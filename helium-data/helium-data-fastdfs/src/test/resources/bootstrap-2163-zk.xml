@@ -1,0 +1,23 @@
+<bootstrap id="217-test">
+    <environments imports="">
+        <variable key="PRIVATE_IP" value="${LOCAL_IP}"/>
+        <variable key="RPC_URL" value="${PRIVATE_IP}:${RPC_PORT}"/>
+        <variable key="RPC_PORT" value="7023"/>
+    </environments>
+    <centralizedService class="org.helium.framework.route.zk.ZkCentralizedService">
+        <setters>
+            <setter field="zkHosts">192.168.156.16:7998</setter>
+        </setters>
+    </centralizedService>
+    <stacks>
+        <stack id="rpc" class="org.helium.framework.rpc.RpcServerStack">
+            <setters>
+                <setter field="host">${PRIVATE_IP}</setter>
+                <setter field="port">${RPC_PORT}</setter>
+            </setters>
+        </stack>
+    </stacks>
+    <beans>
+        <bean class="org.helium.redis.spi.RedisDedicatedTagManager"/>
+    </beans>
+</bootstrap>

@@ -1,0 +1,5 @@
+<configurator>
+    <setters>
+        <setter field="hello">hello.123</setter>
+    </setters>
+</configurator>

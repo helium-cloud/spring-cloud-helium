@@ -1,0 +1,7 @@
+<bundle name="adapter-test">
+    <configImports>
+    </configImports>
+  <beans>
+    <bean class="org.helium.sample.adapter.adapter.AdapterServiceImpl" export="true"/>
+  </beans>
+</bundle>

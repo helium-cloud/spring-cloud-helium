@@ -1,0 +1,80 @@
+
+* SmartCounter: 特例
+
+
+observation:提供通用的观察者组件
+Observable：  可观察对象
+	getName;
+	getObserverSchema
+
+ObserverReportSchema: 	可观察对象报表析构
+	getObserverColumns		获取输出列（固定）
+	getObserverUnits		获取输出单元（动态）
+	
+ObserverUnit:	 
+	getObserverSnapshot()	获取快照(纳秒级)
+
+ObserverSnapshot			输出快照
+	getObserverReportUnit	获取报表单元
+
+ObserverReport				输出报表
+	getColumns();			获取列名
+	getRows();				获取行名
+	fillRow(ObserverReportUnit unit);	unit				
+
+	
+perfmon：提供通用的计数器组件
+
+
+counter
+snapshot
+
+Counter
+|-	Observable
+|-
+
+Observation
+observable
+
+
+
+Snapshot
+Output
+OutputColumn
+OutputColumn
+
+Observation
+	category
+		
+
+- CounterCategory
+- CounterEntity
+- CounterSnapshot
+- CounterOutput
+- CounterBuilder
+
+tracing:
+	name(key)
+	info
+	warn
+	error
+	last error
+	
+database-sp
+	(key)
+database-sql
+	database:(key)
+	
+	 
+
+PerformanceCounterFactory
+	.getCounter()
+	.getAllCategorys()
+	.
+
+
+
+
+
+
+

@@ -1,0 +1,37 @@
+<bundle name="HttpTest">
+  <configImports>
+    <configImport key="HTTP_STACK"/>
+    <!--<configImport key="hello"/>-->
+    <!--<configImport type="" key="executor_http" desc=""/>-->
+  </configImports>
+  <beans stacks="${HTTP_STACK}">
+    <!-- Basic鉴权 -->
+    <bean class="org.helium.http.test.SampleAuthModule">
+      <setters>
+        <setter field="contextPath">/sample</setter>>
+      </setters>
+    </bean>
+    <!-- 从Jar包加载资源文件作为Http静态资源 -->
+    <bean class="org.helium.http.servlet.StaticResourceServlet">
+      <setters>
+        <setter field="contextPath">/sample</setter>
+        <setter field="resourceRoot">/webroot</setter>
+        <setter field="defaultContent">default.html</setter>
+      </setters>
+    </bean>
+
+    <bean class="org.helium.http.test.HttpRootSampleServlet" stacks="${HTTP_STACK}" export="true"/>
+    <bean class="org.helium.http.test.restful.TestRestfulServlet" stacks="${HTTP_STACK}" />
+    
+    <!--<bean class="org.helium.http.servlet.StaticResourceModule" setters="contextPath=/sample" stacks="${HTTP_STACK}"/>-->
+    <!--<bean class="org.helium.http.servlet.StaticResourceServlet" stacks="${HTTP_STACK}" export="true" setters="contextPath=/sample"/>-->
+    <!--<bean class="org.helium.http.test.HttpAllPathServlet" stacks="${HTTP_STACK}" export="true"/>-->
+    
+    <bean class="org.helium.http.test.TestTemplateServlet"/>
+    <!--<bean class="org.helium.http.test.HttpDataJsonServlet" stacks="${HTTP_STACK}" export="true"/>-->
+
+    <bean class="org.helium.http.test.SampleRpcService" executor="test"/>
+    <bean class="org.helium.http.test.SampleServiceImpl" export="true"/>
+    <bean class="org.helium.http.test.TestConfigurator"/>
+  </beans>
+</bundle>

@@ -1,0 +1,32 @@
+[
+  {
+    "enabled": 1,
+    "nodeOrder": 1,
+    "policy": "hash",
+    "routeValue": {
+      "port": "6379",
+      "maxWait": "0",
+      "requestTimeout": "1000",
+      "host": "10.10.220.63",
+      "database": "10"
+    },
+    "routeId": 36,
+    "siteName": "",
+    "weight": 100
+  },
+  {
+    "enabled": 1,
+    "nodeOrder": 2,
+    "policy": "hash",
+    "routeValue": {
+      "port": "6379",
+      "maxWait": "0",
+      "requestTimeout": "1000",
+      "host": "10.10.220.63",
+      "database": "10"
+    },
+    "routeId": 37,
+    "siteName": "",
+    "weight": 100
+  }
+]

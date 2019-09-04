@@ -1,0 +1,14 @@
+<!-- 提供给helium-dashboard用于记录perfmon数据的配置 -->
+<perfmon>
+    <database>
+        <jdbcUrl>jdbc:mysql://10.10.202.132:3306/PERFMONDB?autoReconnect=true</jdbcUrl>
+        <user>admin</user>
+        <password>Admin@!2016</password>
+    </database>
+    <!-- 需要记录的计数器，name请对照perfmon, interval为间隔的时间 -->
+    <counters>
+        <counter name="database" interval="60"/>
+        <counter name="thread-pool" interval="60"/>
+        <counter name="tasks" interval="60"/>
+    </counters>
+</perfmon>

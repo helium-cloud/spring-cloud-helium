@@ -1,0 +1,24 @@
+<bootstrap id="bootstrap-consumer">
+    <environments imports="">
+        <variable key="PRIVATE_IP" value="127.0.0.1"/>
+        <variable key="RPC_PORT" value="10001"/>
+        <variable key="RPC_URL" value="${PRIVATE_IP}:${RPC_PORT}"/>
+      <variable key="ZK_HOST" value="127.0.0.1:7998"/>
+    </environments>
+    <centralizedService class="org.helium.framework.route.center.ZkCentralizedService">
+      <setters>
+        <setter field="zkHosts">${ZK_HOST}</setter>
+      </setters>
+    </centralizedService>
+    <stacks>
+        <stack id="rpc" class="org.helium.framework.rpc.RpcServerStack">
+            <setters>
+                <setter field="host">${PRIVATE_IP}</setter>
+                <setter field="port">${RPC_PORT}</setter>
+            </setters>
+        </stack>
+    </stacks>
+  <beans>
+    <bean class="org.helium.sample.servicesetter.consumer.SimpleConsumerServiceImpl" export="true"/>
+  </beans>
+</bootstrap>

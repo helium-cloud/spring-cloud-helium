@@ -1,0 +1,12 @@
+<logging level="ERROR">
+    <subLevels>
+        <subLevel name="com.feinno.superpojo" level="ERROR"/>
+        <subLevel name="org.apache.zookeeper" level="ERROR"/>
+        <subLevel name="org.helium.framework" level="ERROR"/>
+    </subLevels>
+    <outputs>
+        <output>
+            <appender class="org.helium.logging.spi.ConsoleAppender"/>
+        </output>
+    </outputs>
+</logging>

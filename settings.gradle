@@ -1,0 +1,47 @@
+rootProject.name = 'helium'
+//helium-api
+include 'helium-framework:helium-api'
+include 'helium-framework:helium-superpojo'
+include 'helium-framework:helium-common'
+include 'helium-framework:helium-logging'
+
+//helium-boot[for-boot]
+include 'helium-boot:helium-boot-api'
+include 'helium-boot:helium-boot-starter'
+include 'helium-boot:helium-boot-starter-spring'
+include 'helium-boot:helium-boot-center-zookeeper'
+
+//helium-rpc[for rpc]
+include 'helium-rpc:helium-rpc-api'
+include 'helium-rpc:helium-rpc-default'
+include 'helium-rpc:helium-rpc-dubbo'
+
+
+
+//helium-data[for data client]
+include 'helium-data:helium-data-base'
+include 'helium-data:helium-data-redis'
+include 'helium-data:helium-data-fastdfs'
+include 'helium-data:helium-data-kafka'
+include 'helium-data:helium-data-hbase'
+include 'helium-data:helium-data-elasticsearch'
+include 'helium-data:helium-data-zookeeper'
+include 'helium-data:helium-data-ehcache'
+include 'helium-data:helium-data-spark'
+
+//helium-stack[for data stack]
+
+include 'helium-stack:helium-rpc'
+include 'helium-stack:helium-http'
+include 'helium-monitor:helium-dashboard'
+
+
+include 'helium-cloud:helium-cloud-common'
+include 'helium-cloud:helium-cloud-configcenter'
+include 'helium-cloud:helium-cloud-logger'
+include 'helium-cloud:helium-cloud-starter'
+
+
+//include 'helium-sample:helium-boot'
+
+

@@ -1,0 +1,13 @@
+.*
+!.gitignore
+!.editorconfig
+helium.pid
+build
+out
+/out
+/config
+/felix-cache
+*.iml
+*.~vsd
+gradlew
+gradlew.bat

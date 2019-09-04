@@ -1,0 +1,9 @@
+dependencies {
+    compile project(':helium-boot:helium-boot-api')
+    compile project(':helium-rpc:helium-rpc-default')
+    compile project(':helium-stack:helium-rpc')
+    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: slf4j_version
+
+
+
+}

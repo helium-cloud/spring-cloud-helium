@@ -1,0 +1,4 @@
+dependencies {
+    compile project(':helium-framework:helium-common')
+    compile group: 'org.slf4j', name: 'slf4j-api', version: slf4j_version
+}

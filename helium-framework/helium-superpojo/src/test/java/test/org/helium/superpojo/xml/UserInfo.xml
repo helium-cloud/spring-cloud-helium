@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root name="Feinno" sex="1">
+	<id>1</id>
+	<user:address><![CDATA[北京市朝阳区北苑路甲13号院北辰泰岳大厦18层]]></user:address>
+	<birthday>1377134877465</birthday>
+	<bestFriend name="Feinno" sex="1">
+		<id>1</id>
+		<user:address><![CDATA[北京市朝阳区北苑路甲13号院北辰泰岳大厦18层]]></user:address>
+		<birthday>1377134877465</birthday>
+		<bestFriend></bestFriend>
+		<friendList></friendList>
+		<friendMap></friendMap>
+	</bestFriend>
+	<friendList>
+		<friend name="Feinno" sex="1">
+			<id>1</id>
+			<user:address><![CDATA[北京市朝阳区北苑路甲13号院北辰泰岳大厦18层]]></user:address>
+			<birthday>1377134877465</birthday>
+			<bestFriend></bestFriend>
+			<friendList></friendList>
+			<friendMap></friendMap>
+		</friend>
+		<friend name="Feinno" sex="1">
+			<id>1</id>
+			<user:address><![CDATA[北京市朝阳区北苑路甲13号院北辰泰岳大厦18层]]></user:address>
+			<birthday>1377134877465</birthday>
+			<bestFriend></bestFriend>
+			<friendList></friendList>
+			<friendMap></friendMap>
+		</friend>
+		<friend name="Feinno" sex="1">
+			<id>1</id>
+			<user:address><![CDATA[北京市朝阳区北苑路甲13号院北辰泰岳大厦18层]]></user:address>
+			<birthday>1377134877465</birthday>
+			<bestFriend></bestFriend>
+			<friendList></friendList>
+			<friendMap></friendMap>
+		</friend>
+		<friend name="Feinno" sex="1">
+			<id>1</id>
+			<user:address><![CDATA[北京市朝阳区北苑路甲13号院北辰泰岳大厦18层]]></user:address>
+			<birthday>1377134877465</birthday>
+			<bestFriend></bestFriend>
+			<friendList></friendList>
+			<friendMap></friendMap>
+		</friend>
+	</friendList>
+	<friendMap>
+		<T1 name="Feinno" sex="1">
+			<id>1</id>
+			<user:address><![CDATA[北京市朝阳区北苑路甲13号院北辰泰岳大厦18层]]></user:address>
+			<birthday>1377134877465</birthday>
+			<bestFriend></bestFriend>
+			<friendList></friendList>
+			<friendMap></friendMap>
+		</T1>
+		<T3 name="Feinno" sex="1">
+			<id>1</id>
+			<user:address><![CDATA[北京市朝阳区北苑路甲13号院北辰泰岳大厦18层]]></user:address>
+			<birthday>1377134877465</birthday>
+			<bestFriend></bestFriend>
+			<friendList></friendList>
+			<friendMap></friendMap>
+		</T3>
+		<T2 name="Feinno" sex="1">
+			<id>1</id>
+			<user:address><![CDATA[北京市朝阳区北苑路甲13号院北辰泰岳大厦18层]]></user:address>
+			<birthday>1377134877465</birthday>
+			<bestFriend></bestFriend>
+			<friendList></friendList>
+			<friendMap></friendMap>
+		</T2>
+	</friendMap>
+</root>

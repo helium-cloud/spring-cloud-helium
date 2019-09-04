@@ -1,0 +1,16 @@
+<bundle name="adapter-test">
+    <configImports>
+    </configImports>
+    <beans>
+        <bean class="com.feinno.urcs.data.redis.test.task.AdapterServiceImpl" export="true" executor="adapter-service"/>
+
+        <bean class="com.feinno.urcs.data.redis.test.task.task.AdapterMemoryTask"/>
+        <bean class="com.feinno.urcs.data.redis.test.task.task.AdapterRedisTask"/>
+        <bean class="com.feinno.urcs.data.redis.test.task.task.AdapterMysqlTask"/>
+        <bean class="com.feinno.urcs.data.redis.test.task.task.AdapterRedisDtask" executor="adapter-service"/>
+
+        <bean class="org.helium.database.task.TaskQueueMysql"/>
+        <bean class="org.helium.redis.data.task.TaskQueueRedis"/>
+        <bean class="org.helium.redis.data.task.TaskQueuePriorityRedis"/>
+    </beans>
+</bundle>

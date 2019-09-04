@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<cr:ruleset xmlns:cr="urn:ietf:params:xml:ns:common-policy" xmlns="urn:ietf:params:xml:ns:pres-rules" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:ietf:params:xml:ns:pres-rules pres-rules.xsd">
+    <cr:rule id="099d8b7b5ca74416b">
+        <cr:conditions>
+            <cr:identity>
+                <cr:id entity="sip:16801012354@mcs.zb.cpl"/>
+                <cr:id entity="sip:16802012354@mcs.nj.cpl"/>
+                <cr:id entity="sip:16801012364@mcs.zb.cpl"/>
+                <cr:id entity="sip:16802012353@mcs.nj.cpl"/>
+                <cr:id entity="sip:16801012353@mcs.zb.cpl"/>
+                <cr:id entity="sip:16801012366@mcs.zb.cpl"/>
+                <cr:id entity="sip:16802012355@mcs.nj.cpl"/>
+                <cr:id entity="sip:16801012368@mcs.zb.cpl"/>
+                <cr:id entity="sip:16801012369@mcs.zb.cpl"/>
+                <cr:id entity="sip:16801012367@mcs.zb.cpl"/>
+            </cr:identity>
+        </cr:conditions>
+        <cr:actions>
+            <sub-handling xmlns="urn:ietf:params:xml:ns:pres-rules">allow</sub-handling>
+        </cr:actions>
+        <cr:transformations>
+            <provide-services xmlns="urn:ietf:params:xml:ns:pres-rules">
+            </provide-services>
+            <provide-all-attributes xmlns="urn:ietf:params:xml:ns:pres-rules"/>
+        </cr:transformations>
+    </cr:rule>
+</cr:ruleset>

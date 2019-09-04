@@ -1,0 +1,70 @@
+buildscript {
+    project.ext {
+        
+        nexusRoot = 'http://repo.feinno.com/nexus/content'
+        privateRepo = { return { url "${nexusRoot}/groups/public/" } }
+        versionTail = new Date().format('yyMMddHHmm')
+//        uploadRepo = { project ->
+//            return {
+//                url "$nexusRoot/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}"
+//                credentials { username nexusUser; password nexusPass }
+//            }
+//        }
+
+        repoClosure = {
+            maven privateRepo()
+            mavenCentral()
+            mavenLocal()
+        }
+    }
+    repositories repoClosure
+}
+
+allprojects { project ->
+
+    project.repositories rootProject.repoClosure
+  
+    group = 'org.helium'
+    version = '3.0.1-SNAPSHOT'
+}
+
+def mavenPublishIgnoreList = ['helium-server', 'helium-sample']
+
+subprojects { project ->
+
+    apply plugin: 'java'
+
+    apply plugin: 'maven-publish'
+
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = 1.8
+        options.encoding = "UTF-8"
+    }
+
+    tasks.withType(Test) {
+        defaultCharacterEncoding = "UTF-8"
+    }
+
+    dependencies {
+        testCompile "junit:junit:$junit_version"
+    }
+
+    task sourceJar(type: Jar) {
+        from sourceSets.main.allJava
+        classifier = 'sources'
+    }
+
+    if (!(project.name in mavenPublishIgnoreList)) {
+        publishing {
+//            repositories {
+//                maven uploadRepo(project)
+//            }
+            publications {
+                maven(MavenPublication) {
+                    from components.java
+                    artifact sourceJar
+                }
+            }
+        }
+    }
+}

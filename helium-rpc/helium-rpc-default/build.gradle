@@ -1,0 +1,7 @@
+dependencies {
+    compile project(':helium-rpc:helium-rpc-api')
+    compile group: 'io.netty', name: 'netty', version: netty_version
+  
+    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.8.0-alpha2'
+
+}

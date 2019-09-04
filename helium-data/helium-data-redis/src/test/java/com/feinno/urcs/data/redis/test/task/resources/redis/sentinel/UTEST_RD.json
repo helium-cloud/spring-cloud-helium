@@ -1,0 +1,20 @@
+[
+  {
+    "roleName": "UTEST_RDS",
+    "weight": "10",
+    "addrs": "10.10.12.77:26381",
+    "enabled": "1",
+    "policy": "Hash",
+    "masterName": "mymaster",
+    "database": "0",
+    "nodeOrder": "1",
+    "testWhileIdle": "true",
+    "testOnBorrow": "true",
+    "propertiesExt": {
+      "maxIdle": "500",
+      "maxTotal": "500",
+      "minIdle": "500",
+      "maxWaitMillis": "3000"
+    }
+  }
+]

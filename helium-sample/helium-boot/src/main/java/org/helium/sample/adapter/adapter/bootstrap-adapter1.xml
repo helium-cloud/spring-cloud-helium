@@ -1,0 +1,28 @@
+<bootstrap id="adapter-test">
+    <environments imports="">
+        <variable key="PRIVATE_IP" value="10.10.12.75"/>
+        <variable key="RPC_URL" value="${PRIVATE_IP}:${RPC_PORT}"/>
+        <variable key="RPC_PORT" value="7024"/>
+    </environments>
+    <centralizedService class="org.helium.framework.route.center.ZkCentralizedService">
+      <setters>
+        <setter field="zkHosts">10.10.220.91:7998</setter>
+      </setters>
+    </centralizedService>
+    <stacks>
+        <stack id="rpc" class="org.helium.framework.rpc.RpcServerStack">
+            <setters>
+                <setter field="host">${PRIVATE_IP}</setter>
+                <setter field="port">${RPC_PORT}</setter>
+            </setters>
+        </stack>
+    </stacks>
+    <!--<references>-->
+        <!--<reference id="test:ReferenceBean2" interface="org.helium.reference.test.SampleBean"/>-->
+    <!--</references>-->
+  <bundles>
+  <bundle path="bundle.xml">
+
+  </bundle>
+  </bundles>
+</bootstrap>

@@ -1,0 +1,28 @@
+<bootstrap id="bootstrap-producer">
+    <environments imports="">
+        <variable key="PRIVATE_IP" value="127.0.0.1"/>
+        <variable key="RPC_URL" value="${PRIVATE_IP}:${RPC_PORT}"/>
+        <variable key="RPC_PORT" value="10002"/>
+        <variable key="ZK_HOST" value="127.0.0.1:7998"/>
+    </environments>
+    <centralizedService class="org.helium.framework.route.center.ZkCentralizedService">
+        <setters>
+            <setter field="zkHosts">${ZK_HOST}</setter>
+        </setters>
+    </centralizedService>
+    <stacks>
+        <stack id="rpc" class="org.helium.framework.rpc.RpcServerStack">
+            <setters>
+                <setter field="host">${PRIVATE_IP}</setter>
+                <setter field="port">${RPC_PORT}</setter>
+            </setters>
+        </stack>
+    </stacks>
+    <!--<references>-->
+  <!--&lt;!&ndash; id: 引用的beanId; interface: 引用的接口; endpoints: 如果指明了，则使用静态地址，如果未指明，使用zk中同步的地址 &ndash;&gt;-->
+  <!--<reference id="quickstart:SampleService" interface="org.helium.sample.bootstrap.quickstart.SampleService" endpoints="tcp://127.0.0.1:7023;protocol=rpc"/>-->
+    <!--</references>-->
+    <beans>
+      <bean class="org.helium.sample.servicesetter.producer.SimpleProducerServiceImpl" export="true"/>
+    </beans>
+</bootstrap>

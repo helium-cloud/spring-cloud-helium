@@ -1,0 +1,10 @@
+root = true
+
+[*.java]
+charset = utf-8
+indent_style = tab
+
+[*.{xml, gradle}]
+charset = utf-8
+indent_style = space
+indent_size = 2

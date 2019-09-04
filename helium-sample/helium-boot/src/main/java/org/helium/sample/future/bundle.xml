@@ -1,0 +1,8 @@
+<bundle name="bootstrap-future">
+    <configImports>
+    </configImports>
+  <beans>
+    <bean class="org.helium.sample.future.FutureServiceImpl" export="true" executor="rpc-exec-it"/>
+    <bean class="org.helium.sample.future.task.FutureMemoryTask" export="true" />
+  </beans>
+</bundle>

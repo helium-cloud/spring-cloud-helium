@@ -1,0 +1,15 @@
+<ShardedDataSource name="SAMPLEDB">
+    <!-- 库号，从1开始: 注意不是从0开始 -->
+    <dataSources>
+        <dataSource id="1" name="SAMPLEDB.1"/>
+        <dataSource id="2" name="SAMPLEDB.2"/>
+    </dataSources>
+    <!-- 用于Sharding与Partition的函数, ModDiv表示先按modBy取余再按divBy -->
+    <shardingFunction class="org.helium.data.sharding.functions.ModDivFunction">
+        <setters>
+            <setter field="modBy">8</setter><!-- id % 8，得到表名后缀-->
+            <setter field="divBy">4</setter><!-- (id % 8) / 4，得到库序号-->
+            <setter field="shardingFormat">%d</setter><!-- 表后缀格式，如果希望得到补零后的格式，_00, _01，设置为"%02d"-->
+        </setters>
+    </shardingFunction>
+</ShardedDataSource>

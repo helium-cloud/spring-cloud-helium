@@ -1,0 +1,14 @@
+dependencies {
+    compile project(':helium-data:helium-data-base')
+    compile(group: 'org.apache.hbase', name: 'hbase-client', version: hbase_version) {
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'com.sun.xml.bind', module: 'jaxb-impl'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+        exclude group: 'org.apache.httpcomponents', module: 'httpcore'
+    }
+    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: slf4j_version
+    testCompile group: 'org.helium', name: 'helium-boot-starter', version: helium_version
+
+
+}

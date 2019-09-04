@@ -1,0 +1,12 @@
+<bootstrap>
+    <environments>
+        <variable key="PRIVATE_IP" value="127.0.0.1"/>
+        <variable key="UTEST_RD" value="UTEST_RD"/>
+        <variable key="UTEST_RDS" value="UTEST_RDS"/>
+    </environments>
+    <bundles>
+        <beans>
+            <bean class="com.feinno.urcs.data.redis.test.client.RedisClusterTester"/>
+        </beans>
+    </bundles>
+</bootstrap>

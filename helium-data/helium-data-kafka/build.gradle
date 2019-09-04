@@ -1,0 +1,21 @@
+dependencies {
+    compile project(':helium-data:helium-data-base')
+    compileOnly group: 'org.helium', name: 'helium-logging', version: helium_version
+    compile(group: 'org.apache.kafka', name: 'kafka_2.10', version: kafka_version)
+            {
+                exclude group: 'org.apache.logging.log4j', module: 'log4j-core'
+                exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+                exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+            }
+
+    compile(group: 'org.apache.kafka', name: 'kafka-clients', version: kafka_client_version)
+            {
+                exclude group: 'org.apache.logging.log4j', module: 'log4j-core'
+                exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+                exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+            }
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: log_version
+
+    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: slf4j_version
+
+}

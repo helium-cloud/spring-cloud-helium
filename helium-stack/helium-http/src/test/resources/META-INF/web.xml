@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+    <!-- -->
+    <context-param>
+        <param-name></param-name>
+        <param-value></param-value>
+    </context-param>
+    <!-- 在 用户访问Web应用时,如果仅给出Web应用的根访问URL，没有指定具体的文件名，容器会调用<weblcome-file- list> 元素里指定的文件清单。<welcome-file-list>里允许有多个<welcome-file>元 素，每个元素代表一个文件。容器会先找第一文文件件是否存在，如果存在这把这个文件返回个客户，不再进行其他文件的查找。如果不存在则找第二个文件，依次 类推。如果所有文件都不存在，则跑出404错误-->
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+    </welcome-file-list>
+    <display-name>Sample Application</display-name>
+    <description>This is a sample application</description>
+    <filter>
+        <!--- 过滤器名，可以随便取，当web应用中有多个过滤器时不允许重名.-->
+        <filter-name>SampleFilter</filter-name>
+        <!--具体的过滤器的类的完整的包名+类名。注意：不能写错了。否则容器不能正确的实例化过滤器-->
+        <filter-class>mypack.SampleFilter</filter-class>
+        <init-param>
+            <!-- 参数名 -->
+            <param-name>initParam1</param-name>
+            <!-- 参数值 -->
+            <param-value>2</param-value>
+        </init-param>
+    </filter>
+    <!-- Define the SampleFilter Mapping -->
+    <filter-mapping>
+        <!--过滤器名，注意要和上面的<filter-name>里的名字一样。-->
+        <filter-name>SampleFilter</filter-name>
+        <!-- 指定过滤器负责过滤的URL。这里指定了*.jsp表示在访问任何一个jsp页面时都会先使用mypack.SampleFilter过滤器进行过滤。如果写成login.jsp.则只有在访问login.jsp时才会调用该过滤器进行过滤。-->
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+    <servlet>
+        <!-- Servlet名字，可以随便取，有多个Servlet时不允许重名-->
+        <servlet-name>SampleServlet</servlet-name>
+        <!--指定实现这个Servlet的类。完整的包名+类名-->
+        <servlet-class>mypack.SampleServlet</servlet-class>
+        <!--定义Servlet的初始化参数(包括参数名和参数值)一个<servlet>元素里可以有多个<init-param>元素。在Servlet类中通过ServletConfig类的来访问这些参数。
+        -->
+        <init-param>
+            <!-- 参数名 -->
+            <param-name>initParam1</param-name>
+            <!-- 参数值 -->
+            <param-value>2</param-value>
+        </init-param>
+        <!--指定当前Web应用启动时装载Servlet的次序。当这个数>=0时，容器会按数值从小到大依次加载。如果数值<0或没有指定，容器将载Web客户首次访问这个Servlet时加载。-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <!-- Define the SampleServlet Mapping -->
+    <servlet-mapping>
+        <!--必须和<servlet>里的<servlet-name>内容一样-->
+        <servlet-name>SampleServlet</servlet-name>
+        <!--指定访问这个Servlet的URL。这里给出的是对于整个Web应用的相对URL路径。-->
+        <url-pattern>/sample</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <!--设 定HttpSession的生命周期。这里以分钟计算。下面的设定指明Session在最长不活动时间为10分钟。过了这个时间，Servlet容器将它 作为无效处理。注意这里和程序里指定的计数单位不同，程序里是以秒为单位。<session-config>只有<session- timeout>这个元素-->
+        <session-timeout>10</session-timeout>
+    </session-config>
+    <!-- 配置会话侦听器，class表示一个HttpSessionListener或 HttpSessionActivationListener 或 HttpSessionAttributeListener或
+    HttpSessionBindingListener的实现类。该节点允许多个 -->
+    <listener>
+        <listener-class>com.cn.SessionListenerImpl</listener-class>
+    </listener>
+    <!-- 设置Web应用引用的自定义标签库。下面的代码定义了一个/mytaglib标签库，它对应的TLD文件为/WEB-INF/mytaglib.tld -->
+    <taglib>
+        <taglib-uri>/mytaglib</taglib-uri>
+        <taglib-location>/WEB-INF/mytaglib.tld</taglib-location>
+    </taglib>
+    <!-- 如果Web应用访问了由Servlet容器管理的某个JNDI Resource必须在这里声明对JNDI Resource的引用 -->
+    <resource-ref>
+        <!-- 对应用资源的说明 -->
+        <description>DB Connection</description>
+        <!-- 指定所引用资源的JNDI名字 -->
+        <res-ref-name>jdbc/sampleDb</res-ref-name>
+        <!-- 指定所引用资源的类名字 -->
+        <res-type>javax.sql.DataSource</res-type>
+        <!-- 指定管理所引用资源的Manager， 它有两个可选值：Container和Application.Container表示由容器来创建和管理Resource，Application表示由Web应用来管理和创建Resource -->
+        <res-auth>Container</res-auth>
+    </resource-ref>
+    <security-constraint>
+        <web-resource-collection>
+            <!-- 这个名字是必须的，由工具使用，别的地方不使用 -->
+            <web-resource-name>my application</web-resource-name>
+            <!-- 指定要受约束的资源，至少有一个。可以有多个. -->
+            <uri-pattern>/*</uri-pattern>
+            <!-- 描 述了度可与URL模式指定的资源哪些方法是受约束的，如果没有<http-method>元素，表示任何角色的人都无法访问任何http的方 法  。这里放置了GET方法，表示只有GET方法是受约束的。其他任何角色的人可以访问POST和其他的方法。但不能访问GET方法。-->
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <!-- 如果没有<auth-constraint>表示所有角色都能访问GET方法，如果是<auth-constraint/>表示任何角色都不能访问GET方法 -->
+        <auth-constraint>
+            <!-- 可选的。表示哪些角色能够在指定的资源上调用受约束的方法。这里表示只有拥有Admin和Member角色的人能够访问GET方法
+            <security-role>>里的<role-name>值一样 -->
+            <role-name>Admin</role-name>
+            <role-name>Member</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <!-- 将指定的角色映射到web.xml里 -->
+    <security-role>
+        <description>The role that is required to log into the my Application
+        </description>
+        <!-- 以下的角色和tomcat-users.xml里的<tomcat-users>里的<role rolename=""/>里的rolename属性值对应 -->
+        <role-name>Guest</role-name>
+        <role-name>Admin</role-name>
+        <role-name>Member</role-name>
+    </security-role>
+    <!-- 如果要想进行认证，必须有<login-config>-->
+    <login-config>
+        <!-- 认证方式。有4种：BASIC:基本。 DIGEST:摘要。CLIENT-CERT:客户证书(能提供最高强度的认证)。FORM:表单 -->
+        <auth-method>FORM</auth-method>
+        <realm-name>
+            Tomcat Servet Configuraton Form-Based Authentication Area
+        </realm-name>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+</web-app>

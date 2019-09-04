@@ -1,0 +1,13 @@
+dependencies {
+    compile group: 'org.apache.dubbo', name: 'dubbo-common', version: dubbo_version
+    compile ("org.springframework.boot:spring-boot-starter:${springboot_version}"){
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
+
+    }
+    compile ("org.springframework.boot:spring-boot-configuration-processor:${springboot_version}"){
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
+
+    }
+    compile group: 'org.helium', name: 'helium-boot-api', version: helium_version
+    
+}

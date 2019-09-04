@@ -1,0 +1,10 @@
+dependencies {
+    compile project(':helium-boot:helium-boot-api')
+    compile group: 'jtds', name: 'jtds', version: jtds_version
+    compile group: 'com.zaxxer', name: 'HikariCP', version: hikaricp_version
+    compile group: 'mysql', name: 'mysql-connector-java', version: mysql_version
+    compile group: 'commons-pool', name: 'commons-pool', version: commons_pool_version
+  
+    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: slf4j_version
+    testCompile group: 'junit', name: 'junit', version: junit_version
+}

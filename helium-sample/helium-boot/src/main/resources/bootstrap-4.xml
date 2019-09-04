@@ -1,0 +1,28 @@
+<bootstrap id="bootstrap-4">
+    <!-- 环境变量配置 -->
+    <environments imports="">
+        <variable key="PRIVATE_IP" value="${LOCAL_IP}"/>
+        <variable key="RPC_URL" value="${PRIVATE_IP}:${RPC_PORT}"/>
+        <variable key="RPC_PORT" value="7023"/>
+        <variable key="HTTP_PORT" value="8301"/>
+        <!-- helium-dashboard~.jar 需要的配置变量 -->
+        <variable key="HTTP_DASH_STACK" value="http"/>
+        <!-- helium-sample~.jar 需要的配置变量 -->
+        <variable key="HTTP_STACK" value="http" />
+    </environments>
+    <!-- 需要启动的ServletStack -->
+    <stacks>
+        <stack id="http" class="org.helium.http.servlet.HttpServletStack">
+            <setters>
+                <setter field="host">${PRIVATE_IP}</setter>
+                <setter field="port">${HTTP_PORT}</setter>
+            </setters>
+        </stack>
+    </stacks>
+    <bundles>
+        <!-- 从helium-sample-2.1.9-SNAPSHOT.jar中加载，"~"符号用于版本号通配 -->
+        <bundle path="helium-sample~.jar"/>
+        <!-- 从helium-dashboard-2.1.9-SNAPSHOT.jar中加载，"~"符号用于版本号通配 -->
+        <bundle path="helium-dashboard~.jar"/>
+    </bundles>
+</bootstrap>

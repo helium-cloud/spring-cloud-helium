@@ -1,0 +1,21 @@
+<bean type="Servlet" id="group:GroupHttpServlet">
+    <object class="org.helium.urcs.group.http.servlet.GroupHttpServlet">
+    </object>
+    <servletMappings protocol="http">
+        <httpMappings>
+            <contextPath>/public-group</contextPath>
+            <urlPattern>/*</urlPattern>
+        </httpMappings>
+    </servletMappings>
+    <servletConfig>
+        <init-param>
+            <param-name>fork</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <init-param>
+            <param-name>xpoweredBy</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <load-on-startup>3</load-on-startup>
+    </servletConfig>
+</bean>

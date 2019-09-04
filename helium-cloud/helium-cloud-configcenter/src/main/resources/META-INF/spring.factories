@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.helium.cloud.configcenter.ConfigCenterAutoConfiguration,\
+org.helium.cloud.configcenter.ConfigCenterConfiguration

@@ -1,0 +1,26 @@
+<bootstrap id="bootstrap-1">
+    <!-- 环境变量配置 -->
+    <environments imports="">
+        <variable key="PRIVATE_IP" value="${LOCAL_IP}"/>
+        <variable key="RPC_URL" value="${PRIVATE_IP}:${RPC_PORT}"/>
+        <variable key="RPC_PORT" value="7023"/>
+        <variable key="HTTP_PORT" value="8301"/>
+        <variable key="HTTP_DASH_STACK" value="http"/>
+        <variable key="USER_NAME" value="HAHAHA"/>
+    </environments>
+    <!-- 需要启动的ServletStack -->
+    <stacks>
+        <stack id="http" class="org.helium.http.servlet.HttpServletStack">
+            <setters>
+                <setter field="host">${PRIVATE_IP}</setter>
+                <setter field="port">${HTTP_PORT}</setter>
+            </setters>
+        </stack>
+    </stacks>
+    <!-- 需要添加的beans -->
+    <beans>
+        <!-- 加载bean的实现类以及想要嵌入的ServletStack -->
+        <bean class="org.helium.sample.bootstrap.quickstart.SampleHttpServlet1" stacks="http"/>
+    </beans>
+</bootstrap>
+

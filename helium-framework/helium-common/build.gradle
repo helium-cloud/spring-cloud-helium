@@ -1,0 +1,5 @@
+dependencies {
+    compile project(':helium-framework:helium-superpojo')
+    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.8.0-alpha2'
+
+}

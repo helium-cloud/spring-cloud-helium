@@ -1,0 +1,44 @@
+<bootstrap id="adapter-test">
+    <environments imports="">
+        <variable key="PRIVATE_IP" value="10.10.12.75"/>
+        <variable key="RPC_URL" value="${PRIVATE_IP}:${RPC_PORT}"/>
+        <variable key="RPC_PORT" value="7024"/>
+
+        <variable key="HTTP_DASH_STACK" value="dash_http"/>
+        <variable key="HTTP_DASH_PORT" value="8124"/>
+        <variable key="TASK_RD" value="UTEST_RD"/>
+        <variable key="TASK_DB" value="UTEST_DB_Sharding.xml"/>
+    </environments>
+
+  <centralizedService class="org.helium.framework.route.center.ZkCentralizedService">
+      <setters>
+        <setter field="zkHosts">10.10.220.91:7998</setter>
+      </setters>
+    </centralizedService>
+  <executors>
+    <executor name="adapter-task" size="128" limit="40960"/>
+  </executors>
+    <stacks>
+      <stack id="rpc" class="org.helium.framework.rpc.RpcServerStack">
+          <setters>
+              <setter field="host">${PRIVATE_IP}</setter>
+              <setter field="port">${RPC_PORT}</setter>
+          </setters>
+      </stack>
+      <stack id="${HTTP_DASH_STACK}" class="org.helium.http.servlet.HttpServletStack">
+        <setters>
+          <setter field="host">${PRIVATE_IP}</setter>
+          <setter field="port">${HTTP_DASH_PORT}</setter>
+        </setters>
+      </stack>
+    </stacks>
+    <!--<references>-->
+        <!--<reference id="test:ReferenceBean2" interface="org.helium.reference.test.SampleBean"/>-->
+    <!--</references>-->
+  <bundles>
+    <bundle path="bundle.xml">
+
+    </bundle>
+    <bundle path="helium-dashboard~.jar"/>
+  </bundles>
+</bootstrap>

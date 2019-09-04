@@ -1,0 +1,22 @@
+{
+  "id": "bootstrap",
+  "environmentsNode": {
+    "imports": "",
+    "variables": [{
+      "key": "PRIVATE_IP",
+      "value": "10.10.12.80"
+    }, {
+      "key": "RPC_URL",
+      "value": "10.10.12.80:7023"
+    }, {
+      "key": "RPC_PORT",
+      "value": "7023"
+    }]
+  },
+  "centralizedService": null,
+  "executors": [],
+  "stacks": [],
+  "beans": [],
+  "references": [],
+  "bundles": []
+}

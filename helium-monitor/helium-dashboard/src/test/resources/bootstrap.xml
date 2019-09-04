@@ -1,0 +1,29 @@
+<bootstrap id="">
+    <environments>
+        <variable key="HTTP_STACK" value="http"/>
+        <variable key="HTTP_DASH_STACK" value="http"/>
+        <variable key="HTTP_PORT" value="8083"/>
+    </environments>
+    <centralizedService class="org.helium.framework.route.center.ZkCentralizedService">
+        <setters>
+            <setter field="zkHosts">192.168.156.16:7998</setter>
+        </setters>
+    </centralizedService>
+    <stacks>
+        <stack id="${HTTP_STACK}" class="org.helium.http.servlet.HttpServletStack">
+            <setters>
+                <setter field="host">${LOCAL_IP}</setter>
+                <setter field="port">${HTTP_PORT}</setter>
+                <setter field="sslPort">0</setter>
+            </setters>
+        </stack>
+    </stacks>
+    <beans>
+        <bean class="org.helium.redis.RedisDedicatedTagManager"/>
+        <bean class="org.helium.perfmon.tester.SampleServiceImpl"/>
+        <bean class="org.helium.perfmon.tester.SampleTask"/>
+    </beans>
+    <bundles>
+        <bundle path="bundle.xml"/>
+    </bundles>
+</bootstrap>

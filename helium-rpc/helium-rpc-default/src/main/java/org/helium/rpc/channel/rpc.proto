@@ -1,0 +1,31 @@
+//
+// 扩展字段, 按照序号从小到大，依次排列在body的后面
+message RpcBodyExtension
+{
+  required int32 Id = 1;             // 扩展字段序号
+  required int32 Length = 2;         // 扩展字段长度，
+}
+
+message RpcRequestHeader { 
+  required int32 FromId = 1;         // 交换后使用缩写的from代替service@computer, 0表示未交换, 交换数据从1开始
+  required int32 ToId = 2;           // 交换后用id代替service.method, 0表示未交换, 交换数据从1开始
+  required int32 Sequence = 3;       // 事务序号, 客户端生成, 活动事务唯一，可复用
+  required int32 BodyLength = 4;     // 包体长度: 0代表传空，1代表全默认，len-1为实际长度
+  optional int32 Option = 5;         // 消息可选项
+  optional string ContextUri = 6;    // 上下文标识
+  optional string FromComputer = 7;  // 来源计算机
+  optional string FromService = 8;   // 来源服务	
+  optional string ToService = 9;     // 访问服务	
+  optional string ToMethod = 10;     // 访问方法名  
+  repeated RpcBodyExtension Extensions = 11; // 扩展字段
+}
+
+message RpcResponseHeader {
+  required int32 Sequence = 1;       // 事务序号, 客户端生成, 活动事务唯一，可复用
+  required int32 ResponseCode = 2;   // 返回码
+  required int32 BodyLength = 3;     // 包体长度: 0代表传空，1代表全默认，len-1为实际长度
+  optional int32 Option = 4;         // 消息可选项
+  optional int32 ToId = 5;           // 用于优化消息长度的交换后id, 针对服务器端为单服务器上有效
+  optional int32 FromId = 6;         // 用于优化消息长度的交换后id, 针对服务器端为单服务器上有效
+  repeated RpcBodyExtension Extensions = 11; // 扩展字段
+}
