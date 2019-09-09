@@ -36,6 +36,7 @@ include 'helium-stack:helium-http'
 include 'helium-monitor:helium-dashboard'
 
 
+//helium-cloud[for cloud update]
 include 'helium-cloud:helium-cloud-common'
 include 'helium-cloud:helium-cloud-configcenter'
 include 'helium-cloud:helium-cloud-logger'
@@ -43,5 +44,6 @@ include 'helium-cloud:helium-cloud-starter'
 
 
 //include 'helium-sample:helium-boot'
+include 'helium-sample:helium-boot-spring-starter'
 
 

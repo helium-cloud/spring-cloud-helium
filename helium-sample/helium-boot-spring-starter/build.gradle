@@ -1,0 +1,5 @@
+dependencies {
+  compile project(':helium-boot:helium-boot-starter-spring')
+  compile project(':helium-framework:helium-logging')
+  testCompile group: 'junit', name: 'junit', version: junit_version
+}

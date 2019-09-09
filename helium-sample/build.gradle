@@ -1,6 +1,0 @@
-
-dependencies {
-  compile project(':helium-data:helium-data-base')
-  compile project(':helium-boot:helium-boot-api')
-  testCompile group: 'junit', name: 'junit', version: junit_version
-}

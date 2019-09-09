@@ -65,30 +65,30 @@ public abstract class AbstractTaskConsumer {
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				while (true) {
-					try {
-
-						boolean entity = true;
-						//处理内存队列-不采用分片处理
-						if (taskQueue instanceof TaskQueueMemory || taskQueue instanceof TaskQueuePriorityMemory) {
-							if (runTask(taskQueue, 0, true)) {
-								entity = false;
-							}
-						} else {
-							List<PartitionBean> beanList = TaskConsumerAssignor.getAssignor();
-							for (PartitionBean partitionBean : beanList) {
-								if (runTask(taskQueue, partitionBean.getIndex(), false)) {
-									entity = false;
-								}
-							}
-						}
-						if (entity) {
-							Thread.sleep(500);
-						}
-					} catch (Throwable t) {
-						LOGGER.error("TaskManager run failed:", t);
-					}
-				}
+//				while (true) {
+//					try {
+//
+//						boolean entity = true;
+//						//处理内存队列-不采用分片处理
+//						if (taskQueue instanceof TaskQueueMemory || taskQueue instanceof TaskQueuePriorityMemory) {
+//							if (runTask(taskQueue, 0, true)) {
+//								entity = false;
+//							}
+//						} else {
+//							List<PartitionBean> beanList = TaskConsumerAssignor.getAssignor();
+//							for (PartitionBean partitionBean : beanList) {
+//								if (runTask(taskQueue, partitionBean.getIndex(), false)) {
+//									entity = false;
+//								}
+//							}
+//						}
+//						if (entity) {
+//							Thread.sleep(500);
+//						}
+//					} catch (Throwable t) {
+//						LOGGER.error("TaskManager run failed:", t);
+//					}
+//				}
 			}
 		});
 		thread.setDaemon(true);

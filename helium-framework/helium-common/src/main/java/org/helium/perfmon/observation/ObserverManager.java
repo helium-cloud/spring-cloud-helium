@@ -209,41 +209,41 @@ public class ObserverManager {
     }
 
     private static void inspectorProc() {
-        while (true) {
-            try {
-                // TODO 保证在每一秒的前沿时刻运行
-                Thread.sleep(10);
-                DateTime now = DateTime.now();
-
-                List<ObserverInspector> runs = new ArrayList<ObserverInspector>();
-                synchronized (syncInspectors) {
-                    for (ObserverInspector i : inspectors) {
-                        if (i.onTime(now)) {
-                            LOGGER.info("begin to run: {}", i);
-                            runs.add(i);
-                        }
-                    }
-                }
-                List<ObserverInspector> deletes = new ArrayList<ObserverInspector>();
-                for (ObserverInspector i : runs) {
-                    LOGGER.info("running: {}", i);
-                    if (!i.run(now)) {
-                        deletes.add(i);
-                        LOGGER.info("delete for: {}", i);
-                    }
-                }
-                //
-                // 删除掉不再响应的Inspector
-                synchronized (syncInspectors) {
-                    for (ObserverInspector i : deletes) {
-                        inspectors.remove(i);
-                    }
-                }
-            } catch (InterruptedException ex) {
-
-            } catch (Exception ex) {
-                LOGGER.error("ThreadProc failed {}", ex);
-            }
-        }
+//        while (true) {
+//            try {
+//                // TODO 保证在每一秒的前沿时刻运行
+//                Thread.sleep(10);
+//                DateTime now = DateTime.now();
+//
+//                List<ObserverInspector> runs = new ArrayList<ObserverInspector>();
+//                synchronized (syncInspectors) {
+//                    for (ObserverInspector i : inspectors) {
+//                        if (i.onTime(now)) {
+//                            LOGGER.info("begin to run: {}", i);
+//                            runs.add(i);
+//                        }
+//                    }
+//                }
+//                List<ObserverInspector> deletes = new ArrayList<ObserverInspector>();
+//                for (ObserverInspector i : runs) {
+//                    LOGGER.info("running: {}", i);
+//                    if (!i.run(now)) {
+//                        deletes.add(i);
+//                        LOGGER.info("delete for: {}", i);
+//                    }
+//                }
+//                //
+//                // 删除掉不再响应的Inspector
+//                synchronized (syncInspectors) {
+//                    for (ObserverInspector i : deletes) {
+//                        inspectors.remove(i);
+//                    }
+//                }
+//            } catch (InterruptedException ex) {
+//
+//            } catch (Exception ex) {
+//                LOGGER.error("ThreadProc failed {}", ex);
+//            }
+//        }
     }
 }

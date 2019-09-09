@@ -1,75 +1,58 @@
 package org.helium.boot.spring.autoconfigure;
 
 import org.helium.boot.spring.annotation.EnableHeliumConfiguration;
-import org.helium.boot.spring.annotation.processor.ServiceSetterBeanPostProcessor;
-import org.helium.boot.spring.annotation.processor.TaskEventBeanPostProcessor;
-import org.helium.boot.spring.assembly.HeliumAssembly;
-import org.helium.boot.spring.assembly.HeliumConfig;
+
 import org.helium.boot.spring.health.HeliumHealthIndicator;
+import org.helium.boot.spring.task.TaskImplementationAnnotationBeanPostProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.PropertyResolver;
+
+import java.util.Set;
+
+import static java.util.Collections.emptySet;
 
 @Configuration
 @ConditionalOnBean(annotation = EnableHeliumConfiguration.class)
-//开启属性注入,通过@autowired注入
-@EnableConfigurationProperties(HeliumConfig.class)
 public class HeliumAutoConfiguration {
 	private static final Logger LOGGER = LoggerFactory.getLogger(HeliumAutoConfiguration.class);
 
-	@Autowired
-	private HeliumConfig heliumConfig;
 
 	@Bean
 	public HeliumHealthIndicator heliumHealthIndicator() {
-		assemblyHelium();
 		return new HeliumHealthIndicator();
 	}
 
+//	@Bean
+//	public ServiceSetterBeanPostProcessor serviceSetterBeanPostProcessor() {
+//		return new ServiceSetterBeanPostProcessor();
+//	}
+//
+//	@Bean
+//	public TaskEventBeanPostProcessor taskEventBeanPostProcessor() {
+//		return new TaskEventBeanPostProcessor();
+//	}
+
+
+	/**
+	 * Creates {@link TaskImplementationAnnotationBeanPostProcessor} Bean
+	 *
+	 * @param propertyResolver {@link PropertyResolver} Bean
+	 * @return {@link TaskImplementationAnnotationBeanPostProcessor}
+	 */
+	@ConditionalOnProperty(prefix = HeliumConfig.PREFIX, name = "task")
 	@Bean
-	public ServiceSetterBeanPostProcessor serviceSetterBeanPostProcessor() {
-		return new ServiceSetterBeanPostProcessor();
+	public TaskImplementationAnnotationBeanPostProcessor taskImplementationAnnotationBeanPostProcessor( PropertyResolver propertyResolver) {
+		Set<String> packagesToScan = propertyResolver.getProperty(HeliumConfig.PREFIX + "task", Set.class, emptySet());
+		return new TaskImplementationAnnotationBeanPostProcessor(packagesToScan);
 	}
 
-	@Bean
-	public TaskEventBeanPostProcessor taskEventBeanPostProcessor() {
-		return new TaskEventBeanPostProcessor();
-	}
-
-	@Bean
-	public HeliumAutoWired heliumAutoWired() {
-		return new HeliumAutoWired();
-	}
-
-	private void assemblyHelium() {
-		try {
-			synchronized (this) {
-				LOGGER.info("prepare init helium:{}", heliumConfig.getBootFile());
-				if (HeliumAssembly.INSTANCE.isStarted()) {
-					LOGGER.info("helium already started:{}", heliumConfig.getBootFile());
-					return;
-				}
-				if (heliumConfig.isXmlEnable()) {
-					String pathArray[] = heliumConfig.getBootFile().split(";");
-					for (String path : pathArray) {
-						HeliumAssembly.INSTANCE.addPath(path);
-					}
-					HeliumAssembly.INSTANCE.run(heliumConfig.getBootFile(), false);
-				} else {
-					HeliumAssembly.INSTANCE.run(heliumConfig, false);
-				}
-
-
-			}
-
-		} catch (Exception e) {
-			LOGGER.error(" init helium exception:", e);
-		}
-
-	}
 
 }

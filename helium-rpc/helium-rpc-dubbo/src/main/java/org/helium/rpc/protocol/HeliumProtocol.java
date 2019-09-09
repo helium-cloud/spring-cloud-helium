@@ -70,7 +70,12 @@ public class HeliumProtocol extends AbstractProxyProtocol {
             }
         };
     }
-    @Override
+
+	@Override
+	protected <T> T doRefer(Class<T> type, URL url) throws RpcException {
+		return null;
+	}
+
     @SuppressWarnings("unchecked")
     protected <T> T getFrameworkProxy(final Class<T> serviceType, final URL url) throws RpcException {
         String heliumUrl = url.getProtocol() + "://" +url.getAddress() + url.getAbsolutePath();
