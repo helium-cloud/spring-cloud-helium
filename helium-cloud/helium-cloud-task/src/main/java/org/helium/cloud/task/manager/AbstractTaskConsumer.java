@@ -12,6 +12,7 @@ import org.helium.cloud.task.entity.PartitionBean;
 import org.helium.cloud.task.store.TaskArgs;
 import org.helium.cloud.task.store.TaskQueueMemory;
 import org.helium.cloud.task.store.TaskQueuePriorityMemory;
+import org.helium.cloud.task.utils.TaskBeanNameUtils;
 import org.helium.perfmon.PerformanceCounterFactory;
 import org.helium.threading.ExecutorFactory;
 import org.helium.threading.FixedObservableExecutor;
@@ -106,9 +107,9 @@ public abstract class AbstractTaskConsumer {
 
 	public void consume(TaskBeanInstance task, Object args) {
 		TaskArgs taskArgs = new TaskArgs();
-		taskArgs.setEventName(task.getEvent());
+		taskArgs.setEvent(task.getEvent());
 		if (args instanceof SuperPojo) {
-			taskArgs.setArgStr(((SuperPojo) args).toPbByteArray());
+			taskArgs.setContent(((SuperPojo) args).toPbByteArray());
 		}
 		taskArgs.setObject(args);
 		taskArgs.setId(task.getEvent());
@@ -142,8 +143,10 @@ public abstract class AbstractTaskConsumer {
 		}
 		return Math.abs(h % partition);
 	}
-	public TaskBeanInstance getTaskInstance(String beanId) {
-		return SpringContextUtil.getBean(beanId, TaskBeanInstance.class);
+	public TaskBeanInstance getTaskInstance(String beanName) {
+		TaskBeanInstance taskBeanInstance = SpringContextUtil.getBean(TaskBeanNameUtils.getBeanInstance(beanName), TaskBeanInstance.class);
+		taskBeanInstance.setBean(SpringContextUtil.getBean(TaskBeanNameUtils.getBeanImpl(beanName)));
+		return taskBeanInstance;
 	}
 
 

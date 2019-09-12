@@ -9,20 +9,19 @@ public class TaskArgs extends SuperPojo implements Comparable<TaskArgs> {
 	@Field(id = 1)
 	private String id;
 	@Field(id = 2)
-	private String eventName;
+	private String event;
 	@Field(id = 3)
-	private byte[] argStr;
+	private byte[] content;
 	@Field(id = 4)
 	private String tag;
 	@Field(id = 5)
 	private int priority;
-
+	@Field(id = 6)
 	private long tid;
 
 	private Object object;
 
 	DedicatedTaskContext ctx;
-
 
 	public String getId() {
 		return id;
@@ -32,20 +31,20 @@ public class TaskArgs extends SuperPojo implements Comparable<TaskArgs> {
 		this.id = id;
 	}
 
-	public String getEventName() {
-		return eventName;
+	public String getEvent() {
+		return event;
 	}
 
-	public void setEventName(String eventName) {
-		this.eventName = eventName;
+	public void setEvent(String event) {
+		this.event = event;
 	}
 
-	public byte[] getArgStr() {
-		return argStr;
+	public byte[] getContent() {
+		return content;
 	}
 
-	public void setArgStr(byte[] argStr) {
-		this.argStr = argStr;
+	public void setContent(byte[] content) {
+		this.content = content;
 	}
 
 	public String getTag() {
@@ -56,12 +55,12 @@ public class TaskArgs extends SuperPojo implements Comparable<TaskArgs> {
 		this.tag = tag;
 	}
 
-	public Object getObject() {
-		return object;
+	public int getPriority() {
+		return priority;
 	}
 
-	public void setObject(Object object) {
-		this.object = object;
+	public void setPriority(int priority) {
+		this.priority = priority;
 	}
 
 	public long getTid() {
@@ -72,6 +71,13 @@ public class TaskArgs extends SuperPojo implements Comparable<TaskArgs> {
 		this.tid = tid;
 	}
 
+	public Object getObject() {
+		return object;
+	}
+
+	public void setObject(Object object) {
+		this.object = object;
+	}
 
 	public DedicatedTaskContext getCtx() {
 		return ctx;
@@ -79,14 +85,6 @@ public class TaskArgs extends SuperPojo implements Comparable<TaskArgs> {
 
 	public void setCtx(DedicatedTaskContext ctx) {
 		this.ctx = ctx;
-	}
-
-	public int getPriority() {
-		return priority;
-	}
-
-	public void setPriority(int priority) {
-		this.priority = priority;
 	}
 
 	@Override

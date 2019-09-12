@@ -1,8 +1,12 @@
 package org.helium.cloud.task.autoconfigure;
 
+import org.helium.cloud.common.utils.SpringContextUtil;
 import org.helium.cloud.task.TaskBeanInstance;
+import org.helium.cloud.task.TaskCounter;
 import org.helium.cloud.task.annotations.TaskImplementation;
 import org.helium.cloud.task.scan.HeliumClassPathBeanDefinitionScanner;
+import org.helium.cloud.task.utils.TaskBeanNameUtils;
+import org.helium.perfmon.PerformanceCounterFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -116,7 +120,12 @@ public class TaskImplementationAnnotationBeanPostProcessor implements BeanDefini
             if (!CollectionUtils.isEmpty(beanDefinitionHolders)) {
 
                 for (BeanDefinitionHolder beanDefinitionHolder : beanDefinitionHolders) {
-                    registerServiceBean(beanDefinitionHolder, registry, scanner);
+                	try {
+						registerServiceBean(beanDefinitionHolder, registry, scanner);
+					} catch (Exception e){
+                		logger.error("beanDefinitionHolder Exception", e);
+					}
+
                 }
 
                 if (logger.isInfoEnabled()) {
@@ -225,17 +234,18 @@ public class TaskImplementationAnnotationBeanPostProcessor implements BeanDefini
 
         Class<?> interfaceClass = resolveServiceInterfaceClass(beanClass, taskImplementation);
 
-        String annotatedServiceBeanName = beanDefinitionHolder.getBeanName();
 		//
 		BeanDefinition taskBeanDefinition =
-                buildTaskBeanDefinition(taskImplementation, interfaceClass, annotatedServiceBeanName);
+                buildTaskBeanDefinition(taskImplementation, interfaceClass);
+		BeanDefinition taskImplementationDefinition =
+				buildTaskImplementationDefinition(taskImplementation, beanClass);
 
 		// ServiceBean Bean name
 		String beanName = taskImplementation.event();
 
         if (scanner.checkCandidate(beanName, taskBeanDefinition)) { // check duplicated candidate bean
-            registry.registerBeanDefinition(beanName, taskBeanDefinition);
-
+            registry.registerBeanDefinition(TaskBeanNameUtils.getBeanInstance(beanName), taskBeanDefinition);
+			registry.registerBeanDefinition(TaskBeanNameUtils.getBeanImpl(beanName), taskImplementationDefinition);
             if (logger.isInfoEnabled()) {
                 logger.info("The BeanDefinition[" + taskBeanDefinition +
                         "] of ServiceBean has been registered with name : " + beanName);
@@ -299,17 +309,29 @@ public class TaskImplementationAnnotationBeanPostProcessor implements BeanDefini
         return resolvedPackagesToScan;
     }
 
-    private AbstractBeanDefinition buildTaskBeanDefinition(TaskImplementation taskImplementation, Class<?> interfaceClass,
-                                                              String annotatedServiceBeanName) {
+    private AbstractBeanDefinition buildTaskBeanDefinition(TaskImplementation taskImplementation, Class<?> interfaceClass) {
+		BeanDefinitionBuilder builder = rootBeanDefinition(TaskBeanInstance.class);
 
-        BeanDefinitionBuilder builder = rootBeanDefinition(TaskBeanInstance.class);
+		try {
+			//
+			builder.addPropertyValue("id", taskImplementation.id());
+			builder.addPropertyValue("event", taskImplementation.event());
+			builder.addPropertyValue("storage", taskImplementation.storage());
+			builder.addPropertyValue("counter",
+					PerformanceCounterFactory.getCounters(TaskCounter.class, taskImplementation.event()));
+		} catch (Exception e){
+			logger.error("buildTaskBeanDefinition Error.", e);
+		}
 
-		builder.addPropertyValue("eventId", taskImplementation.id());
-		builder.addPropertyValue("eventName", taskImplementation.event());
-		builder.addPropertyValue("eventstorageType", taskImplementation.storage());
         return builder.getBeanDefinition();
 
     }
+
+	private AbstractBeanDefinition buildTaskImplementationDefinition(TaskImplementation taskImplementation,
+																	 Class<?> interfaceClass) {
+		BeanDefinitionBuilder builder = rootBeanDefinition(interfaceClass);
+		return builder.getBeanDefinition();
+	}
 
 
 

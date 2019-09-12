@@ -1,18 +1,10 @@
 <!-- 总体日志级别 -->
-<logging level="ERROR">
+<logging level="INFO">
     <!-- 设置子logger级别 -->
-    <subLevels>
-      <subLevel name="org.helium.perfmon.observation" level="ERROR"/>
-      <subLevel name="com.feinno.superpojo" level="ERROR"/>
-    </subLevels>
     <!-- 设置日志输出-->
     <outputs>
         <output>
             <appender class="org.helium.logging.spi.ConsoleAppender"/>
         </output>
     </outputs>
-    <!-- 过滤器 -->
-    <filters>
-        <filter loggerName="org.test.logger." class="org.helium.logging.spi.SimpleMarkerFilter" params="foo"/>
-    </filters>
 </logging>

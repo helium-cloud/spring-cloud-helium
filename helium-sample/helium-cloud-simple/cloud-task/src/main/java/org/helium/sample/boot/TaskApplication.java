@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SpringBootApplication
-public class HeliumBootTest {
+public class TaskApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HeliumBootTest.class, args);
+        SpringApplication.run(TaskApplication.class, args);
     }
 
 

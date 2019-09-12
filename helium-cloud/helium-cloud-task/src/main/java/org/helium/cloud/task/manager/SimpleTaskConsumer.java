@@ -1,6 +1,7 @@
 package org.helium.cloud.task.manager;
 
 import com.feinno.superpojo.SuperPojoManager;
+import org.helium.cloud.common.utils.SpringContextUtil;
 import org.helium.cloud.task.TaskBeanInstance;
 import org.helium.cloud.task.TaskStorageType;
 import org.helium.cloud.task.api.Task;
@@ -47,7 +48,7 @@ public class SimpleTaskConsumer extends AbstractTaskConsumer {
 		for (TaskArgs taskArgs : taskArgsList) {
 			TaskBeanInstance taskInstance = getTaskInstance(taskArgs.getId());
 			if (!memory) {
-				taskArgs.setObject(SuperPojoManager.parsePbFrom(taskArgs.getArgStr(), taskInstance.getArgClazz()));
+				taskArgs.setObject(SuperPojoManager.parsePbFrom(taskArgs.getContent(), taskInstance.getArgClazz()));
 			}
 
 			Task task = (Task) taskInstance.getBean();
@@ -64,7 +65,7 @@ public class SimpleTaskConsumer extends AbstractTaskConsumer {
 							task.processTask(taskArgs.getObject());
 							watch.end();
 						} catch (Exception ex) {
-							LOGGER.error("processTask {} failed {}", taskArgs.getEventName(), ex);
+							LOGGER.error("processTask {} failed {}", taskArgs.getEvent(), ex);
 							watch.fail(ex);
 						} finally {
 							if (!memory){
@@ -77,7 +78,7 @@ public class SimpleTaskConsumer extends AbstractTaskConsumer {
 					if (!memory){
 						taskExecutor.countDown();
 					}
-					LOGGER.error("When process task for event=" + taskArgs.getEventName() + " failed {}", ex);
+					LOGGER.error("When process task for event=" + taskArgs.getEvent() + " failed {}", ex);
 				}
 			} else {
 				Stopwatch watch = notFounds.getConsume().begin();
@@ -85,7 +86,7 @@ public class SimpleTaskConsumer extends AbstractTaskConsumer {
 				if (!memory){
 					taskExecutor.countDown();
 				}
-				LOGGER.error("Unknown TaskImplementation event=", taskArgs.getEventName());
+				LOGGER.error("Unknown TaskImplementation event=", taskArgs.getEvent());
 			}
 		}
 		if (!memory){
