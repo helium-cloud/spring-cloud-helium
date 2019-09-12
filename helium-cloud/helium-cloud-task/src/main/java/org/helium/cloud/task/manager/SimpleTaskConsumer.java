@@ -1,11 +1,10 @@
 package org.helium.cloud.task.manager;
 
 import com.feinno.superpojo.SuperPojoManager;
-import org.helium.cloud.task.TaskInstance;
-
+import org.helium.cloud.task.TaskBeanInstance;
+import org.helium.cloud.task.TaskStorageType;
 import org.helium.cloud.task.api.Task;
 import org.helium.cloud.task.api.TaskQueue;
-import org.helium.cloud.task.TaskStorageType;
 import org.helium.cloud.task.store.TaskArgs;
 import org.helium.cloud.task.store.TaskQueueMemory;
 import org.helium.perfmon.Stopwatch;
@@ -22,8 +21,7 @@ import java.util.concurrent.Executor;
 public class SimpleTaskConsumer extends AbstractTaskConsumer {
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-	public SimpleTaskConsumer(TaskConsumerManager taskConsumer) {
-		super(taskConsumer);
+	public SimpleTaskConsumer() {
 		//默认采用内存处理，增加内存实现
 		putStorageInner(TaskStorageType.MEMORY_TYPE, new TaskQueueMemory());
 	}
@@ -47,7 +45,7 @@ public class SimpleTaskConsumer extends AbstractTaskConsumer {
 		}
 
 		for (TaskArgs taskArgs : taskArgsList) {
-			TaskInstance taskInstance = getTaskInstance(taskArgs.getId());
+			TaskBeanInstance taskInstance = getTaskInstance(taskArgs.getId());
 			if (!memory) {
 				taskArgs.setObject(SuperPojoManager.parsePbFrom(taskArgs.getArgStr(), taskInstance.getArgClazz()));
 			}

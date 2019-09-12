@@ -1,9 +1,8 @@
 package org.helium.cloud.task.manager;
 
-import org.helium.cloud.task.TaskInstance;
-
+import org.helium.cloud.task.TaskBeanInstance;
 import org.helium.cloud.task.api.ScheduledTask;
-import org.helium.cloud.task.api.TaskBeanContext;
+import org.helium.cloud.task.api.TaskBean;
 import org.helium.cloud.task.store.CronExpression;
 import org.helium.perfmon.Stopwatch;
 import org.helium.threading.ExecutorFactory;
@@ -46,7 +45,7 @@ public class SimpleScheduledTaskConsumer {
 	}
 
 	// @Override
-	public void registerScheduledTask(TaskBeanContext bc) {
+	public void registerScheduledTask(TaskBean bc) {
 //		ScheduledTaskNode node = new ScheduledTaskNode();
 //		node.id = bc.getEventId().toString();
 //		String cronExpr = bc.getConfiguration().getExtension(ScheduledTask.EXTENSION_KEY_CRON);
@@ -55,13 +54,13 @@ public class SimpleScheduledTaskConsumer {
 //		} catch (Exception ex) {
 //			throw new IllegalArgumentException("bad cron expression: " + cronExpr);
 //		}
-//		node.bean = (TaskInstance)bc;
+//		node.bean = (TaskBeanInstance)bc;
 //		node.task = (ScheduledTask)bc.getBean();
 //		tasks.add(node);
 	}
 
 	// @Override
-	public void unregisterScheduledTask(TaskBeanContext bc) {
+	public void unregisterScheduledTask(TaskBean bc) {
 
 	}
 
@@ -115,7 +114,7 @@ public class SimpleScheduledTaskConsumer {
 		String id;
 		String lastRun;
 		CronExpression cron;
-		TaskInstance bean;
+		TaskBeanInstance bean;
 		ScheduledTask task;
 	}
 }

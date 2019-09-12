@@ -4,23 +4,23 @@ package org.helium.cloud.task.api;
 /**
  * Created by Coral on 9/12/15.
  */
-public interface TaskBeanContext{
+public interface TaskBean {
+	/**
+	 * 获取事件id
+	 * @return
+	 */
+	default String getId(){return "";};
 	/**
 	 * 获取事件名称
 	 * @return
 	 */
-	default String getEventId(){return "";};
-	/**
-	 * 获取事件名称
-	 * @return
-	 */
-	default String getEventName(){return "";};
+	default String getEvent(){return "";};
 
 	/**
 	 * 获取存储类型
 	 * @return
 	 */
-	default String getEventStorageType(){return "";};
+	default String getStorage(){return "";};
 
 	/**
 	 * 消费一个args

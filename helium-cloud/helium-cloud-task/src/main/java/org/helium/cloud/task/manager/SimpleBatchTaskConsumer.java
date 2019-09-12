@@ -1,6 +1,6 @@
 package org.helium.cloud.task.manager;
 
-import org.helium.cloud.task.TaskInstance;
+import org.helium.cloud.task.TaskBeanInstance;
 import org.helium.cloud.task.api.BatchTask;
 import org.helium.cloud.task.api.TaskQueue;
 import org.helium.cloud.task.store.TaskArgs;
@@ -16,14 +16,6 @@ import java.util.List;
  */
 public class SimpleBatchTaskConsumer extends AbstractTaskConsumer {
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-	/**
-	 *
-	 * @param taskConsumer
-	 */
-	public SimpleBatchTaskConsumer(TaskConsumerManager taskConsumer) {
-		super(taskConsumer);
-	}
-
 
 	/**
 	 * run task返回用来区分是否存在task运行
@@ -43,7 +35,7 @@ public class SimpleBatchTaskConsumer extends AbstractTaskConsumer {
 		//需执行task任务
 		BatchTask batchTask = null;
 		//task实例
-		TaskInstance taskInstance = null;
+		TaskBeanInstance taskInstance = null;
 
 		//获取执行对象
 		List<Object> batchArgsList = new ArrayList<>();

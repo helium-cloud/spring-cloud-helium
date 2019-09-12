@@ -3,9 +3,9 @@ package org.helium.cloud.task.manager;
 import com.feinno.superpojo.SuperPojoManager;
 import com.feinno.superpojo.type.DateTime;
 import com.feinno.superpojo.type.TimeSpan;
-import org.helium.cloud.task.TaskInstance;
+import org.helium.cloud.task.TaskBeanInstance;
+import org.helium.cloud.task.TaskStorageType;
 import org.helium.cloud.task.api.*;
-import org.helium.cloud.task.*;
 import org.helium.cloud.task.store.TaskArgs;
 import org.helium.cloud.task.store.TaskQueuePriorityMemory;
 import org.helium.perfmon.Stopwatch;
@@ -37,8 +37,7 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 	private ScheduledExecutorService clearService = new ScheduledThreadPoolExecutor(1);
 
 
-	public SimpleDedicatedTaskConsumer(TaskConsumerManager taskConsumer) {
-		super(taskConsumer);
+	public SimpleDedicatedTaskConsumer() {
 		putStorageInner(TaskStorageType.MEMORY_TYPE, new TaskQueuePriorityMemory());
 		clearService.schedule(clearTask, 30, TimeUnit.SECONDS);
 		dtContexts = new ConcurrentHashMap<>();
@@ -72,7 +71,7 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 		List<TaskArgs> taskArgsListExecutor = new ArrayList<>();
 		for (TaskArgs taskArgs : taskArgsList) {
 			try {
-				TaskInstance taskInstance = getTaskInstance(taskArgs.getId());
+				TaskBeanInstance taskInstance = getTaskInstance(taskArgs.getId());
 				if (!memory) {
 					taskArgs.setObject(SuperPojoManager.parsePbFrom(taskArgs.getArgStr(), taskInstance.getArgClazz()));
 				}
@@ -104,7 +103,7 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 		CountDownLatch taskExecutor = new CountDownLatch(taskArgsListExecutor.size());
 		for (TaskArgs taskArgs : taskArgsListExecutor) {
 			try {
-				TaskInstance taskInstance = getTaskInstance(taskArgs.getId());
+				TaskBeanInstance taskInstance = getTaskInstance(taskArgs.getId());
 				DedicatedTask dedicatedTask = (DedicatedTask) taskInstance.getBean();
 				DedicatedTaskContext ctx = dtContexts.get(taskArgs.getTag());
 				Executor executor = taskInstance.getExecutor();

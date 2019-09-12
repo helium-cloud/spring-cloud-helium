@@ -1,7 +1,7 @@
 package org.helium.cloud.task;
 
 import org.helium.cloud.common.utils.SpringContextUtil;
-import org.helium.cloud.task.api.TaskBeanContext;
+import org.helium.cloud.task.api.TaskBean;
 import org.helium.perfmon.PerformanceCounterFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,28 +20,28 @@ public class TaskRouter {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TaskRouter.class);
 	private static final Marker MARKER = MarkerFactory.getMarker("TASK");
 
-	private Map<String, TaskBeanContext> tasks = new HashMap<>();
+	private Map<String, TaskBean> tasks = new HashMap<>();
 	private Map<String, TaskRouteEntry> entrys = new HashMap<>();
 
 
-	private void addTask(TaskBeanContext task) {
+	private void addTask(TaskBean task) {
 		synchronized (this) {
-			tasks.put(task.getEventId(), task);
+			tasks.put(task.getEvent(), task);
 			buildEntrys();
 		}
 	}
 
-	private void removeTask(TaskBeanContext task) {
+	private void removeTask(TaskBean task) {
 		synchronized (this) {
-			if (tasks.remove(task.getEventId()) != null) {
+			if (tasks.remove(task.getEvent()) != null) {
 				buildEntrys();
 			}
 		}
 	}
 
-	private void updateTask(TaskBeanContext task) {
+	private void updateTask(TaskBean task) {
 		synchronized (this) {
-			tasks.put(task.getEventId(), task);
+			tasks.put(task.getEvent(), task);
 		}
 	}
 
@@ -53,14 +53,14 @@ public class TaskRouter {
 		synchronized (this) {
 			//
 			// 按照eventName将tasks重组临时的map中
-			for (TaskBeanContext tc: tasks.values()) {
-				String eventName = tc.getEventName();
-				TaskRouteEntry entry = map.get(tc.getEventName());
+			for (TaskBean tc: tasks.values()) {
+				String eventName = tc.getEvent();
+				TaskRouteEntry entry = map.get(tc.getEvent());
 				if (entry == null) {
 					entry = new TaskRouteEntry(eventName);
 					getEntry(eventName);
 				}
-				map.put(tc.getEventName(), entry);
+				map.put(tc.getEvent(), entry);
 				entry.list.contexts.add(tc);
 			}
 
@@ -94,7 +94,7 @@ public class TaskRouter {
 	}
 
 	static class TaskContextList {
-		List<TaskBeanContext> contexts = new ArrayList<>();
+		List<TaskBean> contexts = new ArrayList<>();
 	}
 
 	public static class TaskRouteEntry {
@@ -114,7 +114,7 @@ public class TaskRouter {
 
 		public void consume(Object args) {
 			try {
-				TaskInstance taskInstance = SpringContextUtil.getBean(eventName, TaskInstance.class);
+				TaskBeanInstance taskInstance = SpringContextUtil.getBean(eventName, TaskBeanInstance.class);
 				taskInstance.consume(args);
 				counter.getProduce().increase();
 			} catch (Exception ex) {

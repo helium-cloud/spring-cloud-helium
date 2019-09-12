@@ -1,6 +1,6 @@
 package org.helium.cloud.task.manager;
 
-import org.helium.cloud.task.TaskInstance;
+import org.helium.cloud.task.TaskBeanInstance;
 import org.helium.cloud.task.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,11 +10,13 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class TaskConsumerManagerImpl implements TaskConsumerManager {
-	private static final Logger LOGGER = LoggerFactory.getLogger(TaskConsumerManagerImpl.class);
-	private static final int TASK_RPC_CORE_SIZE = 4;
-	private static final int TASK_RPC_QUEUE_SIZE = 1024;
-	private Map<String, TaskInstance> tasks;
+public class TaskConsumerHandler {
+	private static final Logger LOGGER = LoggerFactory.getLogger(TaskConsumerHandler.class);
+
+
+	private static TaskConsumerHandler INS = new TaskConsumerHandler();
+
+	private Map<String, TaskBeanInstance> tasks;
 
 	private SimpleTaskConsumer simpleTaskConsumer;
 
@@ -24,18 +26,20 @@ public class TaskConsumerManagerImpl implements TaskConsumerManager {
 
 	private SimpleScheduledTaskConsumer scheduledTaskConsumer;
 
-	public TaskConsumerManagerImpl() {
+	private TaskConsumerHandler() {
 		tasks = new ConcurrentHashMap<>();
-		simpleTaskConsumer = new SimpleTaskConsumer(this);
-		batchTaskConsumer = new SimpleBatchTaskConsumer(this);
-		dedicatedTaskConsumer = new SimpleDedicatedTaskConsumer(this);
+		simpleTaskConsumer = new SimpleTaskConsumer();
+		batchTaskConsumer = new SimpleBatchTaskConsumer();
+		dedicatedTaskConsumer = new SimpleDedicatedTaskConsumer();
 		scheduledTaskConsumer = new SimpleScheduledTaskConsumer();
 	}
 
+	public static TaskConsumerHandler getInstance(){
+		return INS;
+	}
 
 
-	@Override
-	public void consume(TaskInstance task, Object args) {
+	public void consume(TaskBeanInstance task, Object args) {
 		if (task.getBean() instanceof DedicatedTask){
 			dedicatedTaskConsumer.consume(task, (DedicatedTaskArgs) args);
 		} else if(task.getBean() instanceof BatchTask){
@@ -46,33 +50,28 @@ public class TaskConsumerManagerImpl implements TaskConsumerManager {
 
 	}
 
-	@Override
+
 	public void putStorage(String stoageType, TaskQueue taskQueue) {
 		simpleTaskConsumer.putStorageInner(stoageType, taskQueue);
-		if(taskQueue instanceof TaskQueuePriority){
-
-		} else if (taskQueue instanceof TaskQueue){
-
-		}
 	}
 
-	@Override
+
 	public void putDtStorage(String stoageType, TaskQueuePriority taskQueue) {
 		dedicatedTaskConsumer.putStorageInner(stoageType, taskQueue);
 	}
 
-	@Override
+
 	public void putBatchStorage(String stoageType, TaskQueue taskQueue) {
 		batchTaskConsumer.putStorageInner(stoageType, taskQueue);
 	}
 
-	@Override
-	public TaskInstance getTaskInstance(String beanId) {
-		TaskInstance task = tasks.get(beanId);
+
+	public TaskBeanInstance getTaskInstance(String beanId) {
+		TaskBeanInstance task = tasks.get(beanId);
 		return task;
 	}
 
-	@Override
+
 	public SimpleDedicatedTaskConsumer getDedicatedTaskConsumer() {
 		return dedicatedTaskConsumer;
 	}

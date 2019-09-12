@@ -1,7 +1,6 @@
 package org.helium.cloud.task.manager;
 
-import com.feinno.superpojo.util.StringUtils;
-import org.helium.cloud.task.entity.TaskBeans;
+import org.helium.cloud.task.entity.PartitionBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,17 +10,14 @@ import java.util.List;
 public class TaskConsumerAssignor {
 	private static  final Logger LOGGER = LoggerFactory.getLogger(TaskConsumerAssignor.class);
 
-	public static Integer partition = 0;
+	public static Integer partition = 6;
 	public static int getPartition() {
-		if (partition > 0){
-			return partition;
-		}
 		return partition;
 
 	}
 
 	//获取分区名称
-	public static List<TaskBeans.PartitionBean> getAssignor() {
+	public static List<PartitionBean> getAssignor() {
 
 		List<String> serverEndpointList = new ArrayList<>();
 		return getAssignor(getPartition(), serverEndpointList, "", "");
@@ -29,9 +25,9 @@ public class TaskConsumerAssignor {
 
 
 	//获取分区名称
-	public static List<TaskBeans.PartitionBean> getAssignor(int partitionSize, List list, String endpoint, String pre) {
+	public static List<PartitionBean> getAssignor(int partitionSize, List list, String endpoint, String pre) {
 		//计算分区数量
-		List<TaskBeans.PartitionBean> assignorList = new ArrayList<>();
+		List<PartitionBean> assignorList = new ArrayList<>();
 		if (list == null || list.size() == 0){
 			return assignorList;
 		}
@@ -55,7 +51,7 @@ public class TaskConsumerAssignor {
 			if (i - index > partitionAssignor){
 				break;
 			}
-			TaskBeans.PartitionBean partitionBean = new TaskBeans.PartitionBean();
+			PartitionBean partitionBean = new PartitionBean();
 			partitionBean.setName(pre + i);
 			partitionBean.setIndex(i);
 			assignorList.add(partitionBean);

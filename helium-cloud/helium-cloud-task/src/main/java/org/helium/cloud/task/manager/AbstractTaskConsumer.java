@@ -2,12 +2,13 @@ package org.helium.cloud.task.manager;
 
 
 import com.feinno.superpojo.SuperPojo;
+import org.helium.cloud.common.utils.SpringContextUtil;
 import org.helium.cloud.task.TaskCounter;
-import org.helium.cloud.task.TaskInstance;
+import org.helium.cloud.task.TaskBeanInstance;
 import org.helium.cloud.task.TaskStorageType;
 import org.helium.cloud.task.api.DedicatedTaskArgs;
 import org.helium.cloud.task.api.TaskQueue;
-import org.helium.cloud.task.entity.TaskBeans;
+import org.helium.cloud.task.entity.PartitionBean;
 import org.helium.cloud.task.store.TaskArgs;
 import org.helium.cloud.task.store.TaskQueueMemory;
 import org.helium.cloud.task.store.TaskQueuePriorityMemory;
@@ -37,7 +38,6 @@ public abstract class AbstractTaskConsumer {
 	//线程池设定
 	protected TaskCounter notFounds;
 
-	protected TaskConsumerManager taskConsumer;
 
 	protected Map<String, Thread> queueThread;
 
@@ -46,8 +46,7 @@ public abstract class AbstractTaskConsumer {
 	protected FixedObservableExecutor defaultExecutor;
 
 
-	public AbstractTaskConsumer(TaskConsumerManager taskConsumer) {
-		this.taskConsumer = taskConsumer;
+	public AbstractTaskConsumer() {
 		//默认处理线程池
 		defaultExecutor = (FixedObservableExecutor) ExecutorFactory.newFixedExecutor(this.getClass().getSimpleName() + "task" , TASK_EXECUTOR_SIZE, TASK_EXECUTOR_QUEUE_SIZE);
 
@@ -81,8 +80,8 @@ public abstract class AbstractTaskConsumer {
 								entity = false;
 							}
 						} else {
-							List<TaskBeans.PartitionBean> beanList = TaskConsumerAssignor.getAssignor();
-							for (TaskBeans.PartitionBean partitionBean : beanList) {
+							List<PartitionBean> beanList = TaskConsumerAssignor.getAssignor();
+							for (PartitionBean partitionBean : beanList) {
 								if (runTask(taskQueue, partitionBean.getIndex(), false)) {
 									entity = false;
 								}
@@ -105,17 +104,17 @@ public abstract class AbstractTaskConsumer {
 	}
 
 
-	public void consume(TaskInstance task, Object args) {
+	public void consume(TaskBeanInstance task, Object args) {
 		TaskArgs taskArgs = new TaskArgs();
-		taskArgs.setEventName(task.getEventName());
+		taskArgs.setEventName(task.getEvent());
 		if (args instanceof SuperPojo) {
 			taskArgs.setArgStr(((SuperPojo) args).toPbByteArray());
 		}
 		taskArgs.setObject(args);
-		taskArgs.setId(task.getEventId().toString());
-		TaskQueue queue = queueMap.get(task.getEventStorageType());
+		taskArgs.setId(task.getEvent());
+		TaskQueue queue = queueMap.get(task.getStorage());
 		if (queue == null) {
-			LOGGER.warn("task.getStorageType() Must Set TaskQueue:{}. And Use MEMORY", task.getEventStorageType());
+			LOGGER.warn("task.getStorageType() Must Set TaskQueue:{}. And Use MEMORY", task.getStorage());
 			queue = queueMap.get(TaskStorageType.MEMORY_TYPE);
 		}
 		int partition = new Random().nextInt(TaskConsumerAssignor.getPartition());
@@ -143,8 +142,8 @@ public abstract class AbstractTaskConsumer {
 		}
 		return Math.abs(h % partition);
 	}
-	public TaskInstance getTaskInstance(String beanId) {
-		return taskConsumer.getTaskInstance(beanId);
+	public TaskBeanInstance getTaskInstance(String beanId) {
+		return SpringContextUtil.getBean(beanId, TaskBeanInstance.class);
 	}
 
 

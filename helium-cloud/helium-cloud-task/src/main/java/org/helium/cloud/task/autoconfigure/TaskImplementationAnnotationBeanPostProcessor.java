@@ -1,18 +1,16 @@
 package org.helium.cloud.task.autoconfigure;
 
-import org.helium.cloud.task.TaskInstance;
+import org.helium.cloud.task.TaskBeanInstance;
 import org.helium.cloud.task.annotations.TaskImplementation;
-import org.helium.cloud.task.api.Task;
-import org.helium.cloud.task.manager.TaskConsumerManagerImpl;
 import org.helium.cloud.task.scan.HeliumClassPathBeanDefinitionScanner;
-import org.helium.cloud.task.utils.AnnotationPropertyValuesAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.BeanClassLoaderAware;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.*;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.config.SingletonBeanRegistry;
 import org.springframework.beans.factory.support.*;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.ResourceLoaderAware;
@@ -23,7 +21,10 @@ import org.springframework.context.annotation.ConfigurationClassPostProcessor;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
-import org.springframework.util.*;
+import org.springframework.util.Assert;
+import org.springframework.util.ClassUtils;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -41,6 +42,7 @@ import static org.springframework.util.ClassUtils.resolveClassName;
  *
  * @since 2.5.8
  */
+
 public class TaskImplementationAnnotationBeanPostProcessor implements BeanDefinitionRegistryPostProcessor, EnvironmentAware,
         ResourceLoaderAware, BeanClassLoaderAware {
 
@@ -55,8 +57,6 @@ public class TaskImplementationAnnotationBeanPostProcessor implements BeanDefini
 
     private ClassLoader classLoader;
 
-    @Autowired
-    private TaskConsumerManagerImpl taskConsumer;
 
     public TaskImplementationAnnotationBeanPostProcessor(String... packagesToScan) {
         this(Arrays.asList(packagesToScan));
@@ -233,9 +233,6 @@ public class TaskImplementationAnnotationBeanPostProcessor implements BeanDefini
 		// ServiceBean Bean name
 		String beanName = taskImplementation.event();
 
-
-
-
         if (scanner.checkCandidate(beanName, taskBeanDefinition)) { // check duplicated candidate bean
             registry.registerBeanDefinition(beanName, taskBeanDefinition);
 
@@ -305,18 +302,11 @@ public class TaskImplementationAnnotationBeanPostProcessor implements BeanDefini
     private AbstractBeanDefinition buildTaskBeanDefinition(TaskImplementation taskImplementation, Class<?> interfaceClass,
                                                               String annotatedServiceBeanName) {
 
-        BeanDefinitionBuilder builder = rootBeanDefinition(TaskInstance.class);
+        BeanDefinitionBuilder builder = rootBeanDefinition(TaskBeanInstance.class);
 
-        AbstractBeanDefinition beanDefinition = builder.getBeanDefinition();
-
-        MutablePropertyValues propertyValues = beanDefinition.getPropertyValues();
-
-        String[] ignoreAttributeNames = new String[]{};
-
-        propertyValues.addPropertyValues(new AnnotationPropertyValuesAdapter(taskImplementation, environment, ignoreAttributeNames));
-		builder.addPropertyValue("consumer", taskConsumer);
+		builder.addPropertyValue("eventId", taskImplementation.id());
 		builder.addPropertyValue("eventName", taskImplementation.event());
-		builder.addPropertyValue("storageType", taskImplementation.storage());
+		builder.addPropertyValue("eventstorageType", taskImplementation.storage());
         return builder.getBeanDefinition();
 
     }
