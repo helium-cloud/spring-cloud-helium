@@ -5,7 +5,6 @@ import org.helium.framework.configuration.BeanContextProvider;
 import org.helium.framework.entitys.BeanConfiguration;
 import org.helium.framework.route.ServerUrl;
 import org.helium.framework.spi.task.TaskConsumerStarter;
-import org.helium.framework.spi.task.TaskCounter;
 import org.helium.framework.task.*;
 import org.helium.perfmon.PerformanceCounterFactory;
 

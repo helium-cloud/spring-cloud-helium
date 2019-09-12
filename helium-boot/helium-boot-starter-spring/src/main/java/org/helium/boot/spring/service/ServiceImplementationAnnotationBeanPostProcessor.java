@@ -1,7 +1,7 @@
 package org.helium.boot.spring.service;
 
-import org.helium.boot.spring.scan.HeliumClassPathBeanDefinitionScanner;
-import org.helium.boot.spring.utils.AnnotationPropertyValuesAdapter;
+import org.helium.cloud.task.scan.HeliumClassPathBeanDefinitionScanner;
+import org.helium.cloud.task.utils.AnnotationPropertyValuesAdapter;
 import org.helium.framework.annotations.TaskImplementation;
 import org.helium.framework.task.Task;
 import org.slf4j.Logger;

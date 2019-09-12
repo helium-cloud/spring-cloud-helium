@@ -4,7 +4,6 @@ import org.helium.perfmon.PerformanceCounterFactory;
 import org.helium.framework.BeanContextService;
 import org.helium.framework.BeanIdentity;
 import org.helium.framework.servlet.ServletRouter;
-import org.helium.framework.spi.task.TaskCounter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;

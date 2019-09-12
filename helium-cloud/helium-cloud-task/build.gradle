@@ -1,0 +1,20 @@
+dependencies {
+  compile project(':helium-framework:helium-common')
+  compile project(':helium-cloud:helium-cloud-common')
+//  compile project(':helium-cloud:helium-cloud-logger')
+//  compile group: 'org.apache.dubbo', name: 'dubbo-common', version: dubbo_version
+  compile group: 'org.slf4j', name: 'slf4j-api', version: slf4j_version
+  compile  (group: 'org.springframework.boot', name: 'spring-boot-starter', version: spring_boot_version){
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+  }
+  compile  (group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: spring_boot_version){
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+  }
+  compile (group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: spring_boot_version){
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+  }
+
+  testCompile group: 'org.slf4j', name: 'slf4j-simple', version: slf4j_version
+
+
+}

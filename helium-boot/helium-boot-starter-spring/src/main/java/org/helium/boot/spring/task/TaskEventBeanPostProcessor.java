@@ -1,6 +1,6 @@
 package org.helium.boot.spring.task;
 
-import org.helium.boot.spring.utils.SpringContextUtil;
+import org.helium.cloud.task.utils.SpringContextUtil;
 import org.helium.framework.annotations.TaskEvent;
 import org.helium.framework.spi.SetterInjector;
 import org.helium.util.StringUtils;

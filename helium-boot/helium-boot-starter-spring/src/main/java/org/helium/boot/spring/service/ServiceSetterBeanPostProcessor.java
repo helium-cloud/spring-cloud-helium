@@ -1,7 +1,6 @@
 package org.helium.boot.spring.service;
 
-import org.helium.boot.spring.utils.SpringContextUtil;
-import org.helium.framework.BeanContext;
+import org.helium.cloud.task.utils.SpringContextUtil;
 import org.helium.framework.annotations.ServiceInterface;
 import org.helium.framework.annotations.ServiceSetter;
 import org.helium.framework.spi.SetterInjector;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 
 import java.lang.reflect.Field;
 
-//import org.helium.framework.spi.Bootstrap;
 
 public class ServiceSetterBeanPostProcessor implements BeanPostProcessor {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ServiceSetterBeanPostProcessor.class);

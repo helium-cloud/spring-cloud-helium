@@ -1,6 +1,7 @@
 package org.helium.sample.boot.service;
 
 
+import com.feinno.superpojo.annotation.Field;
 import org.helium.framework.annotations.ServiceImplementation;
 import org.helium.framework.annotations.TaskEvent;
 import org.helium.framework.task.TaskProducer;
@@ -14,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class HeliumServiceTestImpl implements HeliumServiceTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HeliumServiceTestImpl.class);
-    @TaskEvent(HeliumBootTaskTest.TAG)
+    @Field(HeliumBootTaskTest.TAG)
     private TaskProducer<String> uBootTask;
 
    // @Autowired

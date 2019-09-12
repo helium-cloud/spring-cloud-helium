@@ -1,14 +1,17 @@
 package org.helium.boot.spring.task;
 
-import org.helium.boot.spring.scan.HeliumClassPathBeanDefinitionScanner;
-import org.helium.boot.spring.utils.AnnotationPropertyValuesAdapter;
+import org.helium.cloud.task.scan.HeliumClassPathBeanDefinitionScanner;
+import org.helium.cloud.task.manager.TaskConsumerManagerImpl;
+import org.helium.cloud.task.utils.AnnotationPropertyValuesAdapter;
 import org.helium.framework.annotations.TaskImplementation;
+import org.helium.framework.spi.TaskInstance;
 import org.helium.framework.task.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.BeanClassLoaderAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.*;
 import org.springframework.beans.factory.support.*;
 import org.springframework.context.EnvironmentAware;
@@ -52,6 +55,9 @@ public class TaskImplementationAnnotationBeanPostProcessor implements BeanDefini
 
     private ClassLoader classLoader;
 
+    @Autowired
+    private TaskConsumerManagerImpl taskConsumer;
+
     public TaskImplementationAnnotationBeanPostProcessor(String... packagesToScan) {
         this(Arrays.asList(packagesToScan));
     }
@@ -66,6 +72,7 @@ public class TaskImplementationAnnotationBeanPostProcessor implements BeanDefini
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+
 
         Set<String> resolvedPackagesToScan = resolvePackagesToScan(packagesToScan);
 
