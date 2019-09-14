@@ -1,0 +1,20 @@
+dependencies {
+    compile group: 'org.helium.cloud', name: 'helium-cloud-configcenter', version: helium_version
+    compile group: 'org.helium', name: 'helium-data-base', version: helium_version
+    compile group: 'org.helium', name: 'helium-data-redis', version: helium_version
+    compile group: 'org.helium', name: 'helium-data-kafka', version: helium_version
+
+
+    compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-nacos', version: dubbo_version
+//    compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-apollo', version: dubbo_version
+//    compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-zookeeper', version: dubbo_version
+    compile group: 'junit', name: 'junit', version: '4.12'
+    compile (group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: spring_boot_version){
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
+    }
+  // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-to-slf4j
+  compile group: 'org.apache.logging.log4j', name: 'log4j-to-slf4j', version: '2.12.0'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

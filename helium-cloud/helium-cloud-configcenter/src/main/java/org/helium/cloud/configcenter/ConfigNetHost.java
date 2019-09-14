@@ -2,6 +2,7 @@ package org.helium.cloud.configcenter;
 
 import com.feinno.superpojo.util.FileUtil;
 import com.feinno.superpojo.util.StringUtils;
+import org.helium.cloud.configcenter.autoconfig.ConfigCenterProperties;
 
 import java.io.File;
 

@@ -47,5 +47,7 @@ include 'helium-cloud:helium-cloud-starter'
 
 //include 'helium-sample:helium-boot'
 include ':helium-sample:helium-cloud-simple:cloud-task'
+include ':helium-sample:helium-cloud-simple:cloud-configcenter'
+include ':helium-sample:helium-cloud-simple:cloud-logger'
 
 

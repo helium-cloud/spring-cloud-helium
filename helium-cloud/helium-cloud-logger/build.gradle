@@ -1,9 +1,9 @@
 dependencies {
-    compile project(':helium-cloud:helium-cloud-configcenter')
-    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: springboot_version) {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
-    }
-    compile group: 'org.helium', name: 'helium-logging', version: helium_version
-    compile group: 'org.helium', name: 'helium-data-kafka', version: helium_version
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+  compile project(':helium-cloud:helium-cloud-configcenter')  
+  compile project(':helium-framework:helium-logging')
+  compile project(':helium-data:helium-data-kafka')
+  compile(group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: spring_boot_version) {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
+  }
+  testCompile group: 'junit', name: 'junit', version: '4.12'
 }

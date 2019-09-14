@@ -1,0 +1,18 @@
+server:
+  port: 8012
+
+##开发配置
+#cincloud:
+#  configcenter:
+##    #compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-zookeeper', version: dubbo_version使用zk为配置中心
+##    url: zookeeper://127.0.0.1:7998
+#
+#    url: ${CONFIG_URL:nacos://10.10.220.121:8848?config.namespace=cloud&config.group=cloud}
+#    enable: true
+#    file: cincloud/cincloud-configcenter/src/test/resources/cincloud.properties
+
+cloud:
+  test: cincloudtest-for-application.yml
+  scpIp: scpIp-for-application.yml
+
+

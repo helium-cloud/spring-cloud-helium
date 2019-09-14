@@ -28,7 +28,7 @@ allprojects { project ->
     version = '3.0.1-SNAPSHOT'
 }
 
-def mavenPublishIgnoreList = ['helium-server', 'helium-sample']
+def mavenPublishIgnoreList = ['helium-sample', 'helium-cloud-simple']
 
 subprojects { project ->
 
