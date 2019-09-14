@@ -1,11 +1,10 @@
 package org.helium.cloud.task.autoconfigure;
 
-import org.helium.cloud.common.utils.SpringContextUtil;
 import org.helium.cloud.task.TaskBeanInstance;
 import org.helium.cloud.task.TaskCounter;
 import org.helium.cloud.task.annotations.TaskImplementation;
 import org.helium.cloud.task.scan.HeliumClassPathBeanDefinitionScanner;
-import org.helium.cloud.task.utils.TaskBeanNameUtils;
+import org.helium.cloud.task.utils.TaskBeanUtils;
 import org.helium.perfmon.PerformanceCounterFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -244,8 +243,8 @@ public class TaskImplementationAnnotationBeanPostProcessor implements BeanDefini
 		String beanName = taskImplementation.event();
 
         if (scanner.checkCandidate(beanName, taskBeanDefinition)) { // check duplicated candidate bean
-            registry.registerBeanDefinition(TaskBeanNameUtils.getBeanInstance(beanName), taskBeanDefinition);
-			registry.registerBeanDefinition(TaskBeanNameUtils.getBeanImpl(beanName), taskImplementationDefinition);
+            registry.registerBeanDefinition(TaskBeanUtils.getBeanInstance(beanName), taskBeanDefinition);
+			registry.registerBeanDefinition(TaskBeanUtils.getBeanImpl(beanName), taskImplementationDefinition);
             if (logger.isInfoEnabled()) {
                 logger.info("The BeanDefinition[" + taskBeanDefinition +
                         "] of ServiceBean has been registered with name : " + beanName);

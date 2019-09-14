@@ -1,9 +1,12 @@
 package org.helium.cloud.task.manager;
 
 import org.helium.cloud.task.TaskBeanInstance;
+import org.helium.cloud.task.TaskStorageType;
 import org.helium.cloud.task.api.BatchTask;
 import org.helium.cloud.task.api.TaskQueue;
 import org.helium.cloud.task.store.TaskArgs;
+import org.helium.cloud.task.store.TaskQueueMemory;
+import org.helium.cloud.task.utils.TaskBeanUtils;
 import org.helium.perfmon.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +19,11 @@ import java.util.List;
  */
 public class SimpleBatchTaskConsumer extends AbstractTaskConsumer {
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
+	public SimpleBatchTaskConsumer() {
+		//默认采用内存处理，增加内存实现
+		putStorageInner(TaskStorageType.MEMORY_TYPE, new TaskQueueMemory());
+	}
 
 	/**
 	 * run task返回用来区分是否存在task运行
@@ -41,7 +49,7 @@ public class SimpleBatchTaskConsumer extends AbstractTaskConsumer {
 		List<Object> batchArgsList = new ArrayList<>();
 		for (TaskArgs taskArgs : taskArgsList) {
 			if (taskInstance == null){
-				taskInstance = getTaskInstance(taskArgs.getId());
+				taskInstance = TaskBeanUtils.getTaskInstance(taskArgs.getId());
 			}
 			if (batchTask == null && taskInstance != null){
 				batchTask = (BatchTask) taskInstance.getBean();

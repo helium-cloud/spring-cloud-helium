@@ -3,6 +3,10 @@ package org.helium.sample.boot.control;
 
 import org.helium.cloud.task.annotations.TaskEvent;
 import org.helium.cloud.task.api.TaskProducer;
+import org.helium.sample.boot.entity.SimpleArgs;
+import org.helium.sample.boot.entity.SimpleDtArgs;
+import org.helium.sample.boot.task.SimpleCloudBatchTask;
+import org.helium.sample.boot.task.SimpleCloudDtTask;
 import org.helium.sample.boot.task.SimpleCloudTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,14 +22,43 @@ public class TaskManagerControl {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SimpleCloudTask.class);
 
     @TaskEvent(SimpleCloudTask.TAG)
-    private TaskProducer<String> simpleCloudTask;
+    private TaskProducer<SimpleArgs> simpleCloudTask;
+
+	@TaskEvent(SimpleCloudDtTask.TAG)
+	private TaskProducer<SimpleDtArgs> simpleCloudDtTask;
 
 
-    @RequestMapping(value={"/simple"})
-    public String simple(){
+	@TaskEvent(SimpleCloudBatchTask.TAG)
+	private TaskProducer<SimpleArgs> simpleCloudBatchTask;
+
+    @RequestMapping(value={"/st"})
+    public String st(){
     	String uuid = UUID.randomUUID().toString();
-		LOGGER.info("simple task producer:{}", uuid);
-		simpleCloudTask.produce(uuid);
+		SimpleArgs sa = new SimpleArgs();
+		sa.setUser(uuid);
+		LOGGER.info("simpleCloudTask task producer:{}", uuid);
+		simpleCloudTask.produce(sa);
         return "simple task";
     }
+
+	@RequestMapping(value={"/dt"})
+	public String dt(){
+		String uuid = UUID.randomUUID().toString();
+		SimpleDtArgs simpleDtArgs = new SimpleDtArgs();
+		simpleDtArgs.setUser(uuid);
+		LOGGER.info("simpleCloudDtTask task producer:{}", uuid);
+		simpleCloudDtTask.produce(simpleDtArgs);
+		return "simple task";
+	}
+
+
+	@RequestMapping(value={"/bt"})
+	public String bt(){
+		String uuid = UUID.randomUUID().toString();
+		SimpleArgs sa = new SimpleArgs();
+		sa.setUser(uuid);
+		LOGGER.info("simpleCloudBatchTask task producer:{}", uuid);
+		simpleCloudBatchTask.produce(sa);
+		return "simple task";
+	}
 }

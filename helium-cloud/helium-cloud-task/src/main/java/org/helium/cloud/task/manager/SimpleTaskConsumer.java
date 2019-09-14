@@ -8,6 +8,7 @@ import org.helium.cloud.task.api.Task;
 import org.helium.cloud.task.api.TaskQueue;
 import org.helium.cloud.task.store.TaskArgs;
 import org.helium.cloud.task.store.TaskQueueMemory;
+import org.helium.cloud.task.utils.TaskBeanUtils;
 import org.helium.perfmon.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +47,7 @@ public class SimpleTaskConsumer extends AbstractTaskConsumer {
 		}
 
 		for (TaskArgs taskArgs : taskArgsList) {
-			TaskBeanInstance taskInstance = getTaskInstance(taskArgs.getId());
+			TaskBeanInstance taskInstance = TaskBeanUtils.getTaskInstance(taskArgs.getId());
 			if (!memory) {
 				taskArgs.setObject(SuperPojoManager.parsePbFrom(taskArgs.getContent(), taskInstance.getArgClazz()));
 			}

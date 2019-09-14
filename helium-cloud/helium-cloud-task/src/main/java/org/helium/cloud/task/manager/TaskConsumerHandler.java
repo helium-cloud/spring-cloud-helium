@@ -40,6 +40,7 @@ public class TaskConsumerHandler {
 
 
 	public void consume(TaskBeanInstance task, Object args) {
+		LOGGER.info("TaskConsumerHandler.consume:{}", task.getBean());
 		if (task.getBean() instanceof DedicatedTask){
 			dedicatedTaskConsumer.consume(task, (DedicatedTaskArgs) args);
 		} else if(task.getBean() instanceof BatchTask){

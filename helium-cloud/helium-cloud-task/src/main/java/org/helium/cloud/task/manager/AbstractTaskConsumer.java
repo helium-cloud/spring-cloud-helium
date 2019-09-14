@@ -2,7 +2,6 @@ package org.helium.cloud.task.manager;
 
 
 import com.feinno.superpojo.SuperPojo;
-import org.helium.cloud.common.utils.SpringContextUtil;
 import org.helium.cloud.task.TaskCounter;
 import org.helium.cloud.task.TaskBeanInstance;
 import org.helium.cloud.task.TaskStorageType;
@@ -12,7 +11,6 @@ import org.helium.cloud.task.entity.PartitionBean;
 import org.helium.cloud.task.store.TaskArgs;
 import org.helium.cloud.task.store.TaskQueueMemory;
 import org.helium.cloud.task.store.TaskQueuePriorityMemory;
-import org.helium.cloud.task.utils.TaskBeanNameUtils;
 import org.helium.perfmon.PerformanceCounterFactory;
 import org.helium.threading.ExecutorFactory;
 import org.helium.threading.FixedObservableExecutor;
@@ -143,11 +141,7 @@ public abstract class AbstractTaskConsumer {
 		}
 		return Math.abs(h % partition);
 	}
-	public TaskBeanInstance getTaskInstance(String beanName) {
-		TaskBeanInstance taskBeanInstance = SpringContextUtil.getBean(TaskBeanNameUtils.getBeanInstance(beanName), TaskBeanInstance.class);
-		taskBeanInstance.setBean(SpringContextUtil.getBean(TaskBeanNameUtils.getBeanImpl(beanName)));
-		return taskBeanInstance;
-	}
+
 
 
 	/**

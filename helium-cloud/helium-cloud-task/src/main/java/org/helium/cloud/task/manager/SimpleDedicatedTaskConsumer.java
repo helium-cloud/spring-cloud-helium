@@ -9,6 +9,7 @@ import org.helium.cloud.task.TaskStorageType;
 import org.helium.cloud.task.api.*;
 import org.helium.cloud.task.store.TaskArgs;
 import org.helium.cloud.task.store.TaskQueuePriorityMemory;
+import org.helium.cloud.task.utils.TaskBeanUtils;
 import org.helium.perfmon.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +73,7 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 		List<TaskArgs> taskArgsListExecutor = new ArrayList<>();
 		for (TaskArgs taskArgs : taskArgsList) {
 			try {
-				TaskBeanInstance taskInstance = getTaskInstance(taskArgs.getId());
+				TaskBeanInstance taskInstance = TaskBeanUtils.getTaskInstance(taskArgs.getId());
 				if (!memory) {
 					taskArgs.setObject(SuperPojoManager.parsePbFrom(taskArgs.getContent(), taskInstance.getArgClazz()));
 				}
@@ -104,7 +105,7 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 		CountDownLatch taskExecutor = new CountDownLatch(taskArgsListExecutor.size());
 		for (TaskArgs taskArgs : taskArgsListExecutor) {
 			try {
-				TaskBeanInstance taskInstance = getTaskInstance(taskArgs.getId());
+				TaskBeanInstance taskInstance = TaskBeanUtils.getTaskInstance(taskArgs.getId());
 				DedicatedTask dedicatedTask = (DedicatedTask) taskInstance.getBean();
 				DedicatedTaskContext ctx = dtContexts.get(taskArgs.getTag());
 				Executor executor = taskInstance.getExecutor();
