@@ -1,21 +1,27 @@
 buildscript {
     project.ext {
-        
-        nexusRoot = 'http://repo.feinno.com/nexus/content'
-        privateRepo = { return { url "${nexusRoot}/groups/public/" } }
-        versionTail = new Date().format('yyMMddHHmm')
-//        uploadRepo = { project ->
-//            return {
-//                url "$nexusRoot/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}"
-//                credentials { username nexusUser; password nexusPass }
-//            }
-//        }
 
-        repoClosure = {
-            maven privateRepo()
-            mavenCentral()
-            mavenLocal()
+      if (!project.hasProperty("nexusUser")) {
+        nexusUser = 'deployment'
+      }
+      if (!project.hasProperty("nexusPass")) {
+        nexusPass = 'deployment123'
+      }
+      nexusBaseUrl = 'http://repo.feinno.com/nexus/content'
+      privateRepo = { return { url "${nexusBaseUrl}/groups/public/" } }
+      uploadRepo = {
+        return {
+          url "$nexusBaseUrl/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}"
+          credentials { username nexusUser; password nexusPass }
         }
+      }
+
+      repoClosure = {
+          maven privateRepo()
+          mavenCentral()
+          mavenLocal()
+      }
+      versionTail = new Date().format('yyMMddHHmm')
     }
     repositories repoClosure
 }
@@ -25,7 +31,7 @@ allprojects { project ->
     project.repositories rootProject.repoClosure
   
     group = 'org.helium'
-    version = '3.0'
+    version = "3.0-dev-$versionTail"
 }
 
 def mavenPublishIgnoreList = ['helium-sample', 'helium-cloud-simple']
@@ -56,9 +62,9 @@ subprojects { project ->
 
     if (!(project.name in mavenPublishIgnoreList)) {
         publishing {
-//            repositories {
-//                maven uploadRepo(project)
-//            }
+            repositories {
+                maven uploadRepo(project)
+            }
             publications {
                 maven(MavenPublication) {
                     from components.java

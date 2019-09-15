@@ -2,7 +2,7 @@ package org.helium.cloud.configcenter;
 
 import com.feinno.superpojo.util.FileUtil;
 import com.feinno.superpojo.util.StringUtils;
-import org.helium.cloud.configcenter.autoconfig.ConfigCenterProperties;
+import org.helium.cloud.configcenter.autoconfig.ConfigCenterConfig;
 
 import java.io.File;
 
@@ -13,12 +13,12 @@ import java.io.File;
  */
 public class ConfigNetHost {
     public String sign = "#TCNH_FORJAVA_REFER";
-    private ConfigCenterProperties configCenterProperties;
+    private ConfigCenterConfig configCenterProperties;
 
     public ConfigNetHost() {
     }
 
-    public ConfigNetHost(ConfigCenterProperties configCenterProperties) {
+    public ConfigNetHost(ConfigCenterConfig configCenterProperties) {
         this.configCenterProperties = configCenterProperties;
     }
 

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/redis")
 public class RedisConfigController {
-    @FieldSetter(value = "testredis")
+    @FieldSetter(value = "testredis", group = "test")
     private RedisClient redisClient;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RedisConfigController.class);

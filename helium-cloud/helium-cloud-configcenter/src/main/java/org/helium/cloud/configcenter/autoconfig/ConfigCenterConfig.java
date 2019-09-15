@@ -9,12 +9,13 @@ import org.springframework.stereotype.Component;
  * @Description: 配置中心
  */
 @Component
-@ConfigurationProperties(prefix = "cincloud.configcenter", ignoreUnknownFields = false)
-public class ConfigCenterProperties {
+@ConfigurationProperties(prefix = ConfigCenterConfig.PREFIX, ignoreUnknownFields = false)
+public class ConfigCenterConfig {
 
+	public static final String PREFIX = "helium.config";
     private String url = "zookeeper://127.0.0.1:7998";
 
-    private String file = "cincloud.properties";
+    private String file = "helium-config.properties";
 
     private boolean enable = false;
 

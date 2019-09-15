@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/kafka")
 public class KafkaConfigController {
 
-    @FieldSetter(value = "testkafka")
+    @FieldSetter(value = "testkafka", group = "test")
     private UkProducer ukProducer;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConfigController.class);

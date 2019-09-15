@@ -18,7 +18,7 @@ import java.sql.SQLException;
 @Controller
 @RequestMapping("/db")
 public class DbConfigController {
-    @FieldSetter(value = "testdb")
+    @FieldSetter(value = "testdb", group = "test")
     private Database database;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DbConfigController.class);
@@ -29,25 +29,6 @@ public class DbConfigController {
         //http://127.0.0.1:8012/valuetest1
         LOGGER.info("testPro:{}", database.test());
         return "testPro:" + database.test() ;
-    }
-
-    @GetMapping("/select")
-    @ResponseBody
-    public String valueTest1(){
-        //http://127.0.0.1:8012/valuetest
-        StringBuilder stringBuilder = new StringBuilder();
-        try {
-            DataTable dataTable = database.executeTable("select * from test");
-            for (DataRow dataRow:dataTable.getRows()) {
-                String nameStr = dataRow.getString("name");
-                stringBuilder.append(nameStr).append(":");
-            }
-            LOGGER.info("print:{}", stringBuilder.toString());
-        } catch (SQLException e) {
-            LOGGER.error("", e);
-        }
-        return "select:" + stringBuilder.toString();
-
     }
 
 

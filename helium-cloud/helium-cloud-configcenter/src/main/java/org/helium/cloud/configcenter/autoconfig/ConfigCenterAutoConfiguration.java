@@ -11,16 +11,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
- * @Auther: Mr.Jing
- * @Date: 2019-01-25 11:21
- * @Description:
  */
 @Configuration
-@EnableConfigurationProperties(ConfigCenterProperties.class)
+@EnableConfigurationProperties(ConfigCenterConfig.class)
 public class ConfigCenterAutoConfiguration {
 
     @Autowired
-    private ConfigCenterProperties cinMessageProperties;
+    private ConfigCenterConfig configCenterConfig;
 
     @Autowired
     private ConfigurableEnvironment configurableEnvironment;
@@ -28,13 +25,13 @@ public class ConfigCenterAutoConfiguration {
 
     @Bean
     public ConfigCenterClient getConfiguration() {
-        return new ConfigCenterClient(cinMessageProperties, configurableEnvironment);
+        return new ConfigCenterClient(configCenterConfig, configurableEnvironment);
     }
 
     @Bean
-    @ConditionalOnProperty(prefix = "cincloud.configcenter", value = "hosts")
+    @ConditionalOnProperty(prefix = ConfigCenterConfig.PREFIX, value = "hosts")
     public ConfigNetHost getConfigNetHost() {
-        ConfigNetHost configNetHost = new ConfigNetHost(cinMessageProperties);
+        ConfigNetHost configNetHost = new ConfigNetHost(configCenterConfig);
         configNetHost.refreshFile();
         return configNetHost;
     }

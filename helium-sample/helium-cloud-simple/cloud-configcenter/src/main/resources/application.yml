@@ -1,18 +1,16 @@
 server:
-  port: 8012
-
-##开发配置
-#cincloud:
-#  configcenter:
-##    #compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-zookeeper', version: dubbo_version使用zk为配置中心
-##    url: zookeeper://127.0.0.1:7998
-#
-#    url: ${CONFIG_URL:nacos://10.10.220.121:8848?config.namespace=cloud&config.group=cloud}
-#    enable: true
-#    file: cincloud/cincloud-configcenter/src/test/resources/cincloud.properties
-
-cloud:
-  test: cincloudtest-for-application.yml
-  scpIp: scpIp-for-application.yml
-
-
+  port: 8090
+spring:
+  application:
+    name: test
+    version: 1.0.0
+  profiles:
+    active: ${env:dev}
+helium:
+  config:
+    #compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-apollo', version: dubbo_version使用apollo为注册中心
+    url: ${CONFIG_URL:nacos://10.10.220.121:8848?config.namespace=cloud&config.group=cloud}
+    enable: false
+    #用于替换host
+    #hosts: ${hosts:10.10.220.121 configcenter_server EUT-TEATALK TEATALK UCC_1,10.10.220.121 db_server redis_server fastdfs_tracker,10.10.220.92 EUT-WEB}
+    hosts: ${hosts:}

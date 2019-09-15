@@ -11,7 +11,7 @@ import org.apache.dubbo.configcenter.DynamicConfiguration;
 import org.apache.dubbo.configcenter.DynamicConfigurationFactory;
 import org.helium.cloud.common.api.CloudConstant;
 import org.helium.cloud.common.utils.SpringContextUtil;
-import org.helium.cloud.configcenter.autoconfig.ConfigCenterProperties;
+import org.helium.cloud.configcenter.autoconfig.ConfigCenterConfig;
 import org.helium.cloud.configcenter.cache.ConfigCenterLocal;
 import org.helium.cloud.configcenter.utils.KeyUtils;
 import org.slf4j.Logger;
@@ -33,7 +33,7 @@ public class ConfigCenterClient{
     private ConfigCenterLocal configCenterLocal = new ConfigCenterLocal();
 
     //启动配置
-    private ConfigCenterProperties properties;
+    private ConfigCenterConfig configCenterConfig;
 
     //远程动态配置
     private DynamicConfiguration dynamicConfiguration;
@@ -43,11 +43,11 @@ public class ConfigCenterClient{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConfigCenterClient.class);
 
-    public ConfigCenterClient(ConfigCenterProperties configCenterProperties, ConfigurableEnvironment configurableEnvironment) {
-        properties = configCenterProperties;
+    public ConfigCenterClient(ConfigCenterConfig configCenterProperties, ConfigurableEnvironment configurableEnvironment) {
+		configCenterConfig = configCenterProperties;
         //1.是否启用远程动态配置
-        if (properties.isEnable()) {
-            URL url = URL.valueOf(properties.getUrl());
+        if (configCenterConfig.isEnable()) {
+            URL url = URL.valueOf(configCenterConfig.getUrl());
             DynamicConfigurationFactory factories = ExtensionLoader
                     .getExtensionLoader(DynamicConfigurationFactory.class)
                     .getExtension(url.getProtocol());
@@ -56,9 +56,9 @@ public class ConfigCenterClient{
             dynamicConfiguration = configuration;
         }
         //2.自定义配置文件加载此处不启用
-        configCenterLocal.loadConfig(properties.getFile());
+        configCenterLocal.loadConfig(configCenterConfig.getFile());
         //3.定时缓存至本机local
-        configCenterLocal.timerCheck(properties.getFile() + ".tmp");
+        configCenterLocal.timerCheck(configCenterConfig.getFile() + ".tmp");
         this.configurableEnvironment = configurableEnvironment;
 
     }

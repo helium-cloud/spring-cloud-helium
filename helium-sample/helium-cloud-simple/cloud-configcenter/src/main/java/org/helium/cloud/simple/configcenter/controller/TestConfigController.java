@@ -16,26 +16,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-@RequestMapping("")
+@RequestMapping("/test")
 public class TestConfigController {
     @Autowired
     private ConfigCenterClient configCenterClient;
 
-    @FieldSetter(value = "scpIp")
-    private String scpIp;
+    @FieldSetter(value = "teststr", group = "test")
+    private String testStr;
 
-    @FieldSetter(value = "test")
-    private String test;
-
-    @FieldSetter(value = "testKey")
+    @FieldSetter(value = "testkey", group = "other")
     private String testKey;
 
-    @FieldSetter(value = "dbconfig.properties")
-    private String dubbop;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TestConfigController.class);
 
-    @GetMapping("/test")
+    @GetMapping("/cur")
     @ResponseBody
     public String test(@RequestParam(required = false) String group, @RequestParam(required = false) String key){
         //http://127.0.0.1:8012/test?group=dubbo&key=appname
@@ -53,23 +48,19 @@ public class TestConfigController {
         return sb.toString() ;
     }
 
-    @GetMapping("/testall")
+    @GetMapping("/test")
     @ResponseBody
     public String valueTest(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("scpIp:").append(scpIp);
-        sb.append(" test:").append(test);
-        sb.append(" testKey:").append(testKey);
-        sb.append(" dbconfig.properties:").append(dubbop);
-        return sb.toString() ;
+		LOGGER.info("teststr:{}", testStr);
+		return "teststr:" + testStr ;
     }
 
-    @GetMapping("/testPro")
+    @GetMapping("/testkey")
     @ResponseBody
     public String valueTest1(){
         //http://127.0.0.1:8012/valuetest1
-        LOGGER.info("print:{}", dubbop);
-        return "testPro:" + dubbop ;
+        LOGGER.info("testkey:{}", testKey);
+        return "testPro:" + testKey ;
     }
 
 
