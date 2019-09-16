@@ -32,7 +32,7 @@ dependencies {
     不填写支持迁移配置中心：nacos、zk等
 ```
 
-参考：helium/helium-sample/helium-cloud-simple/cloud-configcenter
+参考：[配置模块参考示例](https://github.com/helium-cloud/helium/tree/master/helium-sample/helium-cloud-simple/cloud-configcenter)
 
 #### 2.1 task组件
 
@@ -68,4 +68,4 @@ dependencies {
 
 ```
 
-参考：helium/helium-sample/helium-cloud-simple/cloud-task
+参考：[task参考示例](https://github.com/helium-cloud/helium/tree/master/helium-sample/helium-cloud-simple/cloud-task)
