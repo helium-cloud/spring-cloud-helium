@@ -2,10 +2,10 @@ buildscript {
     project.ext {
 
       if (!project.hasProperty("nexusUser")) {
-        nexusUser = 'deployment'
+        nexusUser = 'xxx'
       }
       if (!project.hasProperty("nexusPass")) {
-        nexusPass = 'deployment123'
+        nexusPass = 'xxx'
       }
       nexusBaseUrl = 'http://repo.feinno.com/nexus/content'
       privateRepo = { return { url "${nexusBaseUrl}/groups/public/" } }
