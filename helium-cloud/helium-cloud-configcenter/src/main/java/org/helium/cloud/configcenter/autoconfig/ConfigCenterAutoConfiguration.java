@@ -1,6 +1,5 @@
 package org.helium.cloud.configcenter.autoconfig;
 
-import org.helium.cloud.common.utils.SpringContextUtil;
 import org.helium.cloud.configcenter.ConfigCenterClient;
 import org.helium.cloud.configcenter.ConfigNetHost;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +40,5 @@ public class ConfigCenterAutoConfiguration {
     	return new FieldSetterBeanPostProcessor();
 	}
 
-    @Bean
-    public SpringContextUtil getSpringContextUtil(){
-        return new SpringContextUtil();
-    }
 
 }

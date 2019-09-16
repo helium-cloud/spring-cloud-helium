@@ -43,10 +43,6 @@ public class HeliumTaskConfiguration {
 	}
 
 
-	@Bean
-	public SpringContextUtil getSpringContextUtil(){
-		return new SpringContextUtil();
-	}
 	/**
 	 *
 	 * @param propertyResolver
