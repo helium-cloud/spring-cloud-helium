@@ -10,7 +10,6 @@ import org.helium.util.Tuple;
 import org.helium.database.*;
 import org.helium.database.spi.DatabaseManager;
 import org.helium.framework.configuration.Environments;
-import org.helium.framework.spi.Bootstrap;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -23,64 +22,66 @@ public class CounterRecorder {
 	private static final String DBNAME = "MONDB.LOCAL";
 	private String lastDateString;
 	private String sqlInsert;
-	private Database db;
+//	private Database db;
 	private Observable ob;
-	private DatabaseOperator operator;
+//	private DatabaseOperator operator;
 	private SimpleDateFormat dateFormat;
 	private String tableNameFormat;
 
 	public CounterRecorder(Observable ob, ConnectionString connStr, String dateFormat, String tableNameFormat) {
 		this.ob = ob;
 
-		this.operator = DatabaseManager.INSTANCE.getDatabaseOperator(DBNAME, connStr);
-		this.db = DatabaseManager.INSTANCE.getDatabase(DBNAME, connStr);
+//		this.operator = DatabaseManager.INSTANCE.getDatabaseOperator(DBNAME, connStr);
+//		this.db = DatabaseManager.INSTANCE.getDatabase(DBNAME, connStr);
 
 		this.dateFormat = new SimpleDateFormat(dateFormat);
 		this.tableNameFormat = tableNameFormat;
 
-		// 启动的时候删除一次
-		try {
-			operator.dropRedundantTables(1);
-		} catch (Exception ex) {
-
-		}
+//		// 启动的时候删除一次
+//		try {
+//			operator.dropRedundantTables(1);
+//		} catch (Exception ex) {
+//
+//		}
 	}
 
 	public void saveReport(ObserverReport report) throws SQLException {
-		String dateString = dateFormat.format(report.getTime().getDate());
-
-		if (!dateString.equals(lastDateString)) {
-			String tableName = formatTableName(dateString); // 要将sqlInsert拼出来
-			TableSchema schema = createTableSchema(tableName, ob);
-			if (!operator.isTableExists(tableName)) {
-				operator.createTable(schema);
-				// 创建表的时候删除一次
-				try {
-					operator.dropRedundantTables(1);
-				} catch (Exception ex) {
-
-				}
-			}
-			lastDateString = dateString;
-		}
-
-		// Transaction tx = db.beginTransaction();
-		Object[] params = new Object[report.getColumns().size() + 4]; // Time,Instance,{Columns}
-		params[0] = report.getTime().getDate();
-		params[1] = Bootstrap.INSTANCE.getServerId();
-		params[2] = Environments.getPid();
-
-		for (ObserverReportRow row: report.getRows()) {
-			String[] datas = row.getData();
-			params[3] = row.getInstanceName();
-			if (params[3] == null) {
-				params[3] = "";
- 			}
-			for (int i = 0; i < datas.length; i++) {
-				params[4 + i] = datas[i];
-			}
-			db.executeInsert(sqlInsert, params);
-		}
+//		String dateString = dateFormat.format(report.getTime().getDate());
+//
+//		if (!dateString.equals(lastDateString)) {
+//			String tableName = formatTableName(dateString); // 要将sqlInsert拼出来
+//			TableSchema schema = createTableSchema(tableName, ob);
+//			if (!operator.isTableExists(tableName)) {
+//				operator.createTable(schema);
+//				// 创建表的时候删除一次
+//				try {
+//					operator.dropRedundantTables(1);
+//				} catch (Exception ex) {
+//
+//				}
+//			}
+//			lastDateString = dateString;
+//		}
+//
+//		// Transaction tx = db.beginTransaction();
+//		Object[] params = new Object[report.getColumns().size() + 4]; // Time,Instance,{Columns}
+//		params[0] = report.getTime().getDate();
+//		//TODO server id
+//		//params[1] = Bootstrap.INSTANCE.getServerId();
+//		params[1] = "server";
+//		params[2] = Environments.getPid();
+//
+//		for (ObserverReportRow row: report.getRows()) {
+//			String[] datas = row.getData();
+//			params[3] = row.getInstanceName();
+//			if (params[3] == null) {
+//				params[3] = "";
+// 			}
+//			for (int i = 0; i < datas.length; i++) {
+//				params[4 + i] = datas[i];
+//			}
+//			db.executeInsert(sqlInsert, params);
+//		}
 //		.commit();
 	}
 

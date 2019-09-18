@@ -1,42 +1,42 @@
-package org.helium.perfmon.monitor;
+package org.helium.perfmon.controller;
 
 
 import com.feinno.superpojo.type.TimeSpan;
-import org.helium.framework.annotations.ServletImplementation;
-import org.helium.http.servlet.HttpMappings;
-import org.helium.http.servlet.HttpServlet;
-import org.helium.http.servlet.HttpServletContext;
+import org.helium.perfmon.monitor.PullManager;
 import org.helium.perfmon.observation.Observable;
 import org.helium.perfmon.observation.ObserverManager;
 import org.helium.perfmon.observation.ObserverReportMode;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
  * Created by Coral on 2015/8/17.
  */
-@ServletImplementation(id = "perfmon:SubscribeServlet")
-@HttpMappings(contextPath = "/perfmon", urlPattern = "/subscribe")
-public class SubscribeServlet extends HttpServlet {
-    @Override
-    public void process(HttpServletContext ctx) throws Exception {
-        String method = ctx.getRequest().getMethod();
+@RequestMapping("/perfmon/subscribe")
+@RestController
+public class SubscribeController {
+	@RequestMapping
+	public void process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String method = request.getMethod();
 
         switch (method) {
             case "POST":
-                subscribe(ctx);
+                subscribe(request, response);
                 break;
             case "DELETE":
-                unsubscribe(ctx);
+                unsubscribe(request, response);
                 break;
             default:
-                ctx.getResponse().sendError(405, String.format("Not support method '%s', please ues 'POST' or 'DELETE'", method));
+                response.sendError(405, String.format("Not support method '%s', please ues 'POST' or 'DELETE'", method));
         }
     }
 
-    public void subscribe(HttpServletContext ctx) throws IOException {
-        HttpServletRequest request = ctx.getRequest();
+    public void subscribe(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String category = request.getParameter("category");
         String option = request.getParameter("instance");
@@ -47,7 +47,7 @@ public class SubscribeServlet extends HttpServlet {
         Observable ob = ObserverManager.getObserverItem(category);
         ObserverReportMode mode = ObserverReportMode.valueOf(option.toUpperCase());
         if (ob == null) {
-            ctx.getResponse().sendError(404, String.format("Can't found target category '%s'", category));
+			response.sendError(404, String.format("Can't found target category '%s'", category));
             return;
         }
 
@@ -63,8 +63,8 @@ public class SubscribeServlet extends HttpServlet {
         });
     }
 
-    public void unsubscribe(HttpServletContext ctx) throws IOException {
-        String key = ctx.getRequest().getParameter("cookie");
+    public void unsubscribe(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String key = request.getParameter("cookie");
         PullManager pullManager = PullManager.getInstance(key, false);
         if (pullManager != null) {
             pullManager.close();

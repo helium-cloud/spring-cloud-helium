@@ -33,9 +33,9 @@ include 'helium-data:helium-data-spark'
 //helium-stack[for data stack]
 
 include 'helium-stack:helium-rpc'
-include 'helium-stack:helium-http'
-//include 'helium-monitor:helium-dashboard'
-
+//include 'helium-stack:helium-http'
+include 'helium-monitor:helium-dashboard'
+include 'helium-monitor:helium-admin'
 
 //helium-cloud[for cloud update]
 include 'helium-cloud:helium-cloud-common'

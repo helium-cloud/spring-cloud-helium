@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  *
  */
 
-@Component
 public class TaskProducerFactoryImpl implements TaskProducerFactory {
 	private TaskRouter router;
 

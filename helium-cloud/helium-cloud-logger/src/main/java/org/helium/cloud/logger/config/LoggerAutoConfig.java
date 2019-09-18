@@ -12,19 +12,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LoggerAutoConfig {
 
-    @Bean(name = "file")
-    @ConditionalOnProperty(prefix = "spring", name = "common.log-save-to", havingValue = "file")
+    @Bean(name = "log-save-file")
     public LogWriter fileLogWriter(){
         return new FileLogWriter();
     }
 
-    @Bean(name = "kafka")
-    @ConditionalOnProperty(prefix = "spring", name = "common.log-save-to", havingValue = "kafka")
-    public LogWriter kafkaLogWriter(){
-        return new KafkaLogWriter();
-    }
+//    @Bean(name = "log-save-kafka")
+//    @ConditionalOnProperty(prefix = "spring", name = "common.log-save-to", havingValue = "kafka")
+//    public LogWriter kafkaLogWriter(){
+//        return new KafkaLogWriter();
+//    }
 
-    @Bean()
+	@Bean(name = "log-aop")
     public LogAop logAop(){
         return new LogAop();
     }
