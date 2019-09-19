@@ -1,4 +1,5 @@
 dependencies {
+    compile project(':helium-boot:helium-boot-api')
     compile group: 'org.apache.dubbo', name: 'dubbo-common', version: dubbo_version
     compile ("org.springframework.boot:spring-boot-starter:${spring_boot_version}"){
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
@@ -8,6 +9,5 @@ dependencies {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
 
     }
-    compile group: 'org.helium', name: 'helium-boot-api', version: helium_version
     
 }

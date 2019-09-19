@@ -15,7 +15,7 @@ Ext.define('MO.controller.CBController', {
 			},
 			selectRoot : function(combo, records, eOpts) {
 				if (combo.value != "") {
-					MsgTip.msg('刷新时间更新成功', "Refresh Time:" + combo.value, true, 3000);
+					MsgTip.msg('刷新时间更新成功', "刷新时间:" + combo.value, true, 3000);
 					var tabpanelAarry = Ext.ComponentQuery.query('tabpanel');
 					var tabpanel = tabpanelAarry[0];
 					tabpanel.runtask();

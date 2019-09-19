@@ -1,12 +1,22 @@
 ### 1.helium结构图
 
-![](resources/helium-cloud.png)
+![](doc/resources/helium-cloud.png)
 
 系统结构图
 
-### 2.helium使用
+### 2.spring-boot使用
 
-#### 2.1 数据组件
+#### 2.1 spring-boot for web
+
+#### 2.2 spring-cloud
+
+### 3.dubbo使用
+
+#### dubbo rpc
+
+### 4.helium使用
+
+#### 4.1 数据组件
 1.依赖
 
 ```
@@ -34,9 +44,23 @@ dependencies {
 
 参考：[配置模块参考示例](https://github.com/helium-cloud/helium/tree/master/helium-sample/helium-cloud-simple/cloud-configcenter)
 
-#### 2.1 task组件
+#### 4.2 task组件
+1.提供task任务调度组件
+* Task
+简单task，线程
 
-1.依赖
+* DedicatedTask
+定向task，
+
+* BatchTask
+批量task，单个转批量
+
+* ScheduledTask
+定时task，
+## 使用示例参考：
+[cloud-task](helium/helium-sample/helium-cloud-simple/cloud-task)
+
+2.依赖
 
 ```
 
@@ -47,7 +71,7 @@ dependencies {
 
 ```
 
-2.使用
+3.使用
 
 ```java
     
@@ -69,3 +93,8 @@ dependencies {
 ```
 
 参考：[task参考示例](https://github.com/helium-cloud/helium/tree/master/helium-sample/helium-cloud-simple/cloud-task)
+
+
+
+#### 4.3 perfron组件
+* 提供qps监控
