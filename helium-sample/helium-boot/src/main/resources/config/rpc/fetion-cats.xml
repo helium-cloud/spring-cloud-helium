@@ -1,5 +1,0 @@
-<rpcService service="IUserIndexService">
-	<endpoints>
-		<endpoint value="tcp://192.168.110.194:8802"/>
-	</endpoints>
-</rpcService>

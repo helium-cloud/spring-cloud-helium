@@ -52,7 +52,7 @@ public abstract class AbstractTaskConsumer {
 		//Task消费处理
 		queueMap = new ConcurrentHashMap<>();
 		queueThread = new ConcurrentHashMap<>();
-		notFounds = PerformanceCounterFactory.getCounters(TaskCounter.class, "__NOT_FOUND__");
+		notFounds = PerformanceCounterFactory.getCounters(TaskCounter.class, "Task:notFoundsConsumer");
 
 
 	}

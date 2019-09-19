@@ -16,7 +16,7 @@ Ext.application({
 										autoHeight : true,
 										border : false,
 										margins : '0 0 5 0',
-										bodyStyle : 'background-color:#BBCCEE;',
+										bodyStyle : 'background-color:#596170;',
 										items : [Ext.widget('comboBox', {
 													id : 'comboBox',
 													value : 2

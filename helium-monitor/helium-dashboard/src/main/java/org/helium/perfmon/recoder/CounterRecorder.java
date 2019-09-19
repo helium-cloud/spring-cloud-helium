@@ -1,15 +1,13 @@
 package org.helium.perfmon.recoder;
 
+import org.helium.database.Column;
+import org.helium.database.ConnectionString;
+import org.helium.database.TableSchema;
 import org.helium.perfmon.observation.Observable;
 import org.helium.perfmon.observation.ObserverInspector.ReportCallback;
 import org.helium.perfmon.observation.ObserverReport;
 import org.helium.perfmon.observation.ObserverReportColumn;
-
-import org.helium.perfmon.observation.ObserverReportRow;
 import org.helium.util.Tuple;
-import org.helium.database.*;
-import org.helium.database.spi.DatabaseManager;
-import org.helium.framework.configuration.Environments;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -28,7 +26,7 @@ public class CounterRecorder {
 	private SimpleDateFormat dateFormat;
 	private String tableNameFormat;
 
-	public CounterRecorder(Observable ob, ConnectionString connStr, String dateFormat, String tableNameFormat) {
+	public CounterRecorder(Observable ob, String dateFormat, String tableNameFormat) {
 		this.ob = ob;
 
 //		this.operator = DatabaseManager.INSTANCE.getDatabaseOperator(DBNAME, connStr);

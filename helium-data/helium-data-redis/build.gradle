@@ -1,6 +1,6 @@
 dependencies {
-    compile project(':helium-data:helium-data-base')
-    compile group: 'redis.clients', name: 'jedis', version: redis_version
+  compile project(':helium-data:helium-data-base')
+  compile group: 'redis.clients', name: 'jedis', version: redis_version
 
   testCompile group: 'org.slf4j', name: 'slf4j-simple', version: slf4j_version
 
