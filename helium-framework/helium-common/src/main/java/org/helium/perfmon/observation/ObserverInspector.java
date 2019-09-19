@@ -164,7 +164,7 @@ public class ObserverInspector {
 		ObserverReport report = getReport(now);
 
 		try {
-			LOGGER.info("begin callback, {}", report);
+			LOGGER.debug("begin callback, {}", report);
 			return callback.handle(report);
 		} catch (Exception ex) {
 			LOGGER.error("callback failed. {}", ex);

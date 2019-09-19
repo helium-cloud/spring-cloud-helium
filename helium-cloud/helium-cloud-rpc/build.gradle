@@ -5,6 +5,7 @@
 dependencies {
   compile project(':helium-rpc:helium-rpc-default')
   compile group: 'org.apache.dubbo', name: 'dubbo-rpc-api', version: dubbo_version
+  compile group: 'org.apache.dubbo', name: 'dubbo-rpc-dubbo', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-remoting-api', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-config-api', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-container-api', version: dubbo_version
@@ -15,7 +16,11 @@ dependencies {
   compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-zookeeper', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-metadata-report-zookeeper', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-metadata-report-redis', version: dubbo_version
-  
+  compile (group: 'org.apache.dubbo', name: 'dubbo-spring-boot-starter', version: dubbo_version){
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
+    exclude group: 'org.springframework', module: 'spring-web' //by both name and group
+    exclude group: 'org.slf4j', module: 'slf4j-log4j12' //by both name and group
+  }
   testCompile group: 'org.slf4j', name: 'slf4j-simple', version: slf4j_version
 
 }

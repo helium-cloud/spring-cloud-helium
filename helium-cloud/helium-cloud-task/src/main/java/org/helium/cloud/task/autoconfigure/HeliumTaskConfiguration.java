@@ -43,16 +43,16 @@ public class HeliumTaskConfiguration {
 	}
 
 
-	/**
-	 *
-	 * @param propertyResolver
-	 * @return
-	 */
-	@Bean
-	public TaskImplementationAnnotationBeanPostProcessor taskImplementationAnnotationBeanPostProcessor( PropertyResolver propertyResolver) {
-		Set<String> packagesToScan = propertyResolver.getProperty(HeliumTaskConfig.PREFIX + ".bean", Set.class, emptySet());
-		return new TaskImplementationAnnotationBeanPostProcessor(packagesToScan);
-	}
+//	/**
+//	 *
+//	 * @param propertyResolver
+//	 * @return
+//	 */
+//	@Bean
+//	public TaskImplementationAnnotationBeanPostProcessor taskImplementationAnnotationBeanPostProcessor( PropertyResolver propertyResolver) {
+//		Set<String> packagesToScan = propertyResolver.getProperty(HeliumTaskConfig.PREFIX + ".bean", Set.class, emptySet());
+//		return new TaskImplementationAnnotationBeanPostProcessor(packagesToScan);
+//	}
 
 
 }

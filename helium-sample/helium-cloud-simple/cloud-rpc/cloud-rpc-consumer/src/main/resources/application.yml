@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: cloud-rpc-consumer
+    version: 1.0.0
+  profiles:
+    active: ${tenv:dev}
+dubbo:
+  registry:
+    address: ${REG_URL:zookeeper://127.0.0.1:7998}

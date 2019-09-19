@@ -14,7 +14,7 @@ include 'helium-boot:helium-boot-starter'
 //helium-rpc[for rpc]
 include 'helium-rpc:helium-rpc-api'
 include 'helium-rpc:helium-rpc-default'
-include 'helium-rpc:helium-rpc-dubbo'
+
 
 
 
@@ -41,13 +41,18 @@ include 'helium-monitor:helium-admin'
 include 'helium-cloud:helium-cloud-common'
 include 'helium-cloud:helium-cloud-configcenter'
 include 'helium-cloud:helium-cloud-task'
+include 'helium-cloud:helium-cloud-rpc'
 include 'helium-cloud:helium-cloud-logger'
 include 'helium-cloud:helium-cloud-starter'
+
 
 
 //include 'helium-sample:helium-boot'
 include ':helium-sample:helium-cloud-simple:cloud-task'
 include ':helium-sample:helium-cloud-simple:cloud-configcenter'
 include ':helium-sample:helium-cloud-simple:cloud-logger'
+include ':helium-sample:helium-cloud-simple:cloud-rpc:cloud-rpc-api'
+include ':helium-sample:helium-cloud-simple:cloud-rpc:cloud-rpc-consumer'
+include ':helium-sample:helium-cloud-simple:cloud-rpc:cloud-rpc-provider'
 
 
