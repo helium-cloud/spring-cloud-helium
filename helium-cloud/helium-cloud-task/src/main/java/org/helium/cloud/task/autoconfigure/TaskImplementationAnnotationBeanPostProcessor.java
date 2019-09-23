@@ -41,7 +41,7 @@ import static org.springframework.util.ClassUtils.resolveClassName;
 
 /**
  * {@link TaskImplementation} Annotation
- * {@link BeanDefinitionRegistryPostProcessor Bean Definition Registry Post Processor}
+ * {@link TaskImplementationAnnotationBeanPostProcessor Bean Definition Registry Post Processor}
  *
  * @since 2.5.8
  */

@@ -2,7 +2,7 @@ server:
   port: 8091
 helium:
   task:
-    bean: org.helium.sample.boot.task
+    package: org.helium.sample.boot.task
 
 
 
