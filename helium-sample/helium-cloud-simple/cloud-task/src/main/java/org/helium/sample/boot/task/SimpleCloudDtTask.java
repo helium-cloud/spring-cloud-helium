@@ -2,10 +2,10 @@ package org.helium.sample.boot.task;
 
 
 import com.alibaba.fastjson.JSONObject;
-import org.helium.cloud.task.annotations.TaskImplementation;
-import org.helium.cloud.task.api.DedicatedTask;
-import org.helium.cloud.task.api.DedicatedTaskContext;
-import org.helium.cloud.task.api.Task;
+
+import org.helium.framework.annotations.TaskImplementation;
+import org.helium.framework.task.DedicatedTask;
+import org.helium.framework.task.DedicatedTaskContext;
 import org.helium.sample.boot.entity.SimpleDtArgs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

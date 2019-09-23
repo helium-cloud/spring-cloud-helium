@@ -1,6 +1,7 @@
 package org.helium.sample.boot.entity;
 
-import org.helium.cloud.task.api.DedicatedTaskArgs;
+
+import org.helium.framework.task.DedicatedTaskArgs;
 
 public class SimpleDtArgs implements DedicatedTaskArgs {
 

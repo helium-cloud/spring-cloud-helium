@@ -1,6 +1,8 @@
 package org.helium.cloud.task.store;
 
-import org.helium.cloud.task.api.TaskQueuePriority;
+
+import org.helium.framework.task.TaskArgs;
+import org.helium.framework.task.TaskQueuePriority;
 
 import java.util.ArrayList;
 import java.util.List;

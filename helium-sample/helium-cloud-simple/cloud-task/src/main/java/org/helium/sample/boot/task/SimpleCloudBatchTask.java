@@ -2,9 +2,9 @@ package org.helium.sample.boot.task;
 
 
 import com.alibaba.fastjson.JSONObject;
-import org.helium.cloud.task.annotations.TaskImplementation;
-import org.helium.cloud.task.api.BatchTask;
-import org.helium.cloud.task.api.Task;
+
+import org.helium.framework.annotations.TaskImplementation;
+import org.helium.framework.task.BatchTask;
 import org.helium.sample.boot.entity.SimpleArgs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

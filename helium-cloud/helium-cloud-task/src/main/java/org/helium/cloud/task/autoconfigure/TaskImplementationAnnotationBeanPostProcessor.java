@@ -1,10 +1,10 @@
 package org.helium.cloud.task.autoconfigure;
 
-import org.helium.cloud.task.TaskBeanInstance;
+import org.helium.cloud.task.TaskInstance;
 import org.helium.cloud.task.TaskCounter;
-import org.helium.cloud.task.annotations.TaskImplementation;
 import org.helium.cloud.task.scan.HeliumClassPathBeanDefinitionScanner;
 import org.helium.cloud.task.utils.TaskBeanUtils;
+import org.helium.framework.annotations.TaskImplementation;
 import org.helium.perfmon.PerformanceCounterFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,7 +94,7 @@ public class TaskImplementationAnnotationBeanPostProcessor implements BeanDefini
      * Registers Beans whose classes was annotated {@link TaskImplementation}
      *
      * @param packagesToScan The base packages to scan
-     * @param registry       {@link BeanDefinitionRegistry}
+     * @param registry
      */
     private void registerServiceBeans(Set<String> packagesToScan, BeanDefinitionRegistry registry) {
 
@@ -151,8 +151,8 @@ public class TaskImplementationAnnotationBeanPostProcessor implements BeanDefini
      * {@link ConfigurationClassPostProcessor},
      * thus it maybe a potential problem on bean name generation.
      *
-     * @param registry {@link BeanDefinitionRegistry}
-     * @return {@link BeanNameGenerator} instance
+     * @param registry
+     * @return
      * @see SingletonBeanRegistry
      * @see AnnotationConfigUtils#CONFIGURATION_BEAN_NAME_GENERATOR
      * @see ConfigurationClassPostProcessor#processConfigBeanDefinitions
@@ -192,7 +192,7 @@ public class TaskImplementationAnnotationBeanPostProcessor implements BeanDefini
      *
      * @param scanner       {@link ClassPathBeanDefinitionScanner}
      * @param packageToScan pachage to scan
-     * @param registry      {@link BeanDefinitionRegistry}
+     * @param registry
      * @return non-null
      * @since 2.5.8
      */
@@ -309,7 +309,7 @@ public class TaskImplementationAnnotationBeanPostProcessor implements BeanDefini
     }
 
     private AbstractBeanDefinition buildTaskBeanDefinition(TaskImplementation taskImplementation, Class<?> interfaceClass) {
-		BeanDefinitionBuilder builder = rootBeanDefinition(TaskBeanInstance.class);
+		BeanDefinitionBuilder builder = rootBeanDefinition(TaskInstance.class);
 
 		try {
 			//

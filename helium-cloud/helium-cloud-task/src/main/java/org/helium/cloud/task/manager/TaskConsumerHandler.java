@@ -1,7 +1,7 @@
 package org.helium.cloud.task.manager;
 
-import org.helium.cloud.task.TaskBeanInstance;
-import org.helium.cloud.task.api.*;
+import org.helium.cloud.task.TaskInstance;
+import org.helium.framework.task.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ public class TaskConsumerHandler {
 
 	private static TaskConsumerHandler INS = new TaskConsumerHandler();
 
-	private Map<String, TaskBeanInstance> tasks;
+	private Map<String, TaskInstance> tasks;
 
 	private SimpleTaskConsumer simpleTaskConsumer;
 
@@ -39,7 +39,7 @@ public class TaskConsumerHandler {
 	}
 
 
-	public void consume(TaskBeanInstance task, Object args) {
+	public void consume(TaskInstance task, Object args) {
 		LOGGER.info("TaskConsumerHandler.consume:{}", task.getBean());
 		if (task.getBean() instanceof DedicatedTask){
 			dedicatedTaskConsumer.consume(task, (DedicatedTaskArgs) args);
@@ -67,8 +67,8 @@ public class TaskConsumerHandler {
 	}
 
 
-	public TaskBeanInstance getTaskInstance(String beanId) {
-		TaskBeanInstance task = tasks.get(beanId);
+	public TaskInstance getTaskInstance(String beanId) {
+		TaskInstance task = tasks.get(beanId);
 		return task;
 	}
 

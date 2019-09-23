@@ -3,13 +3,11 @@ package org.helium.cloud.task.manager;
 import com.feinno.superpojo.SuperPojoManager;
 import com.feinno.superpojo.type.DateTime;
 import com.feinno.superpojo.type.TimeSpan;
-import org.helium.cloud.common.utils.SpringContextUtil;
-import org.helium.cloud.task.TaskBeanInstance;
+import org.helium.cloud.task.TaskInstance;
 import org.helium.cloud.task.TaskStorageType;
-import org.helium.cloud.task.api.*;
-import org.helium.cloud.task.store.TaskArgs;
 import org.helium.cloud.task.store.TaskQueuePriorityMemory;
 import org.helium.cloud.task.utils.TaskBeanUtils;
+import org.helium.framework.task.*;
 import org.helium.perfmon.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,7 +71,7 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 		List<TaskArgs> taskArgsListExecutor = new ArrayList<>();
 		for (TaskArgs taskArgs : taskArgsList) {
 			try {
-				TaskBeanInstance taskInstance = TaskBeanUtils.getTaskInstance(taskArgs.getId());
+				TaskInstance taskInstance = TaskBeanUtils.getTaskInstance(taskArgs.getId());
 				if (!memory) {
 					taskArgs.setObject(SuperPojoManager.parsePbFrom(taskArgs.getContent(), taskInstance.getArgClazz()));
 				}
@@ -105,7 +103,7 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 		CountDownLatch taskExecutor = new CountDownLatch(taskArgsListExecutor.size());
 		for (TaskArgs taskArgs : taskArgsListExecutor) {
 			try {
-				TaskBeanInstance taskInstance = TaskBeanUtils.getTaskInstance(taskArgs.getId());
+				TaskInstance taskInstance = TaskBeanUtils.getTaskInstance(taskArgs.getId());
 				DedicatedTask dedicatedTask = (DedicatedTask) taskInstance.getBean();
 				DedicatedTaskContext ctx = dtContexts.get(taskArgs.getTag());
 				Executor executor = taskInstance.getExecutor();
@@ -193,7 +191,7 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 				DateTime expired = DateTime.now().add(EXPIRED_SPAN);
 				List<String> tags = new ArrayList<>();
 				dtContexts.forEach((k, v) -> {
-					if (v.isExpired(System.currentTimeMillis())) {
+					if (v.isExpired(new DateTime())) {
 						tags.add(k);
 					}
 				});

@@ -3,14 +3,15 @@ package org.helium.cloud.task.manager;
 
 import com.feinno.superpojo.SuperPojo;
 import org.helium.cloud.task.TaskCounter;
-import org.helium.cloud.task.TaskBeanInstance;
+import org.helium.cloud.task.TaskInstance;
 import org.helium.cloud.task.TaskStorageType;
-import org.helium.cloud.task.api.DedicatedTaskArgs;
-import org.helium.cloud.task.api.TaskQueue;
+
 import org.helium.cloud.task.entity.PartitionBean;
-import org.helium.cloud.task.store.TaskArgs;
 import org.helium.cloud.task.store.TaskQueueMemory;
 import org.helium.cloud.task.store.TaskQueuePriorityMemory;
+import org.helium.framework.task.DedicatedTaskArgs;
+import org.helium.framework.task.TaskArgs;
+import org.helium.framework.task.TaskQueue;
 import org.helium.perfmon.PerformanceCounterFactory;
 import org.helium.threading.ExecutorFactory;
 import org.helium.threading.FixedObservableExecutor;
@@ -103,7 +104,7 @@ public abstract class AbstractTaskConsumer {
 	}
 
 
-	public void consume(TaskBeanInstance task, Object args) {
+	public void consume(TaskInstance task, Object args) {
 		TaskArgs taskArgs = new TaskArgs();
 		taskArgs.setEvent(task.getEvent());
 		if (args instanceof SuperPojo) {

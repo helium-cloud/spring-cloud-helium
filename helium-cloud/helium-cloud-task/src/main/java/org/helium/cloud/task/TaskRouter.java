@@ -1,8 +1,7 @@
 package org.helium.cloud.task;
 
-import org.helium.cloud.common.utils.SpringContextUtil;
-import org.helium.cloud.task.api.TaskBean;
 import org.helium.cloud.task.utils.TaskBeanUtils;
+import org.helium.framework.task.TaskBean;
 import org.helium.perfmon.PerformanceCounterFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -115,7 +114,7 @@ public class TaskRouter {
 
 		public void consume(Object args) {
 			try {
-				TaskBeanInstance taskInstance = TaskBeanUtils.getTaskInstance(eventName);
+				TaskInstance taskInstance = TaskBeanUtils.getTaskInstance(eventName);
 				taskInstance.consume(args);
 				counter.getProduce().increase();
 			} catch (Exception ex) {

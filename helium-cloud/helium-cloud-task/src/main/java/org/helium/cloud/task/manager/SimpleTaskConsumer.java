@@ -1,14 +1,14 @@
 package org.helium.cloud.task.manager;
 
 import com.feinno.superpojo.SuperPojoManager;
-import org.helium.cloud.common.utils.SpringContextUtil;
-import org.helium.cloud.task.TaskBeanInstance;
+import org.helium.cloud.task.TaskInstance;
 import org.helium.cloud.task.TaskStorageType;
-import org.helium.cloud.task.api.Task;
-import org.helium.cloud.task.api.TaskQueue;
-import org.helium.cloud.task.store.TaskArgs;
+
 import org.helium.cloud.task.store.TaskQueueMemory;
 import org.helium.cloud.task.utils.TaskBeanUtils;
+import org.helium.framework.task.Task;
+import org.helium.framework.task.TaskArgs;
+import org.helium.framework.task.TaskQueue;
 import org.helium.perfmon.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +47,7 @@ public class SimpleTaskConsumer extends AbstractTaskConsumer {
 		}
 
 		for (TaskArgs taskArgs : taskArgsList) {
-			TaskBeanInstance taskInstance = TaskBeanUtils.getTaskInstance(taskArgs.getId());
+			TaskInstance taskInstance = TaskBeanUtils.getTaskInstance(taskArgs.getId());
 			if (!memory) {
 				taskArgs.setObject(SuperPojoManager.parsePbFrom(taskArgs.getContent(), taskInstance.getArgClazz()));
 			}

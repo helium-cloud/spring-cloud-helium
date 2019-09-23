@@ -2,9 +2,9 @@ package org.helium.cloud.task.store;
 
 import org.helium.cloud.task.TaskRouter;
 import org.helium.cloud.task.TaskRouter.TaskRouteEntry;
-import org.helium.cloud.task.api.TaskProducer;
-import org.helium.cloud.task.api.TaskProducerFactory;
-import org.springframework.stereotype.Component;
+import org.helium.framework.task.TaskProducer;
+import org.helium.framework.task.TaskProducerFactory;
+
 
 /**
  * Created by Coral on 7/5/15.

@@ -1,8 +1,7 @@
-package org.helium.cloud.task.store;
+package org.helium.framework.task;
 
 import com.feinno.superpojo.SuperPojo;
 import com.feinno.superpojo.annotation.Field;
-import org.helium.cloud.task.api.DedicatedTaskContext;
 
 public class TaskArgs extends SuperPojo implements Comparable<TaskArgs> {
 

@@ -1,13 +1,15 @@
 package org.helium.cloud.task.store;
 
-import org.helium.cloud.task.api.TaskQueue;
+
+import org.helium.framework.task.TaskArgs;
+import org.helium.framework.task.TaskQueue;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-public class TaskQueueMemory implements TaskQueue{
+public class TaskQueueMemory implements TaskQueue {
 	private Queue<TaskArgs> queue = new ConcurrentLinkedDeque<TaskArgs>();;
 
 	private int limit = 128;

@@ -1,8 +1,8 @@
 package org.helium.sample.boot.control;
 
 
-import org.helium.cloud.task.annotations.TaskEvent;
-import org.helium.cloud.task.api.TaskProducer;
+import org.helium.framework.annotations.TaskEvent;
+import org.helium.framework.task.TaskProducer;
 import org.helium.sample.boot.entity.SimpleArgs;
 import org.helium.sample.boot.entity.SimpleDtArgs;
 import org.helium.sample.boot.task.SimpleCloudBatchTask;

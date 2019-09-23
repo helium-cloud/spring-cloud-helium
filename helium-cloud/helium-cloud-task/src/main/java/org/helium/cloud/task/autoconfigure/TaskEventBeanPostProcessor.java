@@ -1,8 +1,9 @@
 package org.helium.cloud.task.autoconfigure;
 
-import org.helium.cloud.task.annotations.TaskEvent;
-import org.helium.cloud.task.api.TaskProducer;
-import org.helium.cloud.task.api.TaskProducerFactory;
+
+import org.helium.framework.annotations.TaskEvent;
+import org.helium.framework.task.TaskProducer;
+import org.helium.framework.task.TaskProducerFactory;
 import org.helium.logging.spi.SetterInjector;
 import org.helium.util.StringUtils;
 import org.slf4j.Logger;

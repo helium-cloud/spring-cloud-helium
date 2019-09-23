@@ -1,9 +1,9 @@
 package org.helium.cloud.task.manager;
 
-import org.helium.cloud.task.TaskBeanInstance;
-import org.helium.cloud.task.api.ScheduledTask;
-import org.helium.cloud.task.api.TaskBean;
+import org.helium.cloud.task.TaskInstance;
 import org.helium.cloud.task.store.CronExpression;
+import org.helium.framework.task.ScheduledTask;
+import org.helium.framework.task.TaskBean;
 import org.helium.perfmon.Stopwatch;
 import org.helium.threading.ExecutorFactory;
 import org.slf4j.Logger;
@@ -47,14 +47,14 @@ public class SimpleScheduledTaskConsumer {
 	// @Override
 	public void registerScheduledTask(TaskBean bc) {
 //		ScheduledTaskNode node = new ScheduledTaskNode();
-//		node.id = bc.getEventId().toString();
+//		node.id = bc.getEvent().toString();
 //		String cronExpr = bc.getConfiguration().getExtension(ScheduledTask.EXTENSION_KEY_CRON);
 //		try {
 //			node.cron = new CronExpression(cronExpr);
 //		} catch (Exception ex) {
 //			throw new IllegalArgumentException("bad cron expression: " + cronExpr);
 //		}
-//		node.bean = (TaskBeanInstance)bc;
+//		node.bean = (TaskInstance)bc;
 //		node.task = (ScheduledTask)bc.getBean();
 //		tasks.add(node);
 	}
@@ -97,7 +97,7 @@ public class SimpleScheduledTaskConsumer {
 			Stopwatch watch = new Stopwatch();
 			try {
 				LOGGER.info("run ScheduledTask id=" + task.id);
-				task.task.processTask(null);
+				//task.task.processTask(null);
 				LOGGER.info("run ScheduledTask id={} cost={}ms", task.id, watch.getMillseconds());
 			} catch (Exception ex) {
 				LOGGER.info("run ScheduledTask failed id={} cost={}ms, {}", task.id, watch.getMillseconds(), ex);
@@ -114,7 +114,7 @@ public class SimpleScheduledTaskConsumer {
 		String id;
 		String lastRun;
 		CronExpression cron;
-		TaskBeanInstance bean;
+		TaskInstance bean;
 		ScheduledTask task;
 	}
 }

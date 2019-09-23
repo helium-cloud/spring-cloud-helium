@@ -1,7 +1,6 @@
 package org.helium.framework.task;
 
 import org.helium.framework.annotations.ServiceInterface;
-import org.helium.framework.spi.task.TaskArgs;
 
 import java.util.List;
 

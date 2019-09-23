@@ -1,14 +1,14 @@
 package org.helium.cloud.task;
 
-import org.helium.cloud.task.api.TaskBean;
 import org.helium.cloud.task.manager.TaskConsumerHandler;
+import org.helium.framework.task.TaskBean;
 
 import java.util.concurrent.Executor;
 
 /**
  * Created by Coral on 7/28/15.
  */
-public class TaskBeanInstance implements TaskBean {
+public class TaskInstance implements TaskBean {
 
 
 	private String id;

@@ -7,8 +7,8 @@ import org.helium.database.sharding.ShardedDatabase;
 import org.helium.framework.annotations.FieldSetter;
 import org.helium.framework.annotations.ServiceImplementation;
 import org.helium.framework.annotations.ServiceSetter;
-import org.helium.framework.spi.task.TaskArgs;
 import org.helium.framework.tag.Initializer;
+import org.helium.framework.task.TaskArgs;
 import org.helium.framework.task.TaskConsumer;
 import org.helium.framework.task.TaskQueue;
 import org.helium.framework.task.TaskStorageType;
@@ -110,7 +110,7 @@ public class TaskQueueMysql implements TaskQueue {
         try {
             String sql = String.format(SQL_INSERT, partition);
             Database database = getSharding(partition);
-            database.executeInsert(sql, taskArgs.getId(), taskArgs.getEventName(), taskArgs.getArgStr());
+            database.executeInsert(sql, taskArgs.getId(), taskArgs.getEvent(), taskArgs.getContent());
         } catch (Exception e) {
             LOGGER.error("put error", e);
         }
@@ -128,8 +128,8 @@ public class TaskQueueMysql implements TaskQueue {
                 TaskArgs taskArgs = new TaskArgs();
                 taskArgs.setId(dr.getString("TaskId"));
                 taskArgs.setTid(dr.getLong("Tid"));
-                taskArgs.setEventName(dr.getString("EventName"));
-                taskArgs.setArgStr(dr.getBytes("Args"));
+                taskArgs.setEvent(dr.getString("EventName"));
+                taskArgs.setContent(dr.getBytes("Args"));
                 result.add(taskArgs);
             }
             return result;
@@ -151,8 +151,8 @@ public class TaskQueueMysql implements TaskQueue {
                 taskArgs = new TaskArgs();
                 taskArgs.setId(dr.getString("TaskId"));
                 taskArgs.setTid(dr.getLong("Tid"));
-                taskArgs.setEventName(dr.getString("EventName"));
-                taskArgs.setArgStr(dr.getBytes("Args"));
+                taskArgs.setEvent(dr.getString("EventName"));
+                taskArgs.setContent(dr.getBytes("Args"));
             }
             return taskArgs;
         } catch (Exception e) {

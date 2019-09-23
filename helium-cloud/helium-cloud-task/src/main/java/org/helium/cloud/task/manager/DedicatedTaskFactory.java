@@ -1,7 +1,7 @@
 package org.helium.cloud.task.manager;
 
 
-import org.helium.cloud.task.api.DedicatedTaskContext;
+import org.helium.framework.task.DedicatedTaskContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
