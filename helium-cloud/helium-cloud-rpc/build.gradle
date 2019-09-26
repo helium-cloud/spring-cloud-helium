@@ -10,7 +10,9 @@ dependencies {
   compile group: 'org.apache.dubbo', name: 'dubbo-config-api', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-container-api', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-api', version: dubbo_version
-  compile group: 'org.apache.dubbo', name: 'dubbo-registry-zookeeper', version: dubbo_version
+  compile (group: 'org.apache.dubbo', name: 'dubbo-registry-zookeeper', version: dubbo_version){
+    exclude group: 'org.slf4j', module: 'slf4j-log4j12' //by both name and group
+  }
   compile group: 'org.apache.dubbo', name: 'dubbo-registry-multicast', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-serialization-hessian2', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-zookeeper', version: dubbo_version

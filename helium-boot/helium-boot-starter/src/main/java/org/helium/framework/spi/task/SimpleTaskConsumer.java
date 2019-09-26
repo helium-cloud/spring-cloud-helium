@@ -2,10 +2,7 @@ package org.helium.framework.spi.task;
 
 import com.feinno.superpojo.SuperPojoManager;
 import org.helium.framework.spi.TaskInstance;
-import org.helium.framework.task.Task;
-import org.helium.framework.task.TaskConsumer;
-import org.helium.framework.task.TaskQueue;
-import org.helium.framework.task.TaskStorageType;
+import org.helium.framework.task.*;
 import org.helium.perfmon.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +44,7 @@ public class SimpleTaskConsumer extends AbstractTaskConsumer {
 		for (TaskArgs taskArgs : taskArgsList) {
 			TaskInstance taskInstance = getTaskInstance(taskArgs.getId());
 			if (!memory) {
-				taskArgs.setObject(SuperPojoManager.parsePbFrom(taskArgs.getArgStr(), taskInstance.getArgClazz()));
+				taskArgs.setObject(SuperPojoManager.parsePbFrom(taskArgs.getContent(), taskInstance.getArgClazz()));
 			}
 
 			Task task = (Task) taskInstance.getBean();
@@ -64,7 +61,7 @@ public class SimpleTaskConsumer extends AbstractTaskConsumer {
 							task.processTask(taskArgs.getObject());
 							watch.end();
 						} catch (Exception ex) {
-							LOGGER.error("processTask {} failed {}", taskArgs.getEventName(), ex);
+							LOGGER.error("processTask {} failed {}", taskArgs.getEvent(), ex);
 							watch.fail(ex);
 						} finally {
 							if (!memory){
@@ -77,7 +74,7 @@ public class SimpleTaskConsumer extends AbstractTaskConsumer {
 					if (!memory){
 						taskExecutor.countDown();
 					}
-					LOGGER.error("When process task for event=" + taskArgs.getEventName() + " failed {}", ex);
+					LOGGER.error("When process task for event=" + taskArgs.getEvent() + " failed {}", ex);
 				}
 			} else {
 				Stopwatch watch = notFounds.getConsume().begin();
@@ -85,7 +82,7 @@ public class SimpleTaskConsumer extends AbstractTaskConsumer {
 				if (!memory){
 					taskExecutor.countDown();
 				}
-				LOGGER.error("Unknown TaskImplementation event=", taskArgs.getEventName());
+				LOGGER.error("Unknown TaskImplementation event=", taskArgs.getEvent());
 			}
 		}
 		if (!memory){

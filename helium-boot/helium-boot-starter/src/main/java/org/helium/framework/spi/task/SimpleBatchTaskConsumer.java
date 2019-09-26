@@ -2,6 +2,7 @@ package org.helium.framework.spi.task;
 
 import org.helium.framework.spi.TaskInstance;
 import org.helium.framework.task.BatchTask;
+import org.helium.framework.task.TaskArgs;
 import org.helium.framework.task.TaskConsumer;
 import org.helium.framework.task.TaskQueue;
 import org.helium.perfmon.Stopwatch;

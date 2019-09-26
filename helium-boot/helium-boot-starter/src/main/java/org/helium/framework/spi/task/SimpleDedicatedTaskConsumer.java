@@ -76,7 +76,7 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 			try {
 				TaskInstance taskInstance = getTaskInstance(taskArgs.getId());
 				if (!memory) {
-					taskArgs.setObject(SuperPojoManager.parsePbFrom(taskArgs.getArgStr(), taskInstance.getArgClazz()));
+					taskArgs.setObject(SuperPojoManager.parsePbFrom(taskArgs.getContent(), taskInstance.getArgClazz()));
 				}
 				DedicatedTask dedicatedTask = (DedicatedTask) taskInstance.getBean();
 				DedicatedTaskContext ctx = dtContexts.get(taskArgs.getTag());
@@ -97,10 +97,10 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 				} else {
 					Stopwatch watch = notFounds.getConsume().begin();
 					watch.fail("");
-					LOGGER.error("Unknown TaskImplementation event=", taskArgs.getEventName());
+					LOGGER.error("Unknown TaskImplementation event=", taskArgs.getEvent());
 				}
 			} catch (Exception ex) {
-				LOGGER.error("When process task for event=" + taskArgs.getEventName() + " failed {}", ex);
+				LOGGER.error("When process task for event=" + taskArgs.getEvent() + " failed {}", ex);
 			}
 		}
 		CountDownLatch taskExecutor = new CountDownLatch(taskArgsListExecutor.size());
@@ -122,7 +122,7 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 						watch.end();
 					} catch (Exception ex) {
 						finalCtx.setTaskRunnable();
-						LOGGER.error("processTask {} failed {}", taskArgs.getEventName(), ex);
+						LOGGER.error("processTask {} failed {}", taskArgs.getEvent(), ex);
 						watch.fail(ex);
 					} finally {
 						taskExecutor.countDown();
@@ -130,7 +130,7 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 				});
 			} catch (Exception e) {
 				taskExecutor.countDown();
-				LOGGER.error("processTask {} failed {}", taskArgs.getEventName(), e);
+				LOGGER.error("processTask {} failed {}", taskArgs.getEvent(), e);
 			}
 
 		}

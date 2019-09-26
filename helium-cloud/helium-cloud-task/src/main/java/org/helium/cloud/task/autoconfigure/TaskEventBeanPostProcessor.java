@@ -14,6 +14,7 @@ import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Field;
 
 
@@ -21,7 +22,7 @@ public class TaskEventBeanPostProcessor implements BeanPostProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskEventBeanPostProcessor.class);
 
 
-    @Autowired
+    @Resource(name = HeliumTaskConfig.TASK_PRODUCER_FACTORY)
 	private TaskProducerFactory taskProducerFactory;
     /**
      * for springboot  support helium

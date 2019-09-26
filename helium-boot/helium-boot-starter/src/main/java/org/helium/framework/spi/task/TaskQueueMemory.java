@@ -1,5 +1,6 @@
 package org.helium.framework.spi.task;
 
+import org.helium.framework.task.TaskArgs;
 import org.helium.framework.task.TaskQueue;
 
 import java.util.ArrayList;

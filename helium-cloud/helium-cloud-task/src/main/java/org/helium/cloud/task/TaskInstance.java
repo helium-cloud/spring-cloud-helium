@@ -1,8 +1,18 @@
 package org.helium.cloud.task;
 
+import org.apache.dubbo.common.extension.ExtensionLoader;
+import org.helium.cloud.common.utils.SpringContextUtil;
 import org.helium.cloud.task.manager.TaskConsumerHandler;
+import org.helium.cloud.task.rpc.TaskInvokerArgs;
+import org.helium.cloud.task.rpc.TaskInvokerFactory;
+import org.helium.cloud.task.rpc.TaskRpcCounter;
+import org.helium.cloud.task.utils.CounterUtils;
+import org.helium.framework.task.DedicatedTask;
 import org.helium.framework.task.TaskBean;
+import org.helium.perfmon.PerformanceCounterFactory;
+import org.helium.perfmon.Stopwatch;
 
+import java.util.UUID;
 import java.util.concurrent.Executor;
 
 /**
@@ -10,6 +20,7 @@ import java.util.concurrent.Executor;
  */
 public class TaskInstance implements TaskBean {
 
+	private static TaskInvokerFactory taskInvokerFactory = null;
 
 	private String id;
 	private String event;
@@ -79,35 +90,21 @@ public class TaskInstance implements TaskBean {
 
 	@Override
 	public void consume(Object args) {
-//		if (reference != null && args instanceof DedicatedTaskArgs) {
-//			DedicatedTaskArgs da = (DedicatedTaskArgs)args;
-//			ServerUrl urlByHash = reference.getRouter().pickServer(da.getTag().toString());
-//			ServerUrl url = urlByHash;
-//
-//			//
-//			// 尝试从TagManager中读取
-//			DedicatedTagManager tagManager = null;
-//			if (BeanContext.getContextService().getBean(DedicatedTagManager.ID) != null) {
-//				tagManager = BeanContext.getContextService().getService(DedicatedTagManager.class);
-//				//
-//				// 增加特性,当存在tagManager时,允许
-//				String s2 = tagManager.getOrPutTag(da.getTag(), urlByHash.toString());
-//				url = ServerUrl.parse(s2);
-//
-//				//
-//				// 如果此Server已经从全局中移除, 则将Hash取到的地址放入到TagManager中
-//				if (!reference.getRouter().hasServer(url)) {
-//					tagManager.putTag(da.getTag(), urlByHash.toString());
-//					url = urlByHash;
-//				}
-//			}
-//
-//			TaskReference.consumeByRpc(url, eventName, getId().toString(), args);
-//
-//		} else {
-//
-//		}
-		//TODO 需支持远程调用
-		TaskConsumerHandler.getInstance().consume(this, args);
+		if (this.getBean() instanceof DedicatedTask) {
+			TaskRpcCounter taskRpcCounter = PerformanceCounterFactory.getCounters(TaskRpcCounter.class, CounterUtils.getRpcEvent(event));
+			Stopwatch stopwatch = taskRpcCounter.getConsume().begin();
+			if (taskInvokerFactory == null){
+				taskInvokerFactory = SpringContextUtil.getBean(TaskInvokerFactory.class);
+			}
+			TaskInvokerArgs taskInvokerArgs = new TaskInvokerArgs();
+			taskInvokerArgs.setArgs(args);
+			taskInvokerArgs.setEvent(event);
+			taskInvokerArgs.setId(UUID.randomUUID().toString());
+			taskInvokerFactory.getInvoker().invoke(taskInvokerArgs);
+			stopwatch.end();
+		} else {
+			TaskConsumerHandler.getInstance().consume(this, args);
+		}
+
 	}
 }

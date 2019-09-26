@@ -101,9 +101,9 @@ public abstract class AbstractTaskConsumer {
 
 	public void consume(TaskInstance task, Object args) {
 		TaskArgs taskArgs = new TaskArgs();
-		taskArgs.setEventName(task.getEventName());
+		taskArgs.setEvent(task.getEventName());
 		if (args instanceof SuperPojo) {
-			taskArgs.setArgStr(((SuperPojo) args).toPbByteArray());
+			taskArgs.setContent(((SuperPojo) args).toPbByteArray());
 		}
 		taskArgs.setObject(args);
 		taskArgs.setId(task.getId().toString());

@@ -2,10 +2,10 @@ buildscript {
     project.ext {
 
       if (!project.hasProperty("nexusUser")) {
-        nexusUser = 'xxx'
+        nexusUser = 'deployment'
       }
       if (!project.hasProperty("nexusPass")) {
-        nexusPass = 'xxx'
+        nexusPass = 'deployment123'
       }
       nexusBaseUrl = 'http://repo.feinno.com/nexus/content'
       privateRepo = { return { url "${nexusBaseUrl}/groups/public/" } }
@@ -34,7 +34,10 @@ allprojects { project ->
     version = "3.0-dev-$versionTail"
 }
 
-def mavenPublishIgnoreList = ['helium-sample', 'helium-cloud-simple']
+def mavenPublishIgnoreList = ['helium-sample:helium-cloud-simple:cloud-configcenter', 
+                              'helium-sample:helium-cloud-simple:cloud-logger',
+                              'helium-sample:helium-cloud-simple:cloud-rpc',
+                              'helium-sample:helium-cloud-simple:cloud-task']
 
 subprojects { project ->
 
