@@ -48,12 +48,12 @@ include 'helium-cloud:helium-cloud-starter'
 
 
 //include 'helium-sample:helium-boot'
-include ':helium-sample:helium-cloud-simple:cloud-task:cloud-task-app1'
-include ':helium-sample:helium-cloud-simple:cloud-task:cloud-task-app2'
-include ':helium-sample:helium-cloud-simple:cloud-configcenter'
-include ':helium-sample:helium-cloud-simple:cloud-logger'
-include ':helium-sample:helium-cloud-simple:cloud-rpc:cloud-rpc-api'
-include ':helium-sample:helium-cloud-simple:cloud-rpc:cloud-rpc-consumer'
-include ':helium-sample:helium-cloud-simple:cloud-rpc:cloud-rpc-provider'
+//include ':helium-sample:helium-cloud-simple:cloud-task:cloud-task-app1'
+//include ':helium-sample:helium-cloud-simple:cloud-task:cloud-task-app2'
+//include ':helium-sample:helium-cloud-simple:cloud-configcenter'
+//include ':helium-sample:helium-cloud-simple:cloud-logger'
+//include ':helium-sample:helium-cloud-simple:cloud-rpc:cloud-rpc-api'
+//include ':helium-sample:helium-cloud-simple:cloud-rpc:cloud-rpc-consumer'
+//include ':helium-sample:helium-cloud-simple:cloud-rpc:cloud-rpc-provider'
 
 

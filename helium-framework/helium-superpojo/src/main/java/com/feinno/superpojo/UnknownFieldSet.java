@@ -1,6 +1,7 @@
 package com.feinno.superpojo;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -46,7 +47,7 @@ import com.feinno.superpojo.util.SuperPojoUtils.XmlTypeEnum;
  * @author Lv.Mingwei
  * 
  */
-public class UnknownFieldSet {
+public class UnknownFieldSet implements Serializable {
 
 	private Map<Integer, List<UnknownField<?>>> fieldMap;
 

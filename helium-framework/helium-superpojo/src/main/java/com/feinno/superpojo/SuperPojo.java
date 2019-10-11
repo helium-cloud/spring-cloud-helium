@@ -7,6 +7,7 @@ import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.BitSet;
 
 /**
@@ -15,7 +16,7 @@ import java.util.BitSet;
  * @author Lv.Mingwei
  * 
  */
-public class SuperPojo implements IProtobufPojo, IJsonPojo, IXmlPojo {
+public class SuperPojo implements IProtobufPojo, IJsonPojo, IXmlPojo, Serializable {
 
 	/** 由于某种原因导致流中{@link ProtoMember}序号不在当前的JAVA对象中，则将此序号和数据存储在此区域 */
 	@JSONField(serialize=false)
