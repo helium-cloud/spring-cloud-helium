@@ -136,7 +136,7 @@ public class ConfigCenterClient{
             }
             //3.远程加载配置
             if (StringUtils.isEmpty(value) && dynamicConfiguration != null){
-                String  dyValue = dynamicConfiguration.getConfig(key, group,0L);
+                String  dyValue = dynamicConfiguration.getProperties(key, group,0L);
                 if (!StringUtils.isEmpty(dyValue)) {
                     value = dyValue;
                     configCenterLocal.putConfig(indexKey, dyValue);

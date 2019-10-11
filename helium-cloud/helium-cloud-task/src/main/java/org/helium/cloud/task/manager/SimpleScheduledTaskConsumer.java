@@ -32,7 +32,7 @@ public class SimpleScheduledTaskConsumer {
 
 	public SimpleScheduledTaskConsumer() {
 		tasks = new ArrayList<>();
-		this.defaultExecutor = ExecutorFactory.newFixedExecutor(this.getClass().getSimpleName() +"task", TASK_EXECUTOR_SIZE, TASK_EXECUTOR_QUEUE_SIZE);
+		this.defaultExecutor = ExecutorFactory.newFixedExecutor(this.getClass().getSimpleName() +"st-task", TASK_EXECUTOR_SIZE, TASK_EXECUTOR_QUEUE_SIZE);
 
 		thread = new Thread(new Runnable() {
 			@Override
@@ -44,19 +44,18 @@ public class SimpleScheduledTaskConsumer {
 		thread.start();
 	}
 
-	// @Override
 	public void registerScheduledTask(TaskBean bc) {
-//		ScheduledTaskNode node = new ScheduledTaskNode();
-//		node.id = bc.getEvent().toString();
-//		String cronExpr = bc.getConfiguration().getExtension(ScheduledTask.EXTENSION_KEY_CRON);
-//		try {
-//			node.cron = new CronExpression(cronExpr);
-//		} catch (Exception ex) {
-//			throw new IllegalArgumentException("bad cron expression: " + cronExpr);
-//		}
-//		node.bean = (TaskInstance)bc;
-//		node.task = (ScheduledTask)bc.getBean();
-//		tasks.add(node);
+		ScheduledTaskNode node = new ScheduledTaskNode();
+		node.id = bc.getEvent().toString();
+		String cronExpr = bc.getExt();
+		try {
+			node.cron = new CronExpression(cronExpr);
+		} catch (Exception ex) {
+			throw new IllegalArgumentException("bad cron expression: " + cronExpr);
+		}
+		node.bean = (TaskInstance)bc;
+		node.task = (ScheduledTask) ((TaskInstance) bc).getBean();
+		tasks.add(node);
 	}
 
 	// @Override
@@ -76,10 +75,10 @@ public class SimpleScheduledTaskConsumer {
 					if (nowText.equals(task.lastRun)) {     // 每秒运行最多一次
 						continue;
 					}
-//					if (task.cron.isSatisfiedBy(now)) {     // 午时已到
-//						task.lastRun = nowText;
-//						runTask(task);
-//					}
+					if (task.cron.isSatisfiedBy(now)) {     // 午时已到
+						task.lastRun = nowText;
+						runTask(task);
+					}
 				}
 			} catch (InterruptedException e) {
 			} catch (Throwable t) {

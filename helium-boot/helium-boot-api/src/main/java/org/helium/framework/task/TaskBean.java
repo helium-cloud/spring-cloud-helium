@@ -17,6 +17,13 @@ public interface TaskBean {
 	default String getEvent(){return "";};
 
 	/**
+	 * 获取事件名称
+	 * @return
+	 */
+	default String getExt(){return "";};
+
+
+	/**
 	 * 获取存储类型
 	 * @return
 	 */

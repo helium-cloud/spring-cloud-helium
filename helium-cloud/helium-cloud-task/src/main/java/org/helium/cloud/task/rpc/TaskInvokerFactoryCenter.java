@@ -51,6 +51,7 @@ public class TaskInvokerFactoryCenter implements TaskInvokerFactory {
 	 * @return
 	 */
     public TaskInvoker checkTaskInvoker(){
+    	//TODO 本机的话就不走rpc
         if (taskInvoker == null){
             synchronized (TaskInvokerFactoryCenter.class){
             	if (taskInvoker == null){

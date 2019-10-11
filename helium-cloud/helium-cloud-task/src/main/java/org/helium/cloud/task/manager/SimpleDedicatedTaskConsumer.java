@@ -142,22 +142,6 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 		DedicatedTaskContext ctx = new DedicatedTaskContext(tag);
 		DedicatedTaskContext old;
 
-		//
-		//如果存在全局Manager,需要通过全局进行同步
-//		DedicatedTagManager tagManager = null;
-//		if (BeanContext.getContextService().getBean(DedicatedTagManager.ID) != null) {
-//			tagManager = BeanContext.getContextService().getService(DedicatedTagManager.class);
-//			//
-//			// 强制更新成本机地址
-//			CentralizedService centerService = BeanContext.getContextService().getCentralizedService();
-//			if (centerService != null) {
-//				ServerUrl url = centerService.getServerEndpoint().getServerUrl("rpc");
-//				tagManager.putTag(tag, url.toString());
-//			} else {
-//				throw new UnsupportedOperationException("TagManager must use with CentralizedService");
-//			}
-//		}
-
 		synchronized (this) {
 			old = dtContexts.put(tag, ctx);
 		}
