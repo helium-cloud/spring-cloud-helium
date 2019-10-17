@@ -33,6 +33,11 @@ public class PooledDatabase extends ShardedDataSource<PooledObject, Database> {
         return null;
     }
 
+    @Override
+    protected Database loadDataSource(String dsName, String value) {
+        return null;
+    }
+
 
     @Override
     public Database getSharding(PooledObject shardingKey) {

@@ -1,12 +1,16 @@
 package org.helium.data.sharding;
 
+import com.feinno.superpojo.SuperPojoManager;
 import org.helium.data.sharding.configuration.DataSourceNode;
 import org.helium.data.sharding.configuration.ShardedDataSourceConfiguration;
+import org.helium.database.ConnectionString;
+import org.helium.database.spi.DatabaseManager;
 import org.helium.framework.BeanContext;
 import org.helium.framework.configuration.ConfigProvider;
 import org.helium.framework.configuration.FieldLoader;
 import org.helium.framework.entitys.ObjectWithSettersNode;
 import org.helium.framework.entitys.SetterNode;
+import org.helium.framework.entitys.SetterNodeLoadType;
 import org.helium.framework.spi.ObjectCreator;
 
 import java.lang.reflect.Field;
@@ -24,21 +28,16 @@ public class ShardedDataSourceLoader implements FieldLoader {
 	public Object loadField(SetterNode node, Field field) {
 		ShardedDataSource ds;
 		String shardedFile = node.getInnerText();
-		ConfigProvider provider = BeanContext.getContextService().getService(ConfigProvider.class);
-
-		ShardedDataSourceConfiguration config = provider.loadXml("db/" + shardedFile, ShardedDataSourceConfiguration.class);
-
+		ShardedDataSourceConfiguration config = SuperPojoManager.parseXmlFrom(shardedFile,ShardedDataSourceConfiguration.class);
 		try {
 			Object o = field.getType().newInstance();
 			ds = (ShardedDataSource)o;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-
 		for (DataSourceNode n: config.getDataSources()) {
-			ds.addDataSource(n.getId(), n.getName());
+			ds.addDataSource(n.getId(), n.getName(),n.getValue());
 		}
-
 		ObjectWithSettersNode sn = config.getShardingFunction();
 		Object o2 = ObjectCreator.createObject(sn);
 		ds.setShardingFunction((ShardingFunction)o2);

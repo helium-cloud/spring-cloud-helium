@@ -14,6 +14,12 @@ public class DataSourceNode extends SuperPojo {
 	@Field(id = 2, name = "name", type = NodeType.ATTR)
 	private String name;
 
+	/**
+	 * 根据key设置成真正想要的value
+	 */
+	@Field(id = 3, name = "value", type = NodeType.ATTR)
+	private String value;
+
 	public int getId() {
 		return id;
 	}
@@ -28,5 +34,13 @@ public class DataSourceNode extends SuperPojo {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 }

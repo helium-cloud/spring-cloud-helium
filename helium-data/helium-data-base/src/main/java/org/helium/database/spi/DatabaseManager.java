@@ -1,5 +1,6 @@
 package org.helium.database.spi;
 
+import com.alibaba.fastjson.JSONObject;
 import org.helium.util.StringUtils;
 import org.helium.database.ConnectionString;
 import org.helium.database.Database;

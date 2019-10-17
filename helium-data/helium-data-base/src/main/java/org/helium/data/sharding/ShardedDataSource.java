@@ -24,8 +24,13 @@ public abstract class ShardedDataSource<SK, SOURCE> {
 		sources.put(id, source);
 	}
 
-	protected abstract SOURCE loadDataSource(String dsName);
+    void addDataSource(int id, String dsName, String value) {
+        SOURCE source = loadDataSource(dsName, value);
+        sources.put(id, source);
+    }
 
+	protected abstract SOURCE loadDataSource(String dsName);
+    protected abstract SOURCE loadDataSource(String dsName, String value);
 	protected abstract SOURCE getSharding(SOURCE source, String shardingName);
 
 	public SOURCE getSharding(SK shardingKey) {

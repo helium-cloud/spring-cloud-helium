@@ -16,19 +16,50 @@ import org.helium.cloud.configcenter.cache.ConfigCenterLocal;
 import org.helium.cloud.configcenter.utils.KeyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanDefinitionStoreException;
+import org.springframework.beans.factory.config.PlaceholderConfigurerSupport;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Properties;
+import java.util.Set;
 
 /**
  * ConfigCenterClient 自定义客户端
- *
  */
-public class ConfigCenterClient{
+public class ConfigCenterClient {
+    private static final Logger logger = LoggerFactory.getLogger(ConfigCenterClient.class);
+    /**
+     * Default placeholder prefix: {@value}.
+     */
+    public static final String DEFAULT_PLACEHOLDER_PREFIX = "${";
 
+    /**
+     * Default placeholder suffix: {@value}.
+     */
+    public static final String DEFAULT_PLACEHOLDER_SUFFIX = "}";
+
+    /**
+     * Default value separator: {@value}.
+     */
+    public static final String DEFAULT_VALUE_SEPARATOR = ":";
+
+
+    /**
+     * Defaults to {@value #DEFAULT_PLACEHOLDER_PREFIX}.
+     */
+    protected String placeholderPrefix = DEFAULT_PLACEHOLDER_PREFIX;
+
+    /**
+     * Defaults to {@value #DEFAULT_PLACEHOLDER_SUFFIX}.
+     */
+    protected String placeholderSuffix = DEFAULT_PLACEHOLDER_SUFFIX;
     //本地缓存配置
     private ConfigCenterLocal configCenterLocal = new ConfigCenterLocal();
 
@@ -44,7 +75,7 @@ public class ConfigCenterClient{
     private static final Logger LOGGER = LoggerFactory.getLogger(ConfigCenterClient.class);
 
     public ConfigCenterClient(ConfigCenterConfig configCenterProperties, ConfigurableEnvironment configurableEnvironment) {
-		configCenterConfig = configCenterProperties;
+        configCenterConfig = configCenterProperties;
         //1.是否启用远程动态配置
         if (configCenterConfig.isEnable()) {
             URL url = URL.valueOf(configCenterConfig.getUrl());
@@ -74,7 +105,7 @@ public class ConfigCenterClient{
 
 
     public void addListener(String key, String group, ConfigurationListener listener) {
-        if (dynamicConfiguration == null){
+        if (dynamicConfiguration == null) {
             return;
         }
         String indexKey = KeyUtils.getKey(key, group);
@@ -83,10 +114,10 @@ public class ConfigCenterClient{
             public void process(ConfigChangeEvent event) {
                 //内部缓存
                 //通知业务侧
-                if (listener != null){
+                if (listener != null) {
                     listener.process(event);
                 }
-                switch (event.getChangeType()){
+                switch (event.getChangeType()) {
                     case ADDED:
                     case MODIFIED:
                         configCenterLocal.putConfig(indexKey, event.getValue());
@@ -128,15 +159,15 @@ public class ConfigCenterClient{
             //内部缓存
             String value = configCenterLocal.getConfig(indexKey);
             //2.spring-boot-application加载配置
-            if (configurableEnvironment != null){
+            if (configurableEnvironment != null) {
                 String ceValue = configurableEnvironment.getProperty(indexKey);
                 if (!StringUtils.isEmpty(ceValue)) {
                     value = ceValue;
                 }
             }
             //3.远程加载配置
-            if (StringUtils.isEmpty(value) && dynamicConfiguration != null){
-                String  dyValue = dynamicConfiguration.getProperties(key, group,0L);
+            if (StringUtils.isEmpty(value) && dynamicConfiguration != null) {
+                String dyValue = dynamicConfiguration.getProperties(key, group, 0L);
                 if (!StringUtils.isEmpty(dyValue)) {
                     value = dyValue;
                     configCenterLocal.putConfig(indexKey, dyValue);
@@ -145,8 +176,13 @@ public class ConfigCenterClient{
                 addListener(key, group, null);
             }
             //4. 加载本机local值获取
-            if (!StringUtils.isEmpty(value) && value.startsWith(CloudConstant.LOCAL)){
-                return readLocalValue(value);
+            if (!StringUtils.isEmpty(value) && value.startsWith(CloudConstant.LOCAL)) {
+                String readLocalValue = readLocalValue(value);
+                //5. 替换二级变量${}
+                if (Objects.nonNull(readLocalValue) && readLocalValue.contains(placeholderPrefix)) {
+                    readLocalValue = parseStringValue(readLocalValue);
+                }
+                return readLocalValue;
             }
             return value;
         } catch (Exception e) {
@@ -157,9 +193,31 @@ public class ConfigCenterClient{
         return null;
     }
 
+    private String parseStringValue(String strVal) {
+        StringBuffer buf = new StringBuffer(strVal);
+        //提取出${}中间的字符串，
+        int startIndex = strVal.indexOf(placeholderPrefix);
+        while (startIndex != -1) {
+            int endIndex = buf.toString().indexOf(this.placeholderSuffix, startIndex + this.placeholderPrefix.length());
+            if (endIndex != -1) {
+                String placeholder = buf.substring(startIndex + this.placeholderPrefix.length(), endIndex);
+                //用System.getEnv和外部的properties文件替代了${}中间的值
+                String propVal = readLocalValue(configurableEnvironment.getProperty(placeholder));
+                buf.replace(startIndex, endIndex + this.placeholderSuffix.length(), propVal == null ? "null" : propVal);
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Resolved placeholder '" + placeholder + "' to value [" + propVal + "]");
+                }
+                startIndex = buf.toString().indexOf(this.placeholderPrefix, startIndex + propVal.length());
+            } else {
+                startIndex = -1;
+            }
+        }
+        return buf.toString();
+    }
 
     /**
      * 获取本地属性配置
+     *
      * @param keyValue
      * @return
      */
@@ -171,7 +229,7 @@ public class ConfigCenterClient{
             String str = FileUtil.read(file.getAbsolutePath());
             return str;
         } catch (IOException e) {
-            LOGGER.error("key: getValue", keyValue,e);
+            LOGGER.error("key: getValue", keyValue, e);
         }
         return null;
     }
@@ -185,8 +243,8 @@ public class ConfigCenterClient{
         this.configurableEnvironment = configurableEnvironment;
     }
 
-    public static ConfigCenterClient getInstance(){
-        ConfigCenterClient configCenterClient =  SpringContextUtil.getBean(ConfigCenterClient.class);
+    public static ConfigCenterClient getInstance() {
+        ConfigCenterClient configCenterClient = SpringContextUtil.getBean(ConfigCenterClient.class);
         return configCenterClient;
     }
 }
