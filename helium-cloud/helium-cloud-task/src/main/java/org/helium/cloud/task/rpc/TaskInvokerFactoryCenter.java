@@ -52,6 +52,7 @@ public class TaskInvokerFactoryCenter implements TaskInvokerFactory {
 			applicationConfig.setName("DtTaskConsumer");
 		}
 		service.setApplication(applicationConfig);
+		service.setRegistry(registry);
 		service.export();
 	}
 
