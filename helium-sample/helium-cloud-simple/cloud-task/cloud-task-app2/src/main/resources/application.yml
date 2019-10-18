@@ -5,6 +5,8 @@ spring:
     name: cloud-rpc-provider
 
 dubbo:
+  application:
+    name: ${spring.application.name}
   protocol:
     name: dubbo
     port: 8192
