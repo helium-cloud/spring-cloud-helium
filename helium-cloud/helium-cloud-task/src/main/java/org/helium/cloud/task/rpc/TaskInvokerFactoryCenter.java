@@ -37,9 +37,6 @@ public class TaskInvokerFactoryCenter implements TaskInvokerFactory {
 		ServiceConfig<TaskInvoker> service = new ServiceConfig<TaskInvoker>();
 		service.setInterface(TaskInvoker.class);
 		service.setRef(new TaskInvokerImpl());
-		ApplicationConfig applicationConfig = new ApplicationConfig();
-		applicationConfig.setName("DtTaskConsumer");
-		service.setApplication(applicationConfig);
 		service.setVersion(version);
 		service.export();
 	}

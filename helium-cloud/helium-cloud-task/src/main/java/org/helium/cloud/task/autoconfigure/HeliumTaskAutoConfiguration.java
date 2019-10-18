@@ -8,11 +8,13 @@ import org.helium.cloud.task.store.TaskProducerFactoryImpl;
 import org.helium.framework.task.TaskProducerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.*;
 
 import java.util.Set;
@@ -31,6 +33,7 @@ public class HeliumTaskAutoConfiguration {
 	 */
 	@Bean(name = HeliumTaskConfig.TASK_INVOKER_FACTORY)
 	@ConditionalOnProperty(prefix = "dubbo.registry", value = "address")
+	@DependsOn({"dubboScanBasePackagesPropertyResolver"})
 	public TaskInvokerFactory taskInvokerFactory(ConfigurableEnvironment environment) {
 		String regUrl = environment.getProperty("dubbo.registry.address", "zookeeper://127.0.0.1:7998");
 		return new TaskInvokerFactoryCenter(regUrl);
