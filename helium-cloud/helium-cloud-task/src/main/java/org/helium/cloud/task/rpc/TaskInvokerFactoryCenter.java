@@ -6,6 +6,7 @@ import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.ServiceConfig;
+import org.helium.cloud.common.utils.SpringContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +24,12 @@ public class TaskInvokerFactoryCenter implements TaskInvokerFactory {
 
 	public TaskInvokerFactoryCenter(String registryUrl){
 		this.registryUrl = registryUrl;
-		initServiceConfig();
+		try {
+			initServiceConfig();
+		} catch (Exception e){
+			LOGGER.error("TaskInvokerFactoryCenter exception:", e);
+		}
+
 	}
 
 	public void initServiceConfig(){
@@ -38,6 +44,14 @@ public class TaskInvokerFactoryCenter implements TaskInvokerFactory {
 		service.setInterface(TaskInvoker.class);
 		service.setRef(new TaskInvokerImpl());
 		service.setVersion(version);
+		ApplicationConfig applicationConfig = null;
+		try {
+			applicationConfig = SpringContextUtil.getBean(ApplicationConfig.class);
+		} catch (Exception e){
+			applicationConfig = new ApplicationConfig();
+			applicationConfig.setName("DtTaskConsumer");
+		}
+		service.setApplication(applicationConfig);
 		service.export();
 	}
 

@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.*;
 
 import java.util.Set;
@@ -33,7 +34,7 @@ public class HeliumTaskAutoConfiguration {
 	 */
 	@Bean(name = HeliumTaskConfig.TASK_INVOKER_FACTORY)
 	@ConditionalOnProperty(prefix = "dubbo.registry", value = "address")
-	@DependsOn({"dubboScanBasePackagesPropertyResolver"})
+	@Order(99)
 	public TaskInvokerFactory taskInvokerFactory(ConfigurableEnvironment environment) {
 		String regUrl = environment.getProperty("dubbo.registry.address", "zookeeper://127.0.0.1:7998");
 		return new TaskInvokerFactoryCenter(regUrl);
