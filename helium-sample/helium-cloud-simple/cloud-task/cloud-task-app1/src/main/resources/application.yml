@@ -9,7 +9,7 @@ dubbo:
     name: dubbo
     port: 8191
   registry:
-    address: zookeeper://10.10.220.121:7998
+    address: zookeeper://10.10.220.122:7998
   scan:
     base-packages: org.helium.sample.boot.service
 helium:
