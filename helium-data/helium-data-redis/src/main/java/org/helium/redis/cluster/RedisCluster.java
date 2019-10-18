@@ -73,6 +73,11 @@ public class RedisCluster extends ShardedDataSource<String, RedisClient> {
     }
 
     @Override
+    protected RedisClient loadDataSource(String dsName, String value) {
+        throw new UnsupportedOperationException("BY DESIGN");
+    }
+
+    @Override
     protected RedisClient getSharding(RedisClient redisClient, String shardingName) {
         throw new UnsupportedOperationException("BY DESIGN");
     }

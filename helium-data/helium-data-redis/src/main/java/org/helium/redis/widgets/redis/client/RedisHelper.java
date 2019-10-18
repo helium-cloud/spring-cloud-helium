@@ -1,16 +1,13 @@
-package org.helium.redis.sentinel.helper;
+package org.helium.redis.widgets.redis.client;
 
-import com.alibaba.fastjson.JSONObject;
-import com.feinno.superpojo.util.StringUtils;
 import com.google.gson.Gson;
-import org.helium.redis.sentinel.RedisSentinelsCfg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPoolConfig;
-import redis.clients.jedis.Protocol;
 import redis.clients.util.Pool;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.lang.reflect.Method;
 import java.util.Enumeration;
@@ -18,12 +15,8 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
-
 /**
- * 工具类, 主要用来解析配置表, 转换为连接池
- *
- * @author Li.Hongbo <lihongbo@feinno.com>
- * @date 2015年3月4日 下午1:24:30
+ * Created by yibo on 2017-6-9.
  */
 public class RedisHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger(RedisHelper.class);
@@ -35,64 +28,40 @@ public class RedisHelper {
      * @param redisCluster
      * @return
      */
-    public static Pool<Jedis> getPool(RedisSentinelsCfg redisCluster) {
+    public static Pool<Jedis> getPool(CFG_RedisSentinels redisCluster) {
         String cacheName = redisCluster.getRoleName();
         String config = redisCluster.getPropertiesExt();
-
+//        Properties property = new RedisClusterProperties(true);
         Properties prop = new Properties();
         try {
-            if (config != null) {
+            if (config != null)
                 prop.load(new StringReader(config));
-            }
-
-        } catch (Exception e) {
+        } catch (IOException e) {
             LOGGER.error(String.format("load cacheName %s  config  %s in table RedisInstances error ",
                     cacheName, config), e);
             throw new RuntimeException(e);
         }
 
-        if (redisCluster.getWeight() == 0) {
-            redisCluster.setWeight(10);
-        }
-        if (!prop.containsKey("database")) {
+        if (!prop.containsKey("database"))
             prop.setProperty("database", "0");
-        }
 
-        if (!prop.containsKey("minIdle")) {
+        if (!prop.containsKey("minIdle"))
             prop.setProperty("minIdle", "1");
-        }
-
-        if (!prop.containsKey("maxIdle")) {
+        if (!prop.containsKey("maxIdle"))
             prop.setProperty("maxIdle", "3");
-        }
-
-        if (!prop.containsKey("maxTotal")) {
+        if (!prop.containsKey("maxTotal"))
             prop.setProperty("maxTotal", "10");
-        }
-        if (!prop.containsKey("maxTotal")) {
-            prop.setProperty("maxTotal", "10");
-        }
-
-        if (!prop.containsKey("testWhileIdle")) {
+        if (!prop.containsKey("testWhileIdle"))
             prop.setProperty("testWhileIdle", "true");
-        }
-
-        if (!prop.containsKey("maxWaitMillis")) {
+        if (!prop.containsKey("maxWaitMillis"))
             prop.setProperty("maxWaitMillis", "3000");
-        }
-
-        if (!prop.containsKey("timeBetweenEvictionRunsMillis")) {
+        if (!prop.containsKey("timeBetweenEvictionRunsMillis"))
             prop.setProperty("timeBetweenEvictionRunsMillis", "60000");
-        }
-
-        if (!prop.containsKey("whenExhaustedAction")) {
+        if (!prop.containsKey("whenExhaustedAction"))
             prop.setProperty("whenExhaustedAction", "1");
-        }
-
-        if (!prop.containsKey("serverNumber")) {
+        // 自己加的内容，redis服务器的数量
+        if (!prop.containsKey("serverNumber"))
             prop.setProperty("serverNumber", "100");
-        }
-
 
         // 池基本配置
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
@@ -130,9 +99,9 @@ public class RedisHelper {
         }
 
         jedisPoolConfig.setLifo(true);//不公平的竞争，保证连接数最少
-        //得不到连接会锁，但是下面的maxwait保证不会锁太久。 即保证能够提供更好的可用性，又保证不会太耗线程。 
+        //得不到连接会锁，但是下面的maxwait保证不会锁太久。 即保证能够提供更好的可用性，又保证不会太耗线程。
         jedisPoolConfig.setBlockWhenExhausted(true);
-        //redis等连接的时候不能超过100ms， 不然就会hang死线程。        
+        //redis等连接的时候不能超过100ms， 不然就会hang死线程。
 //        if (maxWaitMillis > 100)
 //            maxWaitMillis = 100;
 //        if (maxWaitMillis <= 0) //如果不配置，默认给个10ms
@@ -155,10 +124,12 @@ public class RedisHelper {
 
         if (sentinelsSets == null) {
             LOGGER.error(String.format(
-                    "the redis %s config column in table RedisSentinelsCfg set error, no ip address", cacheName));
+                    "the redis %s config column in table CFG_RedisSentinels set error, no ip address", cacheName));
             throw new RuntimeException(String.format(
-                    "the redis %s config column in table RedisSentinelsCfg set error, no ip address", cacheName));
+                    "the redis %s config column in table CFG_RedisSentinels set error, no ip address", cacheName));
         }
+
+        //print maxWaitMillis;
 
 //        JedisSentinelPool pool1 =
 //                new JedisSentinelPool(redisCluster.getMasterName(), sentinelsSets, jedisPoolConfig);
@@ -170,9 +141,26 @@ public class RedisHelper {
             LOGGER.error("Redis Database  error  {}", new Gson().toJson(redisCluster));
         }
 
+        int connectionBuildTimeout=2000;
+        if (prop.containsKey("connTimeout"))
+        {
+            try {
+                connectionBuildTimeout=Integer.parseInt( prop.getProperty("connTimeout"));
+            } catch (Exception e) {
+                LOGGER.error("parseInt connTimeout:"+prop.getProperty("connTimeout"),e);
+            }
+        }
+
+
+
+//        Pool<Jedis> pool1 =
+//                new JedisSentinelPoolFeinno(redisCluster.getMasterName(), sentinelsSets, jedisPoolConfig, Protocol.DEFAULT_TIMEOUT, null,
+//                        database);
+
         Pool<Jedis> pool1 =
-                new JedisSentinelPool(redisCluster.getMasterName(), sentinelsSets, jedisPoolConfig, Protocol.DEFAULT_TIMEOUT, null,
+                new JedisSentinelPoolFeinno(redisCluster.getMasterName(), sentinelsSets, jedisPoolConfig, connectionBuildTimeout, null,
                         database);
+
         return pool1;
     }
 
