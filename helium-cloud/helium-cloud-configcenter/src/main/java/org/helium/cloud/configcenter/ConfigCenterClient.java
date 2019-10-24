@@ -1,7 +1,6 @@
 package org.helium.cloud.configcenter;
 
 
-import com.feinno.superpojo.util.FileUtil;
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.config.Environment;
 import org.apache.dubbo.common.extension.ExtensionLoader;
@@ -16,19 +15,16 @@ import org.helium.cloud.configcenter.cache.ConfigCenterLocal;
 import org.helium.cloud.configcenter.utils.KeyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanDefinitionStoreException;
-import org.springframework.beans.factory.config.PlaceholderConfigurerSupport;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
 import org.springframework.util.StringUtils;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Arrays;
+import java.io.InputStreamReader;
 import java.util.Objects;
-import java.util.Properties;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * ConfigCenterClient 自定义客户端
@@ -202,7 +198,7 @@ public class ConfigCenterClient {
             if (endIndex != -1) {
                 String placeholder = buf.substring(startIndex + this.placeholderPrefix.length(), endIndex);
                 //用System.getEnv和外部的properties文件替代了${}中间的值
-                String propVal = readLocalValue(configurableEnvironment.getProperty(placeholder));
+                String propVal = readLocalValue(Objects.requireNonNull(configurableEnvironment.getProperty(placeholder)));
                 buf.replace(startIndex, endIndex + this.placeholderSuffix.length(), propVal == null ? "null" : propVal);
                 if (logger.isDebugEnabled()) {
                     logger.debug("Resolved placeholder '" + placeholder + "' to value [" + propVal + "]");
@@ -225,11 +221,14 @@ public class ConfigCenterClient {
         try {
             String path = keyValue.replace(CloudConstant.LOCAL, "");
             DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();
-            File file = defaultResourceLoader.getResource(path).getFile();
-            String str = FileUtil.read(file.getAbsolutePath());
+            Resource resource = defaultResourceLoader.getResource(path);
+            //换成文件流读取,resource.getFile() is not working in docker. Need to use getInputStream()
+            BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()));
+            String str = reader.lines().collect(Collectors.joining("\n"));
+            reader.close();
             return str;
         } catch (IOException e) {
-            LOGGER.error("key: getValue", keyValue, e);
+            LOGGER.error("key: {} getValue: {}", keyValue, e);
         }
         return null;
     }
