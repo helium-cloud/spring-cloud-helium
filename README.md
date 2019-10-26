@@ -22,9 +22,9 @@
 ```
 
 dependencies {
-    compile group: 'org.helium', name: 'helium-data-base',version: '3.0-dev-1909161114'
-    compile group: 'org.helium', name: 'helium-data-redis',version: '3.0-dev-1909161114'
-    compile group: 'org.helium', name: 'helium-cloud-starter',version: '3.0-dev-1909161114'
+    compile group: 'org.helium', name: 'helium-data-base',version: '3.0-dev-1910261350'
+    compile group: 'org.helium', name: 'helium-data-redis',version: '3.0-dev-1910261350'
+    compile group: 'org.helium', name: 'helium-cloud-starter',version: '3.0-dev-1910261350'
 }
 
 ```
