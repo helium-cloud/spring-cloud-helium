@@ -1,13 +1,11 @@
 dependencies {
-    compile group: 'org.helium.cloud', name: 'helium-cloud-configcenter', version: helium_version
-    compile group: 'org.helium', name: 'helium-data-base', version: helium_version
-    compile group: 'org.helium', name: 'helium-data-redis', version: helium_version
-    compile group: 'org.helium', name: 'helium-data-kafka', version: helium_version
+
+    compile project(':helium-cloud:helium-cloud-configcenter')
+    compile project(':helium-data:helium-cloud-redis')
+    compile project(':helium-data:helium-cloud-kafka')
 
 
     compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-nacos', version: dubbo_version
-//    compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-apollo', version: dubbo_version
-//    compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-zookeeper', version: dubbo_version
     compile group: 'junit', name: 'junit', version: '4.12'
     compile (group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: spring_boot_version){
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group

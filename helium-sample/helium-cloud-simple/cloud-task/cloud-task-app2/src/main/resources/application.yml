@@ -12,11 +12,10 @@ dubbo:
     port: 8192
   ## Dubbo Registry
   registry:
-    address: zookeeper://10.10.208.86:2181?backup=10.10.208.87:2181,10.10.208.90:2181
-    file: ${user.home}/dubbo-cache/${spring.application.name}/dubbo.cache
+    address: zookeeper://10.10.208.124:7998
 
   metadata-report:
-    address: zookeeper://10.10.208.86:2181?backup=10.10.208.87:2181,10.10.208.90:2181
+    address: zookeeper://10.10.208.124:7998
   scan:
     base-packages: org.helium.sample.boot.service
 helium:

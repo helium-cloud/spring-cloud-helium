@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.feinno.superpojo.SuperPojo;
 import com.feinno.superpojo.annotation.Field;
 import com.feinno.superpojo.generator.ObjectUtils;
+import com.feinno.superpojo.util.JavaEval;
+import com.feinno.superpojo.util.ServiceEnvironment;
 import com.google.gson.Gson;
 
 public class User extends SuperPojo {
@@ -43,6 +45,7 @@ public class User extends SuperPojo {
     }
 
     public static void main(String[] args) {
+		JavaEval.setSaveClassPath("/tmp/java/javaeval-" + ServiceEnvironment.getPid());
         User user = new User();
         int a = 0;
         ObjectUtils.isNull(a);

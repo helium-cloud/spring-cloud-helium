@@ -3,6 +3,4 @@ dependencies {
   compile group: 'redis.clients', name: 'jedis', version: redis_version
 
   testCompile group: 'org.slf4j', name: 'slf4j-simple', version: slf4j_version
-
-  testCompile group: 'org.helium', name: 'helium-dashboard', version: helium_version
 }
