@@ -9,6 +9,8 @@ import org.helium.kafka.spi.KafkaCounters;
 import org.helium.perfmon.PerformanceCounterFactory;
 import org.helium.perfmon.Stopwatch;
 import org.helium.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 
@@ -16,7 +18,7 @@ import java.util.Properties;
  * kafka生产者
  */
 public class UkProducerImpl implements UkProducer {
-
+    private static final Logger logger = LoggerFactory.getLogger(UkProducerImpl.class);
     private Producer producer;
     private String kafkaConf;
     private Properties properties;
@@ -36,36 +38,41 @@ public class UkProducerImpl implements UkProducer {
 		counters.getQps().increase();
 		Stopwatch watch = counters.getTx().begin();
 		if (StringUtils.isNullOrEmpty(topic)) {
-			throw new IllegalArgumentException("config properties not find topic, please config it, file name:" + kafkaConf);
+            logger.error("kafka config properties not find topic, please config it, file name :{}", kafkaConf + ".properties");
+            throw new IllegalArgumentException("config properties not find topic, please config it, file name:" + kafkaConf);
 		}
 		ProducerRecord producerRecord = new ProducerRecord(topic, json);
 		producer.send(producerRecord, (metadata, exception) -> {
 			if (metadata != null) {
-				watch.end();
+                logger.info("produce msg successful, msg's metadata :{}", metadata.toString());
+                watch.end();
 			}
 			if (exception != null) {
-				watch.fail(exception.getMessage());
+                logger.warn("produce msg error, exception :", exception);
+                watch.fail(exception.getMessage());
 			}
 
 		});
 	}
 
 	@Override
-	public void produce(byte content[]) {
-
+	public void produce(byte [] content) {
 		String topic = properties.getProperty("topic");
 		counters.getQps().increase();
 		Stopwatch watch = counters.getTx().begin();
 		if (StringUtils.isNullOrEmpty(topic)) {
-			throw new IllegalArgumentException("kafka properties not find topic, please config it, file name" + kafkaConf);
+            logger.error("kafka config properties not find topic, please config it, file name :{}", kafkaConf + ".properties");
+            throw new IllegalArgumentException("kafka properties not find topic, please config it, file name" + kafkaConf);
 		}
 		ProducerRecord producerRecord = new ProducerRecord(topic, content);
 		producer.send(producerRecord, (metadata, exception) -> {
 			if (metadata != null) {
-				watch.end();
+                logger.info("produce msg successful, msg's metadata :{}", metadata.toString());
+                watch.end();
 			}
 			if (exception != null) {
-				watch.fail(exception.getMessage());
+                logger.warn("produce msg error, exception :", exception);
+                watch.fail(exception.getMessage());
 			}
 
 		});
