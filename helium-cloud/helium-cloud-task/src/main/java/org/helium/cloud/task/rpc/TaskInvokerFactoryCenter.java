@@ -53,6 +53,7 @@ public class TaskInvokerFactoryCenter implements TaskInvokerFactory {
 		}
 		service.setApplication(applicationConfig);
 		service.setRegistry(registry);
+		service.setGroup(applicationConfig.getName());
 		service.export();
 	}
 
@@ -69,12 +70,10 @@ public class TaskInvokerFactoryCenter implements TaskInvokerFactory {
         if (taskInvoker == null){
             synchronized (TaskInvokerFactoryCenter.class){
             	if (taskInvoker == null){
-
 					RegistryConfig registry = new RegistryConfig();
 					URL regUrl = URL.valueOf(registryUrl);
 					registry.setAddress(regUrl.getAddress());
 					registry.setProtocol(regUrl.getProtocol());
-
 					ReferenceConfig<TaskInvoker> referenceConfig = new ReferenceConfig<>();
 					referenceConfig.setRegistry(registry);
 					referenceConfig.setVersion(version);
@@ -84,6 +83,14 @@ public class TaskInvokerFactoryCenter implements TaskInvokerFactory {
 					referenceConfig.setInterface(TaskInvoker.class);
 					referenceConfig.setCheck(false);
 					referenceConfig.setInjvm(false);
+					ApplicationConfig applicationConfig = null;
+					try {
+						applicationConfig = SpringContextUtil.getBean(ApplicationConfig.class);
+					} catch (Exception e){
+						applicationConfig = new ApplicationConfig();
+						applicationConfig.setName("DtTaskConsumer");
+					}
+					referenceConfig.setGroup(applicationConfig.getName());
 					taskInvoker = referenceConfig.get();
 				}
             }
