@@ -2,22 +2,27 @@ buildscript {
     project.ext {
 
       if (!project.hasProperty("nexusUser")) {
-        nexusUser = 'deployment'
+        nexusUser = 'helium'
       }
       if (!project.hasProperty("nexusPass")) {
-        nexusPass = 'deployment123'
+        nexusPass = 'helium.123'
       }
-      nexusBaseUrl = 'http://repo.feinno.com/nexus/content'
-      privateRepo = { return { url "${nexusBaseUrl}/groups/public/" } }
-      uploadRepo = {
+      nexusRoot = 'http://urcs.feinno.com:5260/repository'
+      privateRepo = { return { url "${nexusRoot}/maven-public/" } }
+      uploadRepo = { project ->
         return {
-          url "$nexusBaseUrl/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}"
+          url "$nexusRoot/${project.version.endsWith('-SNAPSHOT') ? 'maven-snapshots' : 'maven-releases'}"
           credentials { username nexusUser; password nexusPass }
         }
       }
-
       repoClosure = {
-          maven privateRepo()
+          maven { url "http://urcs.feinno.com:5260/repository/maven-public/"}
+          maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+          maven { url "http://repo.spring.io/milestone/" }
+          maven { url "https://repo.spring.io/snapshot/" }
+          maven { url "http://central.maven.org/maven2/" }
+          maven { url "https://repository.apache.org/snapshots" }
+          maven { url "http://repo.maven.apache.org/maven2" }
           mavenCentral()
           mavenLocal()
       }
@@ -31,7 +36,7 @@ allprojects { project ->
     project.repositories rootProject.repoClosure
   
     group = 'org.helium'
-    version = "3.1-dev-$versionTail"
+    version = "3.1.x-release"
 }
 
 def mavenPublishIgnoreList = ['helium-sample:helium-cloud-simple:cloud-configcenter', 
