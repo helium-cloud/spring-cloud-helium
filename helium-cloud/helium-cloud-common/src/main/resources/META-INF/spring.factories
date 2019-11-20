@@ -1,2 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.helium.cloud.common.autoconfig.CommonAutoConfiguration
+org.springframework.context.ApplicationListener=\
+org.helium.cloud.common.autoconfig.LogoApplicationListener
