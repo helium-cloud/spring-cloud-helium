@@ -4,8 +4,10 @@ package org.helium.cloud.task.autoconfigure;
 
 import org.helium.cloud.task.rpc.TaskInvokerFactory;
 import org.helium.cloud.task.rpc.TaskInvokerFactoryCenter;
+import org.helium.cloud.task.rpc.TaskInvokerFactoryEntity;
 import org.helium.cloud.task.store.TaskProducerFactoryImpl;
 import org.helium.framework.task.TaskProducerFactory;
+import org.helium.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -33,10 +35,15 @@ public class HeliumTaskAutoConfiguration {
 	 * @return
 	 */
 	@Bean(name = HeliumTaskConfig.TASK_INVOKER_FACTORY)
-	@ConditionalOnProperty(prefix = "dubbo.registry", value = "address")
+	@ConditionalOnProperty(prefix = "helium.task", value = "package")
 	@Order(99)
 	public TaskInvokerFactory taskInvokerFactory(ConfigurableEnvironment environment) {
 		String regUrl = environment.getProperty("dubbo.registry.address", "zookeeper://127.0.0.1:7998");
+		if (StringUtils.isNullOrEmpty(regUrl)){
+			return new TaskInvokerFactoryEntity();
+		}
+		//占位符处理
+		regUrl = environment.resolvePlaceholders(regUrl);
 		return new TaskInvokerFactoryCenter(regUrl);
 	}
 
