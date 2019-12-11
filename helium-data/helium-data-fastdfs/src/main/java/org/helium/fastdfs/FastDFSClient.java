@@ -642,6 +642,11 @@ public class FastDFSClient implements FastDFS {
 		return result;
 	}
 
+	@Override
+	public FastdfsRouteProxy getProxy() {
+		return routeProxy;
+	}
+
 	private ServerInfo getStorageServerInfo(int tag) {
 		return getStorageServerInfo(tag, null, null);
 	}

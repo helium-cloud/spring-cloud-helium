@@ -2,6 +2,7 @@ package org.helium.fastdfs;
 
 import org.csource.common.MyException;
 import org.csource.fastdfs.FileInfo;
+import org.csource.fastdfs.mgr.FastdfsRouteProxy;
 import org.helium.fastdfs.spi.FastDFSFieldLoader;
 import org.helium.framework.annotations.FieldLoaderType;
 
@@ -170,4 +171,6 @@ public interface FastDFS {
 	 * @throws Exception
 	 */
 	int setMetadata(String fileId, Map<String, String> metaMap) throws Exception;
+
+	FastdfsRouteProxy getProxy();
 }
