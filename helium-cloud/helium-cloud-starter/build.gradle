@@ -10,7 +10,6 @@ dependencies {
         exclude group: 'org.springframework', module: 'spring-web' //by both name and group
         exclude group: 'org.slf4j', module: 'slf4j-log4j12' //by both name and group
     }
-    compile group: 'org.apache.dubbo', name: 'dubbo-remoting-netty4', version: dubbo_version
     compile group: 'org.apache.dubbo', name: 'dubbo-remoting-mina', version: dubbo_version
     compile group: 'org.apache.dubbo', name: 'dubbo-serialization-hessian2', version: dubbo_version
     compile group: 'org.apache.dubbo', name: 'dubbo-serialization-jdk', version: dubbo_version
