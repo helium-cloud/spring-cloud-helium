@@ -33,7 +33,7 @@ allprojects { project ->
     project.repositories rootProject.repoClosure
   
     group = 'org.helium'
-    version = "3.1.x-release"
+    version = "3.1.x.2-release"
 }
 
 def mavenPublishIgnoreList = ['helium-sample:helium-cloud-simple:cloud-configcenter', 

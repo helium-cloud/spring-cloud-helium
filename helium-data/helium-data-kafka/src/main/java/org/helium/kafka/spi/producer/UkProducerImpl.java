@@ -44,7 +44,7 @@ public class UkProducerImpl implements UkProducer {
 		ProducerRecord producerRecord = new ProducerRecord(topic, json);
 		producer.send(producerRecord, (metadata, exception) -> {
 			if (metadata != null) {
-                logger.info("produce msg successful, msg's metadata :{}", metadata.toString());
+                logger.debug("produce msg successful, msg's metadata :{}", metadata.toString());
                 watch.end();
 			}
 			if (exception != null) {
@@ -67,7 +67,7 @@ public class UkProducerImpl implements UkProducer {
 		ProducerRecord producerRecord = new ProducerRecord(topic, content);
 		producer.send(producerRecord, (metadata, exception) -> {
 			if (metadata != null) {
-                logger.info("produce msg successful, msg's metadata :{}", metadata.toString());
+                logger.debug("produce msg successful, msg's metadata :{}", metadata.toString());
                 watch.end();
 			}
 			if (exception != null) {
