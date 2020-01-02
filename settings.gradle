@@ -1,4 +1,4 @@
-rootProject.name = 'helium'
+rootProject.name = 'spring-cloud-helium'
 //helium-api
 include 'helium-framework:helium-superpojo'
 include 'helium-framework:helium-common'
@@ -43,7 +43,7 @@ include 'helium-cloud:helium-cloud-task'
 include 'helium-cloud:helium-cloud-rpc'
 include 'helium-cloud:helium-cloud-logger'
 include 'helium-cloud:helium-cloud-starter'
-//include 'helium-cloud:helium-cloud-servlet'
+include 'helium-cloud:helium-cloud-servlet'
 
 
 
