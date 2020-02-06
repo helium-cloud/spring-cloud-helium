@@ -1,0 +1,8 @@
+<bundle name="bootstrap-spring">
+    <configImports>
+    </configImports>
+  <beans>
+    <bean class="org.helium.boot.helium.task.HeliumBootTaskTest"/>
+    <bean class="org.helium.boot.helium.service.HeliumServiceTestImpl"/>
+  </beans>
+</bundle>

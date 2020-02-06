@@ -7,7 +7,7 @@ include 'helium-framework:helium-logging'
 //helium-boot[for-boot]
 include 'helium-boot:helium-boot-api'
 include 'helium-boot:helium-boot-starter'
-//include 'helium-boot:helium-boot-starter-spring'
+include 'helium-boot:helium-boot-starter-spring'
 //include 'helium-boot:helium-boot-center-zookeeper'
 
 //helium-rpc[for rpc]

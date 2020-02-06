@@ -1,0 +1,11 @@
+# Initializers
+org.springframework.context.ApplicationContextInitializer=\
+org.helium.boot.spring.autoconfigure.HeliumInitializer
+
+
+# Application Listeners
+org.springframework.context.ApplicationListener=\
+org.helium.boot.spring.autoconfigure.HeliumPreinitializer
+
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.helium.boot.spring.autoconfigure.HeliumAutoConfiguration
