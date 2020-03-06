@@ -8,15 +8,16 @@
 
 package org.csource.fastdfs;
 
-import java.io.InputStream;
+import org.csource.common.MyException;
+import org.csource.common.NameValuePair;
+import org.csource.fastdfs.mgr.FastdfsRouteDirector;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import org.csource.common.MyException;
-import org.csource.common.NameValuePair;
-import org.csource.fastdfs.mgr.FastdfsRouteDirector;
 
 /**
 * protocol common functions

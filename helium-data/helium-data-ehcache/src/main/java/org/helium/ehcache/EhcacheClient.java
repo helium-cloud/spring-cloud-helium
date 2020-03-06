@@ -1,10 +1,8 @@
 package org.helium.ehcache;
 
-import org.helium.ehcache.api.EhcacheService;
 import org.helium.ehcache.imp.EhcacheServiceImpl;
 import org.helium.ehcache.utils.EhCacheLoader;
 import org.helium.framework.annotations.FieldLoaderType;
-import org.helium.framework.annotations.ServiceSetter;
 
 /**
  * 缓存客户端

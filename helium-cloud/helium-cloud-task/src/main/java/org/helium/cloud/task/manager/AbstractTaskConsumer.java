@@ -5,7 +5,6 @@ import com.feinno.superpojo.SuperPojo;
 import org.helium.cloud.task.TaskCounter;
 import org.helium.cloud.task.TaskInstance;
 import org.helium.cloud.task.TaskStorageType;
-
 import org.helium.cloud.task.entity.PartitionBean;
 import org.helium.cloud.task.store.TaskQueueMemory;
 import org.helium.cloud.task.store.TaskQueuePriorityMemory;

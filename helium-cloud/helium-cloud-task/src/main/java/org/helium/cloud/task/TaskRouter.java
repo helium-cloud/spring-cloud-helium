@@ -1,6 +1,5 @@
 package org.helium.cloud.task;
 
-import org.helium.cloud.task.rpc.TaskInvokerFactory;
 import org.helium.cloud.task.utils.TaskBeanUtils;
 import org.helium.framework.task.TaskBean;
 import org.helium.perfmon.PerformanceCounterFactory;

@@ -1,7 +1,7 @@
 package org.helium.redis.sentinel.pipeline;
 
-import redis.clients.jedis.*;
 import redis.clients.jedis.BinaryClient.LIST_POSITION;
+import redis.clients.jedis.*;
 
 import java.util.List;
 import java.util.Map;

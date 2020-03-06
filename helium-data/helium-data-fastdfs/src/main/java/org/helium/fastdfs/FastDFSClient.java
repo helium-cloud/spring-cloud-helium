@@ -1,6 +1,5 @@
 package org.helium.fastdfs;
 
-import org.helium.perfmon.Stopwatch;
 import org.csource.common.MyException;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.*;
@@ -9,6 +8,7 @@ import org.csource.fastdfs.mgr.FastdfsRouteProxy;
 import org.csource.fastdfs.mgr.Pool;
 import org.helium.fastdfs.spi.FastDFSCounters;
 import org.helium.perfmon.PerformanceCounterFactory;
+import org.helium.perfmon.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

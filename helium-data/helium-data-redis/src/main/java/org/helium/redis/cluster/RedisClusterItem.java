@@ -1,35 +1,21 @@
 package org.helium.redis.cluster;
 
 
-import org.helium.framework.configuration.legacy.ConfigTableField;
-import org.helium.framework.configuration.legacy.ConfigTableItem;
-
-import java.util.Properties;
-
-public class RedisClusterItem extends ConfigTableItem implements Comparable {
-	@ConfigTableField(value = "routeId", isKeyField = true)
+public class RedisClusterItem implements Comparable {
 	private int routeId;
 
-	@ConfigTableField("roleName")
 	private String roleName = "";
 
-	@ConfigTableField("policy")
 	private String policy = "";
 
-	@ConfigTableField("siteName")
 	private String siteName = "";
 
-	@ConfigTableField("nodeOrder")
 	private int nodeOrder;
 
-
-	@ConfigTableField("routeValue")
 	private String routeValue;
 
-	@ConfigTableField("weight")
 	private int weight;
 
-	@ConfigTableField("enabled")
 	private int enabled;
 
 	public boolean isEnabled() {

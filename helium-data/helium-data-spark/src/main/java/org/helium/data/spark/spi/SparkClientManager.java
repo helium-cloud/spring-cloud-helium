@@ -5,7 +5,6 @@ import org.helium.framework.BeanContext;
 import org.helium.framework.configuration.ConfigProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import scala.Serializable;
 
 import java.io.File;
 import java.util.Map;

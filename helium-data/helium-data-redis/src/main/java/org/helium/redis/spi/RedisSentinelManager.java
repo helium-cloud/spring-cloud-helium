@@ -6,7 +6,6 @@ import org.helium.database.ConnectionString;
 import org.helium.framework.BeanContext;
 import org.helium.framework.configuration.ConfigProvider;
 import org.helium.redis.RedisSentinelClientImpl;
-import org.helium.redis.cluster.RedisSentinelClusterLoader;
 import org.helium.redis.sentinel.RedisSentinelsCfg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

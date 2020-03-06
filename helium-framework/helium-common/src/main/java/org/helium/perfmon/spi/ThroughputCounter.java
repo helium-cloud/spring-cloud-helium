@@ -1,10 +1,10 @@
 package org.helium.perfmon.spi;
 
-import org.helium.perfmon.observation.ObserverReportSnapshot;
-import org.helium.perfmon.observation.ObserverReportUnit;
 import org.helium.perfmon.AbstractCounterEntity;
 import org.helium.perfmon.SmartCounter;
 import org.helium.perfmon.Stopwatch;
+import org.helium.perfmon.observation.ObserverReportSnapshot;
+import org.helium.perfmon.observation.ObserverReportUnit;
 
 import java.util.concurrent.atomic.AtomicLong;
 

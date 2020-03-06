@@ -1,21 +1,8 @@
 rootProject.name = 'spring-cloud-helium'
-//helium-api
+//helium-common
 include 'helium-framework:helium-superpojo'
 include 'helium-framework:helium-common'
 include 'helium-framework:helium-logging'
-
-//helium-boot[for-boot]
-include 'helium-boot:helium-boot-api'
-include 'helium-boot:helium-boot-starter'
-include 'helium-boot:helium-boot-starter-spring'
-//include 'helium-boot:helium-boot-center-zookeeper'
-
-//helium-rpc[for rpc]
-include 'helium-rpc:helium-rpc-api'
-include 'helium-rpc:helium-rpc-default'
-
-
-
 
 //helium-data[for data client]
 include 'helium-data:helium-data-base'
@@ -38,12 +25,14 @@ include 'helium-monitor:helium-admin'
 
 //helium-cloud[for cloud update]
 include 'helium-cloud:helium-cloud-common'
+
 include 'helium-cloud:helium-cloud-configcenter'
 include 'helium-cloud:helium-cloud-task'
 include 'helium-cloud:helium-cloud-rpc'
+include 'helium-cloud:helium-cloud-servlet'
+include 'helium-cloud:helium-cloud-service'
 include 'helium-cloud:helium-cloud-logger'
 include 'helium-cloud:helium-cloud-starter'
-include 'helium-cloud:helium-cloud-servlet'
 
 
 

@@ -1,13 +1,10 @@
 package org.helium.hbase.common.task;
 
-import org.helium.database.sharding.ShardedDatabase;
 import org.helium.database.task.TaskQueueMysql;
 import org.helium.framework.annotations.FieldSetter;
 import org.helium.framework.annotations.ServiceImplementation;
-
 import org.helium.framework.tag.Initializer;
 import org.helium.framework.task.TaskArgs;
-import org.helium.framework.task.TaskConsumer;
 import org.helium.framework.task.TaskQueue;
 import org.helium.framework.task.TaskStorageType;
 import org.helium.hbase.HBaseClient;

@@ -1,7 +1,6 @@
 package org.helium.cloud.logger.writer.impl;
 
 import com.alibaba.fastjson.JSON;
-
 import org.helium.cloud.logger.model.LogMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

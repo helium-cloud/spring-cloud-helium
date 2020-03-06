@@ -1,6 +1,5 @@
 package org.helium.redis.widgets.redis.client;
 
-import org.helium.redis.widgets.redis.client.CFG_RedisSentinels;
 import redis.clients.jedis.Jedis;
 import redis.clients.util.Pool;
 

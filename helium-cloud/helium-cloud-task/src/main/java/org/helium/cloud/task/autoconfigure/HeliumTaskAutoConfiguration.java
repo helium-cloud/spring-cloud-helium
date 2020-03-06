@@ -1,7 +1,6 @@
 package org.helium.cloud.task.autoconfigure;
 
 
-
 import org.helium.cloud.task.rpc.TaskInvokerFactory;
 import org.helium.cloud.task.rpc.TaskInvokerFactoryCenter;
 import org.helium.cloud.task.rpc.TaskInvokerFactoryEntity;
@@ -10,15 +9,12 @@ import org.helium.framework.task.TaskProducerFactory;
 import org.helium.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.annotation.Order;
-import org.springframework.core.env.*;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 import java.util.Set;
 
@@ -29,7 +25,7 @@ import static java.util.Collections.emptySet;
 public class HeliumTaskAutoConfiguration {
 	private static final Logger LOGGER = LoggerFactory.getLogger(HeliumTaskAutoConfiguration.class);
 
-
+	private static String REGISTER_ADDRESS = "dubbo.registry.address";
 	/**
 	 * task 生产者自动注入
 	 * @return
@@ -38,7 +34,10 @@ public class HeliumTaskAutoConfiguration {
 	@ConditionalOnProperty(prefix = "helium.task", value = "package")
 	@Order(99)
 	public TaskInvokerFactory taskInvokerFactory(ConfigurableEnvironment environment) {
-		String regUrl = environment.getProperty("dubbo.registry.address", "zookeeper://127.0.0.1:7998");
+		if (StringUtils.isNullOrEmpty(environment.getProperty(REGISTER_ADDRESS))){
+			return new TaskInvokerFactoryEntity();
+		}
+		String regUrl = environment.getProperty(REGISTER_ADDRESS, "zookeeper://127.0.0.1:7998");
 		if (StringUtils.isNullOrEmpty(regUrl)){
 			return new TaskInvokerFactoryEntity();
 		}

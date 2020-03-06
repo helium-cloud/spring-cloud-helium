@@ -1,33 +1,18 @@
 package com.feinno.superpojo.generator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.feinno.superpojo.SuperPojo;
+import com.feinno.superpojo.annotation.ProtoType;
+import com.feinno.superpojo.generator.Field.*;
+import com.feinno.superpojo.io.WireFormat;
 import com.feinno.superpojo.type.Flags;
 import com.feinno.superpojo.type.Guid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.ProtoType;
-import com.feinno.superpojo.generator.Field.ArrayFieldInterpreter;
-import com.feinno.superpojo.generator.Field.DateFieldInterpreter;
-import com.feinno.superpojo.generator.Field.EnumFieldInterpreter;
-import com.feinno.superpojo.generator.Field.FieldInterpreter;
-import com.feinno.superpojo.generator.Field.FlagsFieldInterpreter;
-import com.feinno.superpojo.generator.Field.GuidFieldInterpreter;
-import com.feinno.superpojo.generator.Field.ListFieldInterpreter;
-import com.feinno.superpojo.generator.Field.MapFieldInterpreter;
-import com.feinno.superpojo.generator.Field.MessageFieldInterpreter;
-import com.feinno.superpojo.generator.Field.PrimitiveFieldInterpreter;
-import com.feinno.superpojo.generator.Field.SetFieldInterpreter;
-import com.feinno.superpojo.generator.Field.SqlDateFieldInterpreter;
-import com.feinno.superpojo.generator.Field.StringFieldInterpreter;
-import com.feinno.superpojo.generator.Field.UnKnownFieldInterpreter;
-import com.feinno.superpojo.generator.Field.WrapsFieldInterpreter;
-import com.feinno.superpojo.io.WireFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 使用枚举来表示在实体类中发现的每一种字段的类型，并为这些类型提供相应的序列化信息，<br>

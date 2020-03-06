@@ -1,9 +1,8 @@
 package org.helium.cloud.simple.configcenter.controller;
 
 
-import org.helium.cloud.configcenter.ConfigCenterClient;
-
 import com.feinno.superpojo.util.StringUtils;
+import org.helium.cloud.configcenter.ConfigCenterClient;
 import org.helium.framework.annotations.FieldSetter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

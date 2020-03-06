@@ -30,8 +30,6 @@
 
 package com.feinno.superpojo.io;
 
-import com.feinno.superpojo.io.ByteString;
-
 /**
  * This class is used internally by the Protocol Buffer library and generated
  * message implementations.  It is public only because those generated messages

@@ -2,7 +2,6 @@ package org.helium.sample.boot.task;
 
 
 import com.alibaba.fastjson.JSONObject;
-
 import org.helium.framework.annotations.TaskImplementation;
 import org.helium.framework.task.BatchTask;
 import org.helium.sample.boot.entity.SimpleArgs;

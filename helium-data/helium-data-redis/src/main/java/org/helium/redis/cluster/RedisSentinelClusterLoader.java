@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import org.helium.framework.configuration.FieldLoader;
 import org.helium.framework.entitys.SetterNode;
 import org.helium.framework.entitys.SetterNodeLoadType;
-import org.helium.redis.RedisSentinelClientImpl;
 import org.helium.redis.spi.RedisSentinelLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

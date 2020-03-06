@@ -1,13 +1,13 @@
 package com.feinno.superpojo;
 
-import java.io.IOException;
-import java.math.BigInteger;
-import java.util.Locale;
-
 import com.feinno.superpojo.io.ByteString;
 import com.feinno.superpojo.io.CodedOutputStream;
 import com.feinno.superpojo.io.WireFormat;
 import com.feinno.superpojo.type.AnyNode;
+
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.Locale;
 
 /**
  * 

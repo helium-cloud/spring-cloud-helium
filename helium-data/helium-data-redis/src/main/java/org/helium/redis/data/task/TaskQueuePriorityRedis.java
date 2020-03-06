@@ -1,11 +1,9 @@
 package org.helium.redis.data.task;
 
-import com.alibaba.fastjson.JSONObject;
 import com.feinno.superpojo.util.StringUtils;
 import org.helium.framework.annotations.FieldSetter;
 import org.helium.framework.annotations.ServiceImplementation;
 import org.helium.framework.annotations.ServiceSetter;
-
 import org.helium.framework.tag.Initializer;
 import org.helium.framework.task.TaskArgs;
 import org.helium.framework.task.TaskConsumer;

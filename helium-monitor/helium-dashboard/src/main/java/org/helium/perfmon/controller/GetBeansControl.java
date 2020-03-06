@@ -2,12 +2,9 @@ package org.helium.perfmon.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import org.helium.cloud.common.utils.SpringContextUtil;
-import org.helium.framework.annotations.ServletImplementation;
-import org.helium.framework.entitys.dashboard.BeanJson;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;

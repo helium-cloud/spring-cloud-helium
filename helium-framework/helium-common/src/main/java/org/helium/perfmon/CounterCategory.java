@@ -1,10 +1,10 @@
 package org.helium.perfmon;
 
+import org.helium.perfmon.annotation.PerformanceCounter;
+import org.helium.perfmon.annotation.PerformanceCounterCategory;
 import org.helium.perfmon.observation.Observable;
 import org.helium.perfmon.observation.ObservableUnit;
 import org.helium.perfmon.observation.ObserverReportColumn;
-import org.helium.perfmon.annotation.PerformanceCounter;
-import org.helium.perfmon.annotation.PerformanceCounterCategory;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -15,7 +15,6 @@ public class TaskInvokerImpl implements TaskInvoker{
 		TaskInstance taskInstance = TaskBeanUtils.getTaskInstance(taskInvokerArgs.getEvent());
 		TaskConsumerHandler.getInstance().consume(taskInstance, taskInvokerArgs.getArgs());
 
-
 	}
 
 

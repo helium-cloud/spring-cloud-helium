@@ -1,6 +1,5 @@
 package org.helium.uek.es.spi;
 
-import org.apache.logging.log4j.util.PropertiesUtil;
 import org.helium.framework.BeanContext;
 import org.helium.framework.configuration.ConfigProvider;
 import org.helium.uek.es.EsClient;
@@ -9,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;

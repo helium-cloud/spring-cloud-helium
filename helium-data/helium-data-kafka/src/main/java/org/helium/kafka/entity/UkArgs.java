@@ -3,8 +3,6 @@ package org.helium.kafka.entity;
 import com.alibaba.fastjson.JSONObject;
 import com.feinno.superpojo.SuperPojo;
 import com.feinno.superpojo.annotation.Field;
-import com.feinno.superpojo.util.DateUtil;
-import com.google.gson.JsonObject;
 
 import java.util.UUID;
 

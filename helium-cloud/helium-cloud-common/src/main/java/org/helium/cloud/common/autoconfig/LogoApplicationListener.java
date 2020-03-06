@@ -16,7 +16,6 @@
  */
 package org.helium.cloud.common.autoconfig;
 
-import org.apache.dubbo.common.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;

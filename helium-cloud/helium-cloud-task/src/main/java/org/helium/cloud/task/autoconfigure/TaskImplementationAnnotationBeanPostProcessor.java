@@ -1,7 +1,7 @@
 package org.helium.cloud.task.autoconfigure;
 
-import org.helium.cloud.task.TaskInstance;
 import org.helium.cloud.task.TaskCounter;
+import org.helium.cloud.task.TaskInstance;
 import org.helium.cloud.task.scan.HeliumClassPathBeanDefinitionScanner;
 import org.helium.cloud.task.utils.TaskBeanUtils;
 import org.helium.framework.annotations.TaskImplementation;

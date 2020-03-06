@@ -2,8 +2,6 @@ package com.feinno.superpojo;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.google.gson.JsonObject;
-import com.google.gson.annotations.Expose;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import java.io.InputStream;
 import java.io.OutputStream;

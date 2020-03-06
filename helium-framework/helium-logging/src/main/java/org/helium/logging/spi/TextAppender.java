@@ -1,7 +1,7 @@
 package org.helium.logging.spi;
 
-import org.helium.util.StringUtils;
 import org.helium.logging.LogAppender;
+import org.helium.util.StringUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;

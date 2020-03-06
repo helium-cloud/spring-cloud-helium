@@ -1,7 +1,6 @@
 package org.helium.ehcache.utils;
 
 import org.helium.ehcache.EhcacheClient;
-import org.helium.ehcache.api.EhcacheService;
 import org.helium.ehcache.imp.EhcacheServiceImpl;
 import org.helium.framework.BeanContext;
 import org.helium.framework.configuration.ConfigProvider;
@@ -11,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  *  读取ehcache的配置文件，并生成客户端

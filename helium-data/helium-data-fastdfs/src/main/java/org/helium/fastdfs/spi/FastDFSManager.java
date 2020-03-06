@@ -6,7 +6,6 @@ import org.helium.framework.BeanContext;
 import org.helium.framework.configuration.ConfigProvider;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 

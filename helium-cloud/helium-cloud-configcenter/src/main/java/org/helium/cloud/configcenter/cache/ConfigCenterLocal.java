@@ -62,11 +62,11 @@ public class ConfigCenterLocal {
 
     private void saveConfig(String file) {
         try {
-            Properties prop = new Properties();
-            prop.putAll(configMap);
-            FileOutputStream outputStream = new FileOutputStream(file);
-            prop.store(outputStream, "cache cloud");
-            outputStream.close();
+//            Properties prop = new Properties();
+//            prop.putAll(configMap);
+//            FileOutputStream outputStream = new FileOutputStream(file);
+//            prop.store(outputStream, "cache cloud");
+//            outputStream.close();
         } catch (Exception e) {
             LOGGER.error("saveConfig:{}", file, e);
         }

@@ -1,9 +1,7 @@
 package org.helium.data.spark.entity;
 
 import org.apache.hadoop.hbase.client.Scan;
-import org.apache.hadoop.hbase.mapreduce.TableInputFormat;
 import org.apache.hadoop.hbase.util.Bytes;
-import scala.Serializable;
 import sun.misc.BASE64Encoder;
 
 /**

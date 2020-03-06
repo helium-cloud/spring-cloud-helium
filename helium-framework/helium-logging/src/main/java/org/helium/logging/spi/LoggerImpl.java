@@ -1,9 +1,9 @@
 package org.helium.logging.spi;
 
 
-import org.helium.util.IntegerReference;
 import org.helium.logging.FilterResult;
 import org.helium.logging.LogLevel;
+import org.helium.util.IntegerReference;
 import org.slf4j.Marker;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;

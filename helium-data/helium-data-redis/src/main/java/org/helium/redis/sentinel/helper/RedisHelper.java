@@ -1,7 +1,5 @@
 package org.helium.redis.sentinel.helper;
 
-import com.alibaba.fastjson.JSONObject;
-import com.feinno.superpojo.util.StringUtils;
 import com.google.gson.Gson;
 import org.helium.redis.sentinel.RedisSentinelsCfg;
 import org.slf4j.Logger;

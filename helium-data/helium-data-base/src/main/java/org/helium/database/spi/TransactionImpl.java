@@ -1,10 +1,10 @@
 package org.helium.database.spi;
 
+import org.helium.database.DataTable;
+import org.helium.database.Transaction;
 import org.helium.perfmon.PerformanceCounterFactory;
 import org.helium.perfmon.SmartCounter;
 import org.helium.perfmon.Stopwatch;
-import org.helium.database.DataTable;
-import org.helium.database.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

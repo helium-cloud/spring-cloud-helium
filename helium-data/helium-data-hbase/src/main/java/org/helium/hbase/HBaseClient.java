@@ -1,16 +1,10 @@
 package org.helium.hbase;
 
-import org.apache.hadoop.hbase.HColumnDescriptor;
-import org.apache.hadoop.hbase.HTableDescriptor;
-import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.Table;
 import org.helium.framework.annotations.FieldLoaderType;
 import org.helium.hbase.spi.HBaseClientFieldLoader;
-import org.helium.hbase.spi.HTableFieldLoader;
-
-import java.util.Arrays;
 
 @FieldLoaderType(loaderType = HBaseClientFieldLoader.class)
 public interface HBaseClient{

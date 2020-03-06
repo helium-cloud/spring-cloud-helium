@@ -1,14 +1,13 @@
 package com.feinno.superpojo.util;
 
-import java.io.IOException;
-
-import javax.xml.stream.XMLStreamException;
-
 import com.feinno.superpojo.io.CodedInputStream;
 import com.feinno.superpojo.io.CodedOutputStream;
 import com.feinno.superpojo.io.WireFormat;
 import com.feinno.superpojo.io.XmlInputStream;
 import com.feinno.superpojo.type.Guid;
+
+import javax.xml.stream.XMLStreamException;
+import java.io.IOException;
 
 /**
  * <b>描述: </b>在序列化时对{@link Guid}进行辅助序列化的类

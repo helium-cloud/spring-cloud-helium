@@ -8,12 +8,12 @@
 
 package org.csource.fastdfs;
 
+import org.csource.fastdfs.mgr.FastdfsRouteDirector;
+
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Arrays;
 import java.net.Socket;
-
-import org.csource.fastdfs.mgr.FastdfsRouteDirector;
+import java.util.Arrays;
 
 /**
 * Tracker client

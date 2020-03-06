@@ -1,7 +1,7 @@
 package org.helium.perfmon;
 
-import org.helium.perfmon.observation.ObserverManager;
 import org.helium.perfmon.annotation.PerformanceCounterCategory;
+import org.helium.perfmon.observation.ObserverManager;
 import org.helium.perfmon.spi.*;
 
 import java.util.ArrayList;
