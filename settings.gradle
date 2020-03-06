@@ -4,6 +4,14 @@ include 'helium-framework:helium-superpojo'
 include 'helium-framework:helium-common'
 include 'helium-framework:helium-logging'
 
+//helium-cloud
+include 'helium-cloud:helium-cloud-common'
+include 'helium-cloud:helium-cloud-configcenter'
+include 'helium-cloud:helium-cloud-task'
+include 'helium-cloud:helium-cloud-rpc'
+include 'helium-cloud:helium-cloud-logger'
+include 'helium-cloud:helium-cloud-starter'
+
 //helium-data[for data client]
 include 'helium-data:helium-data-base'
 include 'helium-data:helium-data-redis'
@@ -13,36 +21,18 @@ include 'helium-data:helium-data-hbase'
 include 'helium-data:helium-data-elasticsearch'
 //include 'helium-data:helium-data-zookeeper'
 include 'helium-data:helium-data-ehcache'
-//include 'helium-data:helium-data-task'
 include 'helium-data:helium-data-spark'
 
-//helium-stack[for data stack]
-
-include 'helium-stack:helium-rpc'
-//include 'helium-stack:helium-http'
 include 'helium-monitor:helium-dashboard'
 include 'helium-monitor:helium-admin'
 
-//helium-cloud[for cloud update]
-include 'helium-cloud:helium-cloud-common'
-
-include 'helium-cloud:helium-cloud-configcenter'
-include 'helium-cloud:helium-cloud-task'
-include 'helium-cloud:helium-cloud-rpc'
-include 'helium-cloud:helium-cloud-servlet'
-include 'helium-cloud:helium-cloud-service'
-include 'helium-cloud:helium-cloud-logger'
-include 'helium-cloud:helium-cloud-starter'
-
-
-
-//include 'helium-sample:helium-boot'
-include ':helium-sample:helium-cloud-simple:cloud-task:cloud-task-app1'
-include ':helium-sample:helium-cloud-simple:cloud-task:cloud-task-app2'
-//include ':helium-sample:helium-cloud-simple:cloud-configcenter'
-//include ':helium-sample:helium-cloud-simple:cloud-logger'
-//include ':helium-sample:helium-cloud-simple:cloud-rpc:cloud-rpc-api'
-//include ':helium-sample:helium-cloud-simple:cloud-rpc:cloud-rpc-consumer'
-//include ':helium-sample:helium-cloud-simple:cloud-rpc:cloud-rpc-provider'
+//simple
+include ':helium-sample:cloud-task:cloud-task-app1'
+include ':helium-sample:cloud-task:cloud-task-app2'
+include ':helium-sample:cloud-configcenter'
+include ':helium-sample:cloud-logger'
+include ':helium-sample:cloud-rpc:cloud-rpc-api'
+include ':helium-sample:cloud-rpc:cloud-rpc-consumer'
+include ':helium-sample:cloud-rpc:cloud-rpc-provider'
 
 

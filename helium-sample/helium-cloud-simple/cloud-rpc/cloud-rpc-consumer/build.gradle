@@ -1,5 +1,0 @@
-dependencies {
-    compile project(':helium-sample:helium-cloud-simple:cloud-rpc:cloud-rpc-api')
-
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-}
