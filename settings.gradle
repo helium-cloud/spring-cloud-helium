@@ -23,6 +23,10 @@ include 'helium-data:helium-data-elasticsearch'
 include 'helium-data:helium-data-ehcache'
 include 'helium-data:helium-data-spark'
 
+
+include 'helium-plugin:helium-plugin-jpa'
+include 'helium-plugin:helium-plugin-mybatis'
+
 include 'helium-monitor:helium-dashboard'
 include 'helium-monitor:helium-admin'
 

@@ -16,11 +16,14 @@ buildscript {
         }
       }
       repoClosure = {
+
           maven { url "http://urcs.feinno.com:5260/repository/maven-public/"}
           maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
           maven { url "https://repo.spring.io/snapshot/" }
-          mavenCentral()
+          maven { url "https://repo1.maven.org/maven2/" }
           mavenLocal()
+          mavenCentral()
+
       }
       versionTail = new Date().format('yyMMddHHmm')
     }
@@ -55,6 +58,7 @@ subprojects { project ->
     dependencies {
         testCompile "junit:junit:$junit_version"
     }
+  
 
     task sourceJar(type: Jar) {
         from sourceSets.main.allJava

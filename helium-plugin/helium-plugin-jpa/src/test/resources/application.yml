@@ -1,0 +1,17 @@
+server:
+  port: 8302
+
+#开发配置
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3307/example?useUnicode=true&characterEncoding=utf-8
+    username: root
+    # Jasypt加密 可到common-utils中找到JasyptUtil加解密工具类生成加密结果 格式为ENC(加密结果)
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    show-sql: true
+    # 自动生成表结构
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
