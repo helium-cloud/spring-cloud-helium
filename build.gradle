@@ -18,7 +18,6 @@ buildscript {
       repoClosure = {
           maven { url "http://urcs.feinno.com:5260/repository/maven-public/"}
           maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
-          maven { url "http://repo.spring.io/milestone/" }
           maven { url "https://repo.spring.io/snapshot/" }
           mavenCentral()
           mavenLocal()
@@ -36,10 +35,10 @@ allprojects { project ->
     version = "3.1.x.3-release"
 }
 
-def mavenPublishIgnoreList = ['helium-sample:helium-cloud-simple:cloud-configcenter', 
-                              'helium-sample:helium-cloud-simple:cloud-logger',
-                              'helium-sample:helium-cloud-simple:cloud-rpc',
-                              'helium-sample:helium-cloud-simple:cloud-task']
+def mavenPublishIgnoreList = ['helium-sample:cloud-configcenter', 
+                              'helium-sample:cloud-logger',
+                              'helium-sample:cloud-rpc',
+                              'helium-sample:cloud-task']
 
 subprojects { project ->
 
