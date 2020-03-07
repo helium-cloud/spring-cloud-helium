@@ -189,7 +189,7 @@ public enum ProtoFieldType {
 			return SqlDateFieldInterpreter.getInstance();
 		}
 	},
-	// ENUMTYPE(com.feinno.util.EnumType.class, WireFormat.WIRETYPE_VARINT,
+	// ENUMTYPE(org.helium.util.EnumType.class, WireFormat.WIRETYPE_VARINT,
 	// "Int32") {
 	// @Override
 	// public FieldInterpreter getFieldInterpreter() {
