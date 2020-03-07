@@ -32,13 +32,10 @@ allprojects { project ->
     project.repositories rootProject.repoClosure
   
     group = 'org.helium'
-    version = "3.1.x.3-release"
+    version = "3.2.1.-release"
 }
 
-def mavenPublishIgnoreList = ['helium-sample:cloud-configcenter', 
-                              'helium-sample:cloud-logger',
-                              'helium-sample:cloud-rpc',
-                              'helium-sample:cloud-task']
+def mavenPublishIgnoreList = ['helium-sample']
 
 subprojects { project ->
 
