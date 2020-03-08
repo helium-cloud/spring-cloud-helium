@@ -26,6 +26,7 @@ include 'helium-data:helium-data-spark'
 
 include 'helium-plugin:helium-plugin-jpa'
 include 'helium-plugin:helium-plugin-mybatis'
+include 'helium-plugin:helium-http'
 
 include 'helium-monitor:helium-dashboard'
 include 'helium-monitor:helium-admin'

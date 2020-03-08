@@ -1,0 +1,14 @@
+dependencies {
+  compile project(':helium-framework:helium-common')
+  compile group: 'javax.servlet', name: 'javax.servlet-api', version: servlet_api_version
+  compile group: 'io.netty', name: 'netty', version: netty_version
+  compile group: 'org.freemarker', name: 'freemarker', version: freemarker_version
+  compile group: 'org.glassfish.grizzly', name: 'grizzly-http', version: grizzly_version
+  compile group: 'org.glassfish.grizzly', name: 'grizzly-http2', version: grizzly_version
+  compile group: 'org.glassfish.grizzly', name: 'grizzly-http-server', version: grizzly_version
+  compile group: 'org.glassfish.grizzly', name: 'grizzly-http-servlet', version: grizzly_version
+  compile group: 'org.glassfish.grizzly', name: 'grizzly-http-server-jaxws', version: grizzly_version
+  compile group: 'org.glassfish.grizzly', name: 'grizzly-framework', version: grizzly_version
+  compile group: 'com.sun.xml.ws', name: 'jaxws-rt', version: jaxws_rt_version
+
+}
