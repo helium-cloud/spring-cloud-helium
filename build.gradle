@@ -2,10 +2,10 @@ buildscript {
     project.ext {
 
       if (!project.hasProperty("nexusUser")) {
-        nexusUser = 'helium'
+        nexusUser = 'xxx'
       }
       if (!project.hasProperty("nexusPass")) {
-        nexusPass = 'helium.123'
+        nexusPass = 'xxx.123'
       }
       nexusRoot = 'http://urcs.feinno.com:5260/repository'
       privateRepo = { return { url "${nexusRoot}/maven-public/" } }
