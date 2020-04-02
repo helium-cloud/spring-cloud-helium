@@ -19,7 +19,6 @@ include 'helium-data:helium-data-fastdfs'
 include 'helium-data:helium-data-kafka'
 include 'helium-data:helium-data-hbase'
 include 'helium-data:helium-data-elasticsearch'
-//include 'helium-data:helium-data-zookeeper'
 include 'helium-data:helium-data-ehcache'
 include 'helium-data:helium-data-spark'
 

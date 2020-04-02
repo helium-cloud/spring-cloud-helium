@@ -1,0 +1,7 @@
+test:
+  testdb: local:db/testdb.properties
+  testredis: local:redis/testredis.properties
+  testkafka: local:kafka/testkafka.properties
+  teststr: local:string/teststr.xml
+other:
+  testkey: tkey

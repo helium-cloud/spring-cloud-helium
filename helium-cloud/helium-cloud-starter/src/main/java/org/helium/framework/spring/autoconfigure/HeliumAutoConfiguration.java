@@ -1,7 +1,6 @@
 package org.helium.framework.spring.autoconfigure;
 
 import org.helium.framework.spring.annotation.EnableHeliumConfiguration;
-import org.helium.framework.spring.annotation.processor.ServiceSetterBeanPostProcessor;
 import org.helium.framework.spring.assembly.HeliumAssembly;
 import org.helium.framework.spring.assembly.HeliumConfig;
 import org.helium.framework.spring.health.HeliumHealthIndicator;
@@ -28,12 +27,6 @@ public class HeliumAutoConfiguration {
 		assemblyHelium();
 		return new HeliumHealthIndicator();
 	}
-
-	@Bean
-	public ServiceSetterBeanPostProcessor serviceSetterBeanPostProcessor() {
-		return new ServiceSetterBeanPostProcessor();
-	}
-
 
 	@Bean
 	public HeliumAutoWired heliumAutoWired() {
