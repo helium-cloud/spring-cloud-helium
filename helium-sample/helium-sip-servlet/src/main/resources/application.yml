@@ -7,6 +7,7 @@ spring:
   profiles:
     active: ${env:dev}
 helium:
+  id: test-as
   config:
     #compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-apollo', version: dubbo_version使用apollo为注册中心
     url: ${CONFIG_URL:nacos://10.10.220.121:8848?config.namespace=cloud&config.group=cloud}
@@ -14,3 +15,15 @@ helium:
     #用于替换host
     #hosts: ${hosts:10.10.220.121 configcenter_server EUT-TEATALK TEATALK UCC_1,10.10.220.121 db_server redis_server fastdfs_tracker,10.10.220.92 EUT-WEB}
     hosts: ${hosts:}
+  stacks:
+    - id: http-as
+      className: org.helium.http.servlet.HttpServletStack
+      setters:
+        - field: host
+          value: 10.10.12.91
+        - field: port
+          value: 8089
+  bundles:
+    - path: META-INF/bundle.xml
+      export: false
+  xmlEnable: false

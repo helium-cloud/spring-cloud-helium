@@ -38,5 +38,6 @@ include ':helium-sample:cloud-logger'
 include ':helium-sample:cloud-rpc:cloud-rpc-api'
 include ':helium-sample:cloud-rpc:cloud-rpc-consumer'
 include ':helium-sample:cloud-rpc:cloud-rpc-provider'
+include ':helium-sample:helium-sip-servlet'
 
 
