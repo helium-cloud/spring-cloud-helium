@@ -1,0 +1,13 @@
+<bean type="Servlet" id="im:http-sms2-servlet">
+    <object class="org.helium.servlet.servlet.HttpImsSms2Servlet">
+        <setters>
+
+        </setters>
+    </object>
+    <servletMappings>
+        <httpMappings>
+            <contextPath>/rcs/sms</contextPath>
+            <urlPattern>/*</urlPattern>
+        </httpMappings>
+    </servletMappings>
+</bean>

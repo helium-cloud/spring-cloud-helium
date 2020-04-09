@@ -20,79 +20,91 @@ import java.lang.reflect.Field;
 
 
 public class FieldSetterBeanPostProcessor implements BeanPostProcessor {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FieldSetterBeanPostProcessor.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(FieldSetterBeanPostProcessor.class);
 
 
-    @Autowired
-    private ConfigCenterClient configCenterClient;
+	@Autowired
+	private ConfigCenterClient configCenterClient;
 
-    /**
-     * for springboot  support helium
-     *
-     * @param bean
-     * @param beanName
-     * @return
-     * @throws BeansException
-     */
-    @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName)
-            throws BeansException {
-        processFieldSetter(bean, beanName);
-        return bean;
-    }
+	/**
+	 * for springboot  support helium
+	 *
+	 * @param bean
+	 * @param beanName
+	 * @return
+	 * @throws BeansException
+	 */
+	@Override
+	public Object postProcessBeforeInitialization(Object bean, String beanName)
+			throws BeansException {
+		processFieldSetter(bean, beanName);
+		return bean;
+	}
 
-    @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName)
-            throws BeansException {
-        return bean;
-    }
+	@Override
+	public Object postProcessAfterInitialization(Object bean, String beanName)
+			throws BeansException {
+		return bean;
+	}
 
 
-    public void processFieldSetter(Object bean, String beanName) {
-        Class<?> objClz;
-        if (AopUtils.isAopProxy(bean)) {
-            objClz = AopUtils.getTargetClass(bean);
-        } else {
-            objClz = bean.getClass();
-        }
+	public void processFieldSetter(Object bean, String beanName) {
+		Class<?> objClz;
+		if (AopUtils.isAopProxy(bean)) {
+			objClz = AopUtils.getTargetClass(bean);
+		} else {
+			objClz = bean.getClass();
+		}
 
-        try {
-            for (Field field : objClz.getDeclaredFields()) {
-                FieldSetter fieldSetter = field.getAnnotation(FieldSetter.class);
-                if (fieldSetter != null) {
-                    String key = fieldSetter.value();
-                    if (StringUtils.isNullOrEmpty(key)) {
-                        LOGGER.error("beanName process Error:{} and fieldSetter.value not be null", field);
-                        continue;
-                    }
-                    String value = configCenterClient.get(key, fieldSetter.group());
-                    if (!StringUtils.isNullOrEmpty(value)){
-                        SetterNode setterNode = LoaderUtils.toSetNode(fieldSetter, field, value);
-                        SetterInjector.injectFieldSetter(bean, setterNode);
-                    }
+		try {
+			setFieldClass(bean, objClz);
+		} catch (Exception e) {
+			throw new BeanCreationException(beanName, e);
+		}
+	}
 
-                    configCenterClient.addListener(key, fieldSetter.group(), new ConfigurationListener() {
-                        @Override
-                        public void process(ConfigChangeEvent event) {
+	private void setFieldClass(Object bean, Class<?> objClz) {
+		setField(bean, objClz);
 
-                            try {
-                                String newValue = configCenterClient.get(key, fieldSetter.group());
-                                SetterNode setterNode = LoaderUtils.toSetNode(fieldSetter, field, newValue);
-                                SetterInjector.injectFieldSetter(bean, setterNode);
+		Class<?> superclass = objClz.getSuperclass();
+		if (superclass != null && superclass != Object.class) {
+			setFieldClass(bean, superclass);
+		}
+	}
 
-                                LOGGER.warn("process modify:{}-{}.", field, newValue);
-                            } catch (Exception e) {
-                                LOGGER.error("process modify Error:{} ", field, e);
-                            }
-                        }
-                    });
-                }
-            }
-        } catch (Exception e) {
-            throw new BeanCreationException(beanName, e);
-        }
-    }
+	private void setField(Object bean, Class<?> objClz) {
+		for (Field field : objClz.getDeclaredFields()) {
+			FieldSetter fieldSetter = field.getAnnotation(FieldSetter.class);
+			if (fieldSetter != null) {
+				String key = fieldSetter.value();
+				if (StringUtils.isNullOrEmpty(key)) {
+					LOGGER.error("beanName process Error:{} and fieldSetter.value not be null", field);
+					continue;
+				}
+				String value = configCenterClient.get(key, fieldSetter.group());
+				if (!StringUtils.isNullOrEmpty(value)) {
+					SetterNode setterNode = LoaderUtils.toSetNode(fieldSetter, field, value);
+					SetterInjector.injectFieldSetter(bean, setterNode);
+				}
 
+				configCenterClient.addListener(key, fieldSetter.group(), new ConfigurationListener() {
+					@Override
+					public void process(ConfigChangeEvent event) {
+
+						try {
+							String newValue = configCenterClient.get(key, fieldSetter.group());
+							SetterNode setterNode = LoaderUtils.toSetNode(fieldSetter, field, newValue);
+							SetterInjector.injectFieldSetter(bean, setterNode);
+
+							LOGGER.warn("process modify:{}-{}.", field, newValue);
+						} catch (Exception e) {
+							LOGGER.error("process modify Error:{} ", field, e);
+						}
+					}
+				});
+			}
+		}
+	}
 
 
 }

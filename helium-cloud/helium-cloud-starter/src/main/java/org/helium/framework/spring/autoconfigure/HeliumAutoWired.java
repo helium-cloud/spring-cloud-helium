@@ -43,35 +43,45 @@ public class HeliumAutoWired implements ApplicationContextAware {
 		List<BeanContext> beanContexts = HeliumAssembly.INSTANCE.getBeans();
 		for (BeanContext beanContext : beanContexts) {
 			boolean resolve = beanContext instanceof ServletInstance;
-			if (!resolve){
+			if (!resolve) {
 				continue;
 			}
-			Class<?> objClz = beanContext.getBean().getClass();
 
-			for (Field field : objClz.getDeclaredFields()) {
-				Autowired autowired = field.getAnnotation(Autowired.class);
-				if (autowired != null) {
-					try {
-						field.setAccessible(true);
-						field.set(beanContext.getBean(), applicationContext.getBean(field.getType()));
-					} catch (Exception e) {
-						LOGGER.error("resolveAutoWired Error continue:{}", field, e);
-					}
+			setFieldClass(beanContext, beanContext.getBean().getClass());
+		}
+	}
 
+	private static void setFieldClass(BeanContext beanContext, Class<?> objClz) {
+		setField(beanContext, objClz);
+		Class<?> superclass = objClz.getSuperclass();
+		if (superclass != null && superclass != Object.class) {
+			setFieldClass(beanContext, superclass);
+		}
+	}
+
+	private static void setField(BeanContext beanContext, Class<?> objClz) {
+		for (Field field : objClz.getDeclaredFields()) {
+			Autowired autowired = field.getAnnotation(Autowired.class);
+			if (autowired != null) {
+				try {
+					field.setAccessible(true);
+					field.set(beanContext.getBean(), applicationContext.getBean(field.getType()));
+				} catch (Exception e) {
+					LOGGER.error("resolveAutoWired Error continue:{}", field, e);
 				}
 
-				Resource resource = field.getAnnotation(Resource.class);
-				if (resource != null) {
-					try {
-						field.setAccessible(true);
-						field.set(beanContext.getBean(), applicationContext.getBean(resource.name()));
-					} catch (Exception e) {
-						LOGGER.error("resolveAutoWired Error continue:{}", field, e);
-					}
-
-				}
 			}
 
+			Resource resource = field.getAnnotation(Resource.class);
+			if (resource != null) {
+				try {
+					field.setAccessible(true);
+					field.set(beanContext.getBean(), applicationContext.getBean(resource.name()));
+				} catch (Exception e) {
+					LOGGER.error("resolveAutoWired Error continue:{}", field, e);
+				}
+
+			}
 		}
 	}
 

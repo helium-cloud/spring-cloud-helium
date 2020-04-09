@@ -17,7 +17,6 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2020/4/2
  */
 @EnableHeliumConfiguration
-//@ComponentScan(value = {"org.helium.framework.spring.autoconfigure","org.helium.servlet"})
 @SpringBootApplication
 public class Application {
 
