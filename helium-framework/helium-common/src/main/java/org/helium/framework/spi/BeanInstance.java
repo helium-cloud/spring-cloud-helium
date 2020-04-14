@@ -240,4 +240,8 @@ public abstract class BeanInstance extends AbstractBeanContext implements BeanCo
 			TagInitializer.applyTags(mode, module);
 		}
 	}
+
+	public List<Module> getInterModules() {
+		return interModules;
+	}
 }

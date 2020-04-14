@@ -800,7 +800,7 @@ public class RedisClientImpl implements RedisClient {
 				watch.end();
 				return null;
 			}
-            returnJedis(jedis);
+            //returnJedis(jedis);
              
             jedis = null;
 	        watch.end();
@@ -855,7 +855,7 @@ public class RedisClientImpl implements RedisClient {
 				watch.end();
 				return null;
 			}
-			returnJedis(jedis);
+			//returnJedis(jedis);
 
             Map<String, byte[]> tmp = new HashMap<>();
             for (byte[] bsField : map.keySet())
