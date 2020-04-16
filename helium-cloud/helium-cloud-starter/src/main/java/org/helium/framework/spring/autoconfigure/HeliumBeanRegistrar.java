@@ -1,10 +1,10 @@
 package org.helium.framework.spring.autoconfigure;
 
 import org.helium.framework.BeanContext;
-import org.helium.framework.spring.assembly.HeliumAssembly;
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 
@@ -18,6 +18,7 @@ import java.util.List;
  * @date 2020/4/15
  */
 public class HeliumBeanRegistrar implements ImportBeanDefinitionRegistrar {
+	private static final Logger LOGGER = LoggerFactory.getLogger(HeliumBeanRegistrar.class);
 
 	private static BeanDefinitionRegistry registry;
 
@@ -28,6 +29,7 @@ public class HeliumBeanRegistrar implements ImportBeanDefinitionRegistrar {
 
 	/**
 	 * 将helium bean加载再到spring 容器中
+	 *
 	 * @param beans
 	 */
 	public static void registerBean(List<BeanContext> beans) {
@@ -38,11 +40,8 @@ public class HeliumBeanRegistrar implements ImportBeanDefinitionRegistrar {
 
 	public static void registerBean(BeanContext bean) {
 		Object obj = bean.getBean();
-		Class<?> objClass = obj.getClass();
-		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(objClass);
-		AbstractBeanDefinition beanDefinition = builder.getBeanDefinition();
-
-		registry.registerBeanDefinition(objClass.getName(), beanDefinition);
+		String beanName = bean.getId().toString();
+		((DefaultListableBeanFactory) registry).registerSingleton(beanName, obj);
 	}
 
 }

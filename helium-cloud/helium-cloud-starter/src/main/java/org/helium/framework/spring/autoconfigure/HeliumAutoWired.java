@@ -6,6 +6,8 @@ import org.helium.framework.BeanContext;
 import org.helium.framework.annotations.ServiceInterface;
 import org.helium.framework.module.Module;
 import org.helium.framework.spi.BeanInstance;
+import org.helium.framework.spi.ModuleInstance;
+import org.helium.framework.spi.ServiceInstance;
 import org.helium.framework.spi.ServletInstance;
 import org.helium.framework.spring.assembly.HeliumAssembly;
 import org.helium.framework.task.TaskProducerFactory;
@@ -16,9 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * helium支持spring autowire
@@ -40,24 +46,61 @@ public class HeliumAutoWired implements ApplicationContextAware {
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		HeliumAutoWired.applicationContext = applicationContext;
-		resolveAutoWired();
+
+		resolveAnnotation();
 	}
 
+	private void resolveAnnotation() {
+		resolve(this::resolveAutoWired);
+		resolve(this::resolvePostConstruct);
+	}
 
-	private void resolveAutoWired() {
+	private void resolve(Consumer<BeanContext> consumer) {
 		if (HeliumAutoWired.applicationContext == null) {
 			throw new RuntimeException("resolveAutoWired And applicationContext Is Null");
 		}
 		//获取helium所有bean组件
 		List<BeanContext> beanContexts = HeliumAssembly.INSTANCE.getBeans();
 		for (BeanContext beanContext : beanContexts) {
-			boolean isServlet = beanContext instanceof ServletInstance;
-			if (!isServlet) {
-				continue;
-			}
+			consumer.accept(beanContext);
+		}
+	}
 
+	private void resolveAutoWired(BeanContext beanContext) {
+		if (beanContext instanceof ServletInstance) {
 			setFieldClass(beanContext.getBean(), beanContext.getBean().getClass());
 			resolveModule((BeanInstance) beanContext);
+		} else if (beanContext instanceof ModuleInstance ||
+				beanContext instanceof ServiceInstance) {
+			setFieldClass(beanContext.getBean(), beanContext.getBean().getClass());
+		}
+	}
+
+
+	private void resolvePostConstruct(BeanContext beanContext) {
+		resolvePostConstruct(beanContext.getBean(), beanContext.getBean().getClass());
+	}
+
+	private void resolvePostConstruct(Object object, Class<?> objClz) {
+		Class<?> superclass = objClz.getSuperclass();
+		if (superclass != null && superclass != Object.class) {
+			resolvePostConstruct(object, superclass);
+		}
+
+		Method[] declaredMethods = objClz.getDeclaredMethods();
+		if (declaredMethods == null || declaredMethods.length == 0) {
+			return;
+		}
+
+		for (Method method : declaredMethods) {
+			PostConstruct post = method.getAnnotation(PostConstruct.class);
+			if (post != null) {
+				try {
+					method.invoke(object);
+				} catch (Exception e) {
+					LOGGER.error("resolve PostConstruct Error continue:{}", objClz.getName(), e);
+				}
+			}
 		}
 	}
 
