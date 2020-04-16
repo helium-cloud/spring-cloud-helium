@@ -11,8 +11,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 @Configuration
+@Import(HeliumBeanRegistrar.class)
 @ConditionalOnBean(annotation = EnableHeliumConfiguration.class)
 //开启属性注入,通过@autowired注入
 @EnableConfigurationProperties(HeliumConfig.class)
@@ -50,10 +52,7 @@ public class HeliumAutoConfiguration {
 				} else {
 					HeliumAssembly.INSTANCE.run(heliumConfig, false);
 				}
-
-
 			}
-
 		} catch (Exception e) {
 			LOGGER.error(" init helium exception:", e);
 		}

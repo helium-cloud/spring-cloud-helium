@@ -3,6 +3,7 @@ package org.helium.framework.spring.autoconfigure;
 import org.helium.cloud.task.autoconfigure.HeliumTaskConfig;
 import org.helium.cloud.task.autoconfigure.TaskEventBeanHandler;
 import org.helium.framework.BeanContext;
+import org.helium.framework.annotations.ServiceInterface;
 import org.helium.framework.module.Module;
 import org.helium.framework.spi.BeanInstance;
 import org.helium.framework.spi.ServletInstance;
@@ -14,7 +15,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Import;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Field;
@@ -87,7 +87,17 @@ public class HeliumAutoWired implements ApplicationContextAware {
 					field.setAccessible(true);
 					field.set(object, applicationContext.getBean(field.getType()));
 				} catch (Exception e) {
-					LOGGER.error("resolveAutoWired Error continue:{}", field, e);
+					ServiceInterface id = field.getType().getAnnotation(ServiceInterface.class);
+					BeanContext context = HeliumAssembly.INSTANCE.getBean(id.id());
+					if (context == null) {
+						LOGGER.error("resolveAutoWired Error continue:{}", field, e);
+					} else {
+						try {
+							field.set(object, context.getBean());
+						} catch (Exception ex) {
+							LOGGER.error("resolveAutoWired Error continue:{}", field, ex);
+						}
+					}
 				}
 
 			}
@@ -98,7 +108,16 @@ public class HeliumAutoWired implements ApplicationContextAware {
 					field.setAccessible(true);
 					field.set(object, applicationContext.getBean(resource.name()));
 				} catch (Exception e) {
-					LOGGER.error("resolveAutoWired Error continue:{}", field, e);
+					BeanContext context = HeliumAssembly.INSTANCE.getBean(resource.name());
+					if (context == null) {
+						LOGGER.error("resolveAutoWired Error continue:{}", field, e);
+					} else {
+						try {
+							field.set(object, context.getBean());
+						} catch (Exception ex) {
+							LOGGER.error("resolveAutoWired Error continue:{}", field, ex);
+						}
+					}
 				}
 
 			}
