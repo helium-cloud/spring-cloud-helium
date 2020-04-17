@@ -15,19 +15,22 @@ import javax.annotation.Resource;
 import java.lang.reflect.Field;
 
 /**
- * 类描述：TODO
+ * 类描述：TaskEvent处理
  *
  * @author zkailiang
  * @date 2020/4/14
  */
 @Component
 public class TaskEventBeanHandler {
-	private static final Logger LOGGER = LoggerFactory.getLogger(TaskEventBeanPostProcessor.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(TaskEventBeanHandler.class);
 
 	@Resource(name = HeliumTaskConfig.TASK_PRODUCER_FACTORY)
 	private TaskProducerFactory taskProducerFactory;
 
-	public void setFieldClass(Object bean, String beanName) {
+	/**
+	 * 解析Field TaskEvent注解
+	 */
+	public void processTaskEvent(Object bean, String beanName) {
 		Class<?> objClz;
 		if (AopUtils.isAopProxy(bean)) {
 			objClz = AopUtils.getTargetClass(bean);
@@ -36,13 +39,16 @@ public class TaskEventBeanHandler {
 		}
 
 		processTaskEvent(bean, objClz, beanName);
-		Class<?> superclass = objClz.getSuperclass();
+	}
+
+	/**
+	 * 递归解析解析Field TaskEvent注解
+	 */
+	private void processTaskEvent(Object bean, Class<?> clazz, String beanName) {
+		Class<?> superclass = clazz.getSuperclass();
 		if (superclass != null && superclass != Object.class) {
 			processTaskEvent(bean, superclass, beanName);
 		}
-	}
-
-	private void processTaskEvent(Object bean, Class<?> clazz, String beanName) {
 
 		try {
 			for (Field field : clazz.getDeclaredFields()) {

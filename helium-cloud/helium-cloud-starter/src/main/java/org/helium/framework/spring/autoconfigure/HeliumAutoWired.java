@@ -24,10 +24,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 /**
- * helium支持spring autowire
+ * helium支持spring Autowired,Resource,PostConstruct
  */
 public class HeliumAutoWired implements ApplicationContextAware {
 	/**
@@ -36,9 +35,6 @@ public class HeliumAutoWired implements ApplicationContextAware {
 	private static ApplicationContext applicationContext;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(HeliumAutoWired.class);
-
-	@Resource(name = HeliumTaskConfig.TASK_PRODUCER_FACTORY)
-	private TaskProducerFactory taskProducerFactory;
 
 	@Autowired
 	private TaskEventBeanHandler taskEventBeanHandler;
@@ -50,11 +46,17 @@ public class HeliumAutoWired implements ApplicationContextAware {
 		resolveAnnotation();
 	}
 
+	/**
+	 * 解析 helium Bean 中注解
+	 */
 	private void resolveAnnotation() {
-		resolve(this::resolveAutoWired);
+		resolve(this::resolveFieldInject);
 		resolve(this::resolvePostConstruct);
 	}
 
+	/**
+	 * 遍历 helium BeanContext
+	 */
 	private void resolve(Consumer<BeanContext> consumer) {
 		if (HeliumAutoWired.applicationContext == null) {
 			throw new RuntimeException("resolveAutoWired And applicationContext Is Null");
@@ -66,21 +68,33 @@ public class HeliumAutoWired implements ApplicationContextAware {
 		}
 	}
 
-	private void resolveAutoWired(BeanContext beanContext) {
+	/**
+	 * 解析Field注解
+	 * Autowired,Resource,TaskEvent
+	 */
+	private void resolveFieldInject(BeanContext beanContext) {
 		if (beanContext instanceof ServletInstance) {
-			setFieldClass(beanContext.getBean(), beanContext.getBean().getClass());
+			resolveFieldInject(beanContext.getBean(), beanContext.getBean().getClass());
 			resolveModule((BeanInstance) beanContext);
 		} else if (beanContext instanceof ModuleInstance ||
 				beanContext instanceof ServiceInstance) {
-			setFieldClass(beanContext.getBean(), beanContext.getBean().getClass());
+			resolveFieldInject(beanContext.getBean(), beanContext.getBean().getClass());
 		}
 	}
 
-
+	/**
+	 * 解析PostConstruct注解
+	 */
 	private void resolvePostConstruct(BeanContext beanContext) {
-		resolvePostConstruct(beanContext.getBean(), beanContext.getBean().getClass());
+		Object bean = beanContext.getBean();
+		if (bean != null) {
+			resolvePostConstruct(bean, bean.getClass());
+		}
 	}
 
+	/**
+	 * 解析PostConstruct注解
+	 */
 	private void resolvePostConstruct(Object object, Class<?> objClz) {
 		Class<?> superclass = objClz.getSuperclass();
 		if (superclass != null && superclass != Object.class) {
@@ -104,25 +118,35 @@ public class HeliumAutoWired implements ApplicationContextAware {
 		}
 	}
 
+	/**
+	 * 解析Servlet中的Module
+	 */
 	private void resolveModule(BeanInstance beanInstance) {
 		List<Module> modules = beanInstance.getInterModules();
 		if (modules != null && modules.size() > 0) {
-			modules.forEach(module -> {
-				setField(module, module.getClass());
-				taskEventBeanHandler.setFieldClass(module, module.getClass().getSimpleName());
-			});
+			modules.forEach(module -> resolveFieldInject(module, module.getClass()));
 		}
 	}
 
-	private void setFieldClass(Object object, Class<?> objClz) {
+	/**
+	 * 解析Field注解
+	 * Autowired,Resource,TaskEvent
+	 */
+	private void resolveFieldInject(Object object, Class<?> objClz) {
 		setField(object, objClz);
+		taskEventBeanHandler.processTaskEvent(object, objClz.getSimpleName());
+	}
+
+	/**
+	 * 解析Field注解
+	 * Autowired,Resource
+	 */
+	private void setField(Object object, Class<?> objClz) {
 		Class<?> superclass = objClz.getSuperclass();
 		if (superclass != null && superclass != Object.class) {
-			setFieldClass(object, superclass);
+			setField(object, superclass);
 		}
-	}
 
-	private void setField(Object object, Class<?> objClz) {
 		for (Field field : objClz.getDeclaredFields()) {
 			Autowired autowired = field.getAnnotation(Autowired.class);
 			if (autowired != null) {

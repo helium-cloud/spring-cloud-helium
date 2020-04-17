@@ -35,13 +35,19 @@ public class HeliumBeanRegistrar implements ImportBeanDefinitionRegistrar {
 	public static void registerBean(List<BeanContext> beans) {
 		if (beans != null && beans.size() > 0) {
 			beans.forEach(bean -> registerBean(bean));
+
 		}
 	}
 
-	public static void registerBean(BeanContext bean) {
-		Object obj = bean.getBean();
-		String beanName = bean.getId().toString();
-		((DefaultListableBeanFactory) registry).registerSingleton(beanName, obj);
+	public static void registerBean(BeanContext beanContext) {
+		Object bean = beanContext.getBean();
+		if (bean == null) {
+			return;
+		}
+
+		String beanName = beanContext.getId().toString();
+		((DefaultListableBeanFactory) registry).registerSingleton(beanName, bean);
+		LOGGER.debug("helium bean register spring container,beanNme:{},Class:{}", beanName, bean.getClass().getName());
 	}
 
 }

@@ -428,4 +428,8 @@ public class Bootstrap extends AbstractBeanContextService {
 	public BundleManager getBundleManager() {
 		return bundleManager;
 	}
+
+	public StackManagerImpl getStackManager() {
+		return stackManager;
+	}
 }
