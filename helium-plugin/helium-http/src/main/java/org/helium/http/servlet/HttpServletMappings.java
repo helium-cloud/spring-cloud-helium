@@ -41,7 +41,6 @@ public class HttpServletMappings implements ServletMappings {
 
 	@Override
 	public void initWithConfig(ServletMappingsNode node) {
-		//
 		// 解决AnyNode序列化PB后会消失的问题
 		String innerXml = node.getInnerXml();
 		if (!StringUtils.isNullOrEmpty(innerXml)) {

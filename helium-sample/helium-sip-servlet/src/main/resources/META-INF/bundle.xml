@@ -2,7 +2,7 @@
     <configImports>
     </configImports>
     <beans>
-        <bean path="META-INF/im-http-sms-servlet.xml" stacks="http-as" export="true"/>
-        <bean path="META-INF/im-http-sms-servlet1.xml" stacks="http-as" export="true"/>
+      <!--  <bean path="META-INF/im-http-sms-servlet.xml" stacks="http-as" export="true"/>
+        <bean path="META-INF/im-http-sms-servlet1.xml" stacks="http-as" export="true"/>-->
     </beans>
 </bundle>

@@ -18,7 +18,7 @@ import java.io.IOException;
  * @author zhangkailiang@feinno.com
  * @date 2020/2/24
  */
-@WebServlet(urlPatterns = "/ims/sms")
+@WebServlet("/ims/sms")
 public class HttpImsSmsServlet extends HttpServlet {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(HttpImsSmsServlet.class);
