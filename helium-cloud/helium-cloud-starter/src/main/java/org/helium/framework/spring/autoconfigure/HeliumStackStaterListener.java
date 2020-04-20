@@ -8,7 +8,7 @@ import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
 
 /**
- * 类描述：TODO
+ * 类描述：HeliumStackStaterListener
  *
  * @author zkailiang
  * @date 2020/4/17
@@ -22,9 +22,7 @@ public class HeliumStackStaterListener implements ApplicationListener<Applicatio
 		Bootstrap bootstrap = Bootstrap.INSTANCE;
 
 		if (bootstrap.isLoaded()) {
-
-			// 启动，如果存在CentralizedService, 则自动注册到Center
-			LOGGER.info(">>> =======================Helium Stacks Start ============================ <<<");
+			LOGGER.info(">>> =================== Helium Stacks Start ======================= <<<");
 			bootstrap.getBundleManager().startBundles();
 
 			LOGGER.warn(">>> ================= BOOTSTRAP Start Finished ================= <<<");

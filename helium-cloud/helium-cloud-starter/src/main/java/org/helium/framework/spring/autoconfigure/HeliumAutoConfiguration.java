@@ -35,6 +35,11 @@ public class HeliumAutoConfiguration {
 		return new HeliumAutoWired();
 	}
 
+	@Bean
+	public HeliumStackStaterListener heliumStackStaterListener(){
+		return new HeliumStackStaterListener();
+	}
+
 	private void assemblyHelium() {
 		try {
 			synchronized (this) {

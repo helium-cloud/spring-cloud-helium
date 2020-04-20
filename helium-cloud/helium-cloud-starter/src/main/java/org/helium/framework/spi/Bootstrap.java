@@ -324,15 +324,15 @@ public class Bootstrap extends AbstractBeanContextService {
 		LOGGER.info(MARKER, ">>> ========================= assembleBundles ============================ <<<");
 		checkErrors(exitOnError, bundleManager.assembleBundles(this), "assembleBundles");
 
-		//
-		// 启动，如果存在CentralizedService, 则自动注册到Center
+		// 通过挂载在容器的生命周期上，容器启动后启动消息栈
+		/*// 启动，如果存在CentralizedService, 则自动注册到Center
 		LOGGER.info(MARKER, ">>> ========================= startBundles ============================ <<<");
 		checkErrors(exitOnError, bundleManager.startBundles(), "startBundles");
 
 		LOGGER.warn(MARKER, ">>> ================= BOOTSTRAP Start Finished ================= <<<");
 		for (ServerUrl url : stackManager.getServerUrls()) {
 			LOGGER.warn(MARKER, ">>> listening: {}", url.getUrl());
-		}
+		}*/
 		loaded = true;
 
 		if (runConsole) {
