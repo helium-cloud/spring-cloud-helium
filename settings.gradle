@@ -11,6 +11,7 @@ include 'helium-cloud:helium-cloud-task'
 include 'helium-cloud:helium-cloud-rpc'
 include 'helium-cloud:helium-cloud-logger'
 include 'helium-cloud:helium-cloud-starter'
+include 'helium-cloud:helium-cloud-registercenter'
 
 //helium-data[for data client]
 include 'helium-data:helium-data-base'
@@ -39,5 +40,4 @@ include ':helium-sample:cloud-rpc:cloud-rpc-api'
 include ':helium-sample:cloud-rpc:cloud-rpc-consumer'
 include ':helium-sample:cloud-rpc:cloud-rpc-provider'
 include ':helium-sample:helium-sip-servlet'
-
 

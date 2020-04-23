@@ -1,0 +1,11 @@
+dependencies {
+  compile(group: 'org.springframework.boot', name: 'spring-boot-starter', version: spring_boot_version) {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
+  }
+  compile( group: 'org.springframework.boot', name: 'spring-boot-configuration-processor', version: spring_boot_version) {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
+  }
+
+  compile group: 'org.apache.dubbo', name: 'dubbo-registry-api', version: dubbo_version
+  compile group: 'org.apache.dubbo', name: 'dubbo-config-api', version: dubbo_version
+}

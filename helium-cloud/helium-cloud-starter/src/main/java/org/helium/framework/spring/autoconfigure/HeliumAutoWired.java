@@ -1,6 +1,5 @@
 package org.helium.framework.spring.autoconfigure;
 
-import org.helium.cloud.task.autoconfigure.HeliumTaskConfig;
 import org.helium.cloud.task.autoconfigure.TaskEventBeanHandler;
 import org.helium.framework.BeanContext;
 import org.helium.framework.annotations.ServiceInterface;
@@ -10,7 +9,6 @@ import org.helium.framework.spi.ModuleInstance;
 import org.helium.framework.spi.ServiceInstance;
 import org.helium.framework.spi.ServletInstance;
 import org.helium.framework.spring.assembly.HeliumAssembly;
-import org.helium.framework.task.TaskProducerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;

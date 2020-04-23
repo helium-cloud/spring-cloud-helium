@@ -33,7 +33,7 @@ buildscript {
 allprojects { project ->
 
     project.repositories rootProject.repoClosure
-  
+
     group = 'org.helium'
     version = "3.2.5-release"
 }
@@ -56,9 +56,10 @@ subprojects { project ->
     }
 
     dependencies {
+        compile group: 'org.slf4j', name: 'slf4j-api', version: slf4j_version
         testCompile "junit:junit:$junit_version"
     }
-  
+
 
     task sourceJar(type: Jar) {
         from sourceSets.main.allJava

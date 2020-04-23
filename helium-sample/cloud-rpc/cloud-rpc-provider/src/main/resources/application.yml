@@ -16,6 +16,6 @@ dubbo:
       name: helium
       port: ${PORT:8083}
   registry:
-    address: ${REG_URL:zookeeper://127.0.0.1:7998}
+    address: ${REG_URL:zookeeper://10.10.208.194:7998}
   scan:
     base-packages: com.coral.learning.dubbo.provider
