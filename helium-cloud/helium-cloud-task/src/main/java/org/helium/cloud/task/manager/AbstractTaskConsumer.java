@@ -28,15 +28,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class AbstractTaskConsumer {
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-
-
 	protected final int TASK_EXECUTOR_SIZE = 16;
 
 	protected final int TASK_EXECUTOR_QUEUE_SIZE = 16 * 64;
 
 	//线程池设定
 	protected TaskCounter notFounds;
-
 
 	protected Map<String, Thread> queueThread;
 
@@ -47,14 +44,12 @@ public abstract class AbstractTaskConsumer {
 
 	public AbstractTaskConsumer() {
 		//默认处理线程池
-		defaultExecutor = (FixedObservableExecutor) ExecutorFactory.newFixedExecutor(this.getClass().getSimpleName() + "task" , TASK_EXECUTOR_SIZE, TASK_EXECUTOR_QUEUE_SIZE);
+		defaultExecutor = (FixedObservableExecutor) ExecutorFactory.newFixedExecutor(this.getClass().getSimpleName() + "task", TASK_EXECUTOR_SIZE, TASK_EXECUTOR_QUEUE_SIZE);
 
 		//Task消费处理
 		queueMap = new ConcurrentHashMap<>();
 		queueThread = new ConcurrentHashMap<>();
 		notFounds = PerformanceCounterFactory.getCounters(TaskCounter.class, "Task:notFoundsConsumer");
-
-
 	}
 
 
@@ -117,13 +112,14 @@ public abstract class AbstractTaskConsumer {
 			queue = queueMap.get(TaskStorageType.MEMORY_TYPE);
 		}
 		int partition = new Random().nextInt(TaskConsumerAssignor.getPartition());
-		if (args instanceof DedicatedTaskArgs){
+		if (args instanceof DedicatedTaskArgs) {
 			DedicatedTaskArgs dedicatedTaskArgs = (DedicatedTaskArgs) args;
 			taskArgs.setTag(dedicatedTaskArgs.getTag());
 			partition = getIntCode(TaskConsumerAssignor.getPartition(), dedicatedTaskArgs.getTag());
 		}
 		queue.put(partition, taskArgs);
 	}
+
 	/**
 	 * 计算用户归属区块
 	 *
@@ -141,7 +137,6 @@ public abstract class AbstractTaskConsumer {
 		}
 		return Math.abs(h % partition);
 	}
-
 
 
 	/**

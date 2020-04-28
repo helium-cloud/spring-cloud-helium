@@ -5,7 +5,7 @@ import org.helium.util.StringUtils;
 import org.helium.framework.module.ModuleState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.misc.BASE64Decoder;
+import java.util.Base64;
 
 /**
  * Created by Lei Gao on 10/29/15.
@@ -53,9 +53,8 @@ public abstract class HttpBasicAuthModule implements HttpModule {
 		if (s == null) {
 			return null;
 		}
-		BASE64Decoder decoder = new BASE64Decoder();
 		try {
-			byte[] b = decoder.decodeBuffer(s);
+			byte[] b = Base64.getDecoder().decode(s);
 			return new String(b);
 		} catch (Exception e) {
 			return null;

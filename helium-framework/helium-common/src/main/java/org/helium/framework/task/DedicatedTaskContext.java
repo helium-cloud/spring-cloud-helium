@@ -35,6 +35,7 @@ public final class DedicatedTaskContext {
 
 	/**
 	 * 获取在本context上注册的任务
+	 *
 	 * @param eventId
 	 * @return
 	 */
@@ -46,6 +47,7 @@ public final class DedicatedTaskContext {
 
 	/**
 	 * 在Context上添加一个任务
+	 *
 	 * @param task
 	 * @param event
 	 */
@@ -59,8 +61,6 @@ public final class DedicatedTaskContext {
 		try {
 			task.processTask(this, args);
 		} catch (Exception ex) {
-			//
-			// 如果出错则认为ctx运行完成
 			setTaskRunnable();
 			LOGGER.error("TaskImplementation run failed: " + task.toString() + " {}", ex);
 		}
@@ -71,7 +71,7 @@ public final class DedicatedTaskContext {
 	 */
 	public void close() {
 		synchronized (this) {
-			for (DedicatedTask task: tasks.values()) {
+			for (DedicatedTask task : tasks.values()) {
 				try {
 					task.processTaskRemoved(this);
 				} catch (Exception ex) {
@@ -90,6 +90,7 @@ public final class DedicatedTaskContext {
 	}
 
 	private Map<Object, Object> sessions = new ConcurrentHashMap<>();
+
 	public void putSession(Object key, Object value) {
 		sessions.put(key, value);
 	}
@@ -103,7 +104,6 @@ public final class DedicatedTaskContext {
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isTaskRunning() {
@@ -124,5 +124,4 @@ public final class DedicatedTaskContext {
 	public void setTaskRunning() {
 		running.set(true);
 	}
-
 }

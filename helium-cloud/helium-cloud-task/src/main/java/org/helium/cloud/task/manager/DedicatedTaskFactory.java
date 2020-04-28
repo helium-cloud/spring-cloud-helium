@@ -12,8 +12,6 @@ import org.slf4j.LoggerFactory;
 public final class DedicatedTaskFactory {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DedicatedTaskFactory.class);
 
-
-
 	private static SimpleDedicatedTaskConsumer consumer;
 
 	public static void initialize(SimpleDedicatedTaskConsumer consumer) {

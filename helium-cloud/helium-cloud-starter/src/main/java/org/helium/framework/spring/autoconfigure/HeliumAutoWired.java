@@ -13,8 +13,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.EmbeddedValueResolverAware;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.support.DefaultConversionService;
+import org.springframework.util.StringValueResolver;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -26,14 +31,23 @@ import java.util.function.Consumer;
 /**
  * helium支持spring Autowired,Resource,PostConstruct
  */
-public class HeliumAutoWired implements ApplicationContextAware {
+public class HeliumAutoWired implements ApplicationContextAware, EmbeddedValueResolverAware {
+	private static final Logger LOGGER = LoggerFactory.getLogger(HeliumAutoWired.class);
 	/**
 	 * 上下文对象实例
 	 */
 	private static ApplicationContext applicationContext;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(HeliumAutoWired.class);
+	/**
+	 * ${}解析
+	 */
+	private StringValueResolver stringValueResolver;
 
+	private ConversionService conversionService;
+
+	/**
+	 * TaskEvent处理
+	 */
 	@Autowired
 	private TaskEventBeanHandler taskEventBeanHandler;
 
@@ -48,8 +62,10 @@ public class HeliumAutoWired implements ApplicationContextAware {
 	 * 解析 helium Bean 中注解
 	 */
 	private void resolveAnnotation() {
+		conversionService = getConverter();
 		resolve(this::resolveFieldInject);
 		resolve(this::resolvePostConstruct);
+		resolve(this::resolveValue);
 	}
 
 	/**
@@ -91,6 +107,16 @@ public class HeliumAutoWired implements ApplicationContextAware {
 	}
 
 	/**
+	 * 解析Value注解
+	 */
+	private void resolveValue(BeanContext beanContext) {
+		Object bean = beanContext.getBean();
+		if (bean != null) {
+			resolveValue(bean, bean.getClass());
+		}
+	}
+
+	/**
 	 * 解析PostConstruct注解
 	 */
 	private void resolvePostConstruct(Object object, Class<?> objClz) {
@@ -111,6 +137,33 @@ public class HeliumAutoWired implements ApplicationContextAware {
 					method.invoke(object);
 				} catch (Exception e) {
 					LOGGER.error("resolve PostConstruct Error continue:{}", objClz.getName(), e);
+				}
+			}
+		}
+	}
+
+	/**
+	 * 解析Value注解
+	 */
+	private void resolveValue(Object object, Class<?> objClz) {
+		Class<?> superclass = objClz.getSuperclass();
+		if (superclass != null && superclass != Object.class) {
+			resolveValue(object, superclass);
+		}
+
+		Field[] declaredFields = objClz.getDeclaredFields();
+		if (declaredFields == null || declaredFields.length == 0) {
+			return;
+		}
+
+		for (Field field : declaredFields) {
+			Value post = field.getAnnotation(Value.class);
+			if (post != null) {
+				try {
+					field.setAccessible(true);
+					field.set(object, conversionService.convert(stringValueResolver.resolveStringValue(post.value()), field.getType()));
+				} catch (Exception e) {
+					LOGGER.error("resolve Value Error continue:{}", objClz.getName(), e);
 				}
 			}
 		}
@@ -189,5 +242,14 @@ public class HeliumAutoWired implements ApplicationContextAware {
 		}
 	}
 
+
+	@Override
+	public void setEmbeddedValueResolver(StringValueResolver resolver) {
+		this.stringValueResolver = resolver;
+	}
+
+	private ConversionService getConverter() {
+		return DefaultConversionService.getSharedInstance();
+	}
 }
 
