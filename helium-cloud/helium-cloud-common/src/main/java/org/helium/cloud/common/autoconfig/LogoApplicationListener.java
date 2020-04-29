@@ -76,7 +76,7 @@ public class LogoApplicationListener implements ApplicationListener<ApplicationE
 						"\\__/   | .__/ |_|   |_||_| |_| \\__, |       \\____/ |_| \\___/  \\__,_| \\__,_|       \\/ /_/   \\___||_||_| \\__,_||_| |_| |_|\n" +
 						"       |_|                     |___/                                                                                    ");
 		bannerTextBuilder.append("\n");
-		bannerTextBuilder.append(" :: spring-cloud-helium:3.1.x-release \n");
+		bannerTextBuilder.append(" :: spring-cloud-helium:3.2.x-release \n");
         return bannerTextBuilder.toString();
 
     }
