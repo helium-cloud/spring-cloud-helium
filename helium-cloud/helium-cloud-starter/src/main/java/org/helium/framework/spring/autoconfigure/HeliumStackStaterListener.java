@@ -31,7 +31,7 @@ public class HeliumStackStaterListener implements ApplicationListener<Applicatio
 	@Autowired
 	private HeliumRegister heliumRegister;
 
-	@Value("${helium.private-ip:0:0:0:0}")
+	@Value("${PRIVATE_ID:0:0:0:0}")
 	private String host;
 
 	@Override
