@@ -65,7 +65,7 @@ public class HeliumStackStaterListener implements ApplicationListener<Applicatio
 
 	private void subscribe() {
 		LOGGER.warn(">>> ================= BOOTSTRAP Subscribe ================= <<<");
-		heliumRegister.subscribe("tcp://0.0.0.0", BeanAsRouter::syncBean);
+		heliumRegister.subscribe("tcp://" + host, BeanAsRouter::syncBean);
 	}
 
 	private boolean register(Bootstrap bootstrap, List<ServerUrl> serverUrls) {

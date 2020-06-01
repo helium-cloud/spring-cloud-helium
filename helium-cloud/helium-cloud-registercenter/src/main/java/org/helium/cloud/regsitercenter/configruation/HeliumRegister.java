@@ -82,7 +82,7 @@ public class HeliumRegister {
 		public void notify(List<URL> urls) {
 			urls.forEach(url -> {
 				String key = key(url);
-				if (subscribeUrls.containsKey(key)) {
+				if (registryUrls.containsKey(key)) {
 					return;
 				}
 				LOGGER.info("订阅方法：key:{},url:{}", key, url.toString());
