@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Import;
 
 @Configuration
@@ -30,6 +31,7 @@ public class HeliumAutoConfiguration {
 		return new HeliumHealthIndicator();
 	}
 
+	@DependsOn("heliumHealthIndicator")
 	@Bean
 	public HeliumAutoWired heliumAutoWired() {
 		return new HeliumAutoWired();
