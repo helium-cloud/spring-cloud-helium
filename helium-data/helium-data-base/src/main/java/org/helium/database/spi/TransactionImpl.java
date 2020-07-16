@@ -1,5 +1,4 @@
 package org.helium.database.spi;
-
 import org.helium.database.DataTable;
 import org.helium.database.Transaction;
 import org.helium.perfmon.PerformanceCounterFactory;
@@ -102,6 +101,7 @@ class TransactionImpl implements Transaction {
 		Stopwatch watch = counter.begin();
 
 		try {
+			conn = this.connection;
 			stmt = conn.prepareStatement(sql);
 			if (values != null) {
 				for (int i = 0; i < values.length; i++) {
@@ -128,6 +128,7 @@ class TransactionImpl implements Transaction {
 		Stopwatch watch = counter.begin();
 
 		try {
+			conn = this.connection;
 			stmt = conn.prepareStatement(sql);
 			if (values != null) {
 				for (int i = 0; i < values.length; i++) {
@@ -154,6 +155,7 @@ class TransactionImpl implements Transaction {
 		Stopwatch watch = counter.begin();
 
 		try {
+			conn = this.connection;
 			stmt = conn.prepareStatement(sql);
 			if (values != null) {
 				for (int i = 0; i < values.length; i++) {
@@ -184,6 +186,7 @@ class TransactionImpl implements Transaction {
 		Stopwatch watch = counter.begin();
 
 		try {
+			conn = this.connection;
 			stmt = conn.prepareStatement(sql);
 			if (values != null) {
 				for (int i = 0; i < values.length; i++) {
@@ -213,6 +216,7 @@ class TransactionImpl implements Transaction {
 		Stopwatch watch = counter.begin();
 
 		try {
+			conn = this.connection;
 			stmt = conn.prepareStatement(sql);
 			if (values != null) {
 				for (int i = 0; i < values.length; i++) {
@@ -262,6 +266,7 @@ class TransactionImpl implements Transaction {
 		SmartCounter counter = getTxCounter(sql);
 		Stopwatch watch = counter.begin();
 		try {
+			conn = this.connection;
 			stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
 			if (values != null) {
