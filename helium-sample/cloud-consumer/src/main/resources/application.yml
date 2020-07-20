@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8082
 spring:
   application:
     # 该值为存入日志ES中的index,需要填写
@@ -12,10 +12,9 @@ spring:
 helium:
   service:
     log:
-      producer: true
+      consumer: true
       annotation: true
 
 cloud:
   # kafka配置文件的路径
-  logger-kafka: local:kafka/logger-producer.properties
-  KF_LOG_PRO: local:kafka/logger-producer.properties
+  KF_LOG_CON: local:kafka/logger-consumer.properties

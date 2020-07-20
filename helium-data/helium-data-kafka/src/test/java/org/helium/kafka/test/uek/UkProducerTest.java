@@ -2,7 +2,6 @@ package org.helium.kafka.test.uek;
 
 import org.apache.kafka.clients.BrokerHostMappingConfig;
 import org.helium.kafka.UkProducer;
-import org.helium.kafka.entity.UkArgs;
 import org.helium.kafka.spi.producer.UkProducerManager;
 
 import java.io.File;
@@ -29,15 +28,15 @@ public class UkProducerTest {
 				@Override
 				public void run() {
 					for (int i = 0; i< 20; i++){
-						UkArgs ukArgs = new UkArgs();
-						ukArgs.setBusiness("LOGIN");
-						ukArgs.setOwner("8613701381347");
-						ukArgs.setPeer("8613701381347");
-						ukArgs.setUuid(UUID.randomUUID().toString());
-						ukArgs.setPlatform("ott");
-						ukArgs.setType("REGISTER");
-						ukArgs.setContent(xxx);
-						producer.produce(ukArgs);
+//						Log ukArgs = new UkArgs();
+//						ukArgs.setBusiness("LOGIN");
+//						ukArgs.setOwner("8613701381347");
+//						ukArgs.setPeer("8613701381347");
+//						ukArgs.setUuid(UUID.randomUUID().toString());
+//						ukArgs.setPlatform("ott");
+//						ukArgs.setType("REGISTER");
+//						ukArgs.setContent(xxx);
+						producer.produce(xxx.getBytes());
 					}
 				}
 			});

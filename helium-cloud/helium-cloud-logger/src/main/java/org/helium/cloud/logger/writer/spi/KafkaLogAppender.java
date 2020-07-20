@@ -85,10 +85,10 @@ public class KafkaLogAppender implements LogAppender {
             LogBean logBean = new LogBean();
             logBean.setLevel(event.getLevel().toString());
             logBean.setTime(event.getTime().getTime());
-            logBean.setPlatform(platform);
+            logBean.setBusiness(platform);
             logBean.setBusiness(applicationName);
             logBean.setType("trace-log");
-            logBean.setOwnerAddress(ownerAddress);
+            logBean.setLocalAddr(ownerAddress);
             logBean.setName(event.getLoggerName());
             logBean.setEvent(event);
             String json = JSONObject.toJSONString(logBean, true);

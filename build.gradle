@@ -47,7 +47,7 @@ subprojects { project ->
     apply plugin: 'maven-publish'
 
     tasks.withType(JavaCompile) {
-        sourceCompatibility = 1.8
+//        sourceCompatibilLogoApplicationListenerity = 1.8
         options.encoding = "UTF-8"
     }
 

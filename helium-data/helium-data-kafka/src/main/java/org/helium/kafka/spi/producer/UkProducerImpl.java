@@ -4,7 +4,6 @@ package org.helium.kafka.spi.producer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.helium.kafka.UkProducer;
-import org.helium.kafka.entity.UkArgs;
 import org.helium.kafka.spi.KafkaCounters;
 import org.helium.perfmon.PerformanceCounterFactory;
 import org.helium.perfmon.Stopwatch;
@@ -31,29 +30,6 @@ public class UkProducerImpl implements UkProducer {
 		this.counters = PerformanceCounterFactory.getCounters(KafkaCounters.class, kafkaConf);
     }
 
-	@Override
-	public void produce(UkArgs ukArgs) {
-		String json = ukArgs.toJson();
-		String topic = properties.getProperty("topic");
-		counters.getQps().increase();
-		Stopwatch watch = counters.getTx().begin();
-		if (StringUtils.isNullOrEmpty(topic)) {
-            logger.error("kafka config properties not find topic, please config it, file name :{}", kafkaConf + ".properties");
-            throw new IllegalArgumentException("config properties not find topic, please config it, file name:" + kafkaConf);
-		}
-		ProducerRecord producerRecord = new ProducerRecord(topic, json);
-		producer.send(producerRecord, (metadata, exception) -> {
-			if (metadata != null) {
-                logger.debug("produce msg successful, msg's metadata :{}", metadata.toString());
-                watch.end();
-			}
-			if (exception != null) {
-                logger.warn("produce msg error, exception :", exception);
-                watch.fail(exception.getMessage());
-			}
-
-		});
-	}
 
 	@Override
 	public void produce(byte [] content) {

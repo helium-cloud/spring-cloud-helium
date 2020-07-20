@@ -1,98 +1,96 @@
 package org.helium.logging.args;
 
+import com.alibaba.fastjson.JSONObject;
 import com.feinno.superpojo.SuperPojo;
 import com.feinno.superpojo.annotation.Field;
+import org.helium.util.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class LogArgs extends SuperPojo{
 	private static final int OFFSET = 20;
-	/**
-	 * 平台名称(URCS)
-	 */
-	@Field(id = 1)
-	private String platform;
 
 	/**
 	 * 业务名称(服务名)
 	 */
-	@Field(id = 2)
+	@Field(id = 1)
 	private String business;
 
 	/**
 	 * 子业务类型
 	 */
-	@Field(id = 3)
+	@Field(id = 2)
 	private String type;
 
 	/**
-	 * 事务ID（消息ID、通话的sessionid、）
+	 * 事务ID（消息ID、通话的sessionid）
 	 */
-	@Field(id = 4)
-	private String tid = null;
+	@Field(id = 3)
+	private String tid;
 
 
 	/**
 	 * 主要操作方【】
 	 */
-	@Field(id = 5)
-	private String owner = null;
+	@Field(id = 4)
+	private String owner;
 
 	/**
 	 * 被操作方【】
 	 */
-	@Field(id = 6)
-	private String peer = null;
+	@Field(id = 5)
+	private String peer;
 
 	/**
 	 * 记录时间
 	 */
-	@Field(id = 7)
+	@Field(id = 6)
 	private long time = System.currentTimeMillis();
 	/**
 	 * 耗时
 	 */
-	@Field(id = 8)
+	@Field(id = 7)
 	private long costNano;
 
 	/**
 	 * 结果
 	 */
-	@Field(id = 9)
-	private String result;
+	@Field(id = 8)
+	private String result ;
 
 	/**
 	 * 本机IP、地址
 	 */
-	@Field(id = 10)
-	private String ownerAddress = null;
+	@Field(id = 9)
+	private String localAddr;
 
 	/**
 	 * 远端的IP、地址
 	 */
-	@Field(id = 11)
-	private String peerAddress = null;
+	@Field(id = 10)
+	private String peerAddr;
 
 	/**
 	 * 扩展消息内容
 	 */
+	@Field(id = 11)
+	private String request;
+
 	@Field(id = 12)
-	private List<LogExt> extContent = new ArrayList<>();
+	private String response;
+
+
+	@Field(id = 13)
+	private String content;
 
 	/**
 	 * 扩展消息内容
 	 */
 	@Field(id = 14)
-	private String content;
+	private List<LogExt> extContent = new ArrayList<>();
 
-	public String getPlatform() {
-		return platform;
-	}
-
-	public void setPlatform(String platform) {
-		this.platform = platform;
-	}
 
 	public String getBusiness() {
 		return business;
@@ -158,20 +156,44 @@ public class LogArgs extends SuperPojo{
 		this.result = result;
 	}
 
-	public String getOwnerAddress() {
-		return ownerAddress;
+	public String getLocalAddr() {
+		return localAddr;
 	}
 
-	public void setOwnerAddress(String ownerAddress) {
-		this.ownerAddress = ownerAddress;
+	public void setLocalAddr(String localAddr) {
+		this.localAddr = localAddr;
 	}
 
-	public String getPeerAddress() {
-		return peerAddress;
+	public String getPeerAddr() {
+		return peerAddr;
 	}
 
-	public void setPeerAddress(String peerAddress) {
-		this.peerAddress = peerAddress;
+	public void setPeerAddr(String peerAddr) {
+		this.peerAddr = peerAddr;
+	}
+
+	public String getRequest() {
+		return request;
+	}
+
+	public void setRequest(String request) {
+		this.request = request;
+	}
+
+	public String getResponse() {
+		return response;
+	}
+
+	public void setResponse(String response) {
+		this.response = response;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public List<LogExt> getExtContent() {
@@ -182,22 +204,49 @@ public class LogArgs extends SuperPojo{
 		this.extContent = extContent;
 	}
 
-	public void addLogExt(LogExt logExt) {
-		 extContent.add(logExt);
+	public String toJson(){
+		String jsonContent = null;
+		try {
+			JSONObject jsonObject = JSONObject.parseObject(getRequest());
+			jsonObject.put("business", getBusiness());
+			jsonObject.put("time", getTime());
+			jsonObject.put("type", getType());
+			jsonObject.put("tid", getTid());
+			jsonObject.put("owner", getOwner());
+			jsonObject.put("peer", getPeer());
+			jsonContent = jsonObject.toString();
+		} catch (Exception e){
+			jsonContent = toJsonObject().toString();
+		}
+		return jsonContent;
 	}
 
-
-	public String getContent() {
-		return content;
+	public static LogArgs create(String tid, String req, String resp){
+		LogArgs logArgs = new LogArgs();
+		logArgs.setTid(tid);
+		logArgs.setBusiness("urcs");
+		logArgs.setRequest(req);
+		logArgs.setResponse(resp);
+		logArgs.setLocalAddr(NetworkUtils.getLocalIp());
+		logArgs.getExtContent().add(new LogExt("server", "im"));
+		return logArgs;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public static LogArgs createSimple(String tid, String owner, String content){
+		LogArgs logArgs = new LogArgs();
+		logArgs.setTid(tid);
+		logArgs.setOwner(owner);
+		logArgs.setBusiness("urcs");
+		logArgs.setRequest(content);
+		logArgs.setLocalAddr(NetworkUtils.getLocalIp());
+		return logArgs;
 	}
+
 
 	public static void main(String[] args) {
-		LogArgs logArgs = new LogArgs();
-		logArgs.getExtContent().add(new LogExt("111", "11"));
-		System.out.println(logArgs.toJsonObject());
+		LogArgs logArgs = LogArgs.create(UUID.randomUUID().toString(), "MESSAGE ", "RESPONSE");
+		System.out.println(JSONObject.toJSONString(logArgs, true));
+		LogArgs logArgsSimple = LogArgs.createSimple(UUID.randomUUID().toString(), "张三", "参加");
+		System.out.println(JSONObject.toJSONString(logArgsSimple, true));
 	}
 }
