@@ -13,7 +13,8 @@ helium:
   service:
     log:
       consumer: true
-      annotation: true
+      entity: true
+#      annotation: true
 
 cloud:
   # kafka配置文件的路径

@@ -7,6 +7,7 @@ import org.helium.cloud.logger.service.LogBridgeDefault;
 import org.helium.cloud.logger.service.LogClient;
 import org.helium.cloud.logger.service.LogClientDefault;
 import org.helium.cloud.logger.writer.api.LogWriter;
+import org.helium.cloud.logger.writer.impl.EntityLogWriter;
 import org.helium.cloud.logger.writer.impl.KafkaLogWriter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -20,12 +21,14 @@ public class LoggerAutoConfig {
 		return new LogAop();
 	}
 
-//    @Bean(name = "log-save-file")
-//    public LogWriter fileLogWriter(){
-//        return new FileLogWriter();
-//    }
 
-    @Bean(name = "logClientAno")
+	@Bean(name = "EntityLogWriter")
+	@ConditionalOnProperty(prefix = "helium.service.log", value = "entity")
+	public LogWriter EntityLogWriter(){
+		return new EntityLogWriter();
+	}
+
+    @Bean(name = "kafkaLogWriter")
     @ConditionalOnProperty(prefix = "helium.service.log", value = "annotation")
     public LogWriter kafkaLogWriter(){
         return new KafkaLogWriter();
