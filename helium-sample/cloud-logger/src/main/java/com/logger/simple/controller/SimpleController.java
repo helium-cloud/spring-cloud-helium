@@ -37,7 +37,10 @@ public class SimpleController {
 	@GetMapping(value = "testClient")
 	public List<Integer> testClient() {
 		LOGGER.info("cli");
-		logClient.log(LogArgs.createSimple(UUID.randomUUID().toString(), "1", "testClient"));
+		LogArgs logArgs = LogArgs.createSimple(UUID.randomUUID().toString(), "1", "testClient");
+		logArgs.setType("im");
+		logArgs.setBusiness("xgc");
+		logClient.log(logArgs);
 		return IntStream.rangeClosed(0, 100).boxed().collect(Collectors.toList());
 
 	}
