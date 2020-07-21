@@ -1,6 +1,7 @@
 package org.helium.cloud.logger.config;
 
 
+import org.helium.cloud.configcenter.autoconfig.ConfigCenterConfig;
 import org.helium.cloud.logger.aop.LogAop;
 import org.helium.cloud.logger.service.LogBridge;
 import org.helium.cloud.logger.service.LogBridgeDefault;
@@ -9,44 +10,47 @@ import org.helium.cloud.logger.service.LogClientDefault;
 import org.helium.cloud.logger.writer.api.LogWriter;
 import org.helium.cloud.logger.writer.impl.EntityLogWriter;
 import org.helium.cloud.logger.writer.impl.KafkaLogWriter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 @Configuration
+@EnableConfigurationProperties(LoggerConfig.class)
 public class LoggerAutoConfig {
+
+	@Autowired
+	private LoggerConfig loggerConfig;
+
+
 
 	@Bean(name = "log-aop")
 	public LogAop logAop(){
 		return new LogAop();
 	}
 
-
-	@Bean(name = "EntityLogWriter")
-	@ConditionalOnProperty(prefix = "helium.service.log", value = "entity")
+	@Bean(name = "LogWriter")
 	public LogWriter EntityLogWriter(){
+		if ("kafka".equalsIgnoreCase(loggerConfig.getWriter())){
+			return new KafkaLogWriter();
+		}
 		return new EntityLogWriter();
 	}
 
-    @Bean(name = "kafkaLogWriter")
-    @ConditionalOnProperty(prefix = "helium.service.log", value = "annotation")
-    public LogWriter kafkaLogWriter(){
-        return new KafkaLogWriter();
-    }
-
 
 	@Bean(name = "logBridge")
-	@ConditionalOnProperty(prefix = "helium.service.log", value = "consumer")
+	@ConditionalOnProperty(prefix = "helium.log", value = "consumer")
 	public LogBridge logBridge(){
 		return new LogBridgeDefault();
 	}
 
 	@Bean(name = "logClient")
-	@ConditionalOnProperty(prefix = "helium.service.log", value = "producer")
+	@ConditionalOnProperty(prefix = "helium.log", value = "producer")
 	public LogClient LogClient(){
 		return new LogClientDefault();
 	}
-
 
 
 }

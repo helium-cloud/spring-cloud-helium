@@ -10,10 +10,9 @@ spring:
     # 该配置可以不写,默认为error
     log-level: info
 helium:
-  service:
-    log:
-      producer: true
-      annotation: true
+  log:
+    producer: true
+    writer: kafka
 
 cloud:
   # kafka配置文件的路径
