@@ -10,6 +10,7 @@
  */
 package org.helium.database;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
@@ -53,4 +54,6 @@ public interface Transaction extends Database
 	 * 事务回滚
 	 */
 	void rollback() throws SQLException;
+
+	Connection getConnection();
 }

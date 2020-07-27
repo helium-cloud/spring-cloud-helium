@@ -53,6 +53,11 @@ class TransactionImpl implements Transaction {
 	}
 
 	@Override
+	public Connection getConnection() {
+		return this.connection;
+	}
+
+	@Override
 	public String getName() {
 		return dbName;
 	}
