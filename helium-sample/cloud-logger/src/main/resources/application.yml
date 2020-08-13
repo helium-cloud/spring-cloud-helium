@@ -4,15 +4,6 @@ spring:
   application:
     # 该值为存入日志ES中的index,需要填写
     name: logger-simple
-  common:
-    # 保存到哪,支持配置kafka和file两种值,注意,该值必须填写
-    log-save-to: kafka
-    # 该配置可以不写,默认为error
-    log-level: info
-helium:
-  log:
-    producer: true
-    writer: kafka
 
 cloud:
   # kafka配置文件的路径

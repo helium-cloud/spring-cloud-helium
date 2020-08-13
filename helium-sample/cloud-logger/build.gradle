@@ -2,7 +2,6 @@ dependencies {
     compile project(':helium-cloud:helium-cloud-logger')
     compile project(':helium-cloud:helium-cloud-configcenter')
     compile project(':helium-framework:helium-logging')
-    compile project(':helium-cloud:helium-cloud-logger')
     compile (group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: spring_boot_version){
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
     }

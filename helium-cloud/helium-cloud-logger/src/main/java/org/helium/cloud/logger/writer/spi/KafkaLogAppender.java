@@ -39,18 +39,19 @@ public class KafkaLogAppender implements LogAppender {
     public void open() {
         if (!open) {
             synchronized (this) {
-                if (StringUtils.isEmpty(kafkaConfig)) {
-                    LOGGER.error("logger kafkaLocation config is empty!");
-                }
-                ConfigCenterClient configCenterClient = SpringContextUtil.getBean(ConfigCenterClient.class);
-                String content = configCenterClient.get(kafkaConfig, group);
-                ukProducer = UkProducerManager.INSTANCE.getKafkaProducer(kafkaConfig, content);
-                open = true;
                 try {
+					if (StringUtils.isEmpty(kafkaConfig)) {
+						LOGGER.error("logger kafkaLocation config is empty!");
+					}
+					ConfigCenterClient configCenterClient = SpringContextUtil.getBean(ConfigCenterClient.class);
+					String content = configCenterClient.get(kafkaConfig, group);
+					ukProducer = UkProducerManager.INSTANCE.getKafkaProducer(kafkaConfig, content);
                     InetAddress addr = InetAddress.getLocalHost();
                     ownerAddress = addr.getHostAddress();
-                } catch (UnknownHostException e) {
+					open = true;
+                } catch (Exception e) {
                     ownerAddress = "127.0.0.1";
+					open = false;
                 }
             }
         }
@@ -75,24 +76,27 @@ public class KafkaLogAppender implements LogAppender {
     @Override
     public void writeLog(LogEvent event) {
         try {
-            if (StringUtils.isEmpty(event.getLoggerName())) {
-                return;
-            }
-            if (event.getLoggerName().startsWith("org.helium.kafka") || event.getLoggerName().startsWith("org.apache.kafka")) {
-                System.out.println(event.getMessage());
-                return;
-            }
-            LogBean logBean = new LogBean();
-            logBean.setLevel(event.getLevel().toString());
-            logBean.setTime(event.getTime().getTime());
-            logBean.setBusiness(platform);
-            logBean.setBusiness(applicationName);
-            logBean.setType("trace-log");
-            logBean.setLocalAddr(ownerAddress);
-            logBean.setName(event.getLoggerName());
-            logBean.setEvent(event);
-            String json = JSONObject.toJSONString(logBean, true);
-            ukProducer.produce(json.getBytes());
+			open();
+			if (ukProducer != null){
+				if (StringUtils.isEmpty(event.getLoggerName())) {
+					return;
+				}
+				if (event.getLoggerName().startsWith("org.helium.kafka") || event.getLoggerName().startsWith("org.apache.kafka")) {
+					System.out.println(event.getMessage());
+					return;
+				}
+				LogBean logBean = new LogBean();
+				logBean.setLevel(event.getLevel().toString());
+				logBean.setTime(event.getTime().getTime());
+				logBean.setBusiness(platform);
+				logBean.setBusiness(applicationName);
+				logBean.setType("trace-log");
+				logBean.setLocalAddr(ownerAddress);
+				logBean.setName(event.getLoggerName());
+				logBean.setEvent(event);
+				String json = JSONObject.toJSONString(logBean, true);
+				ukProducer.produce(json.getBytes());
+			}
         } catch (Exception e) {
             e.printStackTrace();
         }

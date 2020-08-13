@@ -1,10 +1,17 @@
-<!-- 总体日志级别 -->
 <logging level="INFO">
-    <!-- 设置子logger级别 -->
-    <!-- 设置日志输出-->
+    <subLevels>
+        <subLevel name="com.feinno.superpojo" level="ERROR"/>
+    </subLevels>
     <outputs>
         <output>
             <appender class="org.helium.logging.spi.ConsoleAppender"/>
+            <appender class="org.helium.cloud.logger.writer.spi.KafkaLogAppender">
+                <setters>
+                    <setter field="group">cloud</setter>
+                    <setter field="kafkaConfig">logger-kafka</setter>
+                    <setter field="applicationName">logger-simple</setter>
+                </setters>
+            </appender>
         </output>
     </outputs>
 </logging>

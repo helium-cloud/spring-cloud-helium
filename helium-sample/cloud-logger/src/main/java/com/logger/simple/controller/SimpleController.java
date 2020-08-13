@@ -21,9 +21,9 @@ public class SimpleController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleController.class);
 
-
-    @Autowired
-    private LogClient logClient;
+//
+//    @Autowired
+//    private LogClient logClient;
 
     @GetMapping(value = "ano")
     @SystemLog(businessType = "method-annotation-log")
@@ -40,7 +40,7 @@ public class SimpleController {
 		LogArgs logArgs = LogArgs.createSimple(UUID.randomUUID().toString(), "1", "testClient");
 		logArgs.setType("im");
 		logArgs.setBusiness("xgc");
-		logClient.log(logArgs);
+	//	logClient.log(logArgs);
 		return IntStream.rangeClosed(0, 100).boxed().collect(Collectors.toList());
 
 	}
