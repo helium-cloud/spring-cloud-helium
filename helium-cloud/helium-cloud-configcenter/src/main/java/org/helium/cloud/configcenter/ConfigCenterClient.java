@@ -178,6 +178,10 @@ public class ConfigCenterClient {
 				readLocalValue = configurableEnvironment.resolvePlaceholders(readLocalValue);
                 return readLocalValue;
             }
+            if (!StringUtils.isEmpty(value)){
+				value = configurableEnvironment.resolvePlaceholders(value);
+			}
+
             return value;
         } catch (Exception e) {
             LOGGER.error("getConfig exception:{}", indexKey, e);

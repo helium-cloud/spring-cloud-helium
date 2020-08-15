@@ -34,17 +34,23 @@ public class KafkaLogAppender implements LogAppender {
 
     private String ownerAddress = "127.0.0.1";
 
-
     @Override
     public void open() {
         if (!open) {
             synchronized (this) {
                 try {
+                	if (SpringContextUtil.getApplicationContext() == null){
+                		return;
+					}
+					ConfigCenterClient configCenterClient = SpringContextUtil.getBean(ConfigCenterClient.class);
 					if (StringUtils.isEmpty(kafkaConfig)) {
 						LOGGER.error("logger kafkaLocation config is empty!");
 					}
-					ConfigCenterClient configCenterClient = SpringContextUtil.getBean(ConfigCenterClient.class);
 					String content = configCenterClient.get(kafkaConfig, group);
+					if (StringUtils.isEmpty(content)){
+						open = true;
+						return;
+					}
 					ukProducer = UkProducerManager.INSTANCE.getKafkaProducer(kafkaConfig, content);
                     InetAddress addr = InetAddress.getLocalHost();
                     ownerAddress = addr.getHostAddress();

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class LogClientDefault implements LogClient {
 
 
-	@FieldSetter(value = "KF_LOG_PRO")
+	@FieldSetter(value = "biz-logger")
 	private UkProducer ukProducer;
 
 	@Override

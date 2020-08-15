@@ -8,7 +8,7 @@
             <appender class="org.helium.cloud.logger.writer.spi.KafkaLogAppender">
                 <setters>
                     <setter field="group">cloud</setter>
-                    <setter field="kafkaConfig">logger-kafka</setter>
+                    <setter field="kafkaConfig">sys-logger</setter>
                     <setter field="applicationName">logger-simple</setter>
                 </setters>
             </appender>

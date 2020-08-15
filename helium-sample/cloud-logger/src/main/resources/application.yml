@@ -7,5 +7,5 @@ spring:
 
 cloud:
   # kafka配置文件的路径
-  logger-kafka: local:kafka/logger-producer.properties
-  KF_LOG_PRO: local:kafka/logger-producer.properties
+  sys-logger: local:kafka/logger-producer.properties
+  biz-logger: local:kafka/logger-producer.properties
