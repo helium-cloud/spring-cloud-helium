@@ -175,11 +175,13 @@ public class ConfigCenterClient {
             if (!StringUtils.isEmpty(value) && value.startsWith(CloudConstant.LOCAL)) {
                 String readLocalValue = readLocalValue(value);
                 //5. 替换二级变量${}
-                if (Objects.nonNull(readLocalValue) && readLocalValue.contains(placeholderPrefix)) {
-                    readLocalValue = parseStringValue(readLocalValue);
-                }
+				readLocalValue = configurableEnvironment.resolvePlaceholders(readLocalValue);
                 return readLocalValue;
             }
+            if (!StringUtils.isEmpty(value)){
+				value = configurableEnvironment.resolvePlaceholders(value);
+			}
+
             return value;
         } catch (Exception e) {
             LOGGER.error("getConfig exception:{}", indexKey, e);

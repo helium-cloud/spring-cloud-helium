@@ -42,7 +42,7 @@ public class KafkaLogWriter extends LogWriterAdapter {
         logBean.setTimestamp(logMessage.getCreateTime());
         logBean.setResult(JSON.toJSONString(logMessage.getMethodResult()));
         logBean.setBusiness(logMessage.getClassName());
-        logBean.setPlatform(applicationName);
+        logBean.setBusiness(applicationName);
         logBean.setType("annotation-log");
         logBean.setContent(JSON.toJSONString(logMessage));
 
