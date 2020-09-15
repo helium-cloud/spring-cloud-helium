@@ -198,7 +198,7 @@ public class ConfigCenterClient {
             if (endIndex != -1) {
                 String placeholder = buf.substring(startIndex + this.placeholderPrefix.length(), endIndex);
                 //用System.getEnv和外部的properties文件替代了${}中间的值
-                String propVal = readLocalValue(Objects.requireNonNull(configurableEnvironment.getProperty(placeholder)));
+                String propVal = Objects.requireNonNull(configurableEnvironment.getProperty(placeholder));
                 buf.replace(startIndex, endIndex + this.placeholderSuffix.length(), propVal == null ? "null" : propVal);
                 if (logger.isDebugEnabled()) {
                     logger.debug("Resolved placeholder '" + placeholder + "' to value [" + propVal + "]");
