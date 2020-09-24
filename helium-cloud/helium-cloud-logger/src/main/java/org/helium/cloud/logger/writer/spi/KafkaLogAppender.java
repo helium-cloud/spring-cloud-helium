@@ -34,8 +34,10 @@ public class KafkaLogAppender implements LogAppender {
 
     private String ownerAddress = "127.0.0.1";
 
+    private static final String KSYS = "KSYS";
     @Override
     public void open() {
+
         if (!open) {
             synchronized (this) {
                 try {
@@ -44,7 +46,7 @@ public class KafkaLogAppender implements LogAppender {
 					}
 					ConfigCenterClient configCenterClient = SpringContextUtil.getBean(ConfigCenterClient.class);
 					if (StringUtils.isEmpty(kafkaConfig)) {
-						LOGGER.error("logger kafkaLocation config is empty!");
+						//LOGGER.error("logger kafkaLocation config is empty!");
 					}
 					String content = configCenterClient.get(kafkaConfig, group);
 					if (StringUtils.isEmpty(content)){
@@ -82,6 +84,9 @@ public class KafkaLogAppender implements LogAppender {
     @Override
     public void writeLog(LogEvent event) {
         try {
+			if (StringUtils.isEmpty(System.getenv(KSYS)) || System.getenv(KSYS).equals("false")){
+				return;
+			}
 			open();
 			if (ukProducer != null){
 				if (StringUtils.isEmpty(event.getLoggerName())) {
