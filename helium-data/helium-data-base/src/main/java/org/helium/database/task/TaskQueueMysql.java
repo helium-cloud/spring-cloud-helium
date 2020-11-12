@@ -1,15 +1,10 @@
 package org.helium.database.task;
 
+import org.helium.cloud.task.manager.AbstractTaskConsumer;
 import org.helium.database.DataRow;
 import org.helium.database.DataTable;
 import org.helium.database.Database;
-import org.helium.database.sharding.ShardedDatabase;
-import org.helium.framework.annotations.FieldSetter;
-import org.helium.framework.annotations.ServiceImplementation;
-import org.helium.framework.annotations.ServiceSetter;
-import org.helium.framework.tag.Initializer;
 import org.helium.framework.task.TaskArgs;
-import org.helium.framework.task.TaskConsumer;
 import org.helium.framework.task.TaskQueue;
 import org.helium.framework.task.TaskStorageType;
 import org.slf4j.Logger;
@@ -23,7 +18,6 @@ import java.util.List;
  * QPS单台 4000左右取决于MYSQL的写入性能
  * limit单条一百
  */
-@ServiceImplementation(id = TaskQueue.BEAN_ID + TaskStorageType.MYSQL_TYPE)
 public class TaskQueueMysql implements TaskQueue {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskQueueMysql.class);
@@ -34,25 +28,28 @@ public class TaskQueueMysql implements TaskQueue {
     public static final String SQL_DELETE_LIST = "DELETE FROM HELIUM_TASK_LIST%s WHERE `Tid` > ?  order by `Tid` ASC limit ?;";
     public static final String SQL_GET = "select Tid,TaskId,EventName,Args from HELIUM_TASK_LIST%s order by `Tid` ASC limit ?";
 
+    public String serverId = null;
+	private Database database;
+	private AbstractTaskConsumer taskConsumer;
 
-    @FieldSetter("${TASK_DB}")
-    private ShardedDatabase<Long> shardedDatabse;
+	public TaskQueueMysql(Database database, AbstractTaskConsumer taskConsumer, String serverId) {
+		this.database = database;
+		this.taskConsumer = taskConsumer;
+		this.serverId = serverId;
+		init();
+	}
 
-    @ServiceSetter
-    private TaskConsumer taskConsumer;
-
-    @Initializer
-    public void init() {
-        try {
-            LOGGER.info("TaskQueueMysql init start");
-            initTable(TASK_TABLE_NAME);
-            taskConsumer.putStorage(TaskStorageType.MYSQL_TYPE, this);
-            //taskConsumer
-            LOGGER.info("TaskQueueMysql init complete");
-        } catch (Exception e) {
-            LOGGER.error("TaskQueueMysql init error.{}", e);
-        }
-    }
+	public void init() {
+		try {
+			LOGGER.info("TaskQueueMysql init start");
+			initTable(TASK_TABLE_NAME);
+			taskConsumer.putStorageInner(TaskStorageType.MYSQL_TYPE, this);
+			//taskConsumer
+			LOGGER.info("TaskQueueMysql init complete");
+		} catch (Exception e) {
+			LOGGER.error("TaskQueueMysql init error.{}", e);
+		}
+	}
 
     public long getLimit(){
         return 100;
@@ -60,8 +57,7 @@ public class TaskQueueMysql implements TaskQueue {
 
 
     private Database getSharding(int partition) {
-        long partitionLong = partition;
-        return shardedDatabse.getSharding(partitionLong);
+        return database;
     }
 
     public void initTable(String tableNamePre) throws Exception {

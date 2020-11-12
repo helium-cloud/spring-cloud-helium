@@ -1,5 +1,6 @@
 dependencies {
   compile project(':helium-framework:helium-common')
+  compile project(':helium-cloud:helium-cloud-task')
     compile group: 'jtds', name: 'jtds', version: jtds_version
     compile group: 'com.zaxxer', name: 'HikariCP', version: hikaricp_version
     compile group: 'mysql', name: 'mysql-connector-java', version: mysql_version

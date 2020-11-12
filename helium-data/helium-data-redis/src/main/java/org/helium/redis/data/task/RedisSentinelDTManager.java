@@ -14,7 +14,7 @@ public class RedisSentinelDTManager implements DedicatedTagManager {
     private static final int EXPIRES_SECOND = 60 * 60;
     private static final String PREFIX = "hdtag:";
 
-    @FieldSetter(value = "${URCS_OTT_RD}", loader = RedisSentinelLoader.class)
+    @FieldSetter(value = "URCS_OTT_RD", loader = RedisSentinelLoader.class)
     private RedisClient client;
 
     @Override

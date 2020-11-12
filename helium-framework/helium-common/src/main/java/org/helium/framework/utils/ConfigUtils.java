@@ -21,7 +21,7 @@ public class ConfigUtils {
 	private static String localIp = null;
 
 	public static String getLocalIp() {
-		if (localIp != null) {
+		/*if (localIp != null) {
 			return localIp;
 		}
 
@@ -52,9 +52,9 @@ public class ConfigUtils {
 		if (localIp == null) {
 			localIp = address.value() != null ? address.value() : LOCALHOST;
 			LOGGER.warn("set LOCAL_IP={}", localIp);
-		}
+		}*/
 
-		return localIp;
+		return LOCALHOST;
 	}
 
 	public static String getUserName() {
