@@ -76,4 +76,8 @@ public class TaskConsumerHandler {
 	public SimpleDedicatedTaskConsumer getDedicatedTaskConsumer() {
 		return dedicatedTaskConsumer;
 	}
+
+	public SimpleTaskConsumer getSimpleTaskConsumer() {
+		return simpleTaskConsumer;
+	}
 }
