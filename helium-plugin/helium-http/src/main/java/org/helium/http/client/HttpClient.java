@@ -1,23 +1,25 @@
 package org.helium.http.client;
 
+import com.feinno.superpojo.type.DateTime;
+import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.*;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.http.*;
+import io.netty.util.AttributeKey;
+import org.helium.http.client.timer.Timeout;
 import org.helium.perfmon.PerformanceCounterFactory;
 import org.helium.perfmon.Stopwatch;
-import com.feinno.superpojo.type.DateTime;
 import org.helium.threading.Future;
 import org.helium.util.StringUtils;
-import org.jboss.netty.bootstrap.ClientBootstrap;
-import org.jboss.netty.channel.*;
-import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
-import org.jboss.netty.handler.codec.http.*;
-import org.jboss.netty.util.Timeout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -31,72 +33,75 @@ import java.util.concurrent.TimeUnit;
  * 非oneConnectionMode 有一个tcp的连接池供使用，如果连接空闲60s， 出池。 可以并发使用
  *
  * @author liyang
- *         modify by linsu at 10.28.2011
- *         modify by linsu at 11.01.2011
- *         add connectionPool modify sendData support http 1.1 302 跳转功能 modify
- *         by linsu at 3/29/2012
+ * modify by linsu at 10.28.2011
+ * modify by linsu at 11.01.2011
+ * add connectionPool modify sendData support http 1.1 302 跳转功能 modify
+ * by linsu at 3/29/2012
  * @version 1.0
  */
 
 public class HttpClient {
 
-    private static final Logger logger = LoggerFactory.getLogger(HttpClient.class);
-    private static ClientBootstrap bootstrap;
-    private static ExecutorService ioThreadpool;
-    private static HttpConnectionPool connPool;
-    // private static ScalableExecutor executor;
-    protected static HashWheelTimer timer;
+	private static final Logger logger = LoggerFactory.getLogger(HttpClient.class);
+	private static Bootstrap bootstrap;
+	private static HttpConnectionPool connPool;
+	protected static HashWheelTimer timer;
+	private DateTime lastAccessTime = DateTime.now();
+	private int receivedDataLength = 0;
 
-    //	private Channel channel = null;
-//	private boolean singleConnectionMode = false;
-    private DateTime lastAccessTime = DateTime.now();
-    private int receivedDataLength = 0;
+	private HttpClientCounters counters;
 
-    private HttpClientCounters counters;
+	private static final AttributeKey<Attachment> RESPONSE_KEY = AttributeKey.valueOf("RESPONSE_KEY");
 
-    public HttpClient() {
-        this("httpClient");
-//		this.singleConnectionMode = singleConnectionMode;
-    }
+	public HttpClient() {
+		this("httpClient");
+	}
 
-    public HttpClient(String clientName) {
-        counters = PerformanceCounterFactory.getCounters(HttpClientCounters.class, clientName);
-    }
+	public HttpClient(String clientName) {
+		counters = PerformanceCounterFactory.getCounters(HttpClientCounters.class, clientName);
+	}
 
-    static {
-        ioThreadpool = Executors.newCachedThreadPool();
-        ChannelFactory factory = new NioClientSocketChannelFactory(ioThreadpool, ioThreadpool, 56);
+	{
 
-        bootstrap = new ClientBootstrap(factory);
 
-        bootstrap.setOption("tcpNoDelay", true);
-        bootstrap.setOption("keepAlive", true);
-        connPool = new HttpConnectionPool();
-        // executor = new ScalableExecutor(50, 200,2000);
-        timer = new HashWheelTimer(50, TimeUnit.MILLISECONDS, 7200);
-    }
+		bootstrap = new Bootstrap();
+		bootstrap.channel(NioSocketChannel.class);
+		bootstrap.option(ChannelOption.TCP_NODELAY, true);
+		bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
+		bootstrap.group(new NioEventLoopGroup(3));
+		bootstrap.handler(new ChannelInitializer<SocketChannel>() {
+			@Override
+			protected void initChannel(SocketChannel ch) throws Exception {
+				ch.pipeline().addLast("decoder", new KrakenHttpResponseDecoder());
+				ch.pipeline().addLast("apphandler", new AppUpstreamHandler());
+				ch.pipeline().addLast("encoder", new HttpRequestEncoder());
+			}
+		});
+		connPool = new HttpConnectionPool();
+		timer = new HashWheelTimer(50, TimeUnit.MILLISECONDS, 7200);
+	}
 
-    public void setLastAccessTime(DateTime lastAccessTime) {
-        this.lastAccessTime = lastAccessTime;
-    }
+	public void setLastAccessTime(DateTime lastAccessTime) {
+		this.lastAccessTime = lastAccessTime;
+	}
 
-    public DateTime getLastAccessTime() {
-        return lastAccessTime;
-    }
+	public DateTime getLastAccessTime() {
+		return lastAccessTime;
+	}
 
-    public int getReceivedDataLength() {
-        return receivedDataLength;
-    }
+	public int getReceivedDataLength() {
+		return receivedDataLength;
+	}
 
-    public void setReceivedDataLength(int receivedDataLength) {
-        this.receivedDataLength = receivedDataLength;
-    }
+	public void setReceivedDataLength(int receivedDataLength) {
+		this.receivedDataLength = receivedDataLength;
+	}
 
-    // httpmessage 的公厂类方法
-    public static HttpClientRequest createHttpRequest(String method, String uri) {
+	// httpmessage 的公厂类方法
+	public static HttpClientRequest createHttpRequest(String method, String uri) {
 
-        return createHttpRequest(method, uri, true);
-    }
+		return createHttpRequest(method, uri, true);
+	}
 
 	// httpmessage 的公厂类方法
 	public static HttpClientRequest createHttpRequest(String method, String uri, boolean carryIp) {
@@ -119,12 +124,12 @@ public class HttpClient {
 		// + "?" + u.getQuery();
 
 		String urlPath = "/";
-		if (carryIp){
+		if (carryIp) {
 			urlPath = uri;
 		} else {
 			urlPath = u.getPath();
 			String query = u.getQuery();
-			if (!StringUtils.isNullOrEmpty(query)){
+			if (!StringUtils.isNullOrEmpty(query)) {
 				urlPath = urlPath + "?" + query;
 			}
 
@@ -138,162 +143,131 @@ public class HttpClient {
 		return req;
 	}
 
-    /**
-     * <p>
-     * if downstreamhandler(encode) error or network layer send exception, it
-     * will send a upstream exception event and writefuture will also know it.
-     *
-     * @param req
-     * @throws Throwable
-     */
+	/**
+	 * <p>
+	 * if downstreamhandler(encode) error or network layer send exception, it
+	 * will send a upstream exception event and writefuture will also know it.
+	 *
+	 * @param req
+	 * @throws Throwable
+	 */
 
-    public synchronized Future<HttpClientResponse> sendData(final HttpClientRequest req) throws Throwable {
-        String key = String.format("%s:%s", req.getRemoteAddress(), req.getRemotePort());
-        Channel channel = connPool.poll(key);
+	public synchronized Future<HttpClientResponse> sendData(final HttpClientRequest req) throws Throwable {
+		String key = String.format("%s:%s", req.getRemoteAddress(), req.getRemotePort());
+		Channel channel = connPool.poll(key);
 
+		Future<HttpClientResponse> clientResponse = new Future<>();
+		Stopwatch stopwatch = counters.getTx().begin();
+		Attachment attachment = new Attachment(clientResponse, stopwatch);
 
-        //final Future<HttpClientResponse> f = new Future<HttpClientResponse>();
-        Attachment att = new Attachment(new Future<>(), counters.getTx().begin());
+		final String reqUri = req.getUri();
+		if (channel == null) {
+			ChannelFuture channelFuture = bootstrap.connect(new InetSocketAddress(req.getRemoteAddress(), req.getRemotePort()));
+			channelFuture.addListener(futureLis -> {
+				if (futureLis.isSuccess() == false) {
+					Exception exception = new Exception("connect timeout");
+					stopwatch.fail(exception);
+					clientResponse.complete(null, exception);
+					logger.error(reqUri + " connect timeout!");
+					return;
+				}
 
-        final String reqUri = req.getUri();
-        if (channel == null) {
-            ChannelFuture future = bootstrap
-                    .connect(new InetSocketAddress(req.getRemoteAddress(), req.getRemotePort()));
-
-            future.addListener(future1 -> {
-                if (future1.isSuccess() == false) {
-                    Exception exception = new Exception("connect timeout");
-                    att.watch.fail(exception);
-                    att.future.complete(null, exception);
-                    logger.error(reqUri + " connect timeout!");
-                    return;
-                }
-                Channel channel1 = future1.getChannel();
-                channel1.getPipeline().addLast("decoder", new KrakenHttpResponseDecoder());
-                channel1.getPipeline().addLast("aggregator", new HttpChunkAggregator(10 * 1024 * 1024)); // 最大10m
-                channel1.getPipeline().addLast("apphandler", new AppUpstreamHandler());
-                channel1.getPipeline().addLast("encoder", new HttpRequestEncoder());
-
-                //channel.setAttachment(f);
-                channel1.setAttachment(att);
-                doSend(channel1, req);
-            });
-        } else {
-            //channel.setAttachment(f);
-            channel.setAttachment(att);
-            doSend(channel, req);
-        }
-        return att.future;
-        //return f;
-    }
-
-    private void doSend(Channel channel, HttpClientRequest req) {
-//        final Future<HttpClientResponse> f = (Future<HttpClientResponse>) channel.getAttachment();
-        Attachment att = (Attachment) channel.getAttachment();
-        final Channel ch = channel;
-        final String reqUri = req.getUri();
-        ChannelFuture wfuture = channel.write(req);
-        wfuture.addListener(future -> {
-            if (future.isSuccess() == false) {
-                Exception exception = new Exception("write failed");
-                att.watch.fail(exception);
-                att.future.complete(null, exception);
-                ch.close();
-                logger.error(reqUri + " write failed!");
-                channel.setAttachment(null);
-            }
-        });
-
-        final Timeout t = timer.newTimeout(timeout -> {
-            if (att.future.isDone() == false) {
-                Exception exception = new Exception("timeout");
-                att.watch.fail(exception);
-                att.future.complete(null, exception);
-                ch.close();
-                logger.error(reqUri + " timeout!");
-                channel.setAttachment(null);
-            }
-        }, 120 * 1000, TimeUnit.MILLISECONDS); // 请求120秒超时
-
-        att.future.addListener(result -> {
-            t.cancel();
-            //att.watch.end();//TODO 是否应该记录此问题?
-        });
-    }
-
-    public void close() {
-
-    }
-
-    class KrakenHttpResponseDecoder extends HttpResponseDecoder {
-        @Override
-        protected HttpMessage createMessage(String initialLine[]) {
-            return new HttpClientResponse(HttpVersion.valueOf(initialLine[0]), new HttpResponseStatus(Integer.valueOf(
-                    initialLine[1]).intValue(), initialLine[2]));
-        }
-    }
-
-    class AppUpstreamHandler extends SimpleChannelUpstreamHandler {
-        AppUpstreamHandler() {
-        }
-
-        @Override
-        public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) {
-            // 无论 send过程 ,rev处理过程的
-            // io,应用层的exception都在这里汇聚
-            /*
-             * 此处需要 error 输出ownerId,new date(); message =
-			 * strackTrace,根据堆栈能知道哪个transaction出错 req.to
-			 * string();if(response!=null) response.toString();
-			 */
-            logger.error("exception happened on http client send or recive", e.getCause());
-            Channel channel = ctx.getChannel();
-            channel.close();
-        }
-
-        @Override
-        public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
-            Channel channel = ctx.getChannel();
-            //Future<HttpClientResponse> f = (Future<HttpClientResponse>) channel.getAttachment();
-            Attachment att = (Attachment) channel.getAttachment();
-            channel.setAttachment(null);
-            connPool.add(channel);
-            att.watch.end();
-            att.future.complete((HttpClientResponse) e.getMessage());
-        }
-
-
-    }
-
-    private class Attachment {
-        private Future<HttpClientResponse> future;
-
-        private Stopwatch watch;
-
-        public Attachment(Future<HttpClientResponse> future, Stopwatch watch) {
-            this.future = future;
-            this.watch = watch;
-        }
-    }
-
-    public static void main(String[] args) {
-
-        // false: page mode, true: large mode
-        HttpClient c = new HttpClient();
-
-        HttpClientRequest req = HttpClient.createHttpRequest(HttpMethod.GET.toString(), "http://10.10.220.103:8003/rcs/storage/httpContent/15v3w6qs-7utt-1035-8891-d97324ec3799", false);
-		try {
-			Future<HttpClientResponse> f = c.sendData(req);
-			f.addListener(result -> {
-				System.out.print(result.getValue().toString());
-				System.out.print("\r\n");
+				Channel channelInner =  channelFuture.channel();
+				channelInner.attr(RESPONSE_KEY).set(attachment);
+				doSend(channelInner, req, attachment);
 			});
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} else {
+			channel.attr(RESPONSE_KEY).set(attachment);
+			doSend(channel, req, attachment);
+		}
+		return clientResponse;
+	}
+
+	private void doSend(Channel channel, HttpClientRequest req, Attachment attachment) {
+
+		final Channel ch = channel;
+		final String reqUri = req.getUri();
+		ChannelFuture wfuture = channel.writeAndFlush(req);
+		wfuture.addListener(future -> {
+			if (future.isSuccess() == false) {
+				Exception exception = new Exception("write failed");
+				ch.close();
+				attachment.watch.fail(exception);
+				attachment.future.complete(null, exception);
+				logger.error(reqUri + " write failed!");
+				channel.attr(RESPONSE_KEY).getAndSet(null);
+			}
+		});
+
+		final Timeout t = timer.newTimeout(timeout -> {
+			if (attachment.future.isDone() == false) {
+				Exception exception = new Exception("timeout");
+				attachment.watch.fail(exception);
+				attachment.future.complete(null, exception);
+				ch.close();
+				logger.error(reqUri + " timeout!");
+				channel.attr(RESPONSE_KEY).getAndSet(null);
+			}
+		}, 120 * 1000, TimeUnit.MILLISECONDS); // 请求120秒超时
+
+		attachment.future.addListener(result -> {
+			t.cancel();
+			logger.warn(reqUri + " t.cancel()");
+		});
+	}
+
+	public void close() {
+
+	}
+
+	class KrakenHttpResponseDecoder extends HttpResponseDecoder {
+		@Override
+		protected HttpMessage createMessage(String initialLine[]) {
+			return new HttpClientResponse(HttpVersion.valueOf(initialLine[0]), new HttpResponseStatus(Integer.valueOf(
+					initialLine[1]).intValue(), initialLine[2]));
+		}
+	}
+
+	class AppUpstreamHandler extends ChannelInboundHandlerAdapter {
+		@Override
+		public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+			if (msg instanceof HttpResponse) {
+				HttpResponse response = (HttpResponse) msg;
+			}
+			if (msg instanceof HttpContent) {
+				HttpContent content = (HttpContent) msg;
+				ByteBuf buf = content.content();
+				buf.release();
+			}
+			connPool.add(ctx.channel());
+			Attachment attachment = ctx.channel().attr(RESPONSE_KEY).getAndSet(null);
+			if (attachment != null){
+				attachment.watch.end();
+				attachment.future.complete((HttpClientResponse) msg);
+			}
+
+		}
+		@Override
+		public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
+				throws Exception {
+			Attachment attachment = ctx.channel().attr(RESPONSE_KEY).getAndSet(null);
+			attachment.watch.end();
+			attachment.future.complete(null, new Exception(cause.getMessage()));
 		}
 
-    }
+	}
+	private class Attachment {
+		private Future<HttpClientResponse> future;
+
+		private Stopwatch watch;
+
+		public Attachment(Future<HttpClientResponse> future, Stopwatch watch) {
+			this.future = future;
+			this.watch = watch;
+		}
+	}
+
+
 
 }
 

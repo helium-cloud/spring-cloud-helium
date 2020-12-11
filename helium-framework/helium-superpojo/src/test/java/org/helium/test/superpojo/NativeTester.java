@@ -3,10 +3,10 @@ package org.helium.test.superpojo;
 import com.feinno.superpojo.SuperPojoManager;
 import com.feinno.superpojo.type.Flags;
 import com.google.gson.JsonObject;
-import org.junit.Assert;
-import org.junit.Test;
 import org.helium.test.superpojo.bean.DataCreater;
 import org.helium.test.superpojo.bean.Table;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.*;

@@ -1,11 +1,11 @@
 package org.helium.http.servlet;
 
-import org.helium.util.StringUtils;
 import org.glassfish.grizzly.http.util.MimeType;
 import org.helium.framework.annotations.ServletImplementation;
 import org.helium.framework.tag.Initializer;
 import org.helium.http.servlet.spi.HttpUtils;
 import org.helium.http.servlet.spi.StaticResourceLoader;
+import org.helium.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

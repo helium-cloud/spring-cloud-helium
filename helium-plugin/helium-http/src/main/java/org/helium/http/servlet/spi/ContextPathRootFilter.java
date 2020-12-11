@@ -1,10 +1,10 @@
 package org.helium.http.servlet.spi;
 
-import org.helium.util.Action;
 import org.helium.framework.module.ModuleChain;
 import org.helium.framework.module.ModuleState;
 import org.helium.http.servlet.HttpModule;
 import org.helium.http.servlet.HttpServletContext;
+import org.helium.util.Action;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

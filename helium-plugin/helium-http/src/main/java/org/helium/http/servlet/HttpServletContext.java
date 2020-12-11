@@ -5,7 +5,6 @@ import org.helium.framework.module.AbstractModuleContext;
 import org.helium.framework.module.ModuleContext;
 import org.helium.http.logging.LogUtils;
 import org.helium.http.utils.UrlPattern;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

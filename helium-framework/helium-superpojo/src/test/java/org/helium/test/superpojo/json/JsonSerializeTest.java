@@ -2,11 +2,11 @@ package org.helium.test.superpojo.json;
 
 import com.feinno.superpojo.SuperPojoManager;
 import com.google.gson.JsonObject;
+import org.helium.test.superpojo.bean.Table;
+import org.helium.test.superpojo.bean.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
-import org.helium.test.superpojo.bean.Table;
-import org.helium.test.superpojo.bean.User;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;

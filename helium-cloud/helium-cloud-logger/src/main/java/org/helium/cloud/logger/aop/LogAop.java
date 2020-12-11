@@ -12,7 +12,6 @@ import org.helium.cloud.logger.model.LogMessage;
 import org.helium.cloud.logger.writer.api.LogWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Method;

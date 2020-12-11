@@ -1,6 +1,5 @@
 package org.helium.http.servlet;
 
-import org.helium.util.StringUtils;
 import org.glassfish.grizzly.http.server.NetworkListener;
 import org.helium.framework.BeanContext;
 import org.helium.framework.route.ServerUrl;
@@ -8,6 +7,7 @@ import org.helium.framework.servlet.ServletDescriptor;
 import org.helium.framework.servlet.ServletStack;
 import org.helium.http.servlet.spi.HttpServerImpl;
 import org.helium.http.servlet.spi.HttpsKeyStore;
+import org.helium.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

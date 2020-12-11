@@ -1,8 +1,9 @@
 package org.helium.http.client;
 
-import org.jboss.netty.channel.Channel;
-import org.jboss.netty.util.Timeout;
-import org.jboss.netty.util.TimerTask;
+
+import io.netty.channel.Channel;
+import org.helium.http.client.timer.Timeout;
+import org.helium.http.client.timer.TimerTask;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,11 +19,11 @@ class HttpConnectionPool {
 	}
 
 	public void add(Channel conn) {
-		if (conn.isConnected() == false) {
+		if (conn.isActive() == false) {
 			conn.close();
 			return;
 		}
-		InetSocketAddress addr = (InetSocketAddress) conn.getRemoteAddress();
+		InetSocketAddress addr = (InetSocketAddress) conn.remoteAddress();
 		String key = String.format("%s:%s", addr.getHostString(), addr.getPort());
 		synchronized (ServiceTree) {
 			if (ServiceTree.containsKey(key) == false) {
@@ -43,7 +44,7 @@ class HttpConnectionPool {
 				if (tlConnection == null)
 					return null;
 				conn = tlConnection.getConnection();
-				if (conn.isConnected() == false) {
+				if (conn.isActive() == false) {
 					conn.close();
 				}else {
 					break;
@@ -73,7 +74,7 @@ class HttpConnectionPool {
 			timeout = HttpClient.timer.newTimeout(new TimerTask() {
 				public void run(Timeout timeout) throws Exception {
 					synchronized (ServiceTree) {
-						InetSocketAddress addr = (InetSocketAddress) connection.getRemoteAddress();
+						InetSocketAddress addr = (InetSocketAddress) connection.remoteAddress();
 						String key = String.format("%s:%s", addr.getHostString(), addr.getPort());
 						if (ServiceTree.containsKey(key) == true)
 							if (ServiceTree.get(key).remove(TimeLimitedConnection.this) == true) {

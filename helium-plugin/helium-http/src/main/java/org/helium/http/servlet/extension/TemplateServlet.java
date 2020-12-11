@@ -1,12 +1,12 @@
 package org.helium.http.servlet.extension;
 
-import org.helium.util.Outer;
-import org.helium.util.StringUtils;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.helium.framework.tag.Initializer;
 import org.helium.http.servlet.HttpServlet;
 import org.helium.http.servlet.HttpServletContext;
+import org.helium.util.Outer;
+import org.helium.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;

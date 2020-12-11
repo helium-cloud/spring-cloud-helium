@@ -11,7 +11,6 @@ import org.helium.framework.servlet.ServletMappings;
 import org.helium.framework.tag.Tag;
 import org.helium.framework.tag.TagImplementationClass;
 import org.helium.framework.task.ScheduledTask;
-import org.helium.framework.task.TaskProducerLoader;
 import org.helium.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

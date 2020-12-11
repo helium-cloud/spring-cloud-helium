@@ -1,6 +1,5 @@
 package org.helium.http.webservice;
 
-import org.helium.framework.tag.InitializerTag;
 import org.helium.framework.tag.TagImplementationClass;
 
 import java.lang.annotation.ElementType;

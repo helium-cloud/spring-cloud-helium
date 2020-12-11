@@ -1,6 +1,5 @@
 package org.helium.http.servlet.spi;
 
-import org.helium.perfmon.Stopwatch;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.servlet.WebappContext;
 import org.helium.http.servlet.HttpModule;
@@ -8,8 +7,7 @@ import org.helium.http.servlet.HttpServlet;
 import org.helium.http.servlet.HttpServletContext;
 import org.helium.http.utils.UrlPattern;
 import org.helium.http.utils.UrlPatternGroup;
-import org.helium.http.utils.UrlPatternPath;
-import org.helium.http.utils.UrlPatternType;
+import org.helium.perfmon.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

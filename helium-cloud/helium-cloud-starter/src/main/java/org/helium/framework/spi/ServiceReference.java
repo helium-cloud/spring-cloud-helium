@@ -3,10 +3,7 @@ package org.helium.framework.spi;
 import org.helium.framework.BeanIdentity;
 import org.helium.framework.configuration.BeanContextProvider;
 import org.helium.framework.entitys.BeanConfiguration;
-import org.helium.framework.route.BeanEndpoint;
 import org.helium.framework.route.ServerRouter;
-import org.helium.rpc.channel.tcp.RpcTcpEndpoint;
-import org.helium.rpc.client.RpcProxyFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,20 +22,21 @@ public class ServiceReference extends BeanReference {
 	}
 
 	private Object createServiceProxy() {
-		Class<?> serviceInterface = getConfiguration().getInterfaceClazz();
-		if (serviceInterface == null) {
-			serviceInterface = ObjectCreator.loadClass(getConfiguration().getInterfaceType());
-		}
-		return RpcProxyFactory.getTransparentProxy(serviceName, serviceInterface, () -> {
-			if (router == null){
-				throw new RuntimeException("No Server for bean:" + getId());
-			}
-			BeanEndpoint ep = router.routeBean();
-			if (ep == null) {
-				throw new RuntimeException("No Server for bean:" + getId());
-			}
-			return RpcTcpEndpoint.parse(ep.getServerUrl().getUrl());
-		});
+//		Class<?> serviceInterface = getConfiguration().getInterfaceClazz();
+//		if (serviceInterface == null) {
+//			serviceInterface = ObjectCreator.loadClass(getConfiguration().getInterfaceType());
+//		}
+//		return RpcProxyFactory.getTransparentProxy(serviceName, serviceInterface, () -> {
+//			if (router == null){
+//				throw new RuntimeException("No Server for bean:" + getId());
+//			}
+//			BeanEndpoint ep = router.routeBean();
+//			if (ep == null) {
+//				throw new RuntimeException("No Server for bean:" + getId());
+//			}
+//			return RpcTcpEndpoint.parse(ep.getServerUrl().getUrl());
+//		});
+		return null;
 	}
 
 	@Override

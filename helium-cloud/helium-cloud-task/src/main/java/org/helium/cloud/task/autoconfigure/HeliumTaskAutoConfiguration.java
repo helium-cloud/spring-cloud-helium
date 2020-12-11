@@ -2,7 +2,6 @@ package org.helium.cloud.task.autoconfigure;
 
 
 import org.helium.cloud.task.manager.DedicatedTaskFactory;
-import org.helium.cloud.task.manager.SimpleDedicatedTaskConsumer;
 import org.helium.cloud.task.manager.TaskConsumerHandler;
 import org.helium.cloud.task.rpc.TaskInvokerFactory;
 import org.helium.cloud.task.rpc.TaskInvokerFactoryCenter;
@@ -12,13 +11,11 @@ import org.helium.framework.task.TaskProducerFactory;
 import org.helium.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.ConfigurableEnvironment;
 

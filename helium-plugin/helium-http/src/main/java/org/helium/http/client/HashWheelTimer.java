@@ -16,11 +16,13 @@ package org.helium.http.client;
  * under the License.
  */
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import org.helium.http.client.timer.Timer;
+import org.helium.http.client.timer.TimerTask;
+import org.helium.http.client.timer.*;
+import org.helium.threading.SharedResourceMisuseDetector;
+import org.helium.threading.ThreadRenamingRunnable;
+
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
@@ -28,15 +30,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
-import org.jboss.netty.channel.ChannelPipelineFactory;
-import org.jboss.netty.util.ThreadRenamingRunnable;
-import org.jboss.netty.util.Timeout;
-import org.jboss.netty.util.Timer;
-import org.jboss.netty.util.TimerTask;
-import org.jboss.netty.util.internal.ConcurrentIdentityHashMap;
-import org.jboss.netty.util.internal.ReusableIterator;
-import org.jboss.netty.util.internal.SharedResourceMisuseDetector;
 
 /**
  * A {@link Timer} optimized for approximated I/O timeout scheduling.
@@ -68,7 +61,7 @@ import org.jboss.netty.util.internal.SharedResourceMisuseDetector;
  * and started. Therefore, you should make sure to create only one instance and
  * share it across your application. One of the common mistakes, that makes your
  * application unresponsive, is to create a new instance in
- * {@link ChannelPipelineFactory}, which results in the creation of a new thread
+ * {@link }, which results in the creation of a new thread
  * for every connection.
  * 
  * <h3>Implementation Details</h3>

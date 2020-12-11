@@ -1,11 +1,9 @@
 package com.logger.simple.controller;
 
 import org.helium.cloud.logger.annotation.SystemLog;
-import org.helium.cloud.logger.service.LogClient;
 import org.helium.logging.args.LogArgs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

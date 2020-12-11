@@ -6,21 +6,21 @@ dependencies {
   compile group: 'org.apache.dubbo', name: 'dubbo-config-api', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-container-api', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-api', version: dubbo_version
-  compile (group: 'org.apache.dubbo', name: 'dubbo-registry-zookeeper', version: dubbo_version){
+  compile(group: 'org.apache.dubbo', name: 'dubbo-registry-zookeeper', version: dubbo_version) {
     exclude group: 'org.slf4j', module: 'slf4j-log4j12' //by both name and group
   }
+  compile group: 'org.apache.zookeeper', name: 'zookeeper', version: zookeeper_version
   compile group: 'org.apache.dubbo', name: 'dubbo-registry-multicast', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-serialization-hessian2', version: dubbo_version
-
   compile group: 'org.apache.dubbo', name: 'dubbo-metadata-report-zookeeper', version: dubbo_version
 
-  compile (group: 'org.apache.dubbo', name: 'dubbo-spring-boot-starter', version: dubbo_version){
+  compile(group: 'org.apache.dubbo', name: 'dubbo-spring-boot-starter', version: dubbo_version) {
     exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
     exclude group: 'org.springframework', module: 'spring-web' //by both name and group
     exclude group: 'org.slf4j', module: 'slf4j-log4j12' //by both name and group
   }
-    compile group: 'io.netty', name: 'netty', version: netty_version
-  
-    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.8.0-alpha2'
+  compile group: 'io.netty', name: 'netty-all', version: netty_version
+
+  testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.8.0-alpha2'
 
 }

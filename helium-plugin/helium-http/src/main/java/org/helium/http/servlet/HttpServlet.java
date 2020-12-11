@@ -1,8 +1,7 @@
 package org.helium.http.servlet;
 
-import org.helium.perfmon.PerformanceCounterFactory;
-import org.helium.perfmon.Stopwatch;
 import org.helium.http.servlet.spi.HttpServletCounters;
+import org.helium.perfmon.PerformanceCounterFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

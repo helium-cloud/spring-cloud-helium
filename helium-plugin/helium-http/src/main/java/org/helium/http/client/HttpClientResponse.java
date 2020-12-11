@@ -1,18 +1,17 @@
 package org.helium.http.client;
 
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpVersion;
+import io.netty.util.internal.StringUtil;
+
 import java.nio.charset.Charset;
-import java.security.interfaces.RSAKey;
 import java.util.List;
 import java.util.Map;
 
-import org.jboss.netty.buffer.ChannelBuffer;
-import org.jboss.netty.handler.codec.http.DefaultHttpResponse;
-import org.jboss.netty.handler.codec.http.HttpResponse;
-import org.jboss.netty.handler.codec.http.HttpResponseStatus;
-import org.jboss.netty.handler.codec.http.HttpVersion;
-import org.jboss.netty.util.internal.StringUtil;
 
-public class HttpClientResponse extends DefaultHttpResponse{
+
+public class HttpClientResponse extends DefaultFullHttpResponse {
 
     public HttpClientResponse(HttpVersion version, HttpResponseStatus status) {
         super(version, status);
@@ -33,7 +32,7 @@ public class HttpClientResponse extends DefaultHttpResponse{
 	    	sb.append(StringUtil.NEWLINE);
         }
         
-        sb.append(super.getContent().toString(Charset.forName("utf-8")));
+        sb.append(super.content().toString(Charset.forName("utf-8")));
         return sb.toString();
     }
 }

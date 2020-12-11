@@ -1,10 +1,11 @@
 package org.helium.http.servlet;
 
+import org.helium.framework.module.ModuleState;
 import org.helium.util.Outer;
 import org.helium.util.StringUtils;
-import org.helium.framework.module.ModuleState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.Base64;
 
 /**

@@ -1,7 +1,6 @@
 package org.helium.cloud.logger.config;
 
 
-import org.helium.cloud.configcenter.autoconfig.ConfigCenterConfig;
 import org.helium.cloud.logger.aop.LogAop;
 import org.helium.cloud.logger.service.LogBridge;
 import org.helium.cloud.logger.service.LogBridgeDefault;
@@ -15,7 +14,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 
 @Configuration
 @EnableConfigurationProperties(LoggerConfig.class)

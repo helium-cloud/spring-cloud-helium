@@ -1,6 +1,5 @@
 package org.helium.cloud.logger.config;
 
-import org.helium.cloud.configcenter.autoconfig.ConfigCenterConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 

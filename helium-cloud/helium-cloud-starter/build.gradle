@@ -4,6 +4,7 @@ dependencies {
     compile project(':helium-cloud:helium-cloud-task')
     compile project(':helium-cloud:helium-cloud-rpc')
     compile project(':helium-cloud:helium-cloud-registercenter')
+  compile "com.alibaba:fastjson:1.2.58"
     compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-nacos', version: dubbo_version
     compile (group: 'org.apache.dubbo', name: 'dubbo-registry-zookeeper', version: dubbo_version){
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
@@ -18,5 +19,5 @@ dependencies {
       exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
     }
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile "com.alibaba:fastjson:1.2.58"
+ 
 }

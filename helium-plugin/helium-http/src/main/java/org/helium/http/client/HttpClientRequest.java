@@ -1,21 +1,20 @@
 package org.helium.http.client;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.handler.codec.http.DefaultFullHttpRequest;
+import io.netty.handler.codec.http.HttpMethod;
+import io.netty.handler.codec.http.HttpVersion;
+
+import java.lang.reflect.Field;
 import java.nio.charset.Charset;
-import java.util.List;
-import java.util.Map;
 
-import org.jboss.netty.buffer.ChannelBuffer;
-import org.jboss.netty.buffer.ChannelBuffers;
-import org.jboss.netty.handler.codec.http.DefaultHttpRequest;
-import org.jboss.netty.handler.codec.http.HttpMethod;
-import org.jboss.netty.handler.codec.http.HttpVersion;
-import org.jboss.netty.util.internal.StringUtil;
 
-public class HttpClientRequest extends DefaultHttpRequest {
+public class HttpClientRequest extends DefaultFullHttpRequest {
 
 
 	HttpClientRequest(HttpVersion http11, HttpMethod method,
-	                  String asciiString) {
+					  String asciiString) {
 		super(http11, method, asciiString);
 		
 	}
@@ -23,14 +22,14 @@ public class HttpClientRequest extends DefaultHttpRequest {
 	private int remotePort = 90;
 	
     public void setContent(String content) {
-        ChannelBuffer buffer = ChannelBuffers.copiedBuffer(content, Charset.forName("utf-8"));
-        this.setContent(buffer);
+		ByteBuf buffer = Unpooled.copiedBuffer(content, Charset.forName("utf-8"));
+		setByteBufContent(buffer);
 		this.headers().add("Content-Length", buffer.writerIndex());
     }
 
 	public void setContent(byte[] content,int offset,int length){
-	    ChannelBuffer buffer=ChannelBuffers.copiedBuffer(content, offset, length);
-	    this.setContent(buffer);
+		ByteBuf buffer= Unpooled.copiedBuffer(content, offset, length);
+		setByteBufContent(buffer);
 		this.headers().add("Content-Length", length);
 	}
 
@@ -38,7 +37,7 @@ public class HttpClientRequest extends DefaultHttpRequest {
 	    StringBuilder sb = new StringBuilder();
 	    sb.append(super.toString()).append("\n");
 
-	    sb.append(getContent().toString(Charset.forName("utf-8")));
+	    sb.append(content().toString(Charset.forName("utf-8")));
         if (sb.length() > 4000000) {
             sb.delete(1000, sb.length() - 1000);
             sb.insert(1000, "\r\n\r\ntoo long...\r\n\r\n");
@@ -76,5 +75,18 @@ public class HttpClientRequest extends DefaultHttpRequest {
 
 	public int getRemotePort() {
 		return remotePort;
+	}
+
+	private void setByteBufContent(ByteBuf byteBuf){
+    	// 通过打破封装方式直接对值进行操作
+		try {
+			Field field = null;
+			field = DefaultFullHttpRequest.class.getDeclaredField("content");
+		// 打破封装
+			field.setAccessible(true);
+			field.set(this, byteBuf);
+		} catch (Exception e) {
+			System.out.println("setContent ERROR:" +  remoteAddress);
+		}
 	}
 }

@@ -3,8 +3,8 @@ package org.helium.http.servlet;
 import org.helium.framework.annotations.ModuleImplementation;
 import org.helium.framework.module.ModuleState;
 import org.helium.framework.tag.Initializer;
-import org.helium.http.servlet.spi.StaticResourceLoader;
 import org.helium.http.servlet.spi.HttpUtils;
+import org.helium.http.servlet.spi.StaticResourceLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

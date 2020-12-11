@@ -2,12 +2,10 @@ package org.helium.http.utils;
 
 import com.feinno.superpojo.util.StringUtils;
 import org.helium.util.Consumer2;
-import org.helium.util.Function2;
 import org.helium.util.StringParser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * Created by Gao Lei on 1/12/17.

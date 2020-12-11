@@ -1,7 +1,5 @@
 package org.helium.http.servlet;
 
-import org.helium.http.utils.UrlPattern;
-
 /**
  * Created by Gao Lei on 1/12/17.
  */

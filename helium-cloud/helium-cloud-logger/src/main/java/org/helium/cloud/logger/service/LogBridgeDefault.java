@@ -1,7 +1,5 @@
 package org.helium.cloud.logger.service;
 
-import com.alibaba.fastjson.JSONObject;
-
 import org.helium.cloud.logger.service.monitor.ConsumerCounters;
 import org.helium.framework.annotations.FieldSetter;
 import org.helium.kafka.UkConsumer;
@@ -10,9 +8,6 @@ import org.helium.perfmon.PerformanceCounterFactory;
 import org.helium.perfmon.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;

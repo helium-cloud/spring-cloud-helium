@@ -2,7 +2,6 @@ package com.logger.simple.handler;
 
 import org.helium.cloud.logger.service.LogBridgeDefault;
 import org.helium.kafka.UkConsumerHandler;
-import org.helium.perfmon.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

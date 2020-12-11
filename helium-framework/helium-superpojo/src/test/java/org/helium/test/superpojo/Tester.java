@@ -8,10 +8,10 @@ import com.feinno.superpojo.type.Guid;
 import com.feinno.superpojo.util.FileUtil;
 import com.feinno.superpojo.util.HexUtil;
 import com.google.gson.JsonObject;
-import org.junit.Assert;
 import org.helium.test.superpojo.bean.DataCreater;
 import org.helium.test.superpojo.bean.FullElementsBean;
 import org.helium.test.superpojo.bean.ParentBean;
+import org.junit.Assert;
 
 import java.util.*;
 

@@ -1,11 +1,9 @@
 package org.helium.framework.utils;
 
-import org.helium.util.Outer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
-import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
 import java.util.Properties;

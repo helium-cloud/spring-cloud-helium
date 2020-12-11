@@ -2,12 +2,9 @@ package org.helium.plugin.mybatis.loader.impl;
 
 import org.helium.plugin.mybatis.loader.ConfigLoader;
 import org.helium.plugin.mybatis.model.ConfigModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.Objects;
-import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class AbstractConfigLoader implements ConfigLoader {

@@ -1,14 +1,10 @@
 package org.helium.http.servlet.spi;
 
-import org.helium.perfmon.PerformanceCounterFactory;
-import org.helium.util.StringUtils;
 import org.glassfish.grizzly.http.server.HttpHandler;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.NetworkListener;
 import org.glassfish.grizzly.http.server.ServerConfiguration;
 import org.glassfish.grizzly.jaxws.JaxwsHandler;
-import org.glassfish.grizzly.servlet.FilterRegistration;
-import org.glassfish.grizzly.servlet.WebappContext;
 import org.helium.framework.BeanContext;
 import org.helium.framework.configuration.Environments;
 import org.helium.framework.servlet.ServletMappings;
@@ -16,13 +12,14 @@ import org.helium.framework.spi.ModuleInstance;
 import org.helium.framework.spi.ServletInstance;
 import org.helium.http.servlet.HttpModule;
 import org.helium.http.servlet.HttpServletMappings;
+import org.helium.perfmon.PerformanceCounterFactory;
+import org.helium.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.DispatcherType;
-import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpServlet;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Lei Gao on 8/25/15.
