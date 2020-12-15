@@ -1,6 +1,5 @@
 package org.helium.fastdfs;
 
-import org.helium.perfmon.Stopwatch;
 import org.csource.common.MyException;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.*;
@@ -9,6 +8,7 @@ import org.csource.fastdfs.mgr.FastdfsRouteProxy;
 import org.csource.fastdfs.mgr.Pool;
 import org.helium.fastdfs.spi.FastDFSCounters;
 import org.helium.perfmon.PerformanceCounterFactory;
+import org.helium.perfmon.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +42,7 @@ public class FastDFSClient implements FastDFS {
 		String trackers = props.getProperty("trackers", "");
 		String storages = props.getProperty("storages", "");
 		String ipmap = props.getProperty("ip_map", "");
-		routeProxy = new FastdfsRouteProxy(maxWait, maxActive, maxIdle, minIdle, timeout, charset, trackers, storages,ipmap);
+		routeProxy = new FastdfsRouteProxy(maxWait, maxActive, maxIdle, minIdle, timeout, charset, trackers, storages, ipmap);
 		counters = PerformanceCounterFactory.getCounters(FastDFSCounters.class, "FastDFS-Client");
 		LOGGER.info("FastDFSClient create success. trackers: {} storages: {} ", trackers, storages);
 	}
@@ -125,8 +125,7 @@ public class FastDFSClient implements FastDFS {
 
 	@Override
 	public String upload_file1(String master_file_id, String prefix_name, byte[] file_buff, String file_ext_name, Map<String, String> metaMap)
-			throws IOException, MyException
-	{
+			throws IOException, MyException {
 		Pool<StorageClient> storagePool = null;
 		StorageClient storageClient = null;
 		String parts = null;
@@ -158,6 +157,7 @@ public class FastDFSClient implements FastDFS {
 		}
 		return parts;
 	}
+
 	@Override
 	public String uploadAppenderFile(byte[] fileBuffer, String fileExtName, Map<String, String> metaMap, byte storyPath) throws Exception {
 		Pool<StorageClient> storagePool = null;

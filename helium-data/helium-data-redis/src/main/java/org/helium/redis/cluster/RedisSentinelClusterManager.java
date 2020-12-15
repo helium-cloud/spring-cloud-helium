@@ -2,7 +2,6 @@ package org.helium.redis.cluster;
 
 
 import com.alibaba.fastjson.JSONObject;
-import org.helium.database.ConnectionString;
 import org.helium.framework.BeanContext;
 import org.helium.framework.configuration.ConfigProvider;
 import org.helium.redis.RedisSentinelClientImpl;
@@ -11,8 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 通过配置文件加载.

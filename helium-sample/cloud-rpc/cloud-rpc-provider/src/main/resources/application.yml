@@ -1,0 +1,21 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: cloud-rpc-provider
+    group: crp
+    version: 1.0.0
+  profiles:
+    active: ${tenv:dev}
+dubbo:
+  protocols:
+    dubbo-rpc:
+      name: dubbo
+      port: ${PORT:8082}
+    helium-rpc:
+      name: helium
+      port: ${PORT:8083}
+  registry:
+    address: ${REG_URL:zookeeper://10.10.208.194:7998}
+  scan:
+    base-packages: com.coral.learning.dubbo.provider

@@ -6,9 +6,7 @@ import org.helium.kafka.spi.consumer.UkConsumerManager;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Properties;
-import java.util.UUID;
 
 /**
  * Created by angel on 1/18/17.

@@ -10,5 +10,5 @@ import org.helium.hbase.spi.HTableFieldLoader;
  */
 @FieldLoaderType(loaderType = HTableFieldLoader.class)
 public interface HTableClient extends Table {
-    Connection getConnection();
+	Connection getConnection();
 }

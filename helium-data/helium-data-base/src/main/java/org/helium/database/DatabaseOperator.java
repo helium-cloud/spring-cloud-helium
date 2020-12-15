@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 /**
  * 从MondbHelper中重构，具备数据库的初级建表与操作功能
- *
+ * <p>
  * Created by Coral on 11/2/15.
  *
  * @Author Lv.Mingwei
@@ -15,7 +15,6 @@ import java.sql.SQLException;
 @FieldLoaderType(loaderType = DatabaseOperatorLoader.class)
 public interface DatabaseOperator {
 	/**
-	 *
 	 * @param tableName
 	 * @return
 	 * @throws SQLException
@@ -23,7 +22,6 @@ public interface DatabaseOperator {
 	TableSchema getTableSchema(String tableName) throws SQLException;
 
 	/**
-	 *
 	 * @param tableName
 	 * @return
 	 * @throws SQLException
@@ -31,7 +29,6 @@ public interface DatabaseOperator {
 	boolean isTableExists(String tableName) throws SQLException;
 
 	/**
-	 *
 	 * @param table
 	 * @return
 	 * @throws SQLException
@@ -40,15 +37,13 @@ public interface DatabaseOperator {
 
 
 	/**
-	 *
 	 * @param type 0 log,1 Perfmon
 	 * @return
 	 * @throws SQLException
-     */
+	 */
 	boolean dropRedundantTables(int type) throws SQLException;
 
 	/**
-	 *
 	 * @param srcName
 	 * @param descName
 	 * @return
@@ -57,7 +52,6 @@ public interface DatabaseOperator {
 	boolean renameTable(String srcName, String descName) throws SQLException;
 
 	/**
-	 *
 	 * @param sql
 	 * @return
 	 */

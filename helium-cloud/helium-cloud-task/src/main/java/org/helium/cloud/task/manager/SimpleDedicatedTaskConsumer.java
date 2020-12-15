@@ -30,7 +30,6 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 	private static final TimeSpan EXPIRED_SPAN = new TimeSpan(-15 * TimeSpan.MINUTE_MILLIS);
 
 
-
 	/**
 	 * 定时清理任务线程池
 	 */
@@ -41,13 +40,12 @@ public class SimpleDedicatedTaskConsumer extends AbstractTaskConsumer {
 		putStorageInner(TaskStorageType.MEMORY_TYPE, new TaskQueuePriorityMemory());
 		clearService.schedule(clearTask, 30, TimeUnit.SECONDS);
 		dtContexts = new ConcurrentHashMap<>();
-
 	}
 
 	@Override
 	public boolean runTask(TaskQueue taskQueue, int partition, boolean memory) throws InterruptedException {
 		//转化为innertask
-		if (taskQueue instanceof TaskQueuePriority){
+		if (taskQueue instanceof TaskQueuePriority) {
 			return runInnerTask((TaskQueuePriority) taskQueue, partition, memory);
 		}
 		return false;

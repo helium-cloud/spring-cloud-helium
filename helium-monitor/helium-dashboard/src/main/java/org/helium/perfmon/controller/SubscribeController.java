@@ -6,7 +6,6 @@ import org.helium.perfmon.monitor.PullManager;
 import org.helium.perfmon.observation.Observable;
 import org.helium.perfmon.observation.ObserverManager;
 import org.helium.perfmon.observation.ObserverReportMode;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

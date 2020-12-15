@@ -1,12 +1,12 @@
 package org.helium.database.logging.db;
 
-import org.helium.util.ServiceEnviornment;
 import org.helium.database.*;
 import org.helium.database.spi.DatabaseManager;
 import org.helium.logging.LogAppender;
 import org.helium.logging.LogLevel;
 import org.helium.logging.spi.LogEvent;
 import org.helium.logging.spi.LogUtils;
+import org.helium.util.ServiceEnviornment;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;

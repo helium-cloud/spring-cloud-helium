@@ -3,14 +3,9 @@ package org.helium.data.sharding;
 import com.feinno.superpojo.SuperPojoManager;
 import org.helium.data.sharding.configuration.DataSourceNode;
 import org.helium.data.sharding.configuration.ShardedDataSourceConfiguration;
-import org.helium.database.ConnectionString;
-import org.helium.database.spi.DatabaseManager;
-import org.helium.framework.BeanContext;
-import org.helium.framework.configuration.ConfigProvider;
 import org.helium.framework.configuration.FieldLoader;
 import org.helium.framework.entitys.ObjectWithSettersNode;
 import org.helium.framework.entitys.SetterNode;
-import org.helium.framework.entitys.SetterNodeLoadType;
 import org.helium.framework.spi.ObjectCreator;
 
 import java.lang.reflect.Field;

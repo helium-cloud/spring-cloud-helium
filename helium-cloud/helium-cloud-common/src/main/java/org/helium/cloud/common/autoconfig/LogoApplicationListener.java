@@ -16,7 +16,6 @@
  */
 package org.helium.cloud.common.autoconfig;
 
-import org.apache.dubbo.common.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
@@ -69,13 +68,15 @@ public class LogoApplicationListener implements ApplicationListener<ApplicationE
         StringBuilder bannerTextBuilder = new StringBuilder();
 
         bannerTextBuilder
-                .append(" __                  _                         ___  _                    _                       _  _                   \n" +
+                .append("\n"+
+                		" __                  _                         ___  _                    _                       _  _                   \n" +
 						"/ _\\    _ __   _ __ (_) _ __    __ _          / __\\| |  ___   _   _   __| |         /\\  /\\  ___ | |(_) _   _  _ __ ___  \n" +
 						"\\ \\    | '_ \\ | '__|| || '_ \\  / _` | _____  / /   | | / _ \\ | | | | / _` | _____  / /_/ / / _ \\| || || | | || '_ ` _ \\ \n" +
 						"_\\ \\   | |_) || |   | || | | || (_| ||_____|/ /___ | || (_) || |_| || (_| ||_____|/ __  / |  __/| || || |_| || | | | | |\n" +
 						"\\__/   | .__/ |_|   |_||_| |_| \\__, |       \\____/ |_| \\___/  \\__,_| \\__,_|       \\/ /_/   \\___||_||_| \\__,_||_| |_| |_|\n" +
 						"       |_|                     |___/                                                                                    ");
-		bannerTextBuilder.append("spring-cloud-helium:3.1.x-release");
+		bannerTextBuilder.append("\n");
+		bannerTextBuilder.append(" :: spring-cloud-helium:3.2.x-release \n");
         return bannerTextBuilder.toString();
 
     }

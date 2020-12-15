@@ -1,11 +1,10 @@
 package com.feinno.superpojo.util;
 
+import javax.tools.JavaCompiler;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-
-import javax.tools.JavaCompiler;
 
 /**
  * Provides methods for locating tool providers, for example, providers of

@@ -1,8 +1,0 @@
-<bundle name="RESTFUL_TEST">
-  <configImports>
-    <configImport key="HTTP_STACK"/>
-  </configImports>
-  <beans stacks="${HTTP_STACK}">
-    <bean class="org.helium.http.test.restful"/>
-  </beans>
-</bundle>

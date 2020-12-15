@@ -1,12 +1,12 @@
 package com.feinno.superpojo.io;
 
-import java.lang.reflect.Type;
-
 import com.feinno.superpojo.UnknownField;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+
+import java.lang.reflect.Type;
 
 /**
  * Guid序列化成Json格式时的适配器

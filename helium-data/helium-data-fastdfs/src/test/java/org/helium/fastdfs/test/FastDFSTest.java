@@ -5,8 +5,6 @@ import org.helium.fastdfs.FastDFSClient;
 import org.helium.fastdfs.spi.FastDFSManager;
 import org.junit.Test;
 
-import java.io.IOException;
-
 /**
  * Created by wuzhiguo on 15-10-13.
  */

@@ -1,7 +1,6 @@
 package org.helium.perfmon.recoder;
 
 import org.helium.database.Column;
-import org.helium.database.ConnectionString;
 import org.helium.database.TableSchema;
 import org.helium.perfmon.observation.Observable;
 import org.helium.perfmon.observation.ObserverInspector.ReportCallback;

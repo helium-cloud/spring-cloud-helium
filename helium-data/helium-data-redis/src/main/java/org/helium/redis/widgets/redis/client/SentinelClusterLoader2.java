@@ -6,8 +6,6 @@ import org.helium.database.DataRow;
 import org.helium.database.DataTable;
 import org.helium.database.Database;
 import org.helium.database.spi.DatabaseManager;
-import org.helium.framework.BeanContext;
-import org.helium.framework.configuration.ConfigProvider;
 import org.helium.framework.configuration.FieldLoader;
 import org.helium.framework.entitys.SetterNode;
 import org.helium.redis.widgets.redis.client.sentinel.PropertyItem;

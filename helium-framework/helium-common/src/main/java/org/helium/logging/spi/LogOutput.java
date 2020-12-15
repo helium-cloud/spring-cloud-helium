@@ -148,7 +148,7 @@ class LogOutput {
 	}
 
 	private void writeDiscardWarning() {
-		String msg = String.format("LogOutput<%d> discard:%d queue:%d", name, discardCount, queue.size());
+		String msg = String.format("LogOutput<%s> discard:%d queue:%d", name, discardCount, queue.size());
 		LogEvent event = new LogEvent(LOGGER_NAME, LogLevel.ERROR, msg, null, null, null);
 		for (LogAppender appender: directAppenders) {
 			writeLog(appender, event);

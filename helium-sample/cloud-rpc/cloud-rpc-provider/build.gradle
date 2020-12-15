@@ -1,0 +1,6 @@
+dependencies {
+  compile project(':helium-sample:cloud-rpc:cloud-rpc-api')
+
+  testCompile group: 'junit', name: 'junit', version: '4.11'
+  compile "org.apache.dubbo:dubbo-registry-zookeeper:3.1.x-release"
+}

@@ -30,17 +30,13 @@
 
 package com.feinno.superpojo.io;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FilterOutputStream;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import com.feinno.superpojo.util.HexUtil;
+
+import java.io.*;
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 import java.nio.ReadOnlyBufferException;
 import java.util.List;
-
-import com.feinno.superpojo.util.HexUtil;
 
 /**
  * Immutable array of bytes. <br>

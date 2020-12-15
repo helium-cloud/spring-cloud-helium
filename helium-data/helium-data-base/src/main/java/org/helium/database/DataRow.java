@@ -1,8 +1,8 @@
 /*
  * FAE, Feinno App Engine
- *  
+ *
  * Create by gaolei 2011-1-25
- * 
+ *
  * Copyright (c) 2011 北京新媒传信科技有限公司
  */
 package org.helium.database;
@@ -80,8 +80,8 @@ public class DataRow {
 	 * 根据列名查找列序号
 	 *
 	 * @param columnName 列名
-	 * @throws SQLException
 	 * @return 列序号，如果没有找到，返回-1
+	 * @throws SQLException
 	 */
 	public int findColumn(String columnName) throws SQLException {
 		Integer index = dataTable.getColumnIndex(columnName);
@@ -92,8 +92,8 @@ public class DataRow {
 	 * 获取指定行的原始对象
 	 *
 	 * @param columnIndex 列序号
-	 * @throws SQLException
 	 * @return 如果本列为SQL NULL，返回null
+	 * @throws SQLException
 	 */
 	public Object getObject(int columnIndex) throws SQLException {
 		checkColumnIndexArg(columnIndex);
@@ -292,8 +292,8 @@ public class DataRow {
 	 * 获取指定行的原始对象
 	 *
 	 * @param columnName 列名
-	 * @throws SQLException
 	 * @return 如果本列为SQL NULL，返回null
+	 * @throws SQLException
 	 */
 	public Object getObject(String columnName) throws SQLException {
 		return getObject(findColumn(columnName));

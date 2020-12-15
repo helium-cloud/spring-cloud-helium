@@ -30,13 +30,13 @@
 
 package com.feinno.superpojo.io;
 
+import com.feinno.superpojo.Builder;
+import com.feinno.superpojo.UnknownFieldSet;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-
-import com.feinno.superpojo.Builder;
-import com.feinno.superpojo.UnknownFieldSet;
 
 
 /**

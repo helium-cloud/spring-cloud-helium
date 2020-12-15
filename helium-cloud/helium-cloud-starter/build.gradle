@@ -1,18 +1,11 @@
 dependencies {
-    compile project(':helium-cloud:helium-cloud-common')
-    compile project(':helium-cloud:helium-cloud-configcenter')
-    compile project(':helium-cloud:helium-cloud-logger')
-    compile project(':helium-cloud:helium-cloud-task')
-    compile project(':helium-cloud:helium-cloud-rpc')
-    compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-nacos', version: dubbo_version
-    compile (group: 'org.apache.dubbo', name: 'dubbo-registry-zookeeper', version: dubbo_version){
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
-        exclude group: 'org.springframework', module: 'spring-web' //by both name and group
-        exclude group: 'org.slf4j', module: 'slf4j-log4j12' //by both name and group
-    }
-    compile group: 'org.apache.dubbo', name: 'dubbo-remoting-mina', version: dubbo_version
-    compile group: 'org.apache.dubbo', name: 'dubbo-serialization-hessian2', version: dubbo_version
-    compile group: 'org.apache.dubbo', name: 'dubbo-serialization-jdk', version: dubbo_version
+  compile project(':helium-cloud:helium-cloud-configcenter')
+  compile project(':helium-cloud:helium-cloud-logger')
+  compile project(':helium-cloud:helium-cloud-registercenter')
+  
+  testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: spring_boot_version) {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
+  }
+  testCompile group: 'junit', name: 'junit', version: '4.12'
 
-    testCompile group: 'junit', name: 'junit', version: '4.12'
 }

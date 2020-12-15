@@ -1,10 +1,9 @@
 package org.helium.data.spark.entity;
 
 import org.apache.hadoop.hbase.client.Scan;
-import org.apache.hadoop.hbase.mapreduce.TableInputFormat;
 import org.apache.hadoop.hbase.util.Bytes;
-import scala.Serializable;
-import sun.misc.BASE64Encoder;
+
+import java.util.Base64;
 
 /**
  * HBase数据集
@@ -78,7 +77,7 @@ public class SparkHBaseSource {
         scan.addColumn(Bytes.toBytes(sparkHBaseSource.getDataCf()), Bytes.toBytes(sparkHBaseSource.getDataCl()));
         sparkHBaseSource.setScan(scan);
         sparkHBaseSource.setTableName(tableName);
-        sparkHBaseSource.setSparkTableName(new BASE64Encoder().encode(tableName.getBytes()));
+        sparkHBaseSource.setSparkTableName(Base64.getEncoder().encodeToString(tableName.getBytes()));
         return sparkHBaseSource;
     }
 }

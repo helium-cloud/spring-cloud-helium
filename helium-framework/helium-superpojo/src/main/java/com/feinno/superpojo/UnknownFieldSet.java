@@ -1,22 +1,13 @@
 package com.feinno.superpojo;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import javax.xml.stream.XMLStreamException;
-
-import com.feinno.superpojo.io.ByteString;
-import com.feinno.superpojo.io.CodedInputStream;
-import com.feinno.superpojo.io.CodedOutputStream;
-import com.feinno.superpojo.io.WireFormat;
-import com.feinno.superpojo.io.XmlInputStream;
+import com.feinno.superpojo.io.*;
 import com.feinno.superpojo.type.AnyNode;
 import com.feinno.superpojo.util.SuperPojoUtils.XmlTypeEnum;
+
+import javax.xml.stream.XMLStreamException;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * 

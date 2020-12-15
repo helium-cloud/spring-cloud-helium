@@ -1,20 +1,5 @@
 package com.feinno.superpojo.generator;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feinno.superpojo.BuilderFactory;
 import com.feinno.superpojo.ClassTemplate;
 import com.feinno.superpojo.Config;
@@ -23,15 +8,18 @@ import com.feinno.superpojo.generator.Field.ArrayFieldInterpreter;
 import com.feinno.superpojo.generator.Field.FieldInformation;
 import com.feinno.superpojo.generator.Field.FieldInterpreter;
 import com.feinno.superpojo.io.WireFormat;
-import com.feinno.superpojo.util.ClassUtil;
-import com.feinno.superpojo.util.FileUtil;
-import com.feinno.superpojo.util.JavaEval;
-import com.feinno.superpojo.util.JavaEvalException;
-import com.feinno.superpojo.util.ProtoGenericsUtils;
-
+import com.feinno.superpojo.util.*;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.lang.reflect.Field;
+import java.util.*;
 
 public class CodeGenerator<T> {
 

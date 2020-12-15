@@ -1,5 +1,11 @@
 package com.feinno.superpojo.util;
 
+import com.feinno.superpojo.NativeSuperPojo;
+import com.feinno.superpojo.SuperPojo;
+import com.feinno.superpojo.SuperPojoManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.JarURLConnection;
@@ -11,13 +17,6 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.feinno.superpojo.NativeSuperPojo;
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.SuperPojoManager;
 
 public class SuperPojoChecker {
 

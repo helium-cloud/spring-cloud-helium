@@ -30,14 +30,14 @@
 
 package com.feinno.superpojo.io;
 
+import com.feinno.superpojo.Builder;
+import com.feinno.superpojo.InvalidProtocolBufferException;
+import com.feinno.superpojo.UnknownFieldSet;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.feinno.superpojo.InvalidProtocolBufferException;
-import com.feinno.superpojo.Builder;
-import com.feinno.superpojo.UnknownFieldSet;
 
 /**
  * Reads and decodes protocol message fields.

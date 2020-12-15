@@ -4,8 +4,8 @@ import com.feinno.superpojo.Builder;
 import com.feinno.superpojo.SuperPojo;
 import com.feinno.superpojo.SuperPojoManager;
 import com.feinno.superpojo.type.AnyNode;
-import com.feinno.superpojo.util.DateUtil;
 import com.feinno.superpojo.type.EnumInteger;
+import com.feinno.superpojo.util.DateUtil;
 import com.feinno.superpojo.util.EnumParser;
 
 import javax.xml.XMLConstants;

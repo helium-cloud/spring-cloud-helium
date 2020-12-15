@@ -3,7 +3,6 @@ package org.helium.data.spark.spi;
 
 import org.helium.framework.configuration.FieldLoader;
 import org.helium.framework.entitys.SetterNode;
-import scala.Serializable;
 
 /**
  * spark loader

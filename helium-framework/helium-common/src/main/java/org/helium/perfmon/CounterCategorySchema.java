@@ -1,7 +1,7 @@
 package org.helium.perfmon;
 
-import org.helium.perfmon.observation.ObserverReportColumn;
 import org.helium.perfmon.annotation.PerformanceCounter;
+import org.helium.perfmon.observation.ObserverReportColumn;
 import org.helium.util.Tuple2;
 
 import java.lang.reflect.AccessibleObject;

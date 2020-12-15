@@ -1,12 +1,12 @@
 package com.feinno.superpojo.generator;
 
+import freemarker.cache.TemplateLoader;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
-
-import freemarker.cache.TemplateLoader;
 
 /**
  * 

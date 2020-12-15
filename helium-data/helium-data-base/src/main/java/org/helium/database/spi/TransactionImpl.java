@@ -1,10 +1,9 @@
 package org.helium.database.spi;
-
+import org.helium.database.DataTable;
+import org.helium.database.Transaction;
 import org.helium.perfmon.PerformanceCounterFactory;
 import org.helium.perfmon.SmartCounter;
 import org.helium.perfmon.Stopwatch;
-import org.helium.database.DataTable;
-import org.helium.database.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,6 +50,11 @@ class TransactionImpl implements Transaction {
 			LOGGER.error("Transaction Rollback failed {}", ex);
 			throw ex;
 		}
+	}
+
+	@Override
+	public Connection getConnection() {
+		return this.connection;
 	}
 
 	@Override
@@ -102,6 +106,7 @@ class TransactionImpl implements Transaction {
 		Stopwatch watch = counter.begin();
 
 		try {
+			conn = this.connection;
 			stmt = conn.prepareStatement(sql);
 			if (values != null) {
 				for (int i = 0; i < values.length; i++) {
@@ -128,6 +133,7 @@ class TransactionImpl implements Transaction {
 		Stopwatch watch = counter.begin();
 
 		try {
+			conn = this.connection;
 			stmt = conn.prepareStatement(sql);
 			if (values != null) {
 				for (int i = 0; i < values.length; i++) {
@@ -154,6 +160,7 @@ class TransactionImpl implements Transaction {
 		Stopwatch watch = counter.begin();
 
 		try {
+			conn = this.connection;
 			stmt = conn.prepareStatement(sql);
 			if (values != null) {
 				for (int i = 0; i < values.length; i++) {
@@ -184,6 +191,7 @@ class TransactionImpl implements Transaction {
 		Stopwatch watch = counter.begin();
 
 		try {
+			conn = this.connection;
 			stmt = conn.prepareStatement(sql);
 			if (values != null) {
 				for (int i = 0; i < values.length; i++) {
@@ -213,6 +221,7 @@ class TransactionImpl implements Transaction {
 		Stopwatch watch = counter.begin();
 
 		try {
+			conn = this.connection;
 			stmt = conn.prepareStatement(sql);
 			if (values != null) {
 				for (int i = 0; i < values.length; i++) {
@@ -262,6 +271,7 @@ class TransactionImpl implements Transaction {
 		SmartCounter counter = getTxCounter(sql);
 		Stopwatch watch = counter.begin();
 		try {
+			conn = this.connection;
 			stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
 			if (values != null) {

@@ -1,6 +1,0 @@
-dependencies {
-    compile project(':helium-framework:helium-common')
-    compile group: 'org.freemarker', name: 'freemarker', version: freemarker_version
-    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: slf4j_version
-  
-}

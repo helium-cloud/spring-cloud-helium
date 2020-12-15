@@ -7,12 +7,12 @@
  */
 package com.feinno.superpojo.util;
 
+import com.feinno.superpojo.type.EnumInteger;
+import com.feinno.superpojo.type.Flags;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import com.feinno.superpojo.type.EnumInteger;
-import com.feinno.superpojo.type.Flags;
 
 /**
  * 

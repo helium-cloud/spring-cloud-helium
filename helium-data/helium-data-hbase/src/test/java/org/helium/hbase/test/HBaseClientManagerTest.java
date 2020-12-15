@@ -1,22 +1,17 @@
 package org.helium.hbase.test;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.*;
+import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.HColumnDescriptor;
+import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
-import org.apache.hadoop.hbase.util.Bytes;
 import org.helium.hbase.HBaseClient;
 import org.helium.hbase.HTableClient;
 import org.helium.hbase.spi.HBaseClientManager;
-import org.helium.hbase.spi.HBaseManager;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Properties;
 
 public class HBaseClientManagerTest {

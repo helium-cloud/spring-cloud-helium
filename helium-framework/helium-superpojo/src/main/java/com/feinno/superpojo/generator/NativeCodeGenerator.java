@@ -1,15 +1,14 @@
 package com.feinno.superpojo.generator;
 
-import java.io.IOException;
-import java.io.StringWriter;
-
 import com.feinno.superpojo.ClassTemplate;
 import com.feinno.superpojo.Config;
 import com.feinno.superpojo.util.ClassUtil;
-
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+
+import java.io.IOException;
+import java.io.StringWriter;
 
 /**
  * <b>描述: </b>用于{@link 用于ProtoEntity}类的代码生成

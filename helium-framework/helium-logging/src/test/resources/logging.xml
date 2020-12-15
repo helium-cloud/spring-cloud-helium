@@ -1,18 +1,18 @@
 <logging level="INFO">
-    <subLevels>
-        <subLevel name="com.feinno.superpojo" level="ERROR"/>
-    </subLevels>
-    <outputs>
-        <output>
-            <appender class="org.helium.logging.spi.ConsoleAppender"/>
-            <appender class="org.helium.logging.spi.TextAppender">
-                <setters>
-                    <setter field="fileFormat">LOG_${DATE}.log</setter>
-                </setters>
-            </appender>
-        </output>
-    </outputs>
-    <!--<filters>-->
-        <!--<filter class="org.helium.logging.spi.DefaultMarkerFilter" output=""/>-->
-    <!--</filters>-->
+  <subLevels>
+    <subLevel name="com.feinno.superpojo" level="ERROR"/>
+  </subLevels>
+  <outputs>
+    <output>
+      <appender class="org.helium.logging.spi.ConsoleAppender"/>
+      <appender class="org.helium.logging.spi.TextAppender">
+        <setters>
+          <setter field="fileFormat">LOG_${DATE}.log</setter>
+        </setters>
+      </appender>
+    </output>
+  </outputs>
+  <!--<filters>-->
+  <!--<filter class="org.helium.logging.spi.DefaultMarkerFilter" output=""/>-->
+  <!--</filters>-->
 </logging>

@@ -5,14 +5,11 @@ import org.apache.kafka.clients.producer.Producer;
 import org.helium.framework.BeanContext;
 import org.helium.framework.configuration.ConfigProvider;
 import org.helium.kafka.UkProducer;
-import org.helium.kafka.spi.KafkaCounters;
-import org.helium.perfmon.PerformanceCounterFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;

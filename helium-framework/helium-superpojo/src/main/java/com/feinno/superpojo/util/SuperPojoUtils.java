@@ -1,14 +1,13 @@
 package com.feinno.superpojo.util;
 
-import java.util.Iterator;
-
-import javax.xml.stream.XMLStreamException;
-
 import com.feinno.superpojo.SuperPojo;
 import com.feinno.superpojo.UnknownField;
 import com.feinno.superpojo.UnknownFieldSet;
 import com.feinno.superpojo.type.AnyNode;
 import com.feinno.superpojo.type.EnumInteger;
+
+import javax.xml.stream.XMLStreamException;
+import java.util.Iterator;
 
 /**
  * 

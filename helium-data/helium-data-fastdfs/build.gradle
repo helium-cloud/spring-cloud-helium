@@ -1,5 +1,5 @@
 dependencies {
-    compile project(':helium-data:helium-data-base')
-    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: slf4j_version
+  compile project(':helium-data:helium-data-base')
+  testCompile group: 'org.slf4j', name: 'slf4j-simple', version: slf4j_version
 
 }

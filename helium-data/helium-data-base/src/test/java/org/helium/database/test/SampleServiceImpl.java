@@ -5,15 +5,12 @@ import org.helium.database.Database;
 import org.helium.database.sharding.ShardedDatabase;
 import org.helium.framework.annotations.FieldSetter;
 import org.helium.framework.annotations.ServiceImplementation;
-import org.helium.framework.configuration.loaders.StringPackage;
 
 /**
  * Created by Coral on 10/12/15.
  */
 @ServiceImplementation
 public class SampleServiceImpl implements SampleService {
-	@FieldSetter("package.txt")
-	private StringPackage stringPackage;
 
 	@FieldSetter("TEST_SHARDING.xml")
 	private ShardedDatabase<Long> testdb;

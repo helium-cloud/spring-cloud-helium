@@ -1,9 +1,9 @@
 package com.feinno.superpojo.generator;
 
+import com.feinno.superpojo.Config;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.feinno.superpojo.Config;
 
 /**
  * <b>描述: </b>以protobuf格式进行序列化时会生成对应的{@link ProtoBuilder}和

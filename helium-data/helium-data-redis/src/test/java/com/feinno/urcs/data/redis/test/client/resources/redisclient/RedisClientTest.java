@@ -2,10 +2,6 @@ package com.feinno.urcs.data.redis.test.client.resources.redisclient;
 
 
 import com.feinno.superpojo.util.FileUtil;
-import org.helium.database.ConnectionString;
-import org.helium.database.Database;
-import org.helium.database.spi.DatabaseManager;
-import org.helium.framework.utils.FileUtils;
 import org.helium.redis.RedisClient;
 import org.helium.redis.RedisSentinelClientImpl;
 import org.helium.redis.cluster.RedisCluster;
@@ -16,10 +12,7 @@ import org.helium.redis.spi.RedisManager;
 import org.helium.redis.spi.RedisSentinelManager;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * Created by Coral on 5/5/15.

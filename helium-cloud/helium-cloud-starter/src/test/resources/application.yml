@@ -1,0 +1,30 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: boot-test
+helium:
+  id: heliumboot
+  xmlEnable: false
+  environmentsNode:
+    variables:
+      - key: PRIVATE_IP
+        value: 127.0.0.1
+      - key: RPC_PORT
+        value: 7001
+  beans:
+    - clazz: org.helium.sample.boot.service.HeliumServiceTestImpl
+      export: true
+  task:
+    package: org.helium.sample.boot
+  stacks:
+    - id: rpc
+      className: org.helium.rpc.stack.RpcServerStack
+      setters:
+        - field: host
+          value: 127.0.0.1
+        - field: port
+          value: 7001
+
+
+

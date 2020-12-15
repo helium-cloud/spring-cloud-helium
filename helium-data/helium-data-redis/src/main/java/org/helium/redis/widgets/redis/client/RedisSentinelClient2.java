@@ -2,11 +2,6 @@ package org.helium.redis.widgets.redis.client;
 
 import org.helium.perfmon.PerformanceCounterFactory;
 import org.helium.perfmon.Stopwatch;
-import org.helium.redis.widgets.redis.client.CFG_RedisSentinels;
-import org.helium.redis.widgets.redis.client.IRouteProvider2;
-import org.helium.redis.widgets.redis.client.RedisCounters;
-import org.helium.redis.widgets.redis.client.RedisKey2;
-import org.helium.redis.widgets.redis.client.RedisRouteDirector2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;

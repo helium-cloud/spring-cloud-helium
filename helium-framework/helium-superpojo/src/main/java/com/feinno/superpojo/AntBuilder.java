@@ -1,11 +1,11 @@
 package com.feinno.superpojo;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.feinno.superpojo.util.JavaEval;
 import com.feinno.superpojo.util.SuperPojoChecker;
 import com.feinno.superpojo.util.TwoTuple;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class AntBuilder {
 

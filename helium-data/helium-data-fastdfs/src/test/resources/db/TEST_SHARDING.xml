@@ -1,13 +1,13 @@
 <ShardedDataSource name="TESTDB">
-    <dataSources>
-        <dataSource id="1" name="TESTDB.1"/>
-        <dataSource id="2" name="TESTDB.2"/>
-    </dataSources>
-    <shardingFunction class="org.helium.data.sharding.functions.ModDivFunction">
-        <setters>
-            <setter field="modBy">8</setter>
-            <setter field="divBy">4</setter>
-            <setter field="shardingFormat">%d</setter>
-        </setters>
-    </shardingFunction>
+  <dataSources>
+    <dataSource id="1" name="TESTDB.1"/>
+    <dataSource id="2" name="TESTDB.2"/>
+  </dataSources>
+  <shardingFunction class="org.helium.data.sharding.functions.ModDivFunction">
+    <setters>
+      <setter field="modBy">8</setter>
+      <setter field="divBy">4</setter>
+      <setter field="shardingFormat">%d</setter>
+    </setters>
+  </shardingFunction>
 </ShardedDataSource>

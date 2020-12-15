@@ -1,12 +1,12 @@
 package com.feinno.superpojo.type;
 
-import java.nio.ByteBuffer;
-import java.util.Random;
-import java.util.UUID;
-
 import com.feinno.superpojo.SuperPojo;
 import com.feinno.superpojo.annotation.Field;
 import com.feinno.superpojo.util.StringUtils;
+
+import java.nio.ByteBuffer;
+import java.util.Random;
+import java.util.UUID;
 
 /**
  * 

@@ -8,14 +8,12 @@ import org.helium.framework.annotations.ServiceInterface;
 @ServiceInterface(id = "helium:DatabaseFactory")
 public interface DatabaseFactory {
 	/**
-	 *
 	 * @param name
 	 * @return
 	 */
 	Database getDatabase(String name);
 
 	/**
-	 *
 	 * @param name
 	 * @param string
 	 * @return

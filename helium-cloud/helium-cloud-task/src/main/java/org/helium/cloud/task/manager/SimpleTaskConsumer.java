@@ -3,7 +3,6 @@ package org.helium.cloud.task.manager;
 import com.feinno.superpojo.SuperPojoManager;
 import org.helium.cloud.task.TaskInstance;
 import org.helium.cloud.task.TaskStorageType;
-
 import org.helium.cloud.task.store.TaskQueueMemory;
 import org.helium.cloud.task.utils.TaskBeanUtils;
 import org.helium.framework.task.Task;

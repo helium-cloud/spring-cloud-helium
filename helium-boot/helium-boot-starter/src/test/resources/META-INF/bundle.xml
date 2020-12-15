@@ -1,8 +1,0 @@
-<bundle name="bootstrap-future">
-    <configImports>
-    </configImports>
-  <beans>
-    <bean class="org.helium.sample.bootstrap.quickstart.service.SimpleServiceImpl" export="true" executor="rpc-exec-it"/>
-    <bean class="org.helium.sample.bootstrap.quickstart.task.SimpleBatchTask" export="true" />
-  </beans>
-</bundle>

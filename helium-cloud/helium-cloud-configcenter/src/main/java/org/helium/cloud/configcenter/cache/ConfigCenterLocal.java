@@ -25,7 +25,6 @@ import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -62,11 +61,11 @@ public class ConfigCenterLocal {
 
     private void saveConfig(String file) {
         try {
-            Properties prop = new Properties();
-            prop.putAll(configMap);
-            FileOutputStream outputStream = new FileOutputStream(file);
-            prop.store(outputStream, "cache cloud");
-            outputStream.close();
+//            Properties prop = new Properties();
+//            prop.putAll(configMap);
+//            FileOutputStream outputStream = new FileOutputStream(file);
+//            prop.store(outputStream, "cache cloud");
+//            outputStream.close();
         } catch (Exception e) {
             LOGGER.error("saveConfig:{}", file, e);
         }

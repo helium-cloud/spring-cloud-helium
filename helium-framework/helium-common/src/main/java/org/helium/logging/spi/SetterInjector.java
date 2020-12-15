@@ -1,7 +1,7 @@
 package org.helium.logging.spi;
 
-import org.helium.util.Action;
 import org.helium.logging.LoggingConfiguration.SetterNode;
+import org.helium.util.Action;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

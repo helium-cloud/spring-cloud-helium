@@ -7,20 +7,18 @@
  */
 package com.feinno.superpojo.util;
 
+import com.feinno.superpojo.generator.StringTemplateLoader;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.StringWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.feinno.superpojo.generator.StringTemplateLoader;
-
-import freemarker.template.Configuration;
-import freemarker.template.Template;
 
 /**
  * 

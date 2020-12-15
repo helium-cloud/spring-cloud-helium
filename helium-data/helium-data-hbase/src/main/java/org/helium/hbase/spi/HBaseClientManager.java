@@ -7,7 +7,6 @@ import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.helium.framework.BeanContext;
 import org.helium.framework.configuration.ConfigProvider;
 import org.helium.hbase.HBaseClient;
-import org.helium.hbase.HTableClient;
 import org.helium.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

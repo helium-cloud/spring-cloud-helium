@@ -1,0 +1,14 @@
+server:
+  port: 8081
+spring:
+  application:
+    # 该值为存入日志ES中的index,需要填写
+    name: logger-simple
+
+cloud:
+  # kafka配置文件的路径
+  sys-logger: local:kafka/logger-producer.properties
+  biz-logger: local:kafka/logger-producer.properties
+license:
+  expire: 30000
+  key: njadiKJdj49dFJLd

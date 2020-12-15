@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Helium Dashboard</title>
-		<link rel="stylesheet" href="webix.css" type="text/css" charset="utf-8">
-		<script src="webix.js" type="text/javascript" charset="utf-8"></script>
-	</head>
-	<body>
-		<div class='header_comment'>Zookeeper Routers</div>
-		<div id="testA"></div>
-		<hr>
-		<script type="text/javascript" charset="utf-8">
-		webix.ready(function(){
-			grida = webix.ui({
-				container:"testA",
-				view:"datatable",
-				columns:[
-					{ id:"bundleName",		header:"BundleName",	width:200},
-					{ id:"serverEndpoints",	header:"ServerEndpoints",	width:1500},
-				],
-				autoheight:true,
-				autowidth:true,
-				url:"workers.json"
-			});	
-		});
-		</script>
-	</body>
+<head>
+    <title>Helium Dashboard</title>
+    <link rel="stylesheet" href="webix.css" type="text/css" charset="utf-8">
+    <script src="webix.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div class='header_comment'>Zookeeper Routers</div>
+<div id="testA"></div>
+<hr>
+<script type="text/javascript" charset="utf-8">
+    webix.ready(function () {
+        grida = webix.ui({
+            container: "testA",
+            view: "datatable",
+            columns: [
+                {id: "bundleName", header: "BundleName", width: 200},
+                {id: "serverEndpoints", header: "ServerEndpoints", width: 1500},
+            ],
+            autoheight: true,
+            autowidth: true,
+            url: "workers.json"
+        });
+    });
+</script>
+</body>
 </html>

@@ -1,7 +1,6 @@
 package org.helium.cloud.logger.writer.impl;
 
 import com.alibaba.fastjson.JSON;
-
 import org.helium.cloud.logger.entity.LogBean;
 import org.helium.cloud.logger.model.LogMessage;
 import org.helium.framework.annotations.FieldSetter;
@@ -43,7 +42,7 @@ public class KafkaLogWriter extends LogWriterAdapter {
         logBean.setTimestamp(logMessage.getCreateTime());
         logBean.setResult(JSON.toJSONString(logMessage.getMethodResult()));
         logBean.setBusiness(logMessage.getClassName());
-        logBean.setPlatform(applicationName);
+        logBean.setBusiness(applicationName);
         logBean.setType("annotation-log");
         logBean.setContent(JSON.toJSONString(logMessage));
 

@@ -1,0 +1,2 @@
+## 将自定bean加入到spring容器
+#org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.helium.plugin.jpa.CommonAutoConfig

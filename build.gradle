@@ -1,81 +1,82 @@
 buildscript {
-    project.ext {
+  project.ext {
 
-      if (!project.hasProperty("nexusUser")) {
-        nexusUser = 'xxx'
-      }
-      if (!project.hasProperty("nexusPass")) {
-        nexusPass = 'xxx.123'
-      }
-      nexusRoot = 'http://urcs.feinno.com:5260/repository'
-      privateRepo = { return { url "${nexusRoot}/maven-public/" } }
-      uploadRepo = { project ->
-        return {
-          url "$nexusRoot/${project.version.endsWith('-SNAPSHOT') ? 'maven-snapshots' : 'maven-releases'}"
-          credentials { username nexusUser; password nexusPass }
-        }
-      }
-      repoClosure = {
-          maven { url "http://urcs.feinno.com:5260/repository/maven-public/"}
-          maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
-          maven { url "http://repo.spring.io/milestone/" }
-          maven { url "https://repo.spring.io/snapshot/" }
-          mavenCentral()
-          mavenLocal()
-      }
-      versionTail = new Date().format('yyMMddHHmm')
+    if (!project.hasProperty("nexusUser")) {
+      nexusUser = 'helium'
     }
-    repositories repoClosure
+    if (!project.hasProperty("nexusPass")) {
+      nexusPass = 'helium.123'
+    }
+    nexusRoot = 'http://urcs.feinno.com:5260/repository'
+    privateRepo = { return { url "${nexusRoot}/maven-public/" } }
+    uploadRepo = { project ->
+      return {
+        url "$nexusRoot/${project.version.endsWith('-SNAPSHOT') ? 'maven-snapshots' : 'maven-releases'}"
+        credentials { username nexusUser; password nexusPass }
+      }
+    }
+    repoClosure = {
+      mavenLocal()
+      maven { url "http://urcs.feinno.com:5260/repository/maven-public/" }
+      maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+      maven { url "https://repo.spring.io/snapshot/" }
+      maven { url "https://repo1.maven.org/maven2/" }
+      mavenCentral()
+
+
+    }
+    versionTail = new Date().format('yyMMddHHmm')
+  }
+  repositories repoClosure
 }
 
 allprojects { project ->
 
-    project.repositories rootProject.repoClosure
-  
-    group = 'org.helium'
-    version = "3.1.x.3-release"
+  project.repositories rootProject.repoClosure
+
+  group = 'org.helium'
+  version = "3.2.28-SNAPSHOT"
 }
 
-def mavenPublishIgnoreList = ['helium-sample:helium-cloud-simple:cloud-configcenter', 
-                              'helium-sample:helium-cloud-simple:cloud-logger',
-                              'helium-sample:helium-cloud-simple:cloud-rpc',
-                              'helium-sample:helium-cloud-simple:cloud-task']
+def mavenPublishIgnoreList = ['helium-sample']
 
 subprojects { project ->
 
-    apply plugin: 'java'
+  apply plugin: 'java'
 
-    apply plugin: 'maven-publish'
+  apply plugin: 'maven-publish'
 
-    tasks.withType(JavaCompile) {
-        sourceCompatibility = 1.8
-        options.encoding = "UTF-8"
-    }
+  tasks.withType(JavaCompile) {
+//        sourceCompatibilLogoApplicationListenerity = 1.8
+    options.encoding = "UTF-8"
+  }
 
-    tasks.withType(Test) {
-        defaultCharacterEncoding = "UTF-8"
-    }
+  tasks.withType(Test) {
+    defaultCharacterEncoding = "UTF-8"
+  }
 
-    dependencies {
-        testCompile "junit:junit:$junit_version"
-    }
+  dependencies {
+    compile group: 'org.slf4j', name: 'slf4j-api', version: slf4j_version
+    testCompile "junit:junit:$junit_version"
+  }
 
-    task sourceJar(type: Jar) {
-        from sourceSets.main.allJava
-        classifier = 'sources'
-    }
 
-    if (!(project.name in mavenPublishIgnoreList)) {
-        publishing {
-            repositories {
-                maven uploadRepo(project)
-            }
-            publications {
-                maven(MavenPublication) {
-                    from components.java
-                    artifact sourceJar
-                }
-            }
+  task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+  }
+
+  if (!(project.name in mavenPublishIgnoreList)) {
+    publishing {
+      repositories {
+        maven uploadRepo(project)
+      }
+      publications {
+        maven(MavenPublication) {
+          from components.java
+          artifact sourceJar
         }
+      }
     }
+  }
 }

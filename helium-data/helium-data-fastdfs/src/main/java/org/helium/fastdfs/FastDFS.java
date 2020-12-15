@@ -25,6 +25,7 @@ public interface FastDFS {
 	 * @throws Exception
 	 */
 	String uploadFile(byte[] fileBuffer, String fileExtName, Map<String, String> metaMap, byte storyPath) throws Exception;
+
 	/**
 	 * 上传文件到FastDFS
 	 *
@@ -35,13 +36,15 @@ public interface FastDFS {
 	 * @throws Exception
 	 */
 	String[] uploadFile(byte[] fileBuffer, String fileExtName, Map<String, String> metaMap) throws Exception;
+
 	/**
 	 * 上传文件到FastDFS
-	 * @param master_file_id  masterID
-	 * @param prefix_name  文件名前缀
-	 * @param file_buff  文件内容字节数组
-	 * @param file_ext_name 文件扩展名
-	 * @param metaMap     文件元数据
+	 *
+	 * @param master_file_id masterID
+	 * @param prefix_name    文件名前缀
+	 * @param file_buff      文件内容字节数组
+	 * @param file_ext_name  文件扩展名
+	 * @param metaMap        文件元数据
 	 * @return 成功返回文件ID，失败返回null
 	 * @throws Exception
 	 */

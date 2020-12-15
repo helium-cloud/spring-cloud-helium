@@ -2,7 +2,6 @@ package org.helium.database.spi;
 
 import com.alibaba.fastjson.JSONObject;
 import org.helium.database.ConnectionString;
-import org.helium.database.Database;
 import org.helium.database.DatabaseOperator;
 import org.helium.framework.configuration.FieldLoader;
 import org.helium.framework.entitys.SetterNode;

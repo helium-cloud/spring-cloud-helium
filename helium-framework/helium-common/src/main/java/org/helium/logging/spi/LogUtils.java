@@ -1,7 +1,7 @@
 package org.helium.logging.spi;
 
-import org.helium.util.StringUtils;
 import org.helium.logging.LogLevel;
+import org.helium.util.StringUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

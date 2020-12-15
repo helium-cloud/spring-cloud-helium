@@ -1,6 +1,5 @@
 package org.helium.cloud.task;
 
-import org.apache.dubbo.common.extension.ExtensionLoader;
 import org.helium.cloud.common.utils.SpringContextUtil;
 import org.helium.cloud.task.manager.TaskConsumerHandler;
 import org.helium.cloud.task.rpc.TaskInvokerArgs;

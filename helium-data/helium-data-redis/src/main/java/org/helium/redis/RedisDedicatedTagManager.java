@@ -27,6 +27,7 @@ public class RedisDedicatedTagManager implements DedicatedTagManager {
 
 	/**
 	 * 如果存在就设置一个值, 否则就返回老值
+	 *
 	 * @param tag
 	 * @param value
 	 * @return
