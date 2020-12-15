@@ -2,6 +2,7 @@ package org.helium.framework.spring.controller;
 
 import org.helium.framework.spring.service.LicService;
 import org.helium.framework.spring.service.ResultCode;
+import org.helium.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,13 @@ public class LicenseController {
 		return ResultCode.OK(lic);
 	}
 	@RequestMapping(value = "/del", method = RequestMethod.GET)
-	public ResultCode delLic(){
-		LOGGER.info("delLic:[{}]", licService.getLicense());
-		licService.deleteLicense();
-		return ResultCode.OK(licService.getLicense());
+	public ResultCode delLic(@RequestParam(value = "key", required = false) String key){
+		if (!StringUtils.isNullOrEmpty(key) && key.equalsIgnoreCase("DELLIC")){
+			LOGGER.info("delLic:[{}]", licService.getLicense());
+			licService.deleteLicense();
+			return ResultCode.OK(licService.getLicense());
+		}
+		return ResultCode.ERROR();
 	}
 }
 
