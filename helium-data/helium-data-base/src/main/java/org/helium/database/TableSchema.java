@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * <b>描述: </b>此类为数据库"表结构-->JAVA对象的映射"，通过JAVA对象形式表现数据库的表结构<br>
  * 暂时支持<code>varchar、text、int、long、double、datetime、timestamp</code>类型，
  * ,以及设置主键、自增字段、默认值等功能，创建对象后调用<code>toString()</code>方法可将对象转换为SQL语句
@@ -66,6 +65,7 @@ public class TableSchema {
 
 	/**
 	 * 设置类似: ENGINE=InnoDB DEFAULT CHARSET=latin1; 的语句
+	 *
 	 * @param tail
 	 */
 	public void setTail(String tail) {
@@ -77,8 +77,8 @@ public class TableSchema {
 	 *
 	 * @param column
 	 * @return 当出现以下情况之一时返回<code>false</code><br>
-	 *         1. 列字段格式有问题<br>
-	 *         2. 当前表中已经存在该名称的字段
+	 * 1. 列字段格式有问题<br>
+	 * 2. 当前表中已经存在该名称的字段
 	 */
 	public boolean addColumn(Column column) {
 
@@ -105,8 +105,8 @@ public class TableSchema {
 	 *
 	 * @param primaryKey
 	 * @return 当出现以下情况之一时返回<code>false</code><br>
-	 *         1. 如果列字段中不存在以该主键命名的字段 <br>
-	 *         2. 如果主键集合中已经存在该主键<br>
+	 * 1. 如果列字段中不存在以该主键命名的字段 <br>
+	 * 2. 如果主键集合中已经存在该主键<br>
 	 */
 	public boolean addPrimaryKey(String primaryKey) {
 

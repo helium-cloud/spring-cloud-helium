@@ -1,16 +1,16 @@
 dependencies {
-    compile project(':helium-data:helium-data-base')
-    compile group: 'com.floragunn', name: 'search-guard-ssl', version: '6.0.0-24.beta1'
-    // https://mvnrepository.com/artifact/com.floragunn/search-guard-6
-    compile group: 'com.floragunn', name: 'search-guard-6', version: '6.0.0-17.beta1api'
+  compile project(':helium-data:helium-data-base')
+  compile group: 'com.floragunn', name: 'search-guard-ssl', version: '6.0.0-24.beta1'
+  // https://mvnrepository.com/artifact/com.floragunn/search-guard-6
+  compile group: 'com.floragunn', name: 'search-guard-6', version: '6.0.0-17.beta1api'
 
 
-    compile(group: 'org.elasticsearch.client', name: 'transport', version: elasticsearch_version) {
-                exclude group: 'org.apache.logging.log4j', module: 'log4j-core'
-                exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
-                exclude group: 'org.slf4j', module: 'slf4j-log4j12'
-            }
-    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: log_version
-    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: slf4j_version
+  compile(group: 'org.elasticsearch.client', name: 'transport', version: elasticsearch_version) {
+    exclude group: 'org.apache.logging.log4j', module: 'log4j-core'
+    exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+    exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+  }
+  compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: log_version
+  testCompile group: 'org.slf4j', name: 'slf4j-simple', version: slf4j_version
 
 }

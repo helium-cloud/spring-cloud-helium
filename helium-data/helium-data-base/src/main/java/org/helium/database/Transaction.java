@@ -1,11 +1,11 @@
 /*
  * FAE, Feinno App Engine
- *  
+ *
  * Create by gaolei 2011-1-24
- * 
+ *
  * Copyright (c) 2011 北京新媒传信科技有限公司
- * 
- * remark:mysql 需要表的引擎设为InnoDB才能支持事务 
+ *
+ * remark:mysql 需要表的引擎设为InnoDB才能支持事务
  * alter table table_name engine=InnoDB;
  */
 package org.helium.database;
@@ -38,8 +38,7 @@ import java.sql.SQLException;
  * Created by Coral
  */
 //public class Transaction implements Operation
-public interface Transaction extends Database
-{
+public interface Transaction extends Database {
 	/**
 	 * 释放数据库连接，用户在不使用Transaction对象后必须显示执行此方法
 	 */

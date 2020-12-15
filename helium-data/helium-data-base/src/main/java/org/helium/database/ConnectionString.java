@@ -9,7 +9,6 @@ import java.util.Properties;
 import java.util.function.Consumer;
 
 /**
- *
  * Created by Coral on 5/5/15.
  */
 public class ConnectionString {
@@ -29,7 +28,7 @@ public class ConnectionString {
 	private Properties properties = new Properties();
 
 	public String getProperty(String key) {
-		return (String)properties.get(key);
+		return (String) properties.get(key);
 	}
 
 	public Properties getProperties() {
@@ -70,18 +69,19 @@ public class ConnectionString {
 		}
 
 
-		for (Map.Entry<Object, Object> e: props.entrySet()) {
-			String k = (String)e.getKey();
+		for (Map.Entry<Object, Object> e : props.entrySet()) {
+			String k = (String) e.getKey();
 			if (DRIVER_CLASS.equals(k) || JDBC_URL.equals(k) || USER.equals(k) || PASSWORD.equals(k)) {
 				continue;
 			}
-			cs.properties.put((String)e.getKey(), (String)e.getValue());
+			cs.properties.put((String) e.getKey(), (String) e.getValue());
 		}
 		return cs;
 	}
 
 	/**
 	 * 设置属性
+	 *
 	 * @param key1
 	 * @param key2
 	 * @param def
@@ -140,6 +140,7 @@ public class ConnectionString {
 	 */
 	public static class Builder {
 		private Properties props;
+
 		public Builder() {
 			props = new Properties();
 		}
@@ -171,9 +172,10 @@ public class ConnectionString {
 			return ConnectionString.fromProperties(props);
 		}
 	}
-	public static String toConStr(Properties props){
+
+	public static String toConStr(Properties props) {
 		StringBuilder sb = new StringBuilder();
-		for (String item: props.stringPropertyNames()) {
+		for (String item : props.stringPropertyNames()) {
 			sb.append(item).append("=").append(props.getProperty(item)).append("\n");
 		}
 		return sb.toString();

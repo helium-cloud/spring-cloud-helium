@@ -7,7 +7,6 @@ import java.sql.SQLException;
  * 数据库中的列格式类型
  *
  * @author Lv.Mingwei
- *
  */
 public class Column {
 	private static final int INT_DEFAULT_LENGTH = 11;
@@ -29,14 +28,10 @@ public class Column {
 	/**
 	 * 创建一个varchar类型的列
 	 *
-	 * @param name
-	 *            列名称
-	 * @param length
-	 *            列长度
-	 * @param isNull
-	 *            是否为空
-	 * @param defauleValue
-	 *            默认值
+	 * @param name         列名称
+	 * @param length       列长度
+	 * @param isNull       是否为空
+	 * @param defauleValue 默认值
 	 * @return
 	 */
 	public static Column createVarcharColumn(String name, int length, boolean isNull, String defauleValue) {
@@ -53,12 +48,9 @@ public class Column {
 	/**
 	 * 创建一个int类型的列，列长度默认为10
 	 *
-	 * @param name
-	 *            列名称
-	 * @param isNull
-	 *            是否为空
-	 * @param defauleValue
-	 *            列的默认值
+	 * @param name         列名称
+	 * @param isNull       是否为空
+	 * @param defauleValue 列的默认值
 	 * @return
 	 */
 	public static Column createIntColumn(String name, boolean isNull, Integer defauleValue) {
@@ -76,8 +68,7 @@ public class Column {
 	 * 创建一个具有自增特性的int类型的列,列长度默认是10,默认不能为空<br>
 	 * 请注意，创建了此类型字段的表格，此字段默认会成为主键中的一个
 	 *
-	 * @param name
-	 *            列名称
+	 * @param name 列名称
 	 * @return
 	 */
 	public static Column createAutoIncrementIntColumn(String name) {
@@ -95,8 +86,7 @@ public class Column {
 	 * 创建一个具有自增特性的int类型的列,列长度默认是10,默认不能为空<br>
 	 * 请注意，创建了此类型字段的表格，此字段默认会成为主键中的一个
 	 *
-	 * @param name
-	 *            列名称
+	 * @param name 列名称
 	 * @return
 	 */
 	public static Column createAutoIncrementLongColumn(String name) {
@@ -113,10 +103,8 @@ public class Column {
 	/**
 	 * 创建一个text类型的列字段
 	 *
-	 * @param name
-	 *            字段名称
-	 * @param isNull
-	 *            是否为空
+	 * @param name   字段名称
+	 * @param isNull 是否为空
 	 * @return
 	 */
 	public static Column createTextColumn(String name, boolean isNull) {
@@ -133,12 +121,9 @@ public class Column {
 	/**
 	 * 创建一个日期datime类型的列字段，当列字段有默认值时，会自动选用timestamp,无需调用者担心
 	 *
-	 * @param name
-	 *            列名称
-	 * @param isNull
-	 *            是否为空
-	 * @param defaultValue
-	 *            默认内容
+	 * @param name         列名称
+	 * @param isNull       是否为空
+	 * @param defaultValue 默认内容
 	 * @return
 	 */
 	public static Column createDateTimeColumn(String name, boolean isNull, String defaultValue) {
@@ -159,6 +144,7 @@ public class Column {
 
 	/**
 	 * 显式创建Timestamp列
+	 *
 	 * @param name
 	 * @param isNull
 	 * @param defaultValue
@@ -178,12 +164,9 @@ public class Column {
 	/**
 	 * 创建一个Long类型的列，根据MYSQL特性，会自动启用BIGINT，默认长度63位
 	 *
-	 * @param name
-	 *            列字段名称
-	 * @param isNull
-	 *            是否为空
-	 * @param defauleValue
-	 *            默认值
+	 * @param name         列字段名称
+	 * @param isNull       是否为空
+	 * @param defauleValue 默认值
 	 * @return
 	 */
 	public static Column createLongColumn(String name, boolean isNull, Long defauleValue) {
@@ -200,12 +183,9 @@ public class Column {
 	/**
 	 * 创建一个double类型的列字段
 	 *
-	 * @param name
-	 *            列名称
-	 * @param isNull
-	 *            是否为空
-	 * @param defauleValue
-	 *            默认值
+	 * @param name         列名称
+	 * @param isNull       是否为空
+	 * @param defauleValue 默认值
 	 * @return
 	 */
 	public static Column createDoubleColumn(String name, boolean isNull, Double defauleValue) {

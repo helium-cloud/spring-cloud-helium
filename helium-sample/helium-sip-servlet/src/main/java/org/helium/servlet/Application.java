@@ -29,7 +29,7 @@ public class Application {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(){
+	public CommandLineRunner commandLineRunner() {
 		return args -> {
 			System.out.println(im5GSmsService.get());
 

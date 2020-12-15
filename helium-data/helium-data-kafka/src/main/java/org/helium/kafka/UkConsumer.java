@@ -11,6 +11,7 @@ import java.util.Properties;
 @FieldLoaderType(loaderType = UkConsumerLoader.class)
 public interface UkConsumer {
 
-    Properties getConsumerProperties();
-    void setAndRunHandler(UkConsumerHandler ukConsumerHandler);
+	Properties getConsumerProperties();
+
+	void setAndRunHandler(UkConsumerHandler ukConsumerHandler);
 }

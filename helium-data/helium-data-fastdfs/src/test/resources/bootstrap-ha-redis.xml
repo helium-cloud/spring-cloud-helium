@@ -1,12 +1,12 @@
 <bootstrap>
-    <environments>
-        <variable key="PRIVATE_IP" value="127.0.0.1"/>
-        <variable key="TEST_REDIS" value="TEST_REDIS"/>
-        <variable key="HA_CENTER_RPC" value="tcp://192.168.143.144:8888"/>
-    </environments>
-    <bundles>
-        <beans>
-            <bean class="org.helium.redis.test.HARedisClusterTester"/>
-        </beans>
-    </bundles>
+  <environments>
+    <variable key="PRIVATE_IP" value="127.0.0.1"/>
+    <variable key="TEST_REDIS" value="TEST_REDIS"/>
+    <variable key="HA_CENTER_RPC" value="tcp://192.168.143.144:8888"/>
+  </environments>
+  <bundles>
+    <beans>
+      <bean class="org.helium.redis.test.HARedisClusterTester"/>
+    </beans>
+  </bundles>
 </bootstrap>

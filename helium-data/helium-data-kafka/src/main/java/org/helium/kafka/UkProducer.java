@@ -9,7 +9,7 @@ import org.helium.kafka.spi.producer.UkProducerLoader;
 @FieldLoaderType(loaderType = UkProducerLoader.class)
 public interface UkProducer {
 
-    default void produce(byte[] content){
-        return;
-    }
+	default void produce(byte[] content) {
+		return;
+	}
 }

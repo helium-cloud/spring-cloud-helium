@@ -1,12 +1,12 @@
 dependencies {
-    compile project(':helium-cloud:helium-cloud-common')
-    compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-api', version: dubbo_version
+  compile project(':helium-cloud:helium-cloud-common')
+  compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-api', version: dubbo_version
 
-    testCompile group: 'org.apache.dubbo', name: 'dubbo-configcenter-zookeeper', version: dubbo_version
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    testCompile (group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: spring_boot_version){
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
-    }
-    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
-    
+  testCompile group: 'org.apache.dubbo', name: 'dubbo-configcenter-zookeeper', version: dubbo_version
+  testCompile group: 'junit', name: 'junit', version: '4.12'
+  testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: spring_boot_version) {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
+  }
+  testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+
 }

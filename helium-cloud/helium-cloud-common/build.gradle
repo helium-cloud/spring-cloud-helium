@@ -1,15 +1,15 @@
 dependencies {
-    compile project(':helium-framework:helium-common')
-    compile group: 'org.apache.dubbo', name: 'dubbo-common', version: dubbo_version
-    compile  (group: 'org.springframework.boot', name: 'spring-boot-starter', version: spring_boot_version){
-      exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-    }
-    compile  (group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: spring_boot_version){
-      exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-    }
-    compile ("org.springframework.boot:spring-boot-configuration-processor:${spring_boot_version}"){
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
+  compile project(':helium-framework:helium-common')
+  compile group: 'org.apache.dubbo', name: 'dubbo-common', version: dubbo_version
+  compile(group: 'org.springframework.boot', name: 'spring-boot-starter', version: spring_boot_version) {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+  }
+  compile(group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: spring_boot_version) {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+  }
+  compile("org.springframework.boot:spring-boot-configuration-processor:${spring_boot_version}") {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
 
-    }
-    
+  }
+
 }

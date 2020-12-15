@@ -70,9 +70,8 @@ public class PerfmonConfiguration {
 	}
 
 
-
 	@Bean
-	public PerfmonRecorder perfmonRecorder(){
+	public PerfmonRecorder perfmonRecorder() {
 		return new PerfmonRecorder();
 	}
 }

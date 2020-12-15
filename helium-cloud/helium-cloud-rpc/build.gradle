@@ -2,14 +2,20 @@ dependencies {
   compile project(':helium-cloud:helium-cloud-common')
   compile group: 'org.apache.dubbo', name: 'dubbo-rpc-api', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-rpc-dubbo', version: dubbo_version
+
   compile group: 'org.apache.dubbo', name: 'dubbo-remoting-api', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-config-api', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-container-api', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-api', version: dubbo_version
+  compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-nacos', version: dubbo_version
   compile(group: 'org.apache.dubbo', name: 'dubbo-registry-zookeeper', version: dubbo_version) {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
+    exclude group: 'org.springframework', module: 'spring-web' //by both name and group
     exclude group: 'org.slf4j', module: 'slf4j-log4j12' //by both name and group
   }
-  compile group: 'org.apache.zookeeper', name: 'zookeeper', version: zookeeper_version
+  compile group: 'org.apache.dubbo', name: 'dubbo-remoting-mina', version: dubbo_version
+  compile group: 'org.apache.dubbo', name: 'dubbo-serialization-hessian2', version: dubbo_version
+  compile group: 'org.apache.dubbo', name: 'dubbo-serialization-jdk', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-registry-multicast', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-serialization-hessian2', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-metadata-report-zookeeper', version: dubbo_version
@@ -20,6 +26,8 @@ dependencies {
     exclude group: 'org.slf4j', module: 'slf4j-log4j12' //by both name and group
   }
   compile group: 'io.netty', name: 'netty-all', version: netty_version
+  compile group: 'org.apache.zookeeper', name: 'zookeeper', version: zookeeper_version
+
 
   testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.8.0-alpha2'
 

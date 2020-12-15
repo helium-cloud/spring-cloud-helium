@@ -4224,7 +4224,8 @@ public class RedisSentinelClientImpl implements RedisClient {
 		Pipeline pipeline = jedis.pipelined();
 		Stopwatch watch = counters.getTx().begin();
 		Exception ex = null;
-		return new Closeable<Pipeline>() {			@Override
+		return new Closeable<Pipeline>() {
+			@Override
 			public Pipeline get() {
 				return pipeline;
 			}
@@ -4239,6 +4240,7 @@ public class RedisSentinelClientImpl implements RedisClient {
 			}
 		};
 	}
+
 	@Override
 	public boolean setObjectEx(String key, Object value, int time) {
 		Jedis jedis = getJedis(key);
@@ -4345,9 +4347,9 @@ public class RedisSentinelClientImpl implements RedisClient {
 		Jedis jedis = getJedis(key);
 		Stopwatch watch = counters.getTx().begin();
 		try {
-			byte [] values = jedis.get(key.getBytes());
+			byte[] values = jedis.get(key.getBytes());
 			watch.end();
-			if(values == null) {
+			if (values == null) {
 				return null;
 			}
 			return ByteArrayUtils.toObject(values);
@@ -4365,9 +4367,9 @@ public class RedisSentinelClientImpl implements RedisClient {
 		Jedis jedis = getJedis(key);
 		Stopwatch watch = counters.getTx().begin();
 		try {
-			byte [] values = jedis.get(key.getBytes());
+			byte[] values = jedis.get(key.getBytes());
 			watch.end();
-			if(values == null) {
+			if (values == null) {
 				return null;
 			}
 			return values;
@@ -4547,9 +4549,9 @@ public class RedisSentinelClientImpl implements RedisClient {
 		Stopwatch watch = counters.getTx().begin();
 		try {
 			List<byte[]> value = jedis.hmget(key, keyword);
-			if(value != null && value.size() > 0){
+			if (value != null && value.size() > 0) {
 				return value.get(0);
-			}else{
+			} else {
 				return null;
 			}
 		} catch (Exception e) {
@@ -4584,7 +4586,7 @@ public class RedisSentinelClientImpl implements RedisClient {
 		Stopwatch watch = counters.getTx().begin();
 		try {
 			Object result = jedis.eval(script, keys, args);
-			if(result != null){
+			if (result != null) {
 				return result;
 			} else {
 				return null;
@@ -4603,9 +4605,9 @@ public class RedisSentinelClientImpl implements RedisClient {
 		Stopwatch watch = counters.getTx().begin();
 		try {
 			String result = jedis.set(key, value, nxxx, expx, expire);
-			if("OK".equals(result)){
+			if ("OK".equals(result)) {
 				return true;
-			}else{
+			} else {
 				return false;
 			}
 		} catch (Exception e) {

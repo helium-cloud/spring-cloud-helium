@@ -9,7 +9,6 @@ package org.helium.database;
  * 对象如何转为Column对象的代码段
  *
  * @author Lv.Mingwei
- *
  */
 public enum ColumnType {
 	INT("int"),

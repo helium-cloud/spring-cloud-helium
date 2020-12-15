@@ -1,0 +1,10 @@
+dependencies {
+  compile project(':helium-cloud:helium-cloud-common')
+
+  compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: spring_boot_version) {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group
+  }
+
+  testCompile group: 'junit', name: 'junit', version: '4.12'
+
+}
