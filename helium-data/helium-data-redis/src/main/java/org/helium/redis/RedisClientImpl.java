@@ -528,10 +528,6 @@ public class RedisClientImpl implements RedisClient {
 				watch.end();
 				return null;
 			}
-			// 首先释放资源
-			returnJedis(jedis);
-
-			jedis = null;
 			// 反序列化
 			E tmp = clazz.newInstance();
 			SuperPojoManager.parsePbFrom(value, tmp);
@@ -647,9 +643,6 @@ public class RedisClientImpl implements RedisClient {
 				watch.end();
 				return null;
 			}
-			returnJedis(jedis);
-
-			jedis = null;
 
 			E tmp = clazz.newInstance();
 			SuperPojoManager.parsePbFrom(bsOld, tmp);
@@ -762,9 +755,6 @@ public class RedisClientImpl implements RedisClient {
 				watch.end();
 				return null;
 			}
-			returnJedis(jedis);
-
-			jedis = null;
 
 			E tmp = clazz.newInstance();
 			SuperPojoManager.parsePbFrom(bs, tmp);
@@ -801,8 +791,6 @@ public class RedisClientImpl implements RedisClient {
 				return null;
 			}
 			//returnJedis(jedis);
-
-			jedis = null;
 			watch.end();
 			return bs;
 		} catch (Exception e) {
@@ -1362,7 +1350,6 @@ public class RedisClientImpl implements RedisClient {
 				watch.end();
 				return null;
 			}
-			returnJedis(jedis);
 
 			E tmp = clazz.newInstance();
 			SuperPojoManager.parsePbFrom(bsValue, tmp);
@@ -2721,7 +2708,6 @@ public class RedisClientImpl implements RedisClient {
 				watch.end();
 				return null;
 			}
-			returnJedis(jedis);
 
 			E tmp = clazz.newInstance();
 			SuperPojoManager.parsePbFrom(bsMember, tmp);
@@ -3856,8 +3842,6 @@ public class RedisClientImpl implements RedisClient {
 				watch.end();
 				return null;
 			}
-			returnJedis(jedis);
-
 			Set<E> set = new HashSet<E>();
 			for (byte[] bs : value) {
 				E e = clazz.newInstance();
@@ -3924,7 +3908,6 @@ public class RedisClientImpl implements RedisClient {
 				watch.end();
 				return null;
 			}
-			returnJedis(jedis);
 
 			Set<E> set = new HashSet<E>();
 			for (byte[] bs : value) {
@@ -3986,7 +3969,6 @@ public class RedisClientImpl implements RedisClient {
 				watch.end();
 				return null;
 			}
-			returnJedis(jedis);
 
 			Set<E> set = new HashSet<E>();
 			for (byte[] bs : value) {
@@ -4029,7 +4011,6 @@ public class RedisClientImpl implements RedisClient {
 				watch.end();
 				return null;
 			}
-			returnJedis(jedis);
 
 			Set<E> set = new HashSet<E>();
 			for (byte[] bs : value) {
@@ -4076,7 +4057,6 @@ public class RedisClientImpl implements RedisClient {
 				watch.end();
 				return null;
 			}
-			returnJedis(jedis);
 
 			Set<E> set = new HashSet<E>();
 			for (byte[] bs : value) {
