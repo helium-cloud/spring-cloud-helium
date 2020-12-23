@@ -44,7 +44,7 @@ public class SafeSerial {
 	public static String getCPUSerial() {
 		String result = "";
 		try {
-			Process process = Runtime.getRuntime().exec("sudo dmidecode -s system-uuid");
+			Process process = Runtime.getRuntime().exec("dmidecode -s system-uuid");
 			InputStream in;
 			BufferedReader br;
 			in = process.getInputStream();
