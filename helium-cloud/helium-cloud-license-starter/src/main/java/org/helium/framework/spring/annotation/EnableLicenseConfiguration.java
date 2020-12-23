@@ -11,7 +11,6 @@ import java.lang.annotation.*;
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Import(LicenseAutoConfiguration.class)
 @Documented
 public @interface EnableLicenseConfiguration {
 

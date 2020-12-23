@@ -1,9 +1,12 @@
 package org.helium.framework.spring.service;
 
+import org.helium.safe.SafeSerial;
+
 public class ResultCode {
 	private int code;
 	private String msg;
 	private String lic;
+	private String device;
 
 	public int getCode() {
 		return code;
@@ -27,6 +30,10 @@ public class ResultCode {
 
 	public void setLic(String lic) {
 		this.lic = lic;
+	}
+
+	public String getDevice() {
+		return SafeSerial.getCPUSerial();
 	}
 
 	public static ResultCode OK(){

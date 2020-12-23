@@ -34,6 +34,7 @@ public class LicenseController {
 		LOGGER.info("getLic is [{}]", lic);
 		return ResultCode.OK(lic);
 	}
+
 	@RequestMapping(value = "/del", method = RequestMethod.GET)
 	public ResultCode delLic(@RequestParam(value = "key", required = false) String key){
 		if (!StringUtils.isNullOrEmpty(key) && key.equalsIgnoreCase("DELLIC")){
