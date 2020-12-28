@@ -15,4 +15,13 @@ public class LicenseGen {
 		}
 		return "";
 	}
+
+	public static String genLicense(String cpuId){
+		try {
+			return AESUtil.encryptAES(cpuId, LICENSE_KEY);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
 }
