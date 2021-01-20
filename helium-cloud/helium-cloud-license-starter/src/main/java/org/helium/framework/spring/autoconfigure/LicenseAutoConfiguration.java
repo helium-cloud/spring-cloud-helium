@@ -20,8 +20,8 @@ public class LicenseAutoConfiguration {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LicenseAutoConfiguration.class);
 
 
-	@Bean
-	public LicenseHealthIndicator heliumHealthIndicator() {
+	@Bean("licenseHealthIndicator")
+	public LicenseHealthIndicator licenseHealthIndicator() {
 		return new LicenseHealthIndicator();
 	}
 	@Bean
