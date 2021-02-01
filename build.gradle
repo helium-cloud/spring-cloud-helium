@@ -35,7 +35,7 @@ allprojects { project ->
   project.repositories rootProject.repoClosure
 
   group = 'org.helium'
-  version = "3.2.33-SNAPSHOT"
+  version = "3.2.35-SNAPSHOT"
 }
 
 def mavenPublishIgnoreList = ['helium-sample']
