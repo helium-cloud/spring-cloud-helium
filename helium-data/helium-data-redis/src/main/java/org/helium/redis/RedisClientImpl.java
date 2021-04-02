@@ -3,6 +3,7 @@ package org.helium.redis;
 
 import com.feinno.superpojo.SuperPojo;
 import com.feinno.superpojo.SuperPojoManager;
+import com.feinno.superpojo.util.StringUtils;
 import org.helium.data.utils.PropertiesLoader;
 import org.helium.framework.annotations.FieldLoaderType;
 import org.helium.framework.utils.Closeable;
@@ -35,6 +36,7 @@ public class RedisClientImpl implements RedisClient {
 	private int databaseIndex;
 	private JedisPool jedisPool;// 切片连接池
 	private RedisCounters counters;
+	private String auth = null;
 
 	/**
 	 * 构造函数，根据Properties配置文件初始化切片池
@@ -72,6 +74,10 @@ public class RedisClientImpl implements RedisClient {
 		int port = p.getInt("port");
 
 		jedisPool = new JedisPool(config, host, port);
+
+		if (!StringUtils.isNullOrEmpty(p.getString("auth"))){
+			auth = p.getString("auth");
+		}
 
 	}
 
@@ -572,6 +578,9 @@ public class RedisClientImpl implements RedisClient {
 	public Jedis getJedis() {
 		counters.getQps().increase();
 		Jedis j = jedisPool.getResource();
+		if (j != null && auth != null){
+			j.auth(auth);
+		}
 		if (databaseIndex != 0) {
 			j.select(databaseIndex);
 		}
