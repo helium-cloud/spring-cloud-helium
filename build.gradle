@@ -1,18 +1,11 @@
 buildscript {
   project.ext {
 
-    if (!project.hasProperty("nexusUser")) {
-      nexusUser = 'helium'
-    }
-    if (!project.hasProperty("nexusPass")) {
-      nexusPass = 'helium.123'
-    }
-    nexusRoot = 'http://urcs.feinno.com:5260/repository'
-    privateRepo = { return { url "${nexusRoot}/maven-public/" } }
     uploadRepo = { project ->
+      nexusRoot = 'https://s01.oss.sonatype.org/content/repositories'
       return {
-        url "$nexusRoot/${project.version.endsWith('-SNAPSHOT') ? 'maven-snapshots' : 'maven-releases'}"
-        credentials { username nexusUser; password nexusPass }
+        url "$nexusRoot/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}"
+        credentials { username ossrhUsername; password ossrhPassword }
       }
     }
     repoClosure = {
@@ -30,12 +23,14 @@ buildscript {
   repositories repoClosure
 }
 
+
 allprojects { project ->
 
   project.repositories rootProject.repoClosure
 
-  group = 'org.helium'
-  version = "3.2.37-SNAPSHOT"
+  group = 'io.github.helium-cloud'
+  //version = "1.0.0-SNAPSHOT"
+  version = "1.0.0-release"
 }
 
 def mavenPublishIgnoreList = ['helium-sample']
@@ -47,7 +42,6 @@ subprojects { project ->
   apply plugin: 'maven-publish'
 
   tasks.withType(JavaCompile) {
-//        sourceCompatibilLogoApplicationListenerity = 1.8
     options.encoding = "UTF-8"
   }
 
