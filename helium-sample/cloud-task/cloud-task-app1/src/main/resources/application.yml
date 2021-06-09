@@ -4,19 +4,19 @@ spring:
   application:
     name: cloud-rpc-provider
 
-dubbo:
-  protocol:
-    name: dubbo
-    port: 8191
-  ## Dubbo Registry
-  registry:
-    address: zookeeper://10.10.208.86:2181?backup=10.10.208.87:2181,10.10.208.90:2181
-    file: ${user.home}/dubbo-cache/${spring.application.name}/dubbo.cache
-
-  metadata-report:
-    address: zookeeper://10.10.208.86:2181?backup=10.10.208.87:2181,10.10.208.90:2181
-  scan:
-    base-packages: org.helium.sample.boot.service
+#dubbo:
+#  protocol:
+#    name: dubbo
+#    port: 8191
+#  ## Dubbo Registry
+#  registry:
+#    address: zookeeper://10.10.208.86:2181?backup=10.10.208.87:2181,10.10.208.90:2181
+#    file: ${user.home}/dubbo-cache/${spring.application.name}/dubbo.cache
+#
+#  metadata-report:
+#    address: zookeeper://10.10.208.86:2181?backup=10.10.208.87:2181,10.10.208.90:2181
+#  scan:
+#    base-packages: org.helium.sample.boot.service
 helium:
   task:
     package: org.helium.sample.boot.task

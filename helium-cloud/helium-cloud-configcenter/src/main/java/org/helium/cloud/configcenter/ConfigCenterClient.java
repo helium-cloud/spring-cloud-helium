@@ -3,11 +3,12 @@ package org.helium.cloud.configcenter;
 
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.config.Environment;
+import org.apache.dubbo.common.config.configcenter.ConfigChangedEvent;
+import org.apache.dubbo.common.config.configcenter.ConfigurationListener;
+import org.apache.dubbo.common.config.configcenter.DynamicConfiguration;
+import org.apache.dubbo.common.config.configcenter.DynamicConfigurationFactory;
 import org.apache.dubbo.common.extension.ExtensionLoader;
-import org.apache.dubbo.configcenter.ConfigChangeEvent;
-import org.apache.dubbo.configcenter.ConfigurationListener;
-import org.apache.dubbo.configcenter.DynamicConfiguration;
-import org.apache.dubbo.configcenter.DynamicConfigurationFactory;
+
 import org.helium.cloud.common.api.CloudConstant;
 import org.helium.cloud.common.utils.SpringContextUtil;
 import org.helium.cloud.configcenter.autoconfig.ConfigCenterConfig;
@@ -79,7 +80,7 @@ public class ConfigCenterClient {
                     .getExtensionLoader(DynamicConfigurationFactory.class)
                     .getExtension(url.getProtocol());
             DynamicConfiguration configuration = factories.getDynamicConfiguration(url);
-            Environment.getInstance().setDynamicConfiguration(configuration);
+            //Environment.get().setDynamicConfiguration(configuration);
             dynamicConfiguration = configuration;
         }
         //2.自定义配置文件加载此处不启用
@@ -107,7 +108,7 @@ public class ConfigCenterClient {
         String indexKey = KeyUtils.getKey(key, group);
         dynamicConfiguration.addListener(key, group, new ConfigurationListener() {
             @Override
-            public void process(ConfigChangeEvent event) {
+            public void process(ConfigChangedEvent event) {
                 //内部缓存
                 //通知业务侧
                 if (listener != null) {
@@ -116,7 +117,7 @@ public class ConfigCenterClient {
                 switch (event.getChangeType()) {
                     case ADDED:
                     case MODIFIED:
-                        configCenterLocal.putConfig(indexKey, event.getValue());
+                        configCenterLocal.putConfig(indexKey, event.getContent());
                         break;
                     case DELETED:
                         configCenterLocal.deleteConfig(indexKey);
@@ -133,7 +134,7 @@ public class ConfigCenterClient {
     public void removeListener(String key, String group, ConfigurationListener listener) {
         dynamicConfiguration.removeListener(key, group, new ConfigurationListener() {
             @Override
-            public void process(ConfigChangeEvent event) {
+            public void process(ConfigChangedEvent event) {
                 //内部缓存
                 String indexKey = KeyUtils.getKey(key, group);
                 //通知业务侧

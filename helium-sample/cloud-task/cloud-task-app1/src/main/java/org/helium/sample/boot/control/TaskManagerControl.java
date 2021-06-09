@@ -6,7 +6,7 @@ import org.helium.framework.task.TaskProducer;
 import org.helium.sample.boot.entity.SimpleArgs;
 import org.helium.sample.boot.entity.SimpleDtArgs;
 import org.helium.sample.boot.task.SimpleCloudBatchTask;
-import org.helium.sample.boot.task.SimpleCloudDtTask;
+//import org.helium.sample.boot.task.SimpleCloudDtTask;
 import org.helium.sample.boot.task.SimpleCloudTask;
 import org.helium.util.StringUtils;
 import org.slf4j.Logger;
@@ -25,9 +25,9 @@ public class TaskManagerControl {
 
     @TaskEvent(SimpleCloudTask.TAG)
     private TaskProducer<SimpleArgs> simpleCloudTask;
-
-	@TaskEvent(SimpleCloudDtTask.TAG)
-	private TaskProducer<SimpleDtArgs> simpleCloudDtTask;
+//
+//	@TaskEvent(SimpleCloudDtTask.TAG)
+//	private TaskProducer<SimpleDtArgs> simpleCloudDtTask;
 
 
 	@TaskEvent(SimpleCloudBatchTask.TAG)
@@ -52,8 +52,8 @@ public class TaskManagerControl {
 			uuid = userid;
 		}
 		simpleDtArgs.setUser(uuid);
-		LOGGER.info("simpleCloudDtTask task producer:{}", uuid);
-		simpleCloudDtTask.produce(simpleDtArgs);
+//		LOGGER.info("simpleCloudDtTask task producer:{}", uuid);
+//		simpleCloudDtTask.produce(simpleDtArgs);
 		return "simple task";
 	}
 

@@ -1,6 +1,6 @@
 package org.helium.framework.spring.autoconfigure;
 
-import org.helium.cloud.task.autoconfigure.TaskEventBeanHandler;
+//import org.helium.cloud.task.autoconfigure.TaskEventBeanHandler;
 import org.helium.framework.BeanContext;
 import org.helium.framework.annotations.ServiceInterface;
 import org.helium.framework.module.Module;
@@ -44,12 +44,12 @@ public class HeliumAutoWired implements ApplicationContextAware, EmbeddedValueRe
 	private StringValueResolver stringValueResolver;
 
 	private ConversionService conversionService;
-
-	/**
-	 * TaskEvent处理
-	 */
-	@Autowired
-	private TaskEventBeanHandler taskEventBeanHandler;
+//
+//	/**
+//	 * TaskEvent处理
+//	 */
+//	@Autowired
+//	private TaskEventBeanHandler taskEventBeanHandler;
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -185,7 +185,7 @@ public class HeliumAutoWired implements ApplicationContextAware, EmbeddedValueRe
 	 */
 	private void resolveFieldInject(Object object, Class<?> objClz) {
 		setField(object, objClz);
-		taskEventBeanHandler.processTaskEvent(object, objClz.getSimpleName());
+		//taskEventBeanHandler.processTaskEvent(object, objClz.getSimpleName());
 	}
 
 	/**

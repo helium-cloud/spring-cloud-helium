@@ -6,7 +6,6 @@ dependencies {
   compile group: 'org.apache.dubbo', name: 'dubbo-remoting-api', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-config-api', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-container-api', version: dubbo_version
-  compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-api', version: dubbo_version
   compile group: 'org.apache.dubbo', name: 'dubbo-configcenter-nacos', version: dubbo_version
   compile(group: 'org.apache.dubbo', name: 'dubbo-registry-zookeeper', version: dubbo_version) {
     exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //by both name and group

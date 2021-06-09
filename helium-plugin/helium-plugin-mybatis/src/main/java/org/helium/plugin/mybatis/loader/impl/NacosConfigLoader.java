@@ -2,9 +2,10 @@ package org.helium.plugin.mybatis.loader.impl;
 
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.config.Environment;
+import org.apache.dubbo.common.config.configcenter.DynamicConfiguration;
+import org.apache.dubbo.common.config.configcenter.DynamicConfigurationFactory;
 import org.apache.dubbo.common.extension.ExtensionLoader;
-import org.apache.dubbo.configcenter.DynamicConfiguration;
-import org.apache.dubbo.configcenter.DynamicConfigurationFactory;
+
 import org.helium.plugin.mybatis.model.ConfigModel;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,6 +50,6 @@ public class NacosConfigLoader extends AbstractConfigLoader implements Initializ
         URL url = URL.valueOf(position);
         DynamicConfigurationFactory factories = ExtensionLoader.getExtensionLoader(DynamicConfigurationFactory.class).getExtension(url.getProtocol());
         configuration = factories.getDynamicConfiguration(url);
-        Environment.getInstance().setDynamicConfiguration(configuration);
+        //Environment.getInstance().setDynamicConfiguration(configuration);
     }
 }

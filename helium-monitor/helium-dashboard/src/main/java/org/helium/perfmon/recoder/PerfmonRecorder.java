@@ -41,9 +41,9 @@ public class PerfmonRecorder{
 	/** 表名 */
 	private String tableNameFormat = "PERFMON_${COUNTER}_${DATE}";
 
-	private PerfmonCountersConfiguration configuration= null;
+	private PerfmonCountersConfiguration configuration=  new PerfmonCountersConfiguration();
 
-	private SimpleQueuedWorker<Tuple<CounterRecorder, ObserverReport>> reportWorker;
+	private SimpleQueuedWorker<Tuple<CounterStorage, ObserverReport>> reportWorker;
 
 	public PerfmonRecorder() {
 
@@ -53,35 +53,20 @@ public class PerfmonRecorder{
 
  		DelayRunner.run(delaySeconds, () -> {
 			reportWorker = new SimpleQueuedWorker<>("perfmonRecorder", t -> {
-			    CounterRecorder recorder = t.getV1();
+			    CounterStorage recorder = t.getV1();
 			    try {
 				    recorder.saveReport(t.getV2());
 			    } catch (SQLException ex) {
 				    LOGGER.error("Save recorder failed:{}", ex.getMessage());
 			    }
 		    });
-			if (configuration != null){
-				for (CounterNode node : configuration.getCounters()) {
-					String category = node.getCounterName();
-					LOGGER.debug(MARKER, "Perfmon add category:{}", category);
+			for (Observable observable: ObserverManager.getAllObserverItems()){
+				CounterStorage counterStorage = new CounterStorage(observable, dateFormat, tableNameFormat);
 
-					Observable ob = ObserverManager.getObserverItem(category);
-					if (ob == null) {
-						LOGGER.error(MARKER, "Unknown perfmon category={}", category);
-						continue;
-					}
-					CounterRecorder counterRecorder = new CounterRecorder(ob, dateFormat, tableNameFormat);
-
-					TimeSpan span = new TimeSpan(1000 * node.getInterval());
-					if (span.getTotalSeconds() < 30) {
-						LOGGER.error("Unsupported interval < 30 seconds category={}", category);
-						continue;
-					}
-
-					ObserverManager.addInspector(ob, ObserverReportMode.ALL, span, counterRecorder.getReportCallback(
-							t -> reportWorker.enqueue(t)
-					));
-				}
+				TimeSpan span = new TimeSpan(1000 * 50);
+				ObserverManager.addInspector(observable, ObserverReportMode.ALL, span, counterStorage.getReportCallback(
+						t -> reportWorker.enqueue(t)
+				));
 			}
 
 		});

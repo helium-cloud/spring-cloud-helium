@@ -1,7 +1,7 @@
 package org.helium.cloud.configcenter.autoconfig;
 
-import org.apache.dubbo.configcenter.ConfigChangeEvent;
-import org.apache.dubbo.configcenter.ConfigurationListener;
+import org.apache.dubbo.common.config.configcenter.ConfigChangedEvent;
+import org.apache.dubbo.common.config.configcenter.ConfigurationListener;
 import org.helium.cloud.configcenter.ConfigCenterClient;
 import org.helium.cloud.configcenter.utils.LoaderUtils;
 import org.helium.framework.annotations.FieldSetter;
@@ -89,7 +89,7 @@ public class FieldSetterBeanPostProcessor implements BeanPostProcessor {
 
 				configCenterClient.addListener(key, fieldSetter.group(), new ConfigurationListener() {
 					@Override
-					public void process(ConfigChangeEvent event) {
+					public void process(ConfigChangedEvent event) {
 
 						try {
 							String newValue = configCenterClient.get(key, fieldSetter.group());

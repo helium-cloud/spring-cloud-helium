@@ -10,7 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * kafka生产者loader
+ * EsClientLoader
+ *
  */
 public class EsClientLoader implements FieldLoader {
     private static final Logger LOGGER = LoggerFactory.getLogger(EsClientManager.class);

@@ -1,11 +1,10 @@
 dependencies {
   compile group: 'org.slf4j', name: 'slf4j-api', version: slf4j_version
   compile group: 'org.osgi', name: 'org.osgi.core', version: osgi_version
-  compile group: 'com.sun.tools', name: 'tools-lite', version: tools_lite_version
   compile group: 'com.alibaba', name: 'fastjson', version: fastjson_version
   compile group: 'com.google.code.gson', name: 'gson', version: gson_version
   compile group: 'org.freemarker', name: 'freemarker', version: freemarker_version
+  compile files("${System.properties['java.home']}/../lib/tools.jar")
 
   testCompile group: 'junit', name: 'junit', version: junit_version
-  //testCompile group: 'org.unitils', name: 'unitils-core', version: unitils_version
 }

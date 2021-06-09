@@ -1,9 +1,10 @@
 package org.helium.config;
 
 
-import org.helium.cloud.task.autoconfigure.HeliumTaskConfig;
-import org.helium.perfmon.controller.GetBeansControl;
+//import org.helium.cloud.task.autoconfigure.HeliumTaskConfig;
+//import org.helium.perfmon.controller.GetBeansControl;
 import org.helium.perfmon.controller.GetCategoriesController;
+import org.helium.perfmon.controller.PerfmonController;
 import org.helium.perfmon.controller.PullController;
 import org.helium.perfmon.controller.SubscribeController;
 import org.helium.perfmon.recoder.PerfmonRecorder;
@@ -14,20 +15,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableConfigurationProperties(HeliumTaskConfig.class)
+//@EnableConfigurationProperties(HeliumTaskConfig.class)
 public class PerfmonConfiguration {
 	private static final Logger LOGGER = LoggerFactory.getLogger(PerfmonConfiguration.class);
 
 
-	/**
-	 * GetBeansControl
-	 *
-	 * @return
-	 */
-	@Bean
-	public GetBeansControl getBeansControl() {
-		return new GetBeansControl();
-	}
+//	/**
+//	 * GetBeansControl
+//	 *
+//	 * @return
+//	 */
+//	@Bean
+//	public GetBeansControl getBeansControl() {
+//		return new GetBeansControl();
+//	}
 
 	/**
 	 * GetCategoriesController
@@ -73,5 +74,10 @@ public class PerfmonConfiguration {
 	@Bean
 	public PerfmonRecorder perfmonRecorder() {
 		return new PerfmonRecorder();
+	}
+
+	@Bean
+	public PerfmonController  perfmonController(){
+		return new PerfmonController();
 	}
 }
