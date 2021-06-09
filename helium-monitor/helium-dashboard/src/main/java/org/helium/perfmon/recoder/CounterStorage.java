@@ -24,7 +24,9 @@ public class CounterStorage {
 	private String lastDateString;
 	private SimpleDateFormat dateFormat;
 	private static final Logger LOGGER = LoggerFactory.getLogger(CounterStorage.class);
-
+	public CounterStorage() {
+		initStorage();
+	}
 	public CounterStorage(Observable ob, String dateFormat, String tableNameFormat) {
 
 		this.dateFormat = new SimpleDateFormat(dateFormat);
@@ -50,7 +52,7 @@ public class CounterStorage {
 		Statement createStatement = H2DataSource.getInstance().getConnection().createStatement();
 		//Time,Service,Pid,Instance
 		String createTable = "DROP TABLE perfmon_tb IF EXISTS; create table perfmon_tb(Time VARCHAR(50), " +
-				"Service VARCHAR(50) , Pid VARCHAR(50) ,Instance VARCHAR(50), ,Data VARCHAR(50) )";
+				"Service VARCHAR(50) , Pid VARCHAR(50) ,Instance VARCHAR(50), Data VARCHAR(50) )";
 		createStatement.executeUpdate(createTable);
 
 	}
@@ -99,6 +101,10 @@ public class CounterStorage {
 				return true;
 			}
 		};
+	}
+
+	public static void main(String[] args) {
+		CounterStorage counterStorage = new CounterStorage();
 	}
 
 }
