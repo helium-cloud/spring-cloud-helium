@@ -1,0 +1,4 @@
+fixed=org.helium.common.threadpool.support.fixed.FixedThreadPool
+cached=org.helium.common.threadpool.support.cached.CachedThreadPool
+limited=org.helium.common.threadpool.support.limited.LimitedThreadPool
+eager=org.helium.common.threadpool.support.eager.EagerThreadPool

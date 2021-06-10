@@ -1,0 +1,2 @@
+direct=org.helium.event.DirectEventDispatcher
+parallel=org.helium.event.ParallelEventDispatcher

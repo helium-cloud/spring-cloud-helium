@@ -1,0 +1,2 @@
+adaptive=org.helium.common.extension.factory.AdaptiveExtensionFactory
+spi=org.helium.common.extension.factory.SpiExtensionFactory

@@ -1,0 +1,2 @@
+memory=org.helium.common.status.support.MemoryStatusChecker
+load=org.helium.common.status.support.LoadStatusChecker

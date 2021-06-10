@@ -1,0 +1,3 @@
+# Converter
+string-to-double=String2DoubleConverter
+string-to-integer=String2IntegerConverter

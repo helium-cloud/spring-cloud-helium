@@ -1,0 +1,3 @@
+org.helium.common.extension.HeliumInternalLoadingStrategy
+org.helium.common.extension.HeliumLoadingStrategy
+org.helium.common.extension.ServicesLoadingStrategy

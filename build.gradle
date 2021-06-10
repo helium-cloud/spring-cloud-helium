@@ -5,16 +5,15 @@ buildscript {
       nexusRoot = 'https://s01.oss.sonatype.org/content/repositories'
       return {
         url "$nexusRoot/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}"
-        credentials { username ossrhUsername; password ossrhPassword }
+        //credentials { username ossrhUsername; password ossrhPassword }
       }
     }
     repoClosure = {
-      mavenLocal()
-      maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+      mavenCentral()
       maven { url "https://repo.spring.io/snapshot/" }
       maven { url "https://repo1.maven.org/maven2/" }
-      mavenCentral()
 
+      mavenLocal()
 
     }
     versionTail = new Date().format('yyMMddHHmm')

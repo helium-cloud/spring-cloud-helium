@@ -1,0 +1,1 @@
+default=org.helium.common.lang.DefaultShutdownHookCallback

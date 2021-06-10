@@ -1,0 +1,2 @@
+adaptive=org.helium.common.extension.adaptive.impl.HasAdaptiveExt_ManualAdaptive
+impl1=org.helium.common.extension.adaptive.impl.HasAdaptiveExtImpl1

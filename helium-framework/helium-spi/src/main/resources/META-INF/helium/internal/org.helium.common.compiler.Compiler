@@ -1,0 +1,2 @@
+adaptive=org.helium.common.compiler.support.AdaptiveCompiler
+jdk=org.helium.common.compiler.support.JdkCompiler

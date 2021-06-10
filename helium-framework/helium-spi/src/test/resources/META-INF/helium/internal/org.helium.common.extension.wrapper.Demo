@@ -1,0 +1,4 @@
+demo=org.helium.common.extension.wrapper.impl.DemoImpl
+wrapper=org.helium.common.extension.wrapper.impl.DemoWrapper
+wrapper2=org.helium.common.extension.wrapper.impl.DemoWrapper2
+demo2=org.helium.common.extension.wrapper.impl.DemoImpl
