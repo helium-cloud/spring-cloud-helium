@@ -39,7 +39,7 @@ public class H2DataSourceTest {
 		Statement insertStatement = H2DataSource.getInstance().getConnection().createStatement();
 		String insertSql = "INSERT INTO h2test_tb VALUES(1,'h2test')";
 		insertStatement.executeUpdate(insertSql);
-		String selectSql = "select id,name from h2test_tb";
+		String selectSql = "select id,name from h2test_tb where id = 1";
 		PreparedStatement prepareStatement = H2DataSource.getInstance().getConnection().prepareStatement(selectSql);
 		// 发送SQL 返回一个ResultSet
 		ResultSet rs = prepareStatement.executeQuery();
