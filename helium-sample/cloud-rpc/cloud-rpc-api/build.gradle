@@ -1,7 +1,7 @@
 dependencies {
   compile project(':helium-framework:helium-logging')
   compile project(':helium-cloud:helium-cloud-rpc')
-  compile project(':helium-monitor:helium-dashboard')
+  compile project(':helium-plugin:helium-monitor')
 
   testCompile group: 'junit', name: 'junit', version: '4.11'
 }

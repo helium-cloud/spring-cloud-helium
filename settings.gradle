@@ -1,9 +1,12 @@
 rootProject.name = 'spring-cloud-helium'
 //helium-common
 include 'helium-framework:helium-spi'
-//include 'helium-framework:helium-superpojo'
-//include 'helium-framework:helium-common'
-//include 'helium-framework:helium-logging'
+include 'helium-framework:helium-superpojo'
+include 'helium-framework:helium-common'
+include 'helium-framework:helium-logging'
+
+include 'helium-plugin:helium-h2database'
+include 'helium-plugin:helium-monitor'
 
 ////helium-cloud
 //include 'helium-cloud:helium-cloud-common'
@@ -31,7 +34,7 @@ include 'helium-framework:helium-spi'
 //include 'helium-plugin:helium-http'
 //include 'helium-plugin:helium-h2database'
 //
-//include 'helium-monitor:helium-dashboard'
+
 //
 ////simple
 //include ':helium-sample:cloud-task:cloud-task-app1'
