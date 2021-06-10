@@ -15,14 +15,14 @@
  * limitations under the License.
  */
 package org.helium.common.extension.adaptive;
-import ExtensionLoader;
-public class HasAdaptiveExt$Adaptive implements HasAdaptiveExt {
-public java.lang.String echo(URL arg0, java.lang.String arg1)  {
+import org.helium.common.extension.ExtensionLoader;
+public class HasAdaptiveExt$Adaptive implements org.helium.common.extension.adaptive.HasAdaptiveExt {
+public java.lang.String echo(org.helium.common.URL arg0, java.lang.String arg1)  {
 if (arg0 == null) throw new IllegalArgumentException("url == null");
-URL url = arg0;
+org.helium.common.URL url = arg0;
 String extName = url.getParameter("has.adaptive.ext", "adaptive");
-if(extName == null) throw new IllegalStateException("Failed to get extension (HasAdaptiveExt) name from url (" + url.toString() + ") use keys([has.adaptive.ext])");
-HasAdaptiveExt extension = (HasAdaptiveExt)ExtensionLoader.getExtensionLoader(HasAdaptiveExt.class).getExtension(extName);
+if(extName == null) throw new IllegalStateException("Failed to get extension (org.helium.common.extension.adaptive.HasAdaptiveExt) name from url (" + url.toString() + ") use keys([has.adaptive.ext])");
+org.helium.common.extension.adaptive.HasAdaptiveExt extension = (org.helium.common.extension.adaptive.HasAdaptiveExt)ExtensionLoader.getExtensionLoader(org.helium.common.extension.adaptive.HasAdaptiveExt.class).getExtension(extName);
 return extension.echo(arg0, arg1);
 }
 }
