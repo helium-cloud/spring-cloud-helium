@@ -18,10 +18,7 @@ package org.helium.common.constants;
 
 import org.junit.jupiter.api.Test;
 
-import static org.helium.common.constants.CommonConstants.COMMA_SEPARATOR_CHAR;
-import static org.helium.common.constants.CommonConstants.COMPOSITE_METADATA_STORAGE_TYPE;
-import static org.helium.common.constants.CommonConstants.DEFAULT_SERVICE_NAME_MAPPING_PROPERTIES_PATH;
-import static org.helium.common.constants.CommonConstants.SERVICE_NAME_MAPPING_PROPERTIES_FILE_KEY;
+import static org.helium.common.constants.CommonConstants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**

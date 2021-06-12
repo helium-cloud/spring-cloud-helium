@@ -16,9 +16,8 @@
  */
 package org.helium.common.extension;
 
-import org.helium.common.utils.IOUtils;
 import org.helium.common.extension.adaptive.HasAdaptiveExt;
-
+import org.helium.common.utils.IOUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

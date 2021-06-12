@@ -18,9 +18,7 @@ package org.helium.common.config.configcenter;
 
 import org.junit.jupiter.api.Test;
 
-import static org.helium.common.config.configcenter.ConfigChangeType.ADDED;
-import static org.helium.common.config.configcenter.ConfigChangeType.DELETED;
-import static org.helium.common.config.configcenter.ConfigChangeType.MODIFIED;
+import static org.helium.common.config.configcenter.ConfigChangeType.*;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 /**

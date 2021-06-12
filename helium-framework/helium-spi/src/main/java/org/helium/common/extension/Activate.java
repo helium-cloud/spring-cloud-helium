@@ -3,11 +3,7 @@ package org.helium.common.extension;
 
 import org.helium.common.URL;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Activate. This annotation is useful for automatically activate certain extensions with the given criteria,

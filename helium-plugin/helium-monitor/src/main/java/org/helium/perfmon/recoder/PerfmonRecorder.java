@@ -2,7 +2,6 @@ package org.helium.perfmon.recoder;
 
 import com.feinno.superpojo.type.TimeSpan;
 import org.helium.framework.entitys.PerfmonCountersConfiguration;
-import org.helium.framework.entitys.PerfmonCountersConfiguration.CounterNode;
 import org.helium.perfmon.observation.Observable;
 import org.helium.perfmon.observation.ObserverManager;
 import org.helium.perfmon.observation.ObserverReport;
@@ -51,7 +50,7 @@ public class PerfmonRecorder{
 		// 因为存在不少计数器初始化比较晚的问题, 等系统完全初始化完成后再加载计数器
 		int delaySeconds = PerfmonCountersConfiguration.DEFAULT_DELAY_SECONDS;
 
- 		DelayRunner.run(delaySeconds, () -> {
+ 		DelayRunner.run(1, () -> {
 			reportWorker = new SimpleQueuedWorker<>("perfmonRecorder", t -> {
 			    CounterStorage recorder = t.getV1();
 			    try {
@@ -62,8 +61,7 @@ public class PerfmonRecorder{
 		    });
 			for (Observable observable: ObserverManager.getAllObserverItems()){
 				CounterStorage counterStorage = new CounterStorage(observable, dateFormat, tableNameFormat);
-
-				TimeSpan span = new TimeSpan(1000 * 50);
+				TimeSpan span = new TimeSpan(1000 * 10);
 				ObserverManager.addInspector(observable, ObserverReportMode.ALL, span, counterStorage.getReportCallback(
 						t -> reportWorker.enqueue(t)
 				));

@@ -1,9 +1,9 @@
 
 package org.helium.event;
 
-import org.helium.common.utils.ReflectUtils;
 import org.helium.common.extension.SPI;
 import org.helium.common.lang.Prioritized;
+import org.helium.common.utils.ReflectUtils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

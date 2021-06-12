@@ -6,7 +6,6 @@ import org.helium.framework.task.TaskProducer;
 import org.helium.sample.boot.entity.SimpleArgs;
 import org.helium.sample.boot.entity.SimpleDtArgs;
 import org.helium.sample.boot.task.SimpleCloudBatchTask;
-//import org.helium.sample.boot.task.SimpleCloudDtTask;
 import org.helium.sample.boot.task.SimpleCloudTask;
 import org.helium.util.StringUtils;
 import org.slf4j.Logger;

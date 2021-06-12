@@ -1,11 +1,7 @@
 
 package org.helium.common.utils;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Member;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 
 /**
  * Java Reflection {@link Member} Utilities class

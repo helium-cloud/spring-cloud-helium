@@ -16,10 +16,10 @@
  */
 package org.helium.common.extension.wrapper;
 
+import org.helium.common.extension.ExtensionLoader;
 import org.helium.common.extension.Wrapper;
 import org.helium.common.extension.wrapper.impl.DemoWrapper;
 import org.helium.common.extension.wrapper.impl.DemoWrapper2;
-import org.helium.common.extension.ExtensionLoader;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

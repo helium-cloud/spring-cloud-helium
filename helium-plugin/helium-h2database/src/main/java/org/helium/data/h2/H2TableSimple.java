@@ -1,8 +1,4 @@
-package org.helium.data.h2.test;
-
-import org.helium.data.h2.H2DataSource;
-import org.junit.Assert;
-import org.junit.Test;
+package org.helium.data.h2;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,34 +7,19 @@ import java.sql.Statement;
 
 /**
  * @author wuhao
- * @createTime 2021-06-09 09:41:00
+ * @createTime 2021-06-11 11:15:00
  */
-public class H2DataSourceTest {
+public class H2TableSimple {
 	private static final String CREATE_TABLE = "DROP TABLE h2test_tb IF EXISTS; create table h2test_tb(id integer,name VARCHAR(22) )";
 	private static final String INSERT_SQL = "INSERT INTO h2test_tb VALUES(%s,'%s')";
 	private static final String SELECT_SQL = "SELECT id,name from h2test_tb where id = %s";
 	private static final String DELETE_SQL = "DELETE FROM h2test_tb WHERE id = %s";
 
-	@Test
 	public void testCreateTable() throws SQLException {
 		Statement createStatement = H2DataSource.getH2Connection().createStatement();
-		long f1 = createStatement.executeUpdate(CREATE_TABLE);
-		Assert.assertEquals(f1, 0);
+		createStatement.executeUpdate(CREATE_TABLE);
 	}
 
-	@Test
-	public void testInsert() throws SQLException {
-		int i = 1;
-		String value = "h2test";
-		testCreateTable();
-		Statement insertStatement = H2DataSource.getH2Connection().createStatement();
-		String insertSql = String.format(INSERT_SQL, i, value);
-		long f2 = insertStatement.executeUpdate(insertSql);
-		System.out.println("testInsert：" + f2);
-		Assert.assertEquals(f2, 1);
-	}
-
-	@Test
 	public void testSelect() throws SQLException {
 		int i = 1;
 		String value = "h2test";
@@ -58,10 +39,9 @@ public class H2DataSourceTest {
 			name = rs.getString(2);
 			System.out.println("id:" + id + " name:" + name);
 		}
-		Assert.assertEquals(value, name);
+
 	}
 
-	@Test
 	public void testDelete() throws SQLException {
 		int i = 1;
 		String value = "h2test";
@@ -91,8 +71,12 @@ public class H2DataSourceTest {
 		while (rs.next()) {
 			j++;
 		}
-		Assert.assertEquals(0, j);
+		System.out.println("search ret size:" + j);
 
 	}
 
+	public static void main(String[] args) throws SQLException {
+		H2TableSimple h2TableSimple = new H2TableSimple();
+		h2TableSimple.testSelect();
+	}
 }

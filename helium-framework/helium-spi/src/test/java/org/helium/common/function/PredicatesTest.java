@@ -18,10 +18,7 @@ package org.helium.common.function;
 
 import org.junit.jupiter.api.Test;
 
-import static org.helium.common.function.Predicates.alwaysFalse;
-import static org.helium.common.function.Predicates.alwaysTrue;
-import static org.helium.common.function.Predicates.and;
-import static org.helium.common.function.Predicates.or;
+import static org.helium.common.function.Predicates.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

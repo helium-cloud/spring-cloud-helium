@@ -1,4 +1,5 @@
 dependencies {
+  compile project(':helium-framework:helium-spi')
   compile project(':helium-framework:helium-superpojo')
 
 }

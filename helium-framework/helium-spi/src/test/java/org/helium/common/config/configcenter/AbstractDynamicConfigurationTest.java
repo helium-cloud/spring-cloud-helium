@@ -17,7 +17,6 @@
 package org.helium.common.config.configcenter;
 
 import org.helium.common.URL;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,20 +24,9 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import static org.helium.common.config.configcenter.AbstractDynamicConfiguration.DEFAULT_THREAD_POOL_KEEP_ALIVE_TIME;
-import static org.helium.common.config.configcenter.AbstractDynamicConfiguration.DEFAULT_THREAD_POOL_PREFIX;
-import static org.helium.common.config.configcenter.AbstractDynamicConfiguration.DEFAULT_THREAD_POOL_SIZE;
-import static org.helium.common.config.configcenter.AbstractDynamicConfiguration.GROUP_PARAM_NAME;
-import static org.helium.common.config.configcenter.AbstractDynamicConfiguration.PARAM_NAME_PREFIX;
-import static org.helium.common.config.configcenter.AbstractDynamicConfiguration.THREAD_POOL_KEEP_ALIVE_TIME_PARAM_NAME;
-import static org.helium.common.config.configcenter.AbstractDynamicConfiguration.THREAD_POOL_PREFIX_PARAM_NAME;
-import static org.helium.common.config.configcenter.AbstractDynamicConfiguration.THREAD_POOL_SIZE_PARAM_NAME;
-import static org.helium.common.config.configcenter.AbstractDynamicConfiguration.TIMEOUT_PARAM_NAME;
+import static org.helium.common.config.configcenter.AbstractDynamicConfiguration.*;
 import static org.helium.common.config.configcenter.DynamicConfiguration.DEFAULT_GROUP;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * {@link AbstractDynamicConfiguration} Test

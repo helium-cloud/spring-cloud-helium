@@ -3,11 +3,7 @@ package org.helium.event;
 
 import org.helium.common.extension.ExtensionLoader;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.ServiceLoader;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.Executor;
@@ -17,7 +13,6 @@ import java.util.stream.Stream;
 
 import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
-import static org.helium.event.EventListener.findEventType;
 
 /**
  * The abstract {@link EventDispatcher} providers the common implementation.

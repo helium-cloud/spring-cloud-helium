@@ -3,16 +3,12 @@ package org.helium.common.config.configcenter;
 
 import org.helium.common.URL;
 import org.helium.common.constants.CommonConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.helium.common.utils.NamedThreadFactory;
 import org.helium.common.utils.SPIStringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * The abstract implementation of {@link DynamicConfiguration}

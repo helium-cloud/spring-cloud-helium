@@ -1,8 +1,8 @@
 
 package org.helium.common;
 
-import org.helium.common.utils.SPIStringUtils;
 import org.helium.common.constants.CommonConstants;
+import org.helium.common.utils.SPIStringUtils;
 
 /**
  * 2019-10-10

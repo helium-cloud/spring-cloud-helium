@@ -29,9 +29,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.helium.common.utils;
 
-import static java.lang.Character.MIN_HIGH_SURROGATE;
-import static java.lang.Character.MIN_LOW_SURROGATE;
-import static java.lang.Character.MIN_SUPPLEMENTARY_CODE_POINT;
+import static java.lang.Character.*;
 
 /**
  * See original <a href=

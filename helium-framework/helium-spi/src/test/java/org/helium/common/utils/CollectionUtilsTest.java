@@ -19,31 +19,14 @@ package org.helium.common.utils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptySet;
-import static java.util.Collections.singleton;
-import static org.helium.common.utils.CollectionUtils.isEmpty;
-import static org.helium.common.utils.CollectionUtils.isNotEmpty;
-import static org.helium.common.utils.CollectionUtils.ofSet;
-import static org.helium.common.utils.CollectionUtils.toMap;
-import static org.helium.common.utils.CollectionUtils.toStringMap;
+import static java.util.Collections.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.helium.common.utils.CollectionUtils.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CollectionUtilsTest {
     @Test

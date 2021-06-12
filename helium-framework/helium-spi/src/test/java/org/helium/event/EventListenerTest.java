@@ -20,7 +20,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.helium.event.EventListener.findEventType;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * {@link EventListener} Test

@@ -25,9 +25,7 @@ import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
-import static org.helium.common.function.Streams.filterList;
-import static org.helium.common.function.Streams.filterSet;
-import static org.helium.common.function.Streams.filterStream;
+import static org.helium.common.function.Streams.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**

@@ -1,10 +1,10 @@
 
 package org.helium.common.extension.support;
 
-import org.helium.common.utils.ArrayUtils;
 import org.helium.common.extension.Activate;
 import org.helium.common.extension.ExtensionLoader;
 import org.helium.common.extension.SPI;
+import org.helium.common.utils.ArrayUtils;
 
 import java.util.Arrays;
 import java.util.Comparator;

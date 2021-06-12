@@ -17,14 +17,13 @@
 
 package org.helium.common.status.support;
 
+import org.hamcrest.Matchers;
+import org.helium.common.status.Status;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.helium.common.status.Status;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.anyOf;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class MemoryStatusCheckerTest {

@@ -21,16 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
 
-import static org.helium.common.utils.MethodUtils.excludedDeclaredClass;
-import static org.helium.common.utils.MethodUtils.findMethod;
-import static org.helium.common.utils.MethodUtils.findNearestOverriddenMethod;
-import static org.helium.common.utils.MethodUtils.findOverriddenMethod;
-import static org.helium.common.utils.MethodUtils.getAllDeclaredMethods;
-import static org.helium.common.utils.MethodUtils.getAllMethods;
-import static org.helium.common.utils.MethodUtils.getDeclaredMethods;
-import static org.helium.common.utils.MethodUtils.getMethods;
-import static org.helium.common.utils.MethodUtils.invokeMethod;
-import static org.helium.common.utils.MethodUtils.overrides;
+import static org.helium.common.utils.MethodUtils.*;
 
 public class MethodUtilsTest {
 

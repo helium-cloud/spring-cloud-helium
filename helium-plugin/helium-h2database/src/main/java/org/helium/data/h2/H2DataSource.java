@@ -1,71 +1,50 @@
 package org.helium.data.h2;
 
-import org.h2.tools.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 
 /**
+ * 对外提供使用
  * @author wuhao
- *
  * @createTime 2021-06-09 09:25:00
  */
 public class H2DataSource implements DataSource {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(H2DataSource.class);
 
-	private static volatile H2DataSource h2DataSource;
-	private static final String URL = "jdbc:h2:~/test";
-	private static final String USER = "sa";
-	private static final String PWD = "";
-
-	private Connection connection = null;
+	private H2DataBase h2DataBase;
 
 	public static H2DataSource getInstance() {
-		if (h2DataSource == null) {
-			synchronized (H2DataSource.class) {
-				if (h2DataSource == null) {
-					try {
-						h2DataSource = new H2DataSource();
-					} catch (Exception e) {
-						LOGGER.error("getInstance Error:", e);
-					}
-				}
-			}
-		}
-		return h2DataSource;
+		return H2DataSourceHoler.INSTANCE;
 	}
 
-	private H2DataSource() throws ClassNotFoundException, SQLException {
-		// 加载H2 DB的JDBC驱动
-		Class.forName("org.h2.Driver");
-		//Server.createWebServer("-web", "-webAllowOthers", "-webPort", "18082");
-		Server server = new Server();
-		server.runTool( "-web", "-webAllowOthers", "-webPort", "18082");
-		// 链接数据库，自动在~创建数据库test，得到联接对象 connection
-		connection = DriverManager.getConnection(URL, USER, PWD);
+	public static Connection getH2Connection() {
+		return H2DataSource.getInstance().h2DataBase.getConnection();
+	}
+
+
+	public static class H2DataSourceHoler {
+		private static H2DataSource INSTANCE = new H2DataSource();
+	}
+
+	private H2DataSource() {
+		h2DataBase = new H2DataBase();
 	}
 
 	@Override
 	public Connection getConnection() throws SQLException {
-		return getConnection(USER, PWD);
+		return getConnection("", "");
 	}
 
 	@Override
 	public Connection getConnection(String username, String password) throws SQLException {
-		if (connection != null && !connection.isClosed()) {
-			return connection;
-		}
-		synchronized (this) {
-			connection = DriverManager.getConnection(URL, USER, PWD);
-		}
-		return null;
+		return h2DataBase.getConnection();
 	}
 
 	@Override

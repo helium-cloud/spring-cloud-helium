@@ -5,13 +5,13 @@
   <outputs>
     <output>
       <appender class="org.helium.logging.spi.ConsoleAppender"/>
-      <appender class="org.helium.cloud.logger.writer.spi.KafkaLogAppender">
-        <setters>
-          <setter field="group">cloud</setter>
-          <setter field="kafkaConfig">sys-logger</setter>
-          <setter field="applicationName">logger-simple</setter>
-        </setters>
-      </appender>
+<!--      <appender class="org.helium.cloud.logger.writer.spi.KafkaLogAppender">-->
+<!--        <setters>-->
+<!--          <setter field="group">cloud</setter>-->
+<!--          <setter field="kafkaConfig">sys-logger</setter>-->
+<!--          <setter field="applicationName">logger-simple</setter>-->
+<!--        </setters>-->
+<!--      </appender>-->
     </output>
   </outputs>
 </logging>

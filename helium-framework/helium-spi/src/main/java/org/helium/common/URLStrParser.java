@@ -1,9 +1,9 @@
 
 package org.helium.common;
 
+import org.helium.common.constants.CommonConstants;
 import org.helium.common.utils.SPIStringUtils;
 import org.helium.common.utils.Utf8Utils;
-import org.helium.common.constants.CommonConstants;
 
 import java.util.Collections;
 import java.util.HashMap;

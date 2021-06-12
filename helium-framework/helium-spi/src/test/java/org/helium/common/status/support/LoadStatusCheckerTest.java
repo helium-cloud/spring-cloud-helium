@@ -17,13 +17,13 @@
 
 package org.helium.common.status.support;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.helium.common.status.Status;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.notNullValue;
 
 public class LoadStatusCheckerTest {
     private static Logger logger = LoggerFactory.getLogger(LoadStatusCheckerTest.class);

@@ -1,8 +1,8 @@
 
 package org.helium.common.config;
 
-import org.helium.common.utils.ConfigUtils;
 import org.helium.common.extension.ExtensionLoader;
+import org.helium.common.utils.ConfigUtils;
 
 import java.util.ArrayList;
 import java.util.List;

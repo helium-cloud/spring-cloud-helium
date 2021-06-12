@@ -2,9 +2,9 @@
 package org.helium.common.extension;
 
 import org.helium.common.URL;
+import org.helium.common.utils.SPIStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.helium.common.utils.SPIStringUtils;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

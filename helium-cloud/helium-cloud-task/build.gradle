@@ -1,6 +1,5 @@
 dependencies {
   compile project(':helium-cloud:helium-cloud-common')
-  compile project(':helium-cloud:helium-cloud-rpc')
   testCompile group: 'org.slf4j', name: 'slf4j-simple', version: slf4j_version
 
 

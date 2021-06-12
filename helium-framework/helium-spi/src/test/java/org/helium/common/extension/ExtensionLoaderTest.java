@@ -16,36 +16,10 @@
  */
 package org.helium.common.extension;
 
-import static org.helium.common.constants.CommonConstants.GROUP_KEY;
-import static org.helium.common.extension.ExtensionLoader.getExtensionLoader;
-import static org.helium.common.extension.ExtensionLoader.getLoadingStrategies;
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.anyOf;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.helium.common.URL;
-//import org.helium.common.convert.Converter;
-//import org.helium.common.convert.StringToBooleanConverter;
-//import org.helium.common.convert.StringToDoubleConverter;
-//import org.helium.common.convert.StringToIntegerConverter;
 import org.helium.common.extension.activate.ActivateExt1;
 import org.helium.common.extension.activate.ActivateWrapperExt1;
-import org.helium.common.extension.activate.impl.ActivateExt1Impl1;
-import org.helium.common.extension.activate.impl.GroupActivateExtImpl;
-import org.helium.common.extension.activate.impl.OrderActivateExtImpl1;
-import org.helium.common.extension.activate.impl.OrderActivateExtImpl2;
-import org.helium.common.extension.activate.impl.ValueActivateExtImpl;
-//import org.helium.common.extension.convert.String2BooleanConverter;
-//import org.helium.common.extension.convert.String2DoubleConverter;
-//import org.helium.common.extension.convert.String2IntegerConverter;
+import org.helium.common.extension.activate.impl.*;
 import org.helium.common.extension.ext1.SimpleExt;
 import org.helium.common.extension.ext1.impl.SimpleExtImpl1;
 import org.helium.common.extension.ext1.impl.SimpleExtImpl2;
@@ -59,25 +33,27 @@ import org.helium.common.extension.ext8_add.AddExt1;
 import org.helium.common.extension.ext8_add.AddExt2;
 import org.helium.common.extension.ext8_add.AddExt3;
 import org.helium.common.extension.ext8_add.AddExt4;
-import org.helium.common.extension.ext8_add.impl.AddExt1Impl1;
-import org.helium.common.extension.ext8_add.impl.AddExt1_ManualAdaptive;
-import org.helium.common.extension.ext8_add.impl.AddExt1_ManualAdd1;
-import org.helium.common.extension.ext8_add.impl.AddExt1_ManualAdd2;
-import org.helium.common.extension.ext8_add.impl.AddExt2_ManualAdaptive;
-import org.helium.common.extension.ext8_add.impl.AddExt3_ManualAdaptive;
-import org.helium.common.extension.ext8_add.impl.AddExt4_ManualAdaptive;
+import org.helium.common.extension.ext8_add.impl.*;
 import org.helium.common.extension.ext9_empty.Ext9Empty;
 import org.helium.common.extension.ext9_empty.impl.Ext9EmptyImpl;
 import org.helium.common.extension.injection.InjectExt;
 import org.helium.common.extension.injection.impl.InjectExtImpl;
 import org.helium.common.lang.Prioritized;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.helium.common.constants.CommonConstants.GROUP_KEY;
+import static org.helium.common.extension.ExtensionLoader.getExtensionLoader;
+import static org.helium.common.extension.ExtensionLoader.getLoadingStrategies;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ExtensionLoaderTest {
     @Test

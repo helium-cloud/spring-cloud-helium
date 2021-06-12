@@ -3,8 +3,8 @@ package org.helium.cloud.task.autoconfigure;
 
 import org.helium.cloud.task.manager.DedicatedTaskFactory;
 import org.helium.cloud.task.manager.TaskConsumerHandler;
+import org.helium.cloud.task.rpc.TaskInvoker;
 import org.helium.cloud.task.rpc.TaskInvokerFactory;
-import org.helium.cloud.task.rpc.TaskInvokerFactoryCenter;
 import org.helium.cloud.task.rpc.TaskInvokerFactoryEntity;
 import org.helium.cloud.task.store.TaskProducerFactoryImpl;
 import org.helium.framework.task.TaskProducerFactory;
@@ -49,7 +49,14 @@ public class HeliumTaskAutoConfiguration {
 		}
 		//占位符处理
 		regUrl = environment.resolvePlaceholders(regUrl);
-		return new TaskInvokerFactoryCenter(regUrl);
+		//return new TaskInvokerFactoryCenter(regUrl);
+		//TODO 待添加
+		return new TaskInvokerFactory() {
+			@Override
+			public TaskInvoker getInvoker() {
+				return null;
+			}
+		};
 	}
 
 	/**

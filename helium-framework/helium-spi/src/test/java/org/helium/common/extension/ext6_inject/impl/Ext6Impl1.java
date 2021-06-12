@@ -20,7 +20,6 @@ import org.helium.common.URL;
 import org.helium.common.extension.ext1.SimpleExt;
 import org.helium.common.extension.ext6_inject.Dao;
 import org.helium.common.extension.ext6_inject.Ext6;
-
 import org.junit.jupiter.api.Assertions;
 
 public class Ext6Impl1 implements Ext6 {

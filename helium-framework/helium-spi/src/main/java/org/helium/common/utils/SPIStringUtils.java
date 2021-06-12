@@ -1,23 +1,13 @@
 
 package org.helium.common.utils;
 
-import org.helium.common.io.UnsafeStringWriter;
 import org.helium.common.constants.CommonConstants;
-
-//import com.alibaba.fastjson.JSON;
+import org.helium.common.io.UnsafeStringWriter;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static java.lang.String.valueOf;
 
 /**
  * StringUtils

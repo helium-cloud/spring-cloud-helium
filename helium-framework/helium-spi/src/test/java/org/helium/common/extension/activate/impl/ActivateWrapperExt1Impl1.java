@@ -17,8 +17,8 @@
 
 package org.helium.common.extension.activate.impl;
 
-import org.helium.common.extension.activate.ActivateWrapperExt1;
 import org.helium.common.extension.Activate;
+import org.helium.common.extension.activate.ActivateWrapperExt1;
 
 @Activate(order = 1, group = {"order"})
 public class ActivateWrapperExt1Impl1 implements ActivateWrapperExt1 {
