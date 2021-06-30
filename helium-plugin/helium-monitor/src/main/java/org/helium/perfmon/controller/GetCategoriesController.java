@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 @RequestMapping("/perfmon/categories")
-@RestController
 public class GetCategoriesController {
 
 	@GetMapping

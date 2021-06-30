@@ -15,7 +15,6 @@ import java.util.List;
  * Created by Coral on 2015/8/17.
  */
 @RequestMapping("/perfmon/pull")
-@RestController
 public class PullController {
 
 	@GetMapping

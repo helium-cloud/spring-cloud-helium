@@ -17,7 +17,6 @@ import java.io.IOException;
  * Created by Coral on 2015/8/17.
  */
 @RequestMapping("/perfmon/subscribe")
-@RestController
 public class SubscribeController {
 	@RequestMapping
 	public void process(HttpServletRequest request, HttpServletResponse response) throws Exception {

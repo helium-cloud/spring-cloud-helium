@@ -11,8 +11,7 @@ import java.io.IOException;
 /**
  * Created by Coral on 2015/8/17.
  */
-@RequestMapping("/perfmon")
-@RestController
+@RequestMapping("/")
 public class PerfmonController {
 	@GetMapping
 	public String redirctView(HttpServletResponse response)  {
