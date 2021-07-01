@@ -5,7 +5,7 @@ buildscript {
       nexusRoot = 'https://s01.oss.sonatype.org/content/repositories'
       return {
         url "$nexusRoot/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}"
-        //credentials { username ossrhUsername; password ossrhPassword }
+        credentials { username ossrhUsername; password ossrhPassword }
       }
     }
     repoClosure = {
@@ -27,8 +27,8 @@ allprojects { project ->
   project.repositories rootProject.repoClosure
 
   group = 'io.github.helium-cloud'
-  //version = "1.0.0-SNAPSHOT"
-  version = "1.0.0-release"
+  version = "1.0.0-SNAPSHOT"
+  //version = "1.0.0-release"
 }
 
 def mavenPublishIgnoreList = ['helium-sample']
