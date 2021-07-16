@@ -28,7 +28,6 @@ allprojects { project ->
 
   group = 'io.github.helium-cloud'
   version = "1.0.0-SNAPSHOT"
-  //version = "1.0.0-release"
 }
 
 def mavenPublishIgnoreList = ['helium-sample']
