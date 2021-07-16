@@ -1,6 +1,7 @@
 package org.helium.serialization.superpojo.codec;
 
-import com.feinno.superpojo.SuperPojoManager;
+
+import org.helium.superpojo.SuperPojoManager;
 
 import java.io.IOException;
 

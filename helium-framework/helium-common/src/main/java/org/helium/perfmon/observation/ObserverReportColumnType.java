@@ -1,7 +1,6 @@
 package org.helium.perfmon.observation;
 
-import com.feinno.superpojo.type.EnumInteger;
-
+import org.helium.superpojo.type.EnumInteger;
 
 /**
  * 输出对象类型

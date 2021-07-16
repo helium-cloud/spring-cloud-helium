@@ -1,8 +1,7 @@
 package org.helium.framework.route.center.entity;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Childs;
-import com.feinno.superpojo.annotation.Field;
+
+import org.helium.superpojo.SuperPojo;
 import org.helium.framework.entitys.BeanConfiguration;
 import org.helium.framework.route.ServerEndpoint;
 
@@ -15,19 +14,13 @@ import java.util.List;
  * Created by coral
  */
 public class VersionedBundleNode extends SuperPojo {
-	@Field(id = 1)
+
 	private String bundleName;
 
-	@Field(id = 2)
 	private String bundleVersion;
 
-
-	@Field(id = 3)
 	private List<BeanConfiguration> beans = new ArrayList<>();
 
-
-
-	@Childs(id = 4)
 	private ServerEndpoint serverEndpoint;
 
 	public void addBean(BeanConfiguration bc) {

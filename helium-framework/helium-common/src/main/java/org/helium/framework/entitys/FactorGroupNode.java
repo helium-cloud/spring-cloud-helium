@@ -1,10 +1,6 @@
 package org.helium.framework.entitys;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Childs;
-import com.feinno.superpojo.annotation.Entity;
-import com.feinno.superpojo.annotation.Field;
-import com.feinno.superpojo.annotation.NodeType;
+import org.helium.superpojo.SuperPojo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,21 +15,17 @@ import java.util.List;
  * </grayFactors>
  * Created by Coral on 8/4/15.
  */
-@Entity(name = "factors")
 public class FactorGroupNode extends SuperPojo {
-	@Field(id = 1, name = "condition", type = NodeType.ATTR)
+
 	private String condition;
 
-	@Field(id = 2, name = "duplicate", type = NodeType.ATTR)
 	private boolean duplicate;
 
-	@Field(id = 3, name = "priority", type = NodeType.ATTR)
 	private int priority;
 
-	@Childs(id = 11, parent = "", child = "group")
+
 	private List<FactorGroupNode> groups = new ArrayList<>();
 
-	@Childs(id = 12, parent = "", child = "factor")
 	private List<FactorNode> factors = new ArrayList<>();
 
 	public String getCondition() {
@@ -76,16 +68,6 @@ public class FactorGroupNode extends SuperPojo {
 		this.factors = factors;
 	}
 
-	public static void main(String[] args) {
-		String xml = "<factors condition=\"and\" duplicate=\"true\">\n" +
-				"\t<factor key=\"id\" operator=\"random\" value=\"0.5\"/>\n" +
-				"</factors>";
-
-		FactorGroupNode config = new FactorGroupNode();
-		config.parseXmlFrom(xml);
-		System.out.println(config.toString());
-
-	}
 }
 
 

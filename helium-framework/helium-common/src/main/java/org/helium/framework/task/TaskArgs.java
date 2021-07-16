@@ -1,21 +1,20 @@
 package org.helium.framework.task;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Field;
+
+import org.helium.superpojo.SuperPojo;
 
 public class TaskArgs extends SuperPojo implements Comparable<TaskArgs> {
 
-	@Field(id = 1)
 	private String id;
-	@Field(id = 2)
+
 	private String event;
-	@Field(id = 3)
+
 	private byte[] content;
-	@Field(id = 4)
+
 	private String tag;
-	@Field(id = 5)
+
 	private int priority;
-	@Field(id = 6)
+
 	private long tid;
 
 	private Object object;

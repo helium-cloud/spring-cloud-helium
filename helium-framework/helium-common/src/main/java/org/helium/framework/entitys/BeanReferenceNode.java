@@ -1,8 +1,6 @@
 package org.helium.framework.entitys;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Field;
-import com.feinno.superpojo.annotation.NodeType;
+import org.helium.superpojo.SuperPojo;
 import org.helium.util.TypeUtils;
 
 import java.util.List;
@@ -13,19 +11,15 @@ import java.util.List;
  * Created by Coral on 7/25/15.
  */
 public final class BeanReferenceNode extends SuperPojo {
-	@Field(id = 1, name = "path", type = NodeType.ATTR)
+
 	private String path;
 
-	@Field(id = 2, name = "class", type = NodeType.ATTR)
 	private String clazz;
 
-	@Field(id = 3, name = "interface", type = NodeType.ATTR)
 	private String interfaceClazz;
 
-	@Field(id = 4, name = "endpoints", type = NodeType.ATTR)
 	private String endpointsAttr;
 
-	@Field(id = 5, name = "id", type = NodeType.ATTR)
 	private String id;
 
 	public List<String> getEndpoints() {

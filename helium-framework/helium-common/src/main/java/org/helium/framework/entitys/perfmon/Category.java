@@ -1,7 +1,6 @@
 package org.helium.framework.entitys.perfmon;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Field;
+import org.helium.superpojo.SuperPojo;
 
 import java.util.List;
 
@@ -9,13 +8,11 @@ import java.util.List;
  * Created by Coral on 2015/8/17.
  */
 public class Category extends SuperPojo {
-	@Field(id = 1)
+
 	String name;
 
-	@Field(id = 2)
 	int instance;
 
-	@Field(id = 3)
 	List<ReportColumn> columns;
 
 	public String getName() {

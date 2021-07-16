@@ -1,6 +1,6 @@
 package org.helium.threading;
 
-import com.feinno.superpojo.type.EnumInteger;
+import org.helium.superpojo.type.EnumInteger;
 import org.helium.util.Event;
 import org.helium.util.EventHandler;
 import org.helium.util.Result;
@@ -96,7 +96,7 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  * 的作用是将多个任务组合在一起，统一的协调管理每一个任务的处理结果，且可以选择是同步的等待每一个处理结果还是异步等待处理结果
  * ，以上示例是同步等待线程的处理结果，如果想使用异步方式处理每个任务的结果，方法为
  * {@link FutureGroup#addListener(EventHandler)} ，与
- * {@link Future#addListener(EventHandler)}类似.
+ * {@link Future#(EventHandler)}类似.
  * <p>
  * 
  * @author Lv.Mingwei
@@ -177,7 +177,7 @@ public class FutureGroup<E extends Future> {
 	 * 
 	 * 添加完成的listener，如果此FutureGroup已经完成了运行，则直接执行此listener
 	 * 
-	 * @param listener
+	 * @param
 	 */
 	public void addListener(EventHandler<List<E>> handler) {
 		synchronized (listener) {
@@ -300,7 +300,9 @@ public class FutureGroup<E extends Future> {
 			for (;;) {
 				int state = getState();
 				if (state == 0)
+				{
 					return false;
+				}
 				int nextState = state - 1;
 				if (compareAndSetState(state, nextState)) {
 					if (nextState == 0) {// 如果递减到了0，那么此时返回成功，主动通知等待的线程调用tryAcquireShared方法来获取许可
@@ -335,6 +337,7 @@ enum WaitMode implements EnumInteger {
 		this.value = value;
 	}
 
+	@Override
 	public int intValue() {
 		return value;
 	}

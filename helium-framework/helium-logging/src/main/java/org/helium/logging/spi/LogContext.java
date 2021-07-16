@@ -103,7 +103,7 @@ class LogContext {
 			}
 			LOGGER.info(MARKER, "read logging.xml \r\n {}", xml);
 			LoggingConfiguration configuration = new LoggingConfiguration();
-			configuration.parseXmlFrom(xml);
+			configuration.parseFromJson(xml);
 			return configuration;
 		} catch (Exception e) {
 			LOGGER.error(MARKER, "loading logging.xml failed: \r\n {}", e);

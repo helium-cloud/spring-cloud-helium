@@ -8,7 +8,7 @@
 package org.helium.perfmon.monitor;
 
 
-import com.feinno.superpojo.type.DateTime;
+import org.helium.superpojo.type.DateTime;
 import org.helium.perfmon.observation.ObserverReport;
 
 import java.util.*;

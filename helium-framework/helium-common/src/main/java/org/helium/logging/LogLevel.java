@@ -1,6 +1,7 @@
 package org.helium.logging;
 
-import com.feinno.superpojo.type.EnumInteger;
+
+import org.helium.superpojo.type.EnumInteger;
 
 /**
  * 记录日志的级别
@@ -41,6 +42,7 @@ public enum LogLevel implements EnumInteger {
 	/**
 	 * 为每一个枚举值设置对应的int值
 	 */
+	@Override
 	public int intValue() {
 		return value;
 	}

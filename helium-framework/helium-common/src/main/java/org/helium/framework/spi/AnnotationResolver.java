@@ -1,6 +1,7 @@
 package org.helium.framework.spi;
 
-import com.feinno.superpojo.type.Guid;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.helium.superpojo.type.Guid;
 import org.helium.framework.BeanIdentity;
 import org.helium.framework.BeanType;
 import org.helium.framework.annotations.*;
@@ -44,7 +45,7 @@ public final class AnnotationResolver {
 	 * @param clazz
 	 * @return
 	 */
-	public static BeanConfiguration resolveInstance(Class<?> clazz, BeanContextProvider contextProvider) {
+	public static BeanConfiguration resolveInstance(Class<?> clazz, BeanContextProvider contextProvider) throws JsonProcessingException {
 		BeanConfiguration config = new BeanConfiguration();
 		//
 		// 读取@ServiceInterface, @ServletImplementation, @TaskImplementation Annotation,获取Bean类型
@@ -107,10 +108,10 @@ public final class AnnotationResolver {
 		// 如果ContextProvider不为空， 使用ContextProvider中的信息替换
 		BeanConfiguration config2 = config;
 		if (contextProvider != null) {
-			String xml = config.toXmlString();
+			String xml = config.toJsonString();
 			xml = contextProvider.applyConfigText("bean-" + config.getId(), xml);
 			config2 = new BeanConfiguration();
-			config2.parseXmlFrom(xml);
+			config2.parseFromJson(xml);
 			config2.getObject().setClazz(clazz);
 			config2.getTags().forEach(n -> {
 				config.getTags().forEach(n2 -> {
@@ -164,7 +165,7 @@ public final class AnnotationResolver {
 	 * @param list
 	 * @return
 	 */
-	public static List<SetterNode> resolveSetters(Class<?> clazz, List<SetterNode> list, BeanContextProvider cp) {
+	public static List<SetterNode> resolveSetters(Class<?> clazz, List<SetterNode> list, BeanContextProvider cp) throws JsonProcessingException {
 		if (list == null) {
 			list = new ArrayList<>();
 		}

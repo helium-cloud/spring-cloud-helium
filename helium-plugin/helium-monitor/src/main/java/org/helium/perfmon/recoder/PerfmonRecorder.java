@@ -1,6 +1,6 @@
 package org.helium.perfmon.recoder;
 
-import com.feinno.superpojo.type.TimeSpan;
+import org.helium.superpojo.type.TimeSpan;
 import org.helium.framework.entitys.PerfmonCountersConfiguration;
 import org.helium.perfmon.observation.Observable;
 import org.helium.perfmon.observation.ObserverManager;

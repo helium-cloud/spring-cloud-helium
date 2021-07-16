@@ -1,6 +1,6 @@
 package org.helium.test.perfmon;
 
-import com.feinno.superpojo.type.TimeSpan;
+import org.helium.superpojo.type.TimeSpan;
 import org.helium.perfmon.AbstractCounterEntity;
 import org.helium.perfmon.PerformanceCounterFactory;
 import org.helium.perfmon.observation.*;

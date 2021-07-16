@@ -1,11 +1,7 @@
 package org.helium.framework.entitys;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Entity;
-import com.feinno.superpojo.annotation.Field;
-import com.feinno.superpojo.annotation.NodeType;
-import com.feinno.superpojo.type.AnyNode;
-import com.feinno.superpojo.util.SuperPojoUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.helium.superpojo.SuperPojo;
 import org.helium.framework.configuration.FieldLoader;
 import org.helium.util.XmlUtils;
 
@@ -23,14 +19,13 @@ import org.helium.util.XmlUtils;
  *
  * Created by Coral
  */
-@Entity(name = "setter")
 public class SetterNode extends SuperPojo {
-	@Field(id = 1, name = "field", type = NodeType.ATTR)
+
 	private String field;
 
-	@Field(id = 2, name = "loader", type = NodeType.ATTR)
+
 	private String loader;
-	@Field(id = 3, name = "timeout", type = NodeType.ATTR)
+
 	private int timeout;
 
 	private String key;
@@ -85,21 +80,6 @@ public class SetterNode extends SuperPojo {
 		this.loaderClazz = loaderClazz;
 	}
 
-	/**
-	 * 获取结点中的xml结点
-	 * @return
-	 */
-	public AnyNode getInnerNode() {
-		return SuperPojoUtils.getAnyNode(this);
-	}
-
-	/**
-	 * 获取xml结点中的文本
-	 * @return
-	 */
-	public String getInnerText() {
-		return SuperPojoUtils.getStringAnyNode(this);
-	}
 
 	public boolean isSet() {
 		return isSet;
@@ -122,7 +102,6 @@ public class SetterNode extends SuperPojo {
 	}
 
 	public void setValue(String value) {
-		SuperPojoUtils.setStringAnyNode(this, value);
 		this.value = value;
 	}
 
@@ -149,7 +128,7 @@ public class SetterNode extends SuperPojo {
 		isSet = set;
 	}
 
-	public static SetterNode create(String fieldName, Class<? extends FieldLoader> loaderClazz, String value) {
+	public static SetterNode create(String fieldName, Class<? extends FieldLoader> loaderClazz, String value) throws JsonProcessingException {
 		StringBuilder str = new StringBuilder();
 		str.append("<setter field=\"");
 		str.append(fieldName);
@@ -164,7 +143,7 @@ public class SetterNode extends SuperPojo {
 		str.append("</setter>");
 
 		SetterNode node = new SetterNode();
-		node.parseXmlFrom(str.toString());
+		node.parseFromJson(str.toString());
 		node.setLoaderClazz(loaderClazz);
 		return node;
 	}

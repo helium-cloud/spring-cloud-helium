@@ -1,9 +1,6 @@
-/**
- * Created by Coral on 5/6/15.
- */
 package org.helium.framework.spi;
 
-import com.feinno.superpojo.SuperPojo;
+import org.helium.superpojo.SuperPojo;
 import org.helium.framework.entitys.SetterNode;
 
 import java.util.function.Function;
@@ -39,23 +36,10 @@ enum SetterFieldType {
 	SUPERPOJO(SuperPojo.class) {
 		@Override
 		public Object convertFrom(Class<?> toClazz, SetterNode node) {
-			return node.getInnerNode().convertTo((Class<SuperPojo>) toClazz);
+			return null;
+			//return node.getValue().convertTo((Class<SuperPojo>) toClazz);
 		}
-	},
-// TODO support Date & DateTime
-//	DATE(Date.class) {
-//		@Override
-//		public Object convertFrom(Class<?> toClazz, SetterNode node) {
-//			return DateFormat.F
-//		}
-//	},
-//	DATETIME(DateTime.class) {
-//		@Override
-//		public Object convertFrom(Class<?> toClazz, SetterNode node) {
-//			return null;
-//		}
-//	},
-	;
+	};
 
 	private Class<?>[] supportTypes;
 	private Function<String, Object> parser;
@@ -108,6 +92,6 @@ enum SetterFieldType {
 	}
 
 	public Object convertFrom(Class<?> toClazz, SetterNode node) {
-		return convertFrom(toClazz, node.getInnerText());
+		return convertFrom(toClazz, node.getValue());
 	}
 }

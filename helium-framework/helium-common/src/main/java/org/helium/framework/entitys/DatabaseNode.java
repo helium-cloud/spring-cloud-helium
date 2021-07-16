@@ -1,9 +1,7 @@
 package org.helium.framework.entitys;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Childs;
-import com.feinno.superpojo.annotation.Field;
-import com.feinno.superpojo.annotation.NodeType;
+
+import org.helium.superpojo.SuperPojo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,19 +10,16 @@ import java.util.List;
  * Created by Coral on 11/13/15.
  */
 public class DatabaseNode extends SuperPojo {
-	@Field(id = 1, name = "jdbcUrl", type = NodeType.NODE)
+
 	private String jdbcUrl;
 
-	@Field(id = 2, name = "driverClass", type = NodeType.NODE)
+
 	private String driverClass;
 
-	@Field(id = 3, name = "user", type = NodeType.NODE)
 	private String user;
 
-	@Field(id = 4, name = "password", type = NodeType.NODE)
 	private String password;
 
-	@Childs(id = 11, child = "property", parent = "properties")
 	private List<KeyValueNode> properties = new ArrayList<>();
 
 	public String getJdbcUrl() {

@@ -1,7 +1,6 @@
 rootProject.name = 'spring-cloud-helium'
 //helium-common
 include 'helium-framework:helium-spi'
-include 'helium-framework:helium-superpojo'
 include 'helium-framework:helium-common'
 include 'helium-framework:helium-logging'
 

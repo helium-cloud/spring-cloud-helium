@@ -1,10 +1,6 @@
 package org.helium.framework.route;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Childs;
-import com.feinno.superpojo.annotation.Entity;
-import com.feinno.superpojo.annotation.Field;
-import com.feinno.superpojo.annotation.NodeType;
+import org.helium.superpojo.SuperPojo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +15,11 @@ import java.util.function.Predicate;
  * </serverUrls>
  * Created by Coral on 8/16/15.
  */
-@Entity(name = "serverEndpoint")
+
 public class ServerEndpoint extends SuperPojo {
-	@Field(id = 1, name = "id", type = NodeType.ATTR)
+
 	private String id;
 
-	@Childs(id = 2, parent = "urls", child = "url")
 	private List<String> urlList = new ArrayList<>();
 
 	/**
@@ -92,12 +87,18 @@ public class ServerEndpoint extends SuperPojo {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		ServerEndpoint that = (ServerEndpoint) o;
 
-		if (id != null ? !id.equals(that.id) : that.id != null) return false;
+		if (id != null ? !id.equals(that.id) : that.id != null) {
+			return false;
+		}
 		return !(urlList != null ? !urlList.equals(that.urlList) : that.urlList != null);
 
 	}

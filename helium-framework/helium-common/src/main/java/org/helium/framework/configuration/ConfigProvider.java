@@ -1,7 +1,7 @@
 package org.helium.framework.configuration;
 
-import com.alibaba.fastjson.JSONObject;
-import com.feinno.superpojo.SuperPojo;
+import org.helium.superpojo.JsonUtils;
+import org.helium.superpojo.SuperPojo;
 import org.helium.framework.annotations.ServiceInterface;
 
 import java.io.IOException;
@@ -64,18 +64,7 @@ public interface ConfigProvider {
 
 
 	/**
-	 * 读取一个Xml文件
-	 * @param file
-	 * @param clazz
-	 * @param <E>
-	 * @return
-	 */
-	default <E extends SuperPojo> E loadXml(String file, Class<E> clazz) {
-		return loadXml(file, clazz, false);
-	}
-
-	/**
-	 * 读取一个Xml文件
+	 * 读取一Json文件
 	 * @param file
 	 * @param clazz
 	 * @param <E>
@@ -96,32 +85,12 @@ public interface ConfigProvider {
 	default <E extends SuperPojo> E loadJson(String file, Class<E> clazz, boolean isRaw) {
 		try {
 			String json = isRaw ? loadRawText(file) : loadText(file);
-			E e = JSONObject.parseObject(json, clazz);
+			E e = JsonUtils.toObject(json, clazz);
 			return e;
 		} catch (IllegalArgumentException ex) {
 			throw ex;
 		} catch (Exception ex) {
 			throw new IllegalArgumentException("load json failed! :" + file, ex);
-		}
-	}
-	/**
-	 * 读取一个Xml文件
-	 * @param file
-	 * @param clazz
-	 * @param isRaw 是否不做修改
-	 * @param <E>
-	 * @return
-	 */
-	default <E extends SuperPojo> E loadXml(String file, Class<E> clazz, boolean isRaw) {
-		try {
-			String xml = isRaw ? loadRawText(file) : loadText(file);
-			E e = clazz.newInstance();
-			e.parseXmlFrom(xml);
-			return e;
-		} catch (IllegalArgumentException ex) {
-			throw ex;
-		} catch (Exception ex) {
-			throw new IllegalArgumentException("load xml failed! :" + file, ex);
 		}
 	}
 

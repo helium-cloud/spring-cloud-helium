@@ -28,7 +28,7 @@ public class ConfiguratorInstance extends BeanInstance {
 		instance = configurator.getInstance();
 
 		ConfigProvider configProvider = BeanContext.getContextService().getService(ConfigProvider.class);
-		ConfiguratorConfiguration cc = configProvider.loadXml(getConfiguration().getPath(), ConfiguratorConfiguration.class);
+		ConfiguratorConfiguration cc = configProvider.loadJson(getConfiguration().getPath(), ConfiguratorConfiguration.class);
 		SetterInjector.injectSetters(instance, cc.getSetters(), false);
 	}
 

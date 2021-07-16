@@ -1,10 +1,3 @@
-/*
- * FAE, Feinno App Engine
- *  
- * Create by gaolei 2011-1-17
- * 
- * Copyright (c) 2011 北京新媒传信科技有限公司
- */
 package org.helium.serialization;
 
 import org.helium.serialization.superpojo.SuperPojoCodecFactory;
@@ -51,10 +44,6 @@ public class Serializer {
     static {
         codecFactorys = new ArrayList<CodecFactory>();
 
-        // 预初始化两个Factory
-        // TODO 这里要加入新的工厂类
-//		addFactory(new ProtobufCodecFactory());
-//		addFactory(new JsonCodecFactory());
         addFactory(new SuperPojoCodecFactory());
 
         codecCache = new ConcurrentHashMap<Class<?>, Map<String, Codec>>();
@@ -98,9 +87,9 @@ public class Serializer {
      * @throws IOException
      */
     public static void encode(Object obj, String codecName, OutputStream stream) throws IOException {
-        if (obj == null)
-            throw new IllegalArgumentException("encode Object can't be null");
-
+        if (obj == null){
+			throw new IllegalArgumentException("encode Object can't be null");
+		}
         Class<?> clazz = obj.getClass();
         Codec codec = getCodec(clazz, codecName);
         codec.encode(obj, stream);
@@ -126,9 +115,9 @@ public class Serializer {
      * @throws IOException
      */
     public static byte[] encode(Object obj, String codecName) throws IOException {
-        if (obj == null)
-            throw new IllegalArgumentException("encode Object can't be null");
-
+        if (obj == null){
+			throw new IllegalArgumentException("encode Object can't be null");
+		}
         Class<?> clazz = obj.getClass();
         Codec codec = getCodec(clazz, codecName);
 

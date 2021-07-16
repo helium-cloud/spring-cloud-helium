@@ -1,8 +1,7 @@
 package org.helium.framework.route.center.entity;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Childs;
-import com.feinno.superpojo.annotation.Field;
+
+import org.helium.superpojo.SuperPojo;
 import org.helium.framework.entitys.BeanConfiguration;
 import org.helium.framework.entitys.BundleConfiguration;
 import org.helium.framework.entitys.FactorGroupNode;
@@ -14,22 +13,18 @@ import java.util.List;
  * Created by Coral on 8/4/15.
  */
 public class GrayBundleNode extends SuperPojo {
-	@Field(id = 1)
+
 	private String bundleName;
 
-	@Field(id = 2)
 	private String bundleVersion;
 
-	@Field(id = 3)
 	private BundleConfiguration configuration;
 
-	@Field(id = 4)
 	private FactorGroupNode grayFactors;
 
-	@Childs(id = 11)
+
 	private List<BeanConfiguration> beans;
 
-	@Childs(id = 12)
 	private ServerEndpoint serverEndpoint;
 
 	public String getBundleName() {
@@ -87,8 +82,12 @@ public class GrayBundleNode extends SuperPojo {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		GrayBundleNode that = (GrayBundleNode) o;
 

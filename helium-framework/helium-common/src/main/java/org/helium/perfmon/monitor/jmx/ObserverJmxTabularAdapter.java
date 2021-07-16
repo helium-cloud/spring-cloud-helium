@@ -1,6 +1,6 @@
 package org.helium.perfmon.monitor.jmx;
 
-import com.feinno.superpojo.type.TimeSpan;
+import org.helium.superpojo.type.TimeSpan;
 import org.helium.perfmon.observation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -149,8 +149,10 @@ public class ObserverJmxTabularAdapter implements DynamicMBean {
     @Override
     public AttributeList getAttributes(String[] attributes) {
         AttributeList resultList = new AttributeList();
-        if (attributes.length == 0)
-            return resultList;
+        if (attributes.length == 0){
+			return resultList;
+		}
+
         for (String attribute : attributes) {
             try {
                 Object value = getAttribute(attribute);

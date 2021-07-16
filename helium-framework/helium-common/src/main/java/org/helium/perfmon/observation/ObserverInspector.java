@@ -1,7 +1,7 @@
 package org.helium.perfmon.observation;
 
-import com.feinno.superpojo.type.DateTime;
-import com.feinno.superpojo.type.TimeSpan;
+import org.helium.superpojo.type.DateTime;
+import org.helium.superpojo.type.TimeSpan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

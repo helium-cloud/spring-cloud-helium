@@ -29,7 +29,7 @@ public class GetCategoriesController {
             } else {
                 sb.append(',');
             }
-            sb.append(EntityUtil.convert(observable).toJsonObject().toString());
+            sb.append(EntityUtil.convert(observable).toJsonString());
         }
         sb.append(']');
 

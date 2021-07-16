@@ -1,10 +1,6 @@
 package org.helium.framework.entitys;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Childs;
-import com.feinno.superpojo.annotation.Field;
-import com.feinno.superpojo.annotation.NodeType;
-import com.feinno.superpojo.util.SuperPojoUtils;
+import org.helium.superpojo.SuperPojo;
 import org.helium.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -21,25 +17,19 @@ import java.util.Map;
  * </object>
  */
 public class ObjectWithSettersNode extends SuperPojo {
-	@Field(id = 1, name = "id", type = NodeType.ATTR)
 	private String id;
 
-	@Field(id = 2, name = "class", type = NodeType.ATTR)
 	private String className;
 
-	@Field(id = 5, name = "mode", type = NodeType.ATTR)
 	private String mode;
 
-	@Field(id = 6, name = "params", type = NodeType.ATTR)
 	private String params;
 
-	@Field(id = 7, name = "enabled", type = NodeType.ATTR)
 	private String isEnabled;
 
 	private String value;
 
 
-	@Childs(id = 11, parent = "setters", child = "setter")
 	private List<SetterNode> setters = new ArrayList<>();
 
 	/**
@@ -121,7 +111,6 @@ public class ObjectWithSettersNode extends SuperPojo {
 	}
 
 	public void setValue(String value) {
-		SuperPojoUtils.setStringAnyNode(this, value);
 		this.value = value;
 	}
 }

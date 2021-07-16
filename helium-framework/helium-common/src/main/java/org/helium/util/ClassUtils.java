@@ -1,6 +1,7 @@
 package org.helium.util;
 
-import com.feinno.superpojo.SuperPojo;
+
+import org.helium.superpojo.SuperPojo;
 
 import java.lang.reflect.Array;
 import java.util.HashMap;

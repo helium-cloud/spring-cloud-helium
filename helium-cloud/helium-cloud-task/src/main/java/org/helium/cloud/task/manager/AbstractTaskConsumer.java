@@ -1,7 +1,7 @@
 package org.helium.cloud.task.manager;
 
 
-import com.feinno.superpojo.SuperPojo;
+import org.helium.superpojo.SuperPojo;
 import org.helium.cloud.task.TaskCounter;
 import org.helium.cloud.task.TaskInstance;
 import org.helium.cloud.task.TaskStorageType;

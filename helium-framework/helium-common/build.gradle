@@ -1,5 +1,10 @@
 dependencies {
   compile project(':helium-framework:helium-spi')
-  compile project(':helium-framework:helium-superpojo')
+  compile group: 'com.google.code.gson', name: 'gson', version: gson_version
+  compile "com.fasterxml.jackson.core:jackson-annotations:${jackson_version}"
+  compile "com.fasterxml.jackson.core:jackson-core:${jackson_version}"
+  compile "com.fasterxml.jackson.core:jackson-databind:${jackson_version}"
+  compile "io.protostuff:protostuff-core:${protostuff_version}"
+  compile "io.protostuff:protostuff-runtime:${protostuff_version}"
 
 }

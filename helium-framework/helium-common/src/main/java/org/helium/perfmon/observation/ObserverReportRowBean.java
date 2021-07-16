@@ -1,12 +1,10 @@
 package org.helium.perfmon.observation;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Field;
+
+import org.helium.superpojo.SuperPojo;
 
 public class ObserverReportRowBean extends SuperPojo {
-	@Field(id = 1)
 	private String instance;
-	@Field(id = 2)
 	private String[] data;
 
 	public String getInstance() {

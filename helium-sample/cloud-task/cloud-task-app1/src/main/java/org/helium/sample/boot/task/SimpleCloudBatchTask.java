@@ -1,10 +1,10 @@
 package org.helium.sample.boot.task;
 
 
-import com.alibaba.fastjson.JSONObject;
 import org.helium.framework.annotations.TaskImplementation;
 import org.helium.framework.task.BatchTask;
 import org.helium.sample.boot.entity.SimpleArgs;
+import org.helium.superpojo.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +17,6 @@ public class SimpleCloudBatchTask implements BatchTask<SimpleArgs> {
 
 	@Override
 	public void processTask(List<SimpleArgs> argList) {
-		LOGGER.info("SimpleCloudBatchTask task exec:{}", JSONObject.toJSONString(argList, true));
+		LOGGER.info("SimpleCloudBatchTask task exec:{}", JsonUtils.toJson(argList));
 	}
 }

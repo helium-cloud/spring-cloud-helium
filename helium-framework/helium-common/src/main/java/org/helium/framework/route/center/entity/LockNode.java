@@ -1,6 +1,6 @@
 package org.helium.framework.route.center.entity;
 
-import com.feinno.superpojo.SuperPojo;
+import org.helium.superpojo.SuperPojo;
 
 /**
  * $ROOT/Locks/{LockName-LockId}

@@ -1,26 +1,20 @@
 package org.helium.framework.entitys;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Field;
-import com.feinno.superpojo.annotation.NodeType;
+
+import org.helium.superpojo.SuperPojo;
 
 /**
  * Created by Coral on 12/1/15.
  */
 public class ExecutorNode extends SuperPojo {
-	@Field(id = 1, name = "type", type = NodeType.ATTR)
 	private String type = "fixed";
 
-	@Field(id = 2, name = "name", type = NodeType.ATTR)
 	private String name;
 
-	@Field(id = 3, name = "size", type = NodeType.ATTR)
 	private int size;
 
-	@Field(id = 4, name = "maxSize", type = NodeType.ATTR)
 	private int maxSize;
 
-	@Field(id = 5, name = "limit", type = NodeType.ATTR)
 	private int limit;
 
 	public String getType() {

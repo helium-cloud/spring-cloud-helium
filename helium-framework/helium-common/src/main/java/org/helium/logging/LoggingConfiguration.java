@@ -1,12 +1,7 @@
 package org.helium.logging;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Childs;
-import com.feinno.superpojo.annotation.Entity;
-import com.feinno.superpojo.annotation.Field;
-import com.feinno.superpojo.annotation.NodeType;
-import com.feinno.superpojo.type.AnyNode;
-import com.feinno.superpojo.util.SuperPojoUtils;
+
+import org.helium.superpojo.SuperPojo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +10,14 @@ import java.util.List;
  * logging.xml的配置
  * Created by Coral on 8/26/15.
  */
-@Entity(name = "logging")
+
 public class LoggingConfiguration extends SuperPojo {
-	@Field(id = 1, name = "level", type = NodeType.ATTR)
 	private String level;
 
-	@Childs(id = 2, parent = "subLevels", child = "subLevel")
 	private List<SubLevelNode> subLevels = new ArrayList<>();
 
-	@Childs(id = 3, parent = "outputs", child = "output")
 	private List<OutputNode> outputs = new ArrayList<>();
 
-	@Childs(id = 4, parent = "filters", child = "filter")
 	private List<FilterNode> filters = new ArrayList<>();
 
 	public String getLevel() {
@@ -66,13 +57,12 @@ public class LoggingConfiguration extends SuperPojo {
 	}
 
 	public static class SubLevelNode extends SuperPojo {
-		@Field(id = 1, name = "name", type = NodeType.ATTR)
+
 		private String name;
 
-		@Field(id = 2, name = "level", type = NodeType.ATTR)
+
 		private String level;
 
-		@Field(id = 3, name = "output", type = NodeType.ATTR)
 		private String output;
 
 		public String getName() {
@@ -104,10 +94,10 @@ public class LoggingConfiguration extends SuperPojo {
 	}
 
 	public static class OutputNode extends SuperPojo {
-		@Field(id = 1, name = "name", type = NodeType.ATTR)
+
 		private String name;
 
-		@Childs(id = 2, parent = "", child = "appender")
+
 		private List<AppenderNode> appenders = new ArrayList<>();
 
 		public String getName() {
@@ -129,10 +119,10 @@ public class LoggingConfiguration extends SuperPojo {
 	}
 
 	public static class AppenderNode extends SuperPojo {
-		@Field(id = 1, name = "class", type = NodeType.ATTR)
+
 		private String clazz;
 
-		@Childs(id = 11, parent = "setters", child = "setter")
+
 		private List<SetterNode> setters = new ArrayList<>();
 
 		public String getClazz() {
@@ -155,7 +145,7 @@ public class LoggingConfiguration extends SuperPojo {
 	}
 
 	public static class SetterNode extends SuperPojo {
-		@Field(id = 1, name = "field", type = NodeType.ATTR)
+
 		private String field;
 
 		public String getField() {
@@ -167,37 +157,18 @@ public class LoggingConfiguration extends SuperPojo {
 			return this;
 		}
 
-		/**
-		 * 获取结点中的xml结点
-		 * @return
-		 */
-		public AnyNode getInnerNode() {
-			return SuperPojoUtils.getAnyNode(this);
-		}
-
-		/**
-		 * 获取xml结点中的文本
-		 * @return
-		 */
-		public String getInnerText() {
-			return SuperPojoUtils.getStringAnyNode(this);
-		}
 	}
 
 	public static class FilterNode extends SuperPojo {
-		@Field(id = 1, name = "loggerName", type = NodeType.ATTR)
+
 		private String loggerName;
 
-		@Field(id = 2, name = "class", type = NodeType.ATTR)
 		private String clazz;
 
-		@Field(id = 3, name = "params", type = NodeType.ATTR)
 		private String params;
 
-		@Field(id = 4, name = "output", type = NodeType.ATTR)
 		private String output;
 
-		@Childs(id = 11, parent = "setters", child = "setter")
 		private List<SetterNode> setters = new ArrayList<>();
 
 		public String getLoggerName() {

@@ -4,7 +4,6 @@ import org.helium.serialization.Codec;
 import org.helium.serialization.CodecFactory;
 import org.helium.serialization.superpojo.codec.SuperPojoJsonCodec;
 import org.helium.serialization.superpojo.codec.SuperPojoProtobufCodec;
-import org.helium.serialization.superpojo.codec.SuperPojoXmlCodec;
 
 /**
  * SuperPojo Codec 工厂类，该工厂类实现{@link CodecFactory}, 根据给出的 class 和 codecName 自动初始化响应的编码器{@link Codec}实例
@@ -36,8 +35,6 @@ public class SuperPojoCodecFactory implements CodecFactory {
         switch (SuperPojoSupportCode.valueOf(codecName)) {
             case json:
                 return new SuperPojoJsonCodec(clazz);
-            case xml:
-                return new SuperPojoXmlCodec(clazz);
             case protobuf:
                 return new SuperPojoProtobufCodec(clazz);
         }

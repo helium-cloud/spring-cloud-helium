@@ -34,6 +34,7 @@ public class SimpleBatchTaskConsumer extends AbstractTaskConsumer {
 	 * @return
 	 * @throws InterruptedException
 	 */
+	@Override
 	public boolean runTask(TaskQueue taskQueue, int partition, boolean memory) throws InterruptedException {
 		List<TaskArgs> taskArgsList = taskQueue.poolList(partition);
 		if (taskArgsList == null || taskArgsList.size() == 0) {

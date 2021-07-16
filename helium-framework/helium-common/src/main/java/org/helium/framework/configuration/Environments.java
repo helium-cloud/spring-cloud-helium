@@ -1,8 +1,5 @@
 package org.helium.framework.configuration;
 
-import freemarker.cache.StringTemplateLoader;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
 import org.helium.framework.entitys.KeyValueNode;
 import org.helium.framework.utils.ConfigUtils;
 import org.helium.util.CollectionUtils;
@@ -135,18 +132,19 @@ public final class Environments {
 			return text;
 		}
 		text = applyAutoPort(text);
-		try {
-			Configuration c = new Configuration(Configuration.VERSION_2_3_22);
-			StringTemplateLoader loader = new StringTemplateLoader();
-			loader.putTemplate("T", text);
-			c.setTemplateLoader(loader);
-			Template template = c.getTemplate("T");
-			StringWriter writer = new StringWriter();
-			template.process(vars, writer);
-			return writer.toString();
-		} catch (Exception ex) {
-			throw new IllegalArgumentException("freemarker process failed:" + path, ex);
-		}
+//		try {
+//			Configuration c = new Configuration(Configuration.VERSION_2_3_22);
+//			StringTemplateLoader loader = new StringTemplateLoader();
+//			loader.putTemplate("T", text);
+//			c.setTemplateLoader(loader);
+//			Template template = c.getTemplate("T");
+//			StringWriter writer = new StringWriter();
+//			template.process(vars, writer);
+//			return writer.toString();
+//		} catch (Exception ex) {
+//			throw new IllegalArgumentException("freemarker process failed:" + path, ex);
+//		}
+		return text;
 	}
 
 	public static String applyAutoPort(String text) {

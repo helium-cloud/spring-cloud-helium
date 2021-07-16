@@ -1,17 +1,14 @@
 package org.helium.framework.entitys.dashboard;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Field;
-import com.feinno.superpojo.annotation.NodeType;
+
+import org.helium.superpojo.SuperPojo;
 
 /**
  * Created by Coral on 7/28/15.
  */
 public class WorkerJson extends SuperPojo {
-	@Field(id = 1, name = "bundleName", type = NodeType.NODE)
 	private String bundleName;
 
-	@Field(id = 2, name = "serverEndpoints", type = NodeType.NODE)
 	private String serverEndpoints;
 
 	public String getBundleName() {

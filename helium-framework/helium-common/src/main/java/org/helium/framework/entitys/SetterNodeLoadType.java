@@ -1,6 +1,7 @@
 package org.helium.framework.entitys;
 
-import com.feinno.superpojo.type.EnumInteger;
+
+import org.helium.superpojo.type.EnumInteger;
 
 public enum SetterNodeLoadType implements EnumInteger {
 	UNKNOWN(1),
@@ -13,6 +14,7 @@ public enum SetterNodeLoadType implements EnumInteger {
 	SetterNodeLoadType(int value) {
 		this.value = value;
 	}
+	@Override
 	public int intValue() {
 		return value;
 	}

@@ -1,10 +1,7 @@
 package org.helium.framework.entitys;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Childs;
-import com.feinno.superpojo.annotation.Entity;
-import com.feinno.superpojo.annotation.Field;
-import com.feinno.superpojo.annotation.NodeType;
+
+import org.helium.superpojo.SuperPojo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,21 +10,16 @@ import java.util.List;
  * bundle.xml
  * Created by Coral on 7/2/15.
  */
-@Entity(name = "bundle")
+
 public class BundleConfiguration extends SuperPojo {
-	@Field(id = 1, name = "name", type = NodeType.ATTR)
 	private String name;
 
-	@Field(id = 2, name = "beans", type = NodeType.NODE)
 	private BeansNode beansNode;
 
-	@Childs(id = 11, parent = "configImports", child = "configImport")
 	private List<ConfigImportNode> configImports = new ArrayList<>();
 
-	@Childs(id = 13, parent = "references", child = "reference")
 	private List<BeanReferenceNode> references = new ArrayList<>();
 
-	@Field(id = 21, name = "parentNode", type = NodeType.NODE)
 	private BundleNode parentNode;
 
 	public List<ConfigImportNode> getConfigImports() {

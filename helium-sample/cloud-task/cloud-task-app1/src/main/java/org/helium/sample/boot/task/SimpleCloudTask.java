@@ -1,10 +1,10 @@
 package org.helium.sample.boot.task;
 
 
-import com.alibaba.fastjson.JSONObject;
 import org.helium.framework.annotations.TaskImplementation;
 import org.helium.framework.task.Task;
 import org.helium.sample.boot.entity.SimpleArgs;
+import org.helium.superpojo.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +15,6 @@ public class SimpleCloudTask implements Task<SimpleArgs> {
 
 	@Override
 	public void processTask(SimpleArgs args) {
-		LOGGER.info("SimpleCloudTask task exec:{}", JSONObject.toJSONString(args, true));
+		LOGGER.info("SimpleCloudTask task exec:{}", JsonUtils.toJson(args));
 	}
 }

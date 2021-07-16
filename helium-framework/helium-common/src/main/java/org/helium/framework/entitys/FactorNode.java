@@ -1,23 +1,21 @@
 package org.helium.framework.entitys;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Field;
-import com.feinno.superpojo.annotation.NodeType;
+
+import org.helium.superpojo.SuperPojo;
 
 /**
  * Created by Coral on 8/4/15.
  */
 public class FactorNode extends SuperPojo {
-	@Field(id = 1, name = "key", type = NodeType.ATTR)
+
 	private String key;
 
-	@Field(id = 2, name = "operator", type = NodeType.ATTR)
+
 	private String operator;
 
-	@Field(id = 3, name = "value", type = NodeType.ATTR)
+
 	private String value;
 
-	@Field(id = 4, name = "value2", type = NodeType.ATTR)
 	private String value2;
 
 	public String getKey() {

@@ -1,6 +1,6 @@
 package org.helium.cloud.task.manager;
 
-import com.feinno.superpojo.SuperPojoManager;
+import org.helium.superpojo.SuperPojoManager;
 import org.helium.cloud.task.TaskInstance;
 import org.helium.cloud.task.TaskStorageType;
 import org.helium.cloud.task.store.TaskQueueMemory;
@@ -35,6 +35,7 @@ public class SimpleTaskConsumer extends AbstractTaskConsumer {
 	 * @return
 	 * @throws InterruptedException
 	 */
+	@Override
 	public boolean runTask(TaskQueue taskQueue, int partition, boolean memory) throws InterruptedException {
 		List<TaskArgs> taskArgsList = taskQueue.poolList(partition);
 		if (taskArgsList == null || taskArgsList.size() == 0) {

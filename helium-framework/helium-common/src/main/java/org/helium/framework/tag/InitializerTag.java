@@ -21,16 +21,16 @@ public class InitializerTag implements Tag {
 
 	@Override
 	public void initWithConfig(Object object, TagNode node) {
-		this.object = object;
-		String methodName = node.getInnerText();
-		for (Method method: object.getClass().getMethods()) {
-			if (methodName.equals(method.getName())) {
-				this.method = method;
-			}
-		}
-		if (this.method == null) {
-			throw new IllegalArgumentException("Initializer methodNotFound:" + methodName);
-		}
+//		this.object = object;
+//		String methodName = node.getInnerText();
+//		for (Method method: object.getClass().getMethods()) {
+//			if (methodName.equals(method.getName())) {
+//				this.method = method;
+//			}
+//		}
+//		if (this.method == null) {
+//			throw new IllegalArgumentException("Initializer methodNotFound:" + methodName);
+//		}
 	}
 
 	@Override

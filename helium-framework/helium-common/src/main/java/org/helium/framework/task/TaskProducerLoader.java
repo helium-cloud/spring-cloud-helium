@@ -14,7 +14,7 @@ public class TaskProducerLoader implements FieldLoader {
 	public Object loadField(SetterNode node) {
 		TaskProducerFactory factory = BeanContext.getContextService().getService(TaskProducerFactory.class);
 
-		String eventId = node.getInnerText();
+		String eventId = node.getValue();
 
 		return factory.getProducer(eventId);
 	}

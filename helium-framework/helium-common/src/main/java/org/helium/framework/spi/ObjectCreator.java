@@ -1,5 +1,6 @@
 package org.helium.framework.spi;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.helium.framework.BeanContext;
 import org.helium.framework.BeanContextService;
 import org.helium.framework.entitys.ObjectWithSettersNode;
@@ -40,12 +41,12 @@ public class ObjectCreator {
 	 * @param node
 	 * @return
 	 */
-	public static Object createObject(ObjectWithSettersNode node, BeanContextService contextService, Function<String, Class> loader) {
+	public static Object createObject(ObjectWithSettersNode node, BeanContextService contextService, Function<String, Class> loader) throws JsonProcessingException {
 		Object object = createObject(node.getClassName(), loader);
 		node.setSetters(AnnotationResolver.resolveSetters(object.getClass(), node.getSetters(), null));
 		SetterInjector.injectSetters(object, node.getSetters(), (sn) -> {
-			BeanContext bc = contextService.getBean(sn.getInnerText());
-			SetterInjector.setField(object, sn.getField(), bc.getBean());
+			//BeanContext bc = contextService.getBean(sn.getInnerText());
+			//SetterInjector.setField(object, sn.getField(), bc.getBean());
 		});
 		return object;
 	}

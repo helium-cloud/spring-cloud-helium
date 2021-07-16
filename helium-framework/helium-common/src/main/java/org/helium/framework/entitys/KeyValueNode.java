@@ -3,9 +3,8 @@
  */
 package org.helium.framework.entitys;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Field;
-import com.feinno.superpojo.annotation.NodeType;
+
+import org.helium.superpojo.SuperPojo;
 
 /**
  * for xml node
@@ -13,16 +12,16 @@ import com.feinno.superpojo.annotation.NodeType;
  * <node key="" value=""/>
  */
 public class KeyValueNode extends SuperPojo {
-	@Field(id = 1, name = "key", type = NodeType.ATTR)
+
 	private String key;
 
-	@Field(id = 2, name = "value", type = NodeType.ATTR)
+
 	private String value;
 
-	@Field(id = 3, name = "desc", type = NodeType.ATTR)
+
 	private String desc;
 
-	@Field(id = 4, name = "import", type = NodeType.ATTR)
+
 	private String imports;
 
 	public KeyValueNode() {

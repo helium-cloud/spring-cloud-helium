@@ -3,7 +3,7 @@
  */
 package org.helium.logging.spi;
 
-import com.feinno.superpojo.SuperPojo;
+import org.helium.superpojo.SuperPojo;
 import org.helium.logging.LoggingConfiguration.SetterNode;
 
 import java.util.function.Function;
@@ -39,7 +39,8 @@ enum SetterFieldType {
 	SUPERPOJO(SuperPojo.class) {
 		@Override
 		public Object convertFrom(Class<?> toClazz, SetterNode node) {
-			return node.getInnerNode().convertTo((Class<SuperPojo>) toClazz);
+			//return node.getInnerNode().convertTo((Class<SuperPojo>) toClazz);
+			return null;
 		}
 	},
 // TODO support Date & DateTime
@@ -108,6 +109,7 @@ enum SetterFieldType {
 	}
 
 	public Object convertFrom(Class<?> toClazz, SetterNode node) {
-		return convertFrom(toClazz, node.getInnerText());
+		return null;
+		//return convertFrom(toClazz, node.getInnerText());
 	}
 }

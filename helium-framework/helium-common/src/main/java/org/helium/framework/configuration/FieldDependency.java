@@ -1,7 +1,7 @@
 package org.helium.framework.configuration;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Field;
+
+import org.helium.superpojo.SuperPojo;
 
 /**
  * Bean的依赖关系
@@ -11,22 +11,18 @@ public class FieldDependency extends SuperPojo {
 	/**
 	 * 依赖的字段
 	 */
-	@Field(id = 1)
 	private String field;
 
 	/**
 	 * 依赖类型
 	 */
-	@Field(id = 2)
 	private FieldDependencyType referenceType;
 
-	@Field(id = 3)
 	private String loaderType;
 
 	/**
 	 * 依赖的具体值
 	 */
-	@Field(id = 4)
 	private String value;
 
 	public String getField() {

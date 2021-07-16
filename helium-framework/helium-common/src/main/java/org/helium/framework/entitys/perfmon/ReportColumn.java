@@ -1,13 +1,11 @@
 package org.helium.framework.entitys.perfmon;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Field;
+import org.helium.superpojo.SuperPojo;
 
 /**
  * Created by Coral on 2015/8/17.
  */
 public class ReportColumn extends SuperPojo {
-    @Field(id = 1)
     String name;
 
     public String getName() {

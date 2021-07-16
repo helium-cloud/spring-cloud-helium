@@ -1,13 +1,6 @@
-/*
- * FAE, Feinno App Engine
- *  
- * Create by gaolei Jun 7, 2012
- * 
- * Copyright (c) 2012 北京新媒传信科技有限公司
- */
 package org.helium.threading;
 
-import com.feinno.superpojo.type.EnumInteger;
+import org.helium.superpojo.type.EnumInteger;
 
 /**
  * 预定义线程上下文

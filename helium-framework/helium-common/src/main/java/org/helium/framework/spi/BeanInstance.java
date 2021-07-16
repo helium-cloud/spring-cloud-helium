@@ -1,5 +1,6 @@
 package org.helium.framework.spi;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.helium.framework.*;
 import org.helium.framework.configuration.BeanContextProvider;
 import org.helium.framework.configuration.FieldDependency;
@@ -60,6 +61,7 @@ public abstract class BeanInstance extends AbstractBeanContext implements BeanCo
 		return bean;
 	}
 
+	@Override
 	public Executor getExecutor() {
 		return executor;
 	}
@@ -138,7 +140,7 @@ public abstract class BeanInstance extends AbstractBeanContext implements BeanCo
 
 	protected void doRegister(BeanContextService contextService) { }
 
-	private void resolve() {
+	private void resolve() throws JsonProcessingException {
 		BeanConfiguration configuration = getConfiguration();
 		//
 		// 创建Bean实体对象
@@ -184,12 +186,12 @@ public abstract class BeanInstance extends AbstractBeanContext implements BeanCo
 	private void assembleSetters(BeanContextService contextService) {
 		for (SetterNode node : getConfiguration().getObject().getSetters()) {
 			if (!node.isSet()) {
-				BeanContext refBean = contextService.getBean(node.getInnerText());
+				BeanContext refBean = contextService.getBean(node.getValue());
 				if (refBean != null) {
 					SetterInjector.setField(bean, node.getField(), refBean.getBean());
 					node.setIsSet(true);
 				} else {
-					LOGGER.error("{}.{} missing reference:{}",getId(), node.getField(), node.getInnerText());
+					LOGGER.error("{}.{} missing reference:{}",getId(), node.getField(), node.getValue());
 				}
 
 			}
@@ -204,7 +206,7 @@ public abstract class BeanInstance extends AbstractBeanContext implements BeanCo
 		}
 	}
 
-	private void assembleModules(BeanContextService contextService) {
+	private void assembleModules(BeanContextService contextService) throws JsonProcessingException {
 		if (getConfiguration().getModules().size() == 0) {
 			return;
 		}

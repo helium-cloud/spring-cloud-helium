@@ -1,8 +1,8 @@
 package org.helium.cloud.task.manager;
 
-import com.feinno.superpojo.SuperPojoManager;
-import com.feinno.superpojo.type.DateTime;
-import com.feinno.superpojo.type.TimeSpan;
+import org.helium.superpojo.SuperPojoManager;
+import org.helium.superpojo.type.DateTime;
+import org.helium.superpojo.type.TimeSpan;
 import org.helium.cloud.task.TaskInstance;
 import org.helium.cloud.task.TaskStorageType;
 import org.helium.cloud.task.store.TaskQueuePriorityMemory;

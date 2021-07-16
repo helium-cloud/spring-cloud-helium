@@ -1,94 +1,91 @@
 package org.helium.logging.args;
 
-import com.alibaba.fastjson.JSONObject;
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Field;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import org.helium.superpojo.SuperPojo;
 import org.helium.util.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class LogArgs extends SuperPojo{
+public class LogArgs extends SuperPojo {
 	private static final int OFFSET = 20;
 
 	/**
 	 * 业务名称(服务名)
 	 */
-	@Field(id = 1)
 	private String business;
 
 	/**
 	 * 子业务类型
 	 */
-	@Field(id = 2)
 	private String type;
 
 	/**
 	 * 事务ID（消息ID、通话的sessionid）
 	 */
-	@Field(id = 3)
 	private String tid;
 
 
 	/**
 	 * 主要操作方【】
 	 */
-	@Field(id = 4)
 	private String owner;
 
 	/**
 	 * 被操作方【】
 	 */
-	@Field(id = 5)
+
 	private String peer;
 
 	/**
 	 * 记录时间
 	 */
-	@Field(id = 6)
+
 	private long time = System.currentTimeMillis();
 	/**
 	 * 耗时
 	 */
-	@Field(id = 7)
+
 	private long costNano;
 
 	/**
 	 * 结果
 	 */
-	@Field(id = 8)
+
 	private String result ;
 
 	/**
 	 * 本机IP、地址
 	 */
-	@Field(id = 9)
+
 	private String localAddr;
 
 	/**
 	 * 远端的IP、地址
 	 */
-	@Field(id = 10)
+
 	private String peerAddr;
 
 	/**
 	 * 扩展消息内容
 	 */
-	@Field(id = 11)
+
 	private String request;
 
-	@Field(id = 12)
+
 	private String response;
 
 
-	@Field(id = 13)
+
 	private String content;
 
 	/**
 	 * 扩展消息内容
 	 */
-	@Field(id = 14)
+
 	private List<LogExt> extContent = new ArrayList<>();
 
 
@@ -204,21 +201,8 @@ public class LogArgs extends SuperPojo{
 		this.extContent = extContent;
 	}
 
-	public String toJson(){
-		String jsonContent = null;
-		try {
-			JSONObject jsonObject = JSONObject.parseObject(getRequest());
-			jsonObject.put("business", getBusiness());
-			jsonObject.put("time", getTime());
-			jsonObject.put("type", getType());
-			jsonObject.put("tid", getTid());
-			jsonObject.put("owner", getOwner());
-			jsonObject.put("peer", getPeer());
-			jsonContent = jsonObject.toString();
-		} catch (Exception e){
-			jsonContent = toJsonObject().toString();
-		}
-		return jsonContent;
+	public String toJson() throws JsonProcessingException {
+		return toJsonString();
 	}
 
 	public static LogArgs create(String tid, String req, String resp){
@@ -243,10 +227,10 @@ public class LogArgs extends SuperPojo{
 	}
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws JsonProcessingException {
 		LogArgs logArgs = LogArgs.create(UUID.randomUUID().toString(), "MESSAGE ", "RESPONSE");
-		System.out.println(JSONObject.toJSONString(logArgs, true));
+		System.out.println(logArgs.toJson());
 		LogArgs logArgsSimple = LogArgs.createSimple(UUID.randomUUID().toString(), "张三", "参加");
-		System.out.println(JSONObject.toJSONString(logArgsSimple, true));
+		System.out.println(logArgsSimple.toJson());
 	}
 }

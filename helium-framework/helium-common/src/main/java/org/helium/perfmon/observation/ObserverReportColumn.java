@@ -1,8 +1,7 @@
 package org.helium.perfmon.observation;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Field;
 
+import org.helium.superpojo.SuperPojo;
 
 /**
  * {在这里补充类的功能说明}
@@ -10,10 +9,8 @@ import com.feinno.superpojo.annotation.Field;
  * Created by Coral
  */
 public class ObserverReportColumn extends SuperPojo {
-	@Field(id = 1)
 	private String name;
 
-	@Field(id = 2)
 	private ObserverReportColumnType type = ObserverReportColumnType.LONG;
 
 	public ObserverReportColumn(String name, ObserverReportColumnType type) {

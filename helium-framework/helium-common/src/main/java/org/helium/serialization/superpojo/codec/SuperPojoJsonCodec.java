@@ -1,7 +1,6 @@
 package org.helium.serialization.superpojo.codec;
 
-import com.feinno.superpojo.SuperPojoManager;
-import com.google.gson.JsonObject;
+import org.helium.superpojo.SuperPojoManager;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -19,14 +18,13 @@ public class SuperPojoJsonCodec extends AbstractCodec {
 
     @Override
     public byte[] encode(Object obj) throws IOException {
-        JsonObject jsonObject = SuperPojoManager.toJsonObject(obj);
-        return jsonObject.toString().getBytes(Charset.forName("UTF-8"));
+        String jsonObject = SuperPojoManager.toJsonString(obj);
+        return jsonObject.getBytes(Charset.forName("UTF-8"));
     }
 
     @Override
     public <E> E decode(byte[] buffer) throws IOException {
         String s = new String(buffer);
-        //noinspection unchecked
-        return (E) SuperPojoManager.parseJsonFrom(s, clazz);
+        return (E) SuperPojoManager.jsonToObject(s, clazz);
     }
 }

@@ -1,7 +1,7 @@
 package org.helium.framework.configuration;
 
 
-import com.feinno.superpojo.type.EnumInteger;
+import org.helium.superpojo.type.EnumInteger;
 
 /**
  * Bean的依赖类型

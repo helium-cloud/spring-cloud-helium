@@ -1,21 +1,18 @@
 package org.helium.framework.route.center.entity;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Childs;
-import com.feinno.superpojo.annotation.Field;
+
+import org.helium.superpojo.SuperPojo;
 import org.helium.framework.route.ServerEndpoint;
 
 /**
  * Created by Coral on 8/4/15.
  */
 public class BundleEndpointNode extends SuperPojo {
-	@Field(id = 1)
+
 	private String bundleName;
 
-	@Field(id = 2)
 	private String bundleVersion;
 
-	@Childs(id = 3)
 	private ServerEndpoint serverEndpoint;
 
 	public String getBundleName() {
@@ -49,14 +46,21 @@ public class BundleEndpointNode extends SuperPojo {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		BundleEndpointNode that = (BundleEndpointNode) o;
 
-		if (bundleName != null ? !bundleName.equals(that.bundleName) : that.bundleName != null) return false;
-		if (bundleVersion != null ? !bundleVersion.equals(that.bundleVersion) : that.bundleVersion != null)
+		if (bundleName != null ? !bundleName.equals(that.bundleName) : that.bundleName != null) {
 			return false;
+		}
+		if (bundleVersion != null ? !bundleVersion.equals(that.bundleVersion) : that.bundleVersion != null) {
+			return false;
+		}
 		return !(serverEndpoint != null ? !serverEndpoint.equals(that.serverEndpoint) : that.serverEndpoint != null);
 
 	}

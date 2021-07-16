@@ -1,6 +1,6 @@
 package org.helium.framework.utils;
 
-import com.feinno.superpojo.SuperPojo;
+import org.helium.superpojo.SuperPojo;
 
 import java.net.URL;
 import java.util.List;

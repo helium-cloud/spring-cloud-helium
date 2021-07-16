@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class PerfmonConfiguration {
-	private static final Logger LOGGER = LoggerFactory.getLogger(PerfmonConfiguration.class);
+
 
 
 	/**

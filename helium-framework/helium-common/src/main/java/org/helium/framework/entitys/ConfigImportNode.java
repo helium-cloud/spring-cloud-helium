@@ -1,24 +1,19 @@
 package org.helium.framework.entitys;
 
-import com.feinno.superpojo.SuperPojo;
-import com.feinno.superpojo.annotation.Field;
-import com.feinno.superpojo.annotation.NodeType;
+
+import org.helium.superpojo.SuperPojo;
 
 /**
  * 对Key的依赖类型
  * Created by Coral on 7/4/15.
  */
 public class ConfigImportNode extends SuperPojo {
-	@Field(id = 1, name = "type", type = NodeType.ATTR)
 	private String type;
 
-	@Field(id = 2, name = "key", type = NodeType.ATTR)
 	private String key;
 
-	@Field(id = 3, name = "default", type = NodeType.ATTR)
 	private String defaultValue;
 
-	@Field(id = 4, name = "desc", type = NodeType.ATTR)
 	private String desc;
 
 	public String getType() {
