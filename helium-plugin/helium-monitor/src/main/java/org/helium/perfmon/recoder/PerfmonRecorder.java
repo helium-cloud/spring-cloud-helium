@@ -42,7 +42,7 @@ public class PerfmonRecorder{
 
 	private PerfmonCountersConfiguration configuration=  new PerfmonCountersConfiguration();
 
-	private SimpleQueuedWorker<Tuple<CounterStorage, ObserverReport>> reportWorker;
+	private SimpleQueuedWorker<Tuple<ICounterStorage, ObserverReport>> reportWorker;
 
 	public PerfmonRecorder() {
 
@@ -52,15 +52,11 @@ public class PerfmonRecorder{
 
  		DelayRunner.run(1, () -> {
 			reportWorker = new SimpleQueuedWorker<>("perfmonRecorder", t -> {
-			    CounterStorage recorder = t.getV1();
-			    try {
-				    recorder.saveReport(t.getV2());
-			    } catch (SQLException ex) {
-				    LOGGER.error("Save recorder failed:{}", ex.getMessage());
-			    }
+			    ICounterStorage recorder = t.getV1();
+				recorder.saveReport(t.getV2());
 		    });
 			for (Observable observable: ObserverManager.getAllObserverItems()){
-				CounterStorage counterStorage = new CounterStorage(observable, dateFormat, tableNameFormat);
+				ICounterStorage counterStorage = CounterStorageFactory.getStorage(observable, dateFormat, tableNameFormat);
 				TimeSpan span = new TimeSpan(1000 * 10);
 				ObserverManager.addInspector(observable, ObserverReportMode.ALL, span, counterStorage.getReportCallback(
 						t -> reportWorker.enqueue(t)
